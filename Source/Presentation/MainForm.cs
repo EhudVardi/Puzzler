@@ -162,10 +162,12 @@ namespace Presentation
         {
             if (presentationLogicObject != null)
             {
+                this.SuspendLayout();
                 this.pnl_drawingCanvas.Refresh();
                 this.tssl_boardStatusText.Text = string.Format("Valid: {0}, Solved: {1}", 
                     presentationLogicObject.IsValid(), 
                     presentationLogicObject.IsSolved());
+                this.ResumeLayout();
             }
         }
 
