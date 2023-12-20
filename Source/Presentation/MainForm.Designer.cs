@@ -31,6 +31,7 @@ namespace Presentation
             this.tlp_MainLayoutTable = new System.Windows.Forms.TableLayoutPanel();
             this.tlp_ControlLayoutTable = new System.Windows.Forms.TableLayoutPanel();
             this.gb_puzzleSelector = new System.Windows.Forms.GroupBox();
+            this.rb_griddlerRail = new System.Windows.Forms.RadioButton();
             this.rb_griddler = new System.Windows.Forms.RadioButton();
             this.rb_kakuru = new System.Windows.Forms.RadioButton();
             this.rb_sudoku = new System.Windows.Forms.RadioButton();
@@ -48,7 +49,6 @@ namespace Presentation
             this.sts_statusStrip = new System.Windows.Forms.StatusStrip();
             this.tssl_boardStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssl_boardStatusText = new System.Windows.Forms.ToolStripStatusLabel();
-            this.rb_griddlerRail = new System.Windows.Forms.RadioButton();
             this.tlp_MainLayoutTable.SuspendLayout();
             this.tlp_ControlLayoutTable.SuspendLayout();
             this.gb_puzzleSelector.SuspendLayout();
@@ -71,7 +71,7 @@ namespace Presentation
             this.tlp_MainLayoutTable.Name = "tlp_MainLayoutTable";
             this.tlp_MainLayoutTable.RowCount = 1;
             this.tlp_MainLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_MainLayoutTable.Size = new System.Drawing.Size(818, 525);
+            this.tlp_MainLayoutTable.Size = new System.Drawing.Size(663, 518);
             this.tlp_MainLayoutTable.TabIndex = 0;
             // 
             // tlp_ControlLayoutTable
@@ -86,12 +86,12 @@ namespace Presentation
             this.tlp_ControlLayoutTable.Location = new System.Drawing.Point(4, 4);
             this.tlp_ControlLayoutTable.Name = "tlp_ControlLayoutTable";
             this.tlp_ControlLayoutTable.RowCount = 5;
-            this.tlp_ControlLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 141F));
-            this.tlp_ControlLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 98F));
-            this.tlp_ControlLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
-            this.tlp_ControlLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tlp_ControlLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 126F));
+            this.tlp_ControlLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 96F));
+            this.tlp_ControlLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tlp_ControlLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tlp_ControlLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_ControlLayoutTable.Size = new System.Drawing.Size(108, 517);
+            this.tlp_ControlLayoutTable.Size = new System.Drawing.Size(108, 510);
             this.tlp_ControlLayoutTable.TabIndex = 0;
             // 
             // gb_puzzleSelector
@@ -103,10 +103,26 @@ namespace Presentation
             this.gb_puzzleSelector.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gb_puzzleSelector.Location = new System.Drawing.Point(3, 3);
             this.gb_puzzleSelector.Name = "gb_puzzleSelector";
-            this.gb_puzzleSelector.Size = new System.Drawing.Size(102, 135);
+            this.gb_puzzleSelector.Size = new System.Drawing.Size(102, 120);
             this.gb_puzzleSelector.TabIndex = 1;
             this.gb_puzzleSelector.TabStop = false;
             this.gb_puzzleSelector.Text = "Puzzle Type";
+            // 
+            // rb_griddlerRail
+            // 
+            this.rb_griddlerRail.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rb_griddlerRail.AutoSize = true;
+            this.rb_griddlerRail.Dock = System.Windows.Forms.DockStyle.Top;
+            this.rb_griddlerRail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rb_griddlerRail.Location = new System.Drawing.Point(3, 91);
+            this.rb_griddlerRail.Name = "rb_griddlerRail";
+            this.rb_griddlerRail.Size = new System.Drawing.Size(96, 25);
+            this.rb_griddlerRail.TabIndex = 3;
+            this.rb_griddlerRail.TabStop = true;
+            this.rb_griddlerRail.Text = "Griddler Rail";
+            this.rb_griddlerRail.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rb_griddlerRail.UseVisualStyleBackColor = true;
+            this.rb_griddlerRail.CheckedChanged += new System.EventHandler(this.rb_puzzleTypeSelector_CheckedChanged);
             // 
             // rb_griddler
             // 
@@ -162,9 +178,9 @@ namespace Presentation
             this.gb_load.Controls.Add(this.btn_loadFromWeb);
             this.gb_load.Controls.Add(this.btn_loadFromFile);
             this.gb_load.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gb_load.Location = new System.Drawing.Point(3, 144);
+            this.gb_load.Location = new System.Drawing.Point(3, 129);
             this.gb_load.Name = "gb_load";
-            this.gb_load.Size = new System.Drawing.Size(102, 92);
+            this.gb_load.Size = new System.Drawing.Size(102, 90);
             this.gb_load.TabIndex = 2;
             this.gb_load.TabStop = false;
             this.gb_load.Text = "Load";
@@ -177,7 +193,7 @@ namespace Presentation
             this.btn_loadFromText.Name = "btn_loadFromText";
             this.btn_loadFromText.Size = new System.Drawing.Size(96, 23);
             this.btn_loadFromText.TabIndex = 2;
-            this.btn_loadFromText.Text = "From Text";
+            this.btn_loadFromText.Text = "Text";
             this.btn_loadFromText.UseVisualStyleBackColor = true;
             this.btn_loadFromText.Click += new System.EventHandler(this.btn_loadFromText_Click);
             // 
@@ -189,7 +205,7 @@ namespace Presentation
             this.btn_loadFromWeb.Name = "btn_loadFromWeb";
             this.btn_loadFromWeb.Size = new System.Drawing.Size(96, 23);
             this.btn_loadFromWeb.TabIndex = 1;
-            this.btn_loadFromWeb.Text = "From Web";
+            this.btn_loadFromWeb.Text = "Web";
             this.btn_loadFromWeb.UseVisualStyleBackColor = true;
             this.btn_loadFromWeb.Click += new System.EventHandler(this.btn_loadFromWeb_Click);
             // 
@@ -201,7 +217,7 @@ namespace Presentation
             this.btn_loadFromFile.Name = "btn_loadFromFile";
             this.btn_loadFromFile.Size = new System.Drawing.Size(96, 23);
             this.btn_loadFromFile.TabIndex = 0;
-            this.btn_loadFromFile.Text = "From File";
+            this.btn_loadFromFile.Text = "File";
             this.btn_loadFromFile.UseVisualStyleBackColor = true;
             this.btn_loadFromFile.Click += new System.EventHandler(this.btn_loadFromFile_Click);
             // 
@@ -209,9 +225,9 @@ namespace Presentation
             // 
             this.gb_generate.Controls.Add(this.btn_generateRandom);
             this.gb_generate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gb_generate.Location = new System.Drawing.Point(3, 242);
+            this.gb_generate.Location = new System.Drawing.Point(3, 225);
             this.gb_generate.Name = "gb_generate";
-            this.gb_generate.Size = new System.Drawing.Size(102, 45);
+            this.gb_generate.Size = new System.Drawing.Size(102, 42);
             this.gb_generate.TabIndex = 3;
             this.gb_generate.TabStop = false;
             this.gb_generate.Text = "Generate";
@@ -234,12 +250,12 @@ namespace Presentation
             this.gb_solveControl.Controls.Add(this.rb_showHints);
             this.gb_solveControl.Controls.Add(this.rb_showBoard);
             this.gb_solveControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gb_solveControl.Location = new System.Drawing.Point(3, 293);
+            this.gb_solveControl.Location = new System.Drawing.Point(3, 273);
             this.gb_solveControl.Name = "gb_solveControl";
-            this.gb_solveControl.Size = new System.Drawing.Size(102, 114);
+            this.gb_solveControl.Size = new System.Drawing.Size(102, 134);
             this.gb_solveControl.TabIndex = 4;
             this.gb_solveControl.TabStop = false;
-            this.gb_solveControl.Text = "Solution Control";
+            this.gb_solveControl.Text = "Solution Display";
             // 
             // rb_showSolution
             // 
@@ -251,7 +267,7 @@ namespace Presentation
             this.rb_showSolution.Size = new System.Drawing.Size(96, 27);
             this.rb_showSolution.TabIndex = 2;
             this.rb_showSolution.TabStop = true;
-            this.rb_showSolution.Text = "Show Solution";
+            this.rb_showSolution.Text = "Solved";
             this.rb_showSolution.UseVisualStyleBackColor = true;
             this.rb_showSolution.CheckedChanged += new System.EventHandler(this.rb_show_CheckedChanged);
             // 
@@ -265,7 +281,7 @@ namespace Presentation
             this.rb_showHints.Size = new System.Drawing.Size(96, 27);
             this.rb_showHints.TabIndex = 1;
             this.rb_showHints.TabStop = true;
-            this.rb_showHints.Text = "Show Hints";
+            this.rb_showHints.Text = "Hints";
             this.rb_showHints.UseVisualStyleBackColor = true;
             this.rb_showHints.CheckedChanged += new System.EventHandler(this.rb_show_CheckedChanged);
             // 
@@ -279,7 +295,7 @@ namespace Presentation
             this.rb_showBoard.Size = new System.Drawing.Size(96, 27);
             this.rb_showBoard.TabIndex = 0;
             this.rb_showBoard.TabStop = true;
-            this.rb_showBoard.Text = "Show Board";
+            this.rb_showBoard.Text = "Clean";
             this.rb_showBoard.UseVisualStyleBackColor = true;
             this.rb_showBoard.CheckedChanged += new System.EventHandler(this.rb_show_CheckedChanged);
             // 
@@ -288,7 +304,7 @@ namespace Presentation
             this.pnl_drawingCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_drawingCanvas.Location = new System.Drawing.Point(119, 4);
             this.pnl_drawingCanvas.Name = "pnl_drawingCanvas";
-            this.pnl_drawingCanvas.Size = new System.Drawing.Size(695, 517);
+            this.pnl_drawingCanvas.Size = new System.Drawing.Size(540, 510);
             this.pnl_drawingCanvas.TabIndex = 1;
             this.pnl_drawingCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_drawingCanvas_Paint);
             this.pnl_drawingCanvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnl_drawingCanvas_MouseClick);
@@ -301,9 +317,9 @@ namespace Presentation
             this.sts_statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tssl_boardStatusLabel,
             this.tssl_boardStatusText});
-            this.sts_statusStrip.Location = new System.Drawing.Point(0, 503);
+            this.sts_statusStrip.Location = new System.Drawing.Point(0, 496);
             this.sts_statusStrip.Name = "sts_statusStrip";
-            this.sts_statusStrip.Size = new System.Drawing.Size(818, 22);
+            this.sts_statusStrip.Size = new System.Drawing.Size(663, 22);
             this.sts_statusStrip.TabIndex = 1;
             this.sts_statusStrip.Text = "statusStrip1";
             // 
@@ -319,27 +335,11 @@ namespace Presentation
             this.tssl_boardStatusText.Size = new System.Drawing.Size(55, 17);
             this.tssl_boardStatusText.Text = "<Status>";
             // 
-            // rb_griddlerRail
-            // 
-            this.rb_griddlerRail.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rb_griddlerRail.AutoSize = true;
-            this.rb_griddlerRail.Dock = System.Windows.Forms.DockStyle.Top;
-            this.rb_griddlerRail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb_griddlerRail.Location = new System.Drawing.Point(3, 91);
-            this.rb_griddlerRail.Name = "rb_griddlerRail";
-            this.rb_griddlerRail.Size = new System.Drawing.Size(96, 25);
-            this.rb_griddlerRail.TabIndex = 3;
-            this.rb_griddlerRail.TabStop = true;
-            this.rb_griddlerRail.Text = "Griddler Rail";
-            this.rb_griddlerRail.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rb_griddlerRail.UseVisualStyleBackColor = true;
-            this.rb_griddlerRail.CheckedChanged += new System.EventHandler(this.rb_puzzleTypeSelector_CheckedChanged);
-            // 
             // frm_MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(818, 525);
+            this.ClientSize = new System.Drawing.Size(663, 518);
             this.Controls.Add(this.sts_statusStrip);
             this.Controls.Add(this.tlp_MainLayoutTable);
             this.KeyPreview = true;
