@@ -92,15 +92,15 @@ namespace Presentation.WPF
         //{
         //    RefreshForm();
         //}
-        //private void frm_MainForm_Resize(object sender, EventArgs e)
-        //{
-        //    RefreshForm();
-        //}
         //private void frm_MainForm_KeyDown(object sender, KeyEventArgs e)
         //{
         //    presentationLogicObject.InputKey(e);
         //}
-
+        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+        {
+            base.OnRenderSizeChanged(sizeInfo);
+            RefreshForm();
+        }
         private void rbtnDisplayModes_Checked(object sender, RoutedEventArgs e)
         {
             try
@@ -114,10 +114,7 @@ namespace Presentation.WPF
                 else { }
                 RefreshForm();
             }
-            catch (Exception)
-            {
-
-            }
+            catch (Exception) { }
         }
 
         private void btnLoadFromFile_Click(object sender, RoutedEventArgs e)
@@ -135,13 +132,11 @@ namespace Presentation.WPF
                 RefreshForm();
             }
         }
-
         private void btnLoadFromWeb_Click(object sender, RoutedEventArgs e)
         {
             PresentationLogicObject.ReadFromWeb(null);
             RefreshForm();
         }
-
         private void btnLoadFromText_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("not implemented yet (need to create a form to paste text)");
@@ -168,7 +163,6 @@ namespace Presentation.WPF
         }
 
 
-
         private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             //System.Windows.Point location = e.GetPosition(this.GameCanvas);
@@ -176,7 +170,6 @@ namespace Presentation.WPF
             //MainWindow.PresentationLogicObject.InputMouse(mea, new System.Drawing.Size((int)this.GameCanvas.ActualWidth, (int)this.GameCanvas.ActualHeight));
             //RefreshForm();
         }
-
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Point location = e.GetPosition(this.GameCanvas);
@@ -184,27 +177,28 @@ namespace Presentation.WPF
             MainWindow.PresentationLogicObject.InputMouse(mea, new System.Drawing.Size((int)this.GameCanvas.ActualWidth, (int)this.GameCanvas.ActualHeight));
             RefreshForm();
         }
-
         private void Window_MouseMove(object sender, MouseEventArgs e)
         {
 
         }
-
         private void Window_MouseUp(object sender, MouseButtonEventArgs e)
         {
 
         }
-
         private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             System.Windows.Forms.MouseEventArgs mea = new System.Windows.Forms.MouseEventArgs(System.Windows.Forms.MouseButtons.Left, 1, 0, 0, e.Delta);
             MainWindow.PresentationLogicObject.InputMouseWheel(mea, new System.Drawing.Size((int)this.GameCanvas.ActualWidth, (int)this.GameCanvas.ActualHeight));
 
         }
-
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             MainWindow.PresentationLogicObject.InputKey(new System.Windows.Forms.KeyEventArgs(ConvertWinfromsObjects.ConvertKeys(e.Key)));
+            RefreshForm();
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
             RefreshForm();
         }
     }

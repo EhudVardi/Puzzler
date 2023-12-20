@@ -2,14 +2,15 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:UserControls="clr-namespace:Presentation.WPF"
-        Title="Solvers" Height="500" Width="600"
+        Title="Solvers"
         Loaded="Window_Loaded"
         MouseDown="Window_MouseDown"
         MouseMove="Window_MouseMove"
         MouseDoubleClick="Window_MouseDoubleClick"
         MouseUp="Window_MouseUp"
         MouseWheel="Window_MouseWheel"
-        KeyDown="Window_KeyDown">
+        KeyDown="Window_KeyDown"
+        SizeChanged="Window_SizeChanged" Width="499" Height="409">
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -18,38 +19,41 @@
         <Grid >
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="110"></ColumnDefinition>
-                    <ColumnDefinition Width="5"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition ></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Grid>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <GroupBox VerticalAlignment="Top" Height="90" Grid.Row="0" Header="Puzzle Type" Margin="3,3,3,3">
+                    <GroupBox Grid.Row="0" Header="Puzzle Type" Margin="3,3,3,3" VerticalAlignment="Top">
                         <DockPanel>
-                            <RadioButton x:Name="btnSelectSudoku" DockPanel.Dock="Top" Content="Sudoku" IsChecked="True" Checked="btnSelectPuzzles_Checked"></RadioButton>
+                            <RadioButton x:Name="btnSelectSudoku" DockPanel.Dock="Top" Content="Sudoku" Checked="btnSelectPuzzles_Checked"></RadioButton>
                             <RadioButton x:Name="btnSelectKakuru" DockPanel.Dock="Top" Content="Kakuru" Checked="btnSelectPuzzles_Checked" ></RadioButton>
                             <RadioButton x:Name="btnSelectGriddler" DockPanel.Dock="Top" Content="Griddler" Checked="btnSelectPuzzles_Checked" ></RadioButton>
-                            <RadioButton x:Name="btnSelectGriddlerRails" DockPanel.Dock="Top" Content="Griddler Rails" Checked="btnSelectPuzzles_Checked" ></RadioButton>
+                            <RadioButton x:Name="btnSelectGriddlerRails" DockPanel.Dock="Top" Content="Rails" Checked="btnSelectPuzzles_Checked" ></RadioButton>
                         </DockPanel>
                     </GroupBox>
-                    <GroupBox VerticalAlignment="Top" Grid.Row="1" Header="Load" Margin="3,3,3,0" Height="109">
+                    <GroupBox Grid.Row="1" Header="Load" Margin="3,3,3,0" VerticalAlignment="Top">
                         <DockPanel >
                             <Button x:Name="btnLoadFromFile" VerticalAlignment="Top" DockPanel.Dock="Top" Content="File" Click="btnLoadFromFile_Click" ></Button>
-                            <Button x:Name="btnLoadFromWeb" VerticalAlignment="Top" Height="20" DockPanel.Dock="Top" Content="Web" Click="btnLoadFromWeb_Click" ></Button>
-                            <Button x:Name="btnLoadFromText" VerticalAlignment="Top" Height="20" DockPanel.Dock="Top" Content="Text" Click="btnLoadFromText_Click"></Button>
+                            <Button x:Name="btnLoadFromWeb" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Web" Click="btnLoadFromWeb_Click" />
+                            <Button x:Name="btnLoadFromText" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Text" Click="btnLoadFromText_Click"/>
                         </DockPanel>
                     </GroupBox>
-                    <GroupBox VerticalAlignment="Top" Grid.Row="2" Header="Generate" Margin="3,3,3,0" Height="43">
+                    <GroupBox Grid.Row="2" Header="Generate" Margin="3,3,3,0" VerticalAlignment="Top">
                         <DockPanel >
-                            <Button x:Name="btnRandom"  VerticalAlignment="Top" DockPanel.Dock="Top" Height="20" Content="Random" Click="btnRandom_Click"></Button>
+                            <Button x:Name="btnRandom"  VerticalAlignment="Top" DockPanel.Dock="Top" Content="Random" Click="btnRandom_Click"/>
                         </DockPanel >
                     </GroupBox>
-                    <GroupBox VerticalAlignment="Top" Grid.Row="3" Header="Display" Margin="3,3,3,0" Height="71">
+                    <GroupBox Grid.Row="3" Header="Display" Margin="3,3,3,-37" VerticalAlignment="Top">
                         <DockPanel >
                             <RadioButton x:Name="rbtnClean" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Clean" IsChecked="True" Checked="rbtnDisplayModes_Checked"></RadioButton>
                             <RadioButton x:Name="rbtnHints" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Hints" Checked="rbtnDisplayModes_Checked" ></RadioButton>
@@ -58,11 +62,12 @@
                     </GroupBox>
                 </Grid>
 
-                <GridSplitter Grid.Column="1"></GridSplitter>
-
-                <UserControls:PuzzlerCanvas Grid.Column="2" x:Name="GameCanvas" Margin="3">
-
-                </UserControls:PuzzlerCanvas>
+                <GridSplitter Grid.Column="1" Width="5"></GridSplitter>
+                
+                <DockPanel Grid.Column="2">
+                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3">
+                    </UserControls:PuzzlerCanvas>
+                </DockPanel>
             </Grid>
 
         </Grid>
