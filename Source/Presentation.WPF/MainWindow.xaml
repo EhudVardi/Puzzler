@@ -65,7 +65,16 @@
                 <GridSplitter Grid.Column="1" Width="5"></GridSplitter>
 
                 <DockPanel Grid.Column="2">
-                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" RenderTransformOrigin="0.5,0.5"/>
+                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" RenderTransformOrigin="0.5,0.5">
+                        <UserControls:PuzzlerCanvas.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                <SkewTransform AngleX="-5" AngleY="2"/>
+                                <RotateTransform Angle="10"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </UserControls:PuzzlerCanvas.RenderTransform>
+                    </UserControls:PuzzlerCanvas>
                 </DockPanel>
             </Grid>
 
