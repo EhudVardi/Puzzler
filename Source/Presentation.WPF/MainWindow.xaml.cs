@@ -57,6 +57,7 @@ namespace Presentation.WPF
                     this.GameCanvas.HookEventsToPresentationLogicObject(PresentationLogicObject);
                     PresentationLogicObject.Initialize();
                     PresentationLogicObject.Refresh += PresentationLogicObject_Refresh;
+                    rbtnDisplayModes_Checked(null, null);
                 }
 
                 RefreshForm();
@@ -75,7 +76,7 @@ namespace Presentation.WPF
         {
             if (PresentationLogicObject != null)
             {
-                this.InvalidateVisual();
+
                 this.GameCanvas.InvalidateVisual();
                 try
                 {
