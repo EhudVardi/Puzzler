@@ -42,15 +42,14 @@ namespace Presentation
 
         private void rb_puzzleTypeSelector_CheckedChanged(object sender, EventArgs e)
         {
-            //TODO return those back when finished implementing
             if (rb_sudoku.Checked)
                 presentationLogicObject = new PresentationLogicSudoku();
             else if (rb_kakuru.Checked)
                 presentationLogicObject = new PresentationLogicKakuru();
             else if (rb_griddler.Checked)
                 presentationLogicObject = new PresentationLogicGriddler();
-            //else if (rb_griddlerRail.Checked)
-            //    presentationLogicObject = new PresentationLogicGriddlerRails();
+            else if (rb_griddlerRail.Checked)
+                presentationLogicObject = new PresentationLogicGriddlerRails();
 
             if (presentationLogicObject != null)
             {

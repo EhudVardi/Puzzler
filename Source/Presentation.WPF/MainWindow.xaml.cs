@@ -56,6 +56,7 @@ namespace Presentation.WPF
                 {
                     this.GameCanvas.HookEventsToPresentationLogicObject(PresentationLogicObject);
                     PresentationLogicObject.Initialize();
+                    PresentationLogicObject.Refresh += PresentationLogicObject_Refresh;
                 }
 
                 RefreshForm();
@@ -65,16 +66,27 @@ namespace Presentation.WPF
             }
         }
 
-
+        void PresentationLogicObject_Refresh(object sender, EventArgs e)
+        {
+            RefreshForm();
+        }
 
         private void RefreshForm()
         {
             if (PresentationLogicObject != null)
             {
+                this.InvalidateVisual();
                 this.GameCanvas.InvalidateVisual();
-                //this.lblStatus.Text = string.Format("Valid: {0}, Solved: {1}",
-                //    PresentationLogicObject.IsValid(),
-                //    PresentationLogicObject.IsSolved());
+                try
+                {
+                    this.lblStatus.Text = string.Format("Valid: {0}, Solved: {1}",
+                        PresentationLogicObject.IsValid(),
+                        PresentationLogicObject.IsSolved());
+                    //this.lblStatusTitle.Text = "OK";
+                }
+                catch (Exception) {
+                    //this.lblStatusTitle.Text = "Error";
+                }
             }
         }
 
@@ -88,19 +100,46 @@ namespace Presentation.WPF
             this.rbtnClean.IsChecked = true;
         }
 
-        //private void frm_MainForm_Refresh(object sender, EventArgs e)
-        //{
-        //    RefreshForm();
-        //}
-        //private void frm_MainForm_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    presentationLogicObject.InputKey(e);
-        //}
+        private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //System.Windows.Point location = e.GetPosition(this.GameCanvas);
+            //System.Windows.Forms.MouseEventArgs mea = new System.Windows.Forms.MouseEventArgs(System.Windows.Forms.MouseButtons.Left, 1, (int)location.X, (int)location.Y, 1);
+            //MainWindow.PresentationLogicObject.InputMouse(mea, new System.Drawing.Size((int)this.GameCanvas.ActualWidth, (int)this.GameCanvas.ActualHeight));
+            //RefreshForm();
+        }
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Point location = e.GetPosition(this.GameCanvas);
+            System.Windows.Forms.MouseEventArgs mea = new System.Windows.Forms.MouseEventArgs(System.Windows.Forms.MouseButtons.Left, 1, (int)location.X, (int)location.Y, 1);
+            MainWindow.PresentationLogicObject.InputMouse(mea, new System.Drawing.Size((int)this.GameCanvas.ActualWidth, (int)this.GameCanvas.ActualHeight));
+            RefreshForm();
+        }
+        private void Window_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
+        private void Window_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+        private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            System.Windows.Forms.MouseEventArgs mea = new System.Windows.Forms.MouseEventArgs(System.Windows.Forms.MouseButtons.Left, 1, 0, 0, e.Delta);
+            MainWindow.PresentationLogicObject.InputMouseWheel(mea, new System.Drawing.Size((int)this.GameCanvas.ActualWidth, (int)this.GameCanvas.ActualHeight));
+
+        }
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            MainWindow.PresentationLogicObject.InputKey(new System.Windows.Forms.KeyEventArgs(ConvertWinfromsObjects.ConvertKeys(e.Key)));
+            RefreshForm();
+        }
+
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
             base.OnRenderSizeChanged(sizeInfo);
             RefreshForm();
         }
+
         private void rbtnDisplayModes_Checked(object sender, RoutedEventArgs e)
         {
             try
@@ -155,50 +194,10 @@ namespace Presentation.WPF
             //            ok = true;
             //    }
         }
-        
+
         private void btnRandom_Click(object sender, RoutedEventArgs e)
         {
             PresentationLogicObject.GenerateRandom();
-            RefreshForm();
-        }
-
-
-        private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            //System.Windows.Point location = e.GetPosition(this.GameCanvas);
-            //System.Windows.Forms.MouseEventArgs mea = new System.Windows.Forms.MouseEventArgs(System.Windows.Forms.MouseButtons.Left, 1, (int)location.X, (int)location.Y, 1);
-            //MainWindow.PresentationLogicObject.InputMouse(mea, new System.Drawing.Size((int)this.GameCanvas.ActualWidth, (int)this.GameCanvas.ActualHeight));
-            //RefreshForm();
-        }
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            System.Windows.Point location = e.GetPosition(this.GameCanvas);
-            System.Windows.Forms.MouseEventArgs mea = new System.Windows.Forms.MouseEventArgs(System.Windows.Forms.MouseButtons.Left, 1, (int)location.X, (int)location.Y, 1);
-            MainWindow.PresentationLogicObject.InputMouse(mea, new System.Drawing.Size((int)this.GameCanvas.ActualWidth, (int)this.GameCanvas.ActualHeight));
-            RefreshForm();
-        }
-        private void Window_MouseMove(object sender, MouseEventArgs e)
-        {
-
-        }
-        private void Window_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-        private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            System.Windows.Forms.MouseEventArgs mea = new System.Windows.Forms.MouseEventArgs(System.Windows.Forms.MouseButtons.Left, 1, 0, 0, e.Delta);
-            MainWindow.PresentationLogicObject.InputMouseWheel(mea, new System.Drawing.Size((int)this.GameCanvas.ActualWidth, (int)this.GameCanvas.ActualHeight));
-
-        }
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
-            MainWindow.PresentationLogicObject.InputKey(new System.Windows.Forms.KeyEventArgs(ConvertWinfromsObjects.ConvertKeys(e.Key)));
-            RefreshForm();
-        }
-
-        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
             RefreshForm();
         }
     }

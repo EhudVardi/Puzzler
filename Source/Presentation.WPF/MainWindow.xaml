@@ -10,7 +10,7 @@
         MouseUp="Window_MouseUp"
         MouseWheel="Window_MouseWheel"
         KeyDown="Window_KeyDown"
-        SizeChanged="Window_SizeChanged" Width="499" Height="409">
+        Width="499" Height="409">
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -63,10 +63,9 @@
                 </Grid>
 
                 <GridSplitter Grid.Column="1" Width="5"></GridSplitter>
-                
+
                 <DockPanel Grid.Column="2">
-                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3">
-                    </UserControls:PuzzlerCanvas>
+                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" RenderTransformOrigin="0.5,0.5"/>
                 </DockPanel>
             </Grid>
 
