@@ -69,8 +69,9 @@ namespace Presentation
             this.tlp_MainLayoutTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlp_MainLayoutTable.Location = new System.Drawing.Point(0, 0);
             this.tlp_MainLayoutTable.Name = "tlp_MainLayoutTable";
-            this.tlp_MainLayoutTable.RowCount = 1;
+            this.tlp_MainLayoutTable.RowCount = 2;
             this.tlp_MainLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_MainLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
             this.tlp_MainLayoutTable.Size = new System.Drawing.Size(663, 518);
             this.tlp_MainLayoutTable.TabIndex = 0;
             // 
@@ -89,9 +90,9 @@ namespace Presentation
             this.tlp_ControlLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 126F));
             this.tlp_ControlLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 96F));
             this.tlp_ControlLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tlp_ControlLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tlp_ControlLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 104F));
             this.tlp_ControlLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_ControlLayoutTable.Size = new System.Drawing.Size(108, 510);
+            this.tlp_ControlLayoutTable.Size = new System.Drawing.Size(108, 487);
             this.tlp_ControlLayoutTable.TabIndex = 0;
             // 
             // gb_puzzleSelector
@@ -252,7 +253,7 @@ namespace Presentation
             this.gb_solveControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gb_solveControl.Location = new System.Drawing.Point(3, 273);
             this.gb_solveControl.Name = "gb_solveControl";
-            this.gb_solveControl.Size = new System.Drawing.Size(102, 134);
+            this.gb_solveControl.Size = new System.Drawing.Size(102, 98);
             this.gb_solveControl.TabIndex = 4;
             this.gb_solveControl.TabStop = false;
             this.gb_solveControl.Text = "Solution Display";
@@ -302,9 +303,10 @@ namespace Presentation
             // pnl_drawingCanvas
             // 
             this.pnl_drawingCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl_drawingCanvas.Location = new System.Drawing.Point(119, 4);
+            this.pnl_drawingCanvas.Location = new System.Drawing.Point(116, 1);
+            this.pnl_drawingCanvas.Margin = new System.Windows.Forms.Padding(0);
             this.pnl_drawingCanvas.Name = "pnl_drawingCanvas";
-            this.pnl_drawingCanvas.Size = new System.Drawing.Size(540, 510);
+            this.pnl_drawingCanvas.Size = new System.Drawing.Size(546, 493);
             this.pnl_drawingCanvas.TabIndex = 1;
             this.pnl_drawingCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_drawingCanvas_Paint);
             this.pnl_drawingCanvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnl_drawingCanvas_MouseClick);

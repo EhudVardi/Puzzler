@@ -12,7 +12,7 @@ using Data;
 using Logic;
 using Common.Models.Griddler;
 
-namespace Presentation
+namespace PresentationLogic
 {
     public class PresentationLogicGriddlerRails : PresentationLogicGriddler
     {
@@ -22,25 +22,21 @@ namespace Presentation
             this.LogicProxy = new LogicLayerGriddler();
         }
 
-
         public override void InitDisplay()
         {
             visualBoard = new VisualBoard();
             visualBoard.Init(this.GetSolvedBoard());
-
             margin = 1;
-
         }
 
-
-        public override void Draw(PaintEventArgs e)
+        public override void Draw(object drawingContext, float width, float height)
         {
             try
             {
-                Graphics g = e.Graphics;
+                //Graphics g = e.Graphics;
 
-                float brWidth = e.ClipRectangle.Width;
-                float brHeight = e.ClipRectangle.Height;
+                float brWidth = width;
+                float brHeight = height;
 
                 float cellWidth = (float)brWidth / GetTrackerBoard().Columns;
                 float cellHeight = (float)brHeight / GetTrackerBoard().Rows;
@@ -53,23 +49,23 @@ namespace Presentation
 
                 if (this.visualBoard.SelectedRailGroup)
                 {
-                    DrawRows(g, cellWidth, cellHeight, rowBrushFore);
-                    DrawColumns(g, cellWidth, cellHeight, colBrushBack);
+                    DrawRows(drawingContext, cellWidth, cellHeight, rowBrushFore);
+                    DrawColumns(drawingContext, cellWidth, cellHeight, colBrushBack);
                 }
                 else
                 {
-                    DrawColumns(g, cellWidth, cellHeight, colBrushFore);
-                    DrawRows(g, cellWidth, cellHeight, rowBrushBack);
+                    DrawColumns(drawingContext, cellWidth, cellHeight, colBrushFore);
+                    DrawRows(drawingContext, cellWidth, cellHeight, rowBrushBack);
                 }
 
             }
             catch (Exception)
             {
-                base.Draw(e);
+                //base.Draw(e);
             }
         }
 
-        private void DrawColumns(Graphics g, float cellWidth, float cellHeight, Brush colBrushFore)
+        private void DrawColumns(object drawingContext, float cellWidth, float cellHeight, Brush colBrushFore)
         {
             for (int i = 0; i < this.visualBoard.ColumnRails.Count; i++)
             {
@@ -78,7 +74,7 @@ namespace Presentation
                 {
                     Car c = r.Cars[j];
 
-                    DrawCar(g, colBrushFore,
+                    DrawCar(drawingContext, colBrushFore,
                         (int)(cellWidth * i + margin),
                         (int)(cellHeight * c.Position + margin),
                         (int)(cellWidth - 2 * +margin),
@@ -86,7 +82,7 @@ namespace Presentation
 
                     if (c.Equals(selectedColumnCar))
                     {
-                        DrawCar(g, Brushes.Yellow,
+                        DrawCar(drawingContext, Brushes.Yellow,
                         (int)(cellWidth * i + margin),
                         (int)(cellHeight * c.Position + margin),
                         (int)(cellWidth - 2 * +margin),
@@ -96,7 +92,7 @@ namespace Presentation
             }
         }
 
-        private void DrawRows(Graphics g, float cellWidth, float cellHeight, Brush rowBrushFore)
+        private void DrawRows(object drawingContext, float cellWidth, float cellHeight, Brush rowBrushFore)
         {
             for (int i = 0; i < this.visualBoard.RowRails.Count; i++)
             {
@@ -105,7 +101,7 @@ namespace Presentation
                 {
                     Car c = r.Cars[j];
 
-                    DrawCar(g, rowBrushFore,
+                    DrawCar(drawingContext, rowBrushFore,
                         (int)(cellWidth * c.Position + margin),
                         (int)(cellHeight * i + margin),
                         (int)(cellWidth * c.Size - 2 * +margin),
@@ -113,28 +109,24 @@ namespace Presentation
 
                     if (c.Equals(selectedRowCar))
                     {
-                        DrawCar(g, Brushes.Yellow,
-    (int)(cellWidth * c.Position + margin),
-    (int)(cellHeight * i + margin),
-    (int)(cellWidth * c.Size - 2 * +margin),
-    (int)(cellHeight - 2 * margin));
+                        DrawCar(drawingContext, Brushes.Yellow,
+                        (int)(cellWidth * c.Position + margin),
+                        (int)(cellHeight * i + margin),
+                        (int)(cellWidth * c.Size - 2 * +margin),
+                        (int)(cellHeight - 2 * margin));
                     }
 
                 }
             }
         }
 
-        private static void DrawCar(Graphics g, Brush rowBrushFore, int x, int y, int w, int h)
+        private void DrawCar(object drawingContext, Brush rowBrushFore, int x, int y, int w, int h)
         {
             try
             {
-                g.FillRectangle(rowBrushFore, x, y, w, h);
-                //g.DrawRectangle(Pens.Black, x, y, w, h);
+                OnRequestFillRectangle(drawingContext, rowBrushFore, x, y, w, h);
             }
-            catch (Exception)
-            {
-
-            }
+            catch (Exception) { }
         }
 
         Car selectedRowCar = null;
@@ -189,7 +181,6 @@ namespace Presentation
 
                         break;
 
-
                     case MouseButtons.Middle:
                     case MouseButtons.None:
                     case MouseButtons.Right:
@@ -199,10 +190,7 @@ namespace Presentation
                         break;
                 }
             }
-            catch (Exception ex)
-            {
-
-            }
+            catch (Exception ex) { }
         }
 
         public override void InputMouse(MouseEventArgs e, Size s)
@@ -218,7 +206,6 @@ namespace Presentation
                         int column = (int)((float)e.X / ((float)s.Width / (float)b.Columns));
                         int row = (int)((float)e.Y / ((float)s.Height / (float)b.Rows));
 
-                        
                         if (this.visualBoard.SelectedRailGroup) // rows
                         {
                             Rail r = this.visualBoard.RowRails[column];
@@ -249,7 +236,7 @@ namespace Presentation
 
                     this.selectedRowCar = null;
                     this.selectedColumnCar = null;
-                    
+                  
                     break;
             }
 
@@ -296,7 +283,7 @@ namespace Presentation
             {
             }
         }
-        
+      
 
         #region specific
 
@@ -326,7 +313,7 @@ namespace Presentation
                 {
                     Rail rail = new Rail();
                     rail.Init(g);
-                    
+                  
                     if (g is GroupGriddlerRow)
                     {
                         RowRails.Add(rail);

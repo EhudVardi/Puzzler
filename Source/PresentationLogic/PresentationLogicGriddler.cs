@@ -12,8 +12,9 @@ using Data;
 using Logic;
 using Common.Models.Griddler;
 
-namespace Presentation
+namespace PresentationLogic
 {
+
     public class PresentationLogicGriddler : PresentationLogicGeneric<PuzzleGriddler, BoardGriddler>
     {
         public PresentationLogicGriddler()
@@ -22,16 +23,12 @@ namespace Presentation
             this.LogicProxy = new LogicLayerGriddler();
         }
 
-
-
-        public override void Draw(PaintEventArgs e)
+        public override void Draw(object drawingContext, float width, float height)
         {
             try
             {
-                Graphics g = e.Graphics;
-
-                float brWidth = e.ClipRectangle.Width;
-                float brHeight = e.ClipRectangle.Height;
+                float brWidth = width;
+                float brHeight = height;
 
                 float cellWidth = (float)brWidth / GetTrackerBoard().Columns;
                 float cellHeight = (float)brHeight / GetTrackerBoard().Rows;
@@ -45,8 +42,9 @@ namespace Presentation
                     switch (this.displayType)
                     {
                         case DisplayType.Board:
-                            g.FillRectangle(valueCell.Value == null ? Brushes.Yellow : valueCell.Value == true ? Brushes.Green : Brushes.Red,
-
+                            OnRequestFillRectangle(
+                                    drawingContext,
+                                    valueCell.Value == null ? Brushes.Yellow : valueCell.Value == true ? Brushes.Green : Brushes.Red,
                                     cellWidth * valueCell.Column + margin,
                                     cellHeight * valueCell.Row + margin,
                                     cellWidth - margin * 2f,
@@ -56,8 +54,9 @@ namespace Presentation
                             
                             break;
                         case DisplayType.Hint:
-                            g.FillRectangle(valueCell.Value == null ? Brushes.Yellow : valueCell.Value == true ? Brushes.Green : Brushes.Red,
-
+                            OnRequestFillRectangle(
+                                    drawingContext,
+                                   valueCell.Value == null ? Brushes.Yellow : valueCell.Value == true ? Brushes.Green : Brushes.Red,
                                     cellWidth * valueCell.Column + margin,
                                     cellHeight * valueCell.Row + margin,
                                     cellWidth - margin * 2f,
@@ -70,7 +69,9 @@ namespace Presentation
                                 else
                                     brushValue = Pens.Green;
 
-                                g.DrawRectangle(brushValue,
+                                OnRequestDrawRectangle(
+                                    drawingContext,
+                                    brushValue,
                                     cellWidth * valueCell.Column + margin,
                                     cellHeight * valueCell.Row + margin,
                                     cellWidth - margin * 2f,
@@ -81,8 +82,9 @@ namespace Presentation
                         case DisplayType.Solution:
                             if (solvedValueCell.IsFixed)
                             {
-                                g.FillRectangle(solvedValueCell.Value == null ? Brushes.Yellow : solvedValueCell.Value == true ? Brushes.Green : Brushes.Red,
-
+                                OnRequestFillRectangle(
+                                    drawingContext,
+                                    solvedValueCell.Value == null ? Brushes.Yellow : solvedValueCell.Value == true ? Brushes.Green : Brushes.Red,
                                     cellWidth * solvedValueCell.Column + margin,
                                     cellHeight * solvedValueCell.Row + margin,
                                     cellWidth - margin * 2f,
@@ -98,59 +100,45 @@ namespace Presentation
 
                 //draw selected value cell marker
                 if (selectedValueCell != null)
-                    g.DrawRectangle(new Pen(Color.Black, margin),
-
+                    OnRequestDrawRectangle(
+                        drawingContext,
+                        new Pen(Color.Black, margin),
                         cellWidth * selectedValueCell.Column + margin,
                         cellHeight * selectedValueCell.Row + margin,
                         cellWidth - margin * 2f,
                         cellHeight - margin * 2f
-
                         );
 
             }
             catch (Exception)
             {
-                base.Draw(e);
+                base.Draw(drawingContext, width, height);
             }
         }
-
-
+        
         public override void InputMouse(MouseEventArgs e, Size s)
         {
             try
             {
                 BoardGriddler b = this.GetTrackerBoard();
-
                 Point p = GetBoardCoordinates(e, s, b);
-
                 CellValueGriddler pointedCell = b.CellsMatrix[p.X, p.Y] as CellValueGriddler;
-
                 if (!b.InitialCells.Contains(pointedCell))
                     selectedValueCell = pointedCell;
-
                 this.OnRequestRefresh(EventArgs.Empty);
             }
-            catch (Exception ex)
-            {
-
-            }
+            catch (Exception ex) { }
         }
-
-
 
         protected  Point GetBoardCoordinates(MouseEventArgs e, Size s, BoardGriddler b)
         {
             return new Point((int)((float)e.X / ((float)s.Width / (float)b.Columns)), (int)((float)e.Y / ((float)s.Height / (float)b.Rows)));
         }
 
-
-
         public override void InputKey(KeyEventArgs e)
         {
             BoardGriddler board = GetTrackerBoard();
-
             int numRequested = e.KeyValue - 49;
-
             if (selectedValueCell != null)
                 if (numRequested > -1 && numRequested < 3)
                     if (numRequested == 0)
@@ -161,17 +149,12 @@ namespace Presentation
                         selectedValueCell.Value = false;
                     else
                         selectedValueCell.Value = null;
-
-
             this.OnRequestRefresh(EventArgs.Empty);
         }
 
-
         #region specific
 
-
         CellValueGriddler selectedValueCell;
-
 
         #endregion
     }

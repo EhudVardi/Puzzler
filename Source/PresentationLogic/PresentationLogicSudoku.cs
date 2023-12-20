@@ -11,32 +11,46 @@ using Data;
 using Logic;
 using Common.Models.Sudoku;
 
-namespace Presentation
+namespace PresentationLogic
 {
     public class PresentationLogicSudoku : PresentationLogicGeneric<SudokuPuzzle, BoardSudoku>
     {
         public PresentationLogicSudoku()
         {
             this.LogicProxy = new LogicLayerSudoku();
-
             this.URL = "http://www.sudokuconquest.com/9x9/expert";
         }
 
-
-
-        public override void Draw(PaintEventArgs e)
+        public override void Draw(object drawingContext, float width, float height)
         {
             try
             {
-
-                Graphics g = e.Graphics;
-                
-                float brWidth = e.ClipRectangle.Width;
-                float brHeight = e.ClipRectangle.Height;
+                float brWidth = width;
+                float brHeight = height;
 
                 float cellWidth = (float)brWidth / GetTrackerBoard().Columns;
                 float cellHeight = (float)brHeight / GetTrackerBoard().Rows;
 
+
+                ////draw board groups frame
+                float widthB = (float)brWidth / GetTrackerBoard().N;
+                float heightB = (float)brHeight / GetTrackerBoard().M;
+
+                //rows 
+                for (int i = 0; i < GetTrackerBoard().CellsMatrix.GetLength(0); i++)
+                    OnRequestDrawLine(drawingContext,
+                    Pens.Black, 0, cellHeight * i, (float)brWidth, cellHeight * i);
+
+                //columns
+                for (int j = 0; j < GetTrackerBoard().CellsMatrix.GetLength(1); j++)
+                    OnRequestDrawLine(drawingContext,
+                    Pens.Black, cellWidth * j, 0, cellWidth * j, (float)brHeight);
+
+                //boxes
+                for (int i = 0; i < GetTrackerBoard().N; i++)
+                    for (int j = 0; j < GetTrackerBoard().M; j++)
+                        OnRequestDrawRectangle(drawingContext, 
+                        Pens.Black, widthB * j + margin, heightB * i + margin, widthB - margin * 2f, heightB - margin * 2f);
 
                 //draw cells
                 foreach (CellValueSudoku valueCell in GetTrackerBoard().ValueCells)
@@ -51,7 +65,8 @@ namespace Presentation
                     else brushBackColor = bFixed;
 
                     //draw value cell back color (initial or not)
-                    g.FillRectangle(brushBackColor,
+                    OnRequestFillRectangle(drawingContext,
+                        brushBackColor,
                         cellWidth * valueCell.Column + margin,
                         cellHeight * valueCell.Row + margin,
                         cellWidth - margin * 2f,
@@ -66,7 +81,8 @@ namespace Presentation
                         case DisplayType.Board:
                             if (valueCell.IsFixed)
                             {
-                                g.DrawString(valueCell.Value.ToString(), font, bText,
+                                OnRequestDrawText(drawingContext,
+                                    valueCell.Value.ToString(), font, bText,
                                     new RectangleF(
                                     cellWidth * valueCell.Column + margin,
                                     cellHeight * valueCell.Row + margin,
@@ -84,7 +100,8 @@ namespace Presentation
                                 else
                                     brushValue = bCorrect;
 
-                                g.DrawString(valueCell.Value.ToString(), font, brushValue,
+                                OnRequestDrawText(drawingContext,
+                                    valueCell.Value.ToString(), font, brushValue,
                                     new RectangleF(
                                     cellWidth * valueCell.Column + margin,
                                     cellHeight * valueCell.Row + margin,
@@ -94,7 +111,8 @@ namespace Presentation
                             }
                             break;
                         case DisplayType.Solution:
-                            g.DrawString(solvedValueCell.Value.ToString(), font, bCorrect,
+                                OnRequestDrawText(drawingContext,
+                                    solvedValueCell.Value.ToString(), font, bCorrect,
                                     new RectangleF(
                                     cellWidth * valueCell.Column + margin,
                                     cellHeight * valueCell.Row + margin,
@@ -113,7 +131,8 @@ namespace Presentation
                         else
                             brushValue = bCorrect;
 
-                        g.DrawString(valueCell.Value.ToString(), font, brushValue,
+                        OnRequestDrawText(drawingContext,
+                            valueCell.Value.ToString(), font, brushValue,
                             new RectangleF(
                             cellWidth * valueCell.Column + margin,
                             cellHeight * valueCell.Row + margin,
@@ -130,7 +149,8 @@ namespace Presentation
                 //draw selected value cell marker
                 if (selectedValueCell != null)
                 {
-                    g.DrawRectangle(new Pen(Color.Black, margin), 
+                    OnRequestDrawRectangle(drawingContext,
+                        new Pen(Color.Black, margin), 
                         cellWidth * selectedValueCell.Column + margin, 
                         cellHeight * selectedValueCell.Row + margin, 
                         cellWidth - margin * 2f, 
@@ -138,94 +158,49 @@ namespace Presentation
                         );
                 }
 
-
-
-
-                //draw board groups frame
-                float widthB = (float)brWidth / GetTrackerBoard().N;
-                float heightB = (float)brHeight / GetTrackerBoard().M;
-
-                //rows 
-                for (int i = 0; i < GetTrackerBoard().CellsMatrix.GetLength(0); i++)
-                    g.DrawLine(Pens.Black, 0, cellHeight * i, (float)brWidth, cellHeight * i);
-
-                //columns
-                for (int j = 0; j < GetTrackerBoard().CellsMatrix.GetLength(1); j++)
-                    g.DrawLine(Pens.Black, cellWidth * j, 0, cellWidth * j, (float)brHeight);
-
-                //boxes
-                for (int i = 0; i < GetTrackerBoard().N; i++)
-                    for (int j = 0; j < GetTrackerBoard().M; j++)
-                        g.DrawRectangle(Pens.Black, widthB * j + margin, heightB * i + margin, widthB - margin * 2f, heightB - margin * 2f);
-
-
-
-
             }
             catch (Exception ex)
             {
-                base.Draw(e);
+                base.Draw(drawingContext, width, height);
             }
         }
-
 
         public override void InputMouse(MouseEventArgs e, Size s)
         {
             try
             {
                 BoardSudoku b = this.GetTrackerBoard();
-
                 int column = (int)((float)e.X / ((float)s.Width / (float)b.Columns));
                 int row = (int)((float)e.Y / ((float)s.Height / (float)b.Rows));
-
                 CellValueSudoku pointedCell = b.CellsMatrix[row, column] as CellValueSudoku;
-
                 if (!b.InitialCells.Contains(pointedCell))
                     selectedValueCell = pointedCell;
-
                 this.OnRequestRefresh(EventArgs.Empty);
             }
-            catch (Exception ex)
-            {
-
-            }
+            catch (Exception ex) { }
         }
-
-
 
         public override void InputKey(KeyEventArgs e)
         {
             try
             {
-                
-            BoardSudoku board = GetTrackerBoard();
-
-            int numRequested = e.KeyValue - 49;
-
-            if (selectedValueCell != null)
-                if (numRequested > -1 && numRequested < board.Size)
-                    selectedValueCell.Value = numRequested;
-                else
-                    selectedValueCell.Value = null;
-
-
-            this.OnRequestRefresh(EventArgs.Empty);
+                BoardSudoku board = GetTrackerBoard();
+                int numRequested = e.KeyValue - 49;
+                if (selectedValueCell != null)
+                    if (numRequested > -1 && numRequested < board.Size)
+                        selectedValueCell.Value = numRequested;
+                    else
+                        selectedValueCell.Value = null;
+                this.OnRequestRefresh(EventArgs.Empty);
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
         }
-
-
 
         #region specific
 
-
         CellValueSudoku selectedValueCell;
 
-
         #endregion
-
     }
 }
 
