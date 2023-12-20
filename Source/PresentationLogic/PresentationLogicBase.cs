@@ -33,6 +33,7 @@ namespace PresentationLogic
 
         public virtual void Initialize() { }
 
+        public virtual Dictionary<string, List<string>> ReadFileList() { return null; }
         public virtual bool ReadFromFile(string fileName) { return false; }
         public virtual bool ReadFromWeb(string url) { return false; }
         public virtual bool ReadFromText(string text) { return false; }

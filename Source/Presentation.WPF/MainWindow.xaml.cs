@@ -26,6 +26,14 @@ namespace Presentation.WPF
         public MainWindow()
         {
             InitializeComponent();
+            this.ucDataGridGenerator.RequestLoadPuzzle += ucDataGrid_RequestLoadPuzzle;
+            this.ucDataGridText.RequestLoadPuzzle += ucDataGrid_RequestLoadPuzzle;
+            this.ucDataGridWeb.RequestLoadPuzzle += ucDataGrid_RequestLoadPuzzle;
+        }
+
+        void ucDataGrid_RequestLoadPuzzle(object sender, ucPuzzlerDataGrid.RequestLoadPuzzleEventArgs e)
+        {
+            PresentationLogicObject.ReadFromFile(e.Path);
         }
 
         private void btnSelectPuzzles_Checked(object sender, RoutedEventArgs e)
@@ -54,6 +62,11 @@ namespace Presentation.WPF
 
                 if (PresentationLogicObject != null)
                 {
+                    Dictionary<string, List<string>> puzzlesDic = PresentationLogicObject.ReadFileList();
+                    this.ucDataGridGenerator.SetData(puzzlesDic["FromGenerator"]);
+                    this.ucDataGridText.SetData(puzzlesDic["FromText"]);
+                    this.ucDataGridWeb.SetData(puzzlesDic["FromWeb"]);
+
                     this.GameCanvas.HookEventsToPresentationLogicObject(PresentationLogicObject);
                     PresentationLogicObject.Initialize();
                     PresentationLogicObject.Refresh += PresentationLogicObject_Refresh;
@@ -76,7 +89,6 @@ namespace Presentation.WPF
         {
             if (PresentationLogicObject != null)
             {
-
                 this.GameCanvas.InvalidateVisual();
                 try
                 {
@@ -97,8 +109,8 @@ namespace Presentation.WPF
         {
             this.btnSelectSudoku.IsChecked = false;
             this.btnSelectSudoku.IsChecked = true;
-            this.rbtnClean.IsChecked = false;
-            this.rbtnClean.IsChecked = true;
+            this.rbtnSolved.IsChecked = false;
+            this.rbtnSolved.IsChecked = true;
         }
 
         private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)

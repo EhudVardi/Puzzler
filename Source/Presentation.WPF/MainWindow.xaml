@@ -10,7 +10,7 @@
         MouseUp="Window_MouseUp"
         MouseWheel="Window_MouseWheel"
         KeyDown="Window_KeyDown"
-        Width="499" Height="409">
+        Width="640" Height="480">
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -20,10 +20,10 @@
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    <ColumnDefinition ></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Grid >
+                <Grid Grid.Column="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
@@ -33,7 +33,7 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <GroupBox Grid.Row="0" Header="Puzzle Type" Margin="3,3,3,3" VerticalAlignment="Top">
+                    <GroupBox Grid.Row="0" Header="Puzzle Type" Margin="3" VerticalAlignment="Top">
                         <DockPanel>
                             <RadioButton x:Name="btnSelectSudoku" DockPanel.Dock="Top" Content="Sudoku" Checked="btnSelectPuzzles_Checked"></RadioButton>
                             <RadioButton x:Name="btnSelectKakuru" DockPanel.Dock="Top" Content="Kakuru" Checked="btnSelectPuzzles_Checked" ></RadioButton>
@@ -41,19 +41,19 @@
                             <RadioButton x:Name="btnSelectGriddlerRails" DockPanel.Dock="Top" Content="Rails" Checked="btnSelectPuzzles_Checked" ></RadioButton>
                         </DockPanel>
                     </GroupBox>
-                    <GroupBox Grid.Row="1" Header="Load" Margin="3,3,3,0" VerticalAlignment="Top">
+                    <GroupBox Grid.Row="1" Header="Load" Margin="3" VerticalAlignment="Top">
                         <DockPanel >
                             <Button x:Name="btnLoadFromFile" VerticalAlignment="Top" DockPanel.Dock="Top" Content="File" Click="btnLoadFromFile_Click" ></Button>
                             <Button x:Name="btnLoadFromWeb" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Web" Click="btnLoadFromWeb_Click" />
                             <Button x:Name="btnLoadFromText" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Text" Click="btnLoadFromText_Click"/>
                         </DockPanel>
                     </GroupBox>
-                    <GroupBox Grid.Row="2" Header="Generate" Margin="3,3,3,0" VerticalAlignment="Top">
+                    <GroupBox Grid.Row="2" Header="Generate" Margin="3" VerticalAlignment="Top">
                         <DockPanel >
                             <Button x:Name="btnRandom"  VerticalAlignment="Top" DockPanel.Dock="Top" Content="Random" Click="btnRandom_Click"/>
                         </DockPanel >
                     </GroupBox>
-                    <GroupBox Grid.Row="3" Header="Display" Margin="3,3,3,-37" VerticalAlignment="Top">
+                    <GroupBox Grid.Row="3" Header="Display" Margin="3" VerticalAlignment="Top">
                         <DockPanel >
                             <RadioButton x:Name="rbtnClean" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Clean" IsChecked="True" Checked="rbtnDisplayModes_Checked"></RadioButton>
                             <RadioButton x:Name="rbtnHints" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Hints" Checked="rbtnDisplayModes_Checked" ></RadioButton>
@@ -62,24 +62,38 @@
                     </GroupBox>
                 </Grid>
 
-                <GridSplitter Grid.Column="1" Width="5"></GridSplitter>
+                <!--<GridSplitter Grid.Column="1" Width="5"></GridSplitter>-->
+
+
+                <DockPanel Grid.Column="1">
+                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" RenderTransformOrigin="0.5,0.5"/>
+                </DockPanel>
+
 
                 <DockPanel Grid.Column="2">
-                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" RenderTransformOrigin="0.5,0.5">
-                        <UserControls:PuzzlerCanvas.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
-                                <SkewTransform AngleX="-5" AngleY="2"/>
-                                <RotateTransform Angle="10"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </UserControls:PuzzlerCanvas.RenderTransform>
-                    </UserControls:PuzzlerCanvas>
+                    <TabControl VerticalAlignment="Top">
+                        <TabItem Header="Generator">
+                            <Grid Background="#FFE5E5E5">
+                                <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridGenerator"  RenderTransformOrigin="0.5,0.5"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Text">
+                            <Grid Background="#FFE5E5E5">
+                                <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridText"  RenderTransformOrigin="0.5,0.5"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Web">
+                            <Grid Background="#FFE5E5E5">
+                                <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridWeb"  RenderTransformOrigin="0.5,0.5"/>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
                 </DockPanel>
+                
             </Grid>
 
         </Grid>
-        <DockPanel Grid.Row="1">
+        <DockPanel Grid.Row="1" >
             <StatusBar DockPanel.Dock="Bottom">
                 <StatusBarItem>
                     <TextBox x:Name="lblStatusTitle">Status:</TextBox>

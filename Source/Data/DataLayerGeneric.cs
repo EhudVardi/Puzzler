@@ -20,7 +20,6 @@ namespace Data
         {
             return default(P);
         }
-
         public virtual P WebToPuzzleObject(string url)
         {
             return default(P);
@@ -30,7 +29,6 @@ namespace Data
         {
             return (P)(new SerializeDeserializeObject().DeserializePuzzle(XmlFileName, typeof(P)));
         }
-
         public virtual void PuzzleToXML(P puzzle, string XmlFileName)
         {
             if (!Directory.Exists(Path.GetDirectoryName(XmlFileName)))
@@ -38,6 +36,18 @@ namespace Data
             new SerializeDeserializeObject().SerializePuzzle(XmlFileName, puzzle, typeof(P));
         }
 
+        public Dictionary<string, List<string>> GetFileList()
+        {
+            Dictionary<string, List<string>> dic = new Dictionary<string, List<string>>();
+            string[] keys = new string[] { "FromGenerator", "FromText", "FromWeb" };
+            for (int i = 0; i < keys.Length; i++)
+            {
+                string puzzleType = keys[i];
+                string folder = GetPuzzleTypeDocumentsPath() + Configuration.PuzzlesLibraryFolder + puzzleType;
+                dic.Add(puzzleType, new List<string>(Directory.GetFiles(folder)));
+            }
+            return dic;
+        }
 
         public string GetPuzzleTypeDocumentsPath()
         {
@@ -45,7 +55,6 @@ namespace Data
         }
 
         public string GetPuzzleName() { return this.PuzzleName; }
-
 
         public virtual void WritePuzzle(P puzzle, string sourceTypeFolder)
         {
@@ -56,8 +65,5 @@ namespace Data
                 ".xml";
             PuzzleToXML(puzzle, filePath);
         }
-
-
-        
     }
 }

@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PainterCellBase.cs" />
     <Compile Include="PresentationLogicBase.cs" />
     <Compile Include="PresentationLogicGeneric.cs" />
     <Compile Include="PresentationLogicGriddler.cs" />

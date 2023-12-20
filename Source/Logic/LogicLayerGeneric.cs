@@ -10,59 +10,51 @@ namespace Logic
     {
         public DataLayerGeneric<P> DataProxy;
 
-
         public FactoryGeneric<P, B> FactoryModule;
         public SolverGeneric<B> SolverModule;
         public TrackerGeneric<B> TrackerModule;
-
         
         protected void AttachSolverEvents()
         {
             this.SolverModule.StepCompleted += new EventHandler(SolverProxy_StepCompleted);
             this.SolverModule.SolveCompleted += new EventHandler(SolverProxy_SolveCompleted);
-
             this.FactoryModule.StepGenerated += new EventHandler(FactoryModule_StepGenerated);
         }
 
         public event EventHandler StepCompleted;
         public event EventHandler SolveCompleted;
-
         public event EventHandler LoadCompleted;
-
         public event EventHandler StepGenerated;
-
 
         protected virtual void OnStepCompleted(EventArgs e)
         {
             if (StepCompleted != null)
                 StepCompleted(this, e);
         }
-
         protected virtual void OnSolveCompleted(EventArgs e)
         {
             if (SolveCompleted != null)
                 SolveCompleted(this, e);
         }
-
         protected virtual void OnLoadCompleted(EventArgs e)
         {
             if (LoadCompleted != null)
                 LoadCompleted(this, e);
         }
-
         protected virtual void OnStepGenerated(EventArgs e)
         {
             if (StepGenerated != null)
                 StepGenerated(this, e);
         }
 
-
+        public Dictionary<string, List<string>> ReadFileList()
+        {
+            return this.DataProxy.GetFileList();
+        }
         public virtual bool ReadFromFile(string fileName)
         {
             return LoadFromPuzzleObject(this.DataProxy.XMLToPuzzle(fileName));
         }
-
-
         public virtual bool ReadFromWeb(string url)
         {
             P puzzleFromWeb = this.DataProxy.WebToPuzzleObject(url);
@@ -76,7 +68,6 @@ namespace Logic
                 return false;
             }
         }
-
         public virtual bool ReadFromText(string text)
         {
             P puzzleFromText = this.DataProxy.TextToPuzzleObject(text);
@@ -90,7 +81,6 @@ namespace Logic
                 return false;
             }
         }
-
 
         public virtual bool GenerateRandom()
         {
@@ -124,7 +114,6 @@ namespace Logic
             return true;
         }
 
-
         public string GetPuzzleTypeDocumentsPath()
         {
             return DataProxy.GetPuzzleTypeDocumentsPath();
@@ -135,23 +124,19 @@ namespace Logic
             return DataProxy.GetPuzzleName();
         }
 
-
         void SolverProxy_SolveCompleted(object sender, EventArgs e)
         {
             OnSolveCompleted(EventArgs.Empty);
         }
-
         void SolverProxy_StepCompleted(object sender, EventArgs e)
         {
             OnStepCompleted(EventArgs.Empty);
         }
-
         void FactoryModule_StepGenerated(object sender, EventArgs e)
         {
             OnStepGenerated(EventArgs.Empty);
 
         }
-
 
         public bool? RequestSolveStatus()
         {
@@ -160,7 +145,6 @@ namespace Logic
             else
                 return null;
         }
-
         public bool? RequestValidStatus()
         {
             if (this.SolverModule.Board != null)
@@ -169,12 +153,10 @@ namespace Logic
                 return null;
         }
 
-
         public B getTrackedBoard()
         {
             return this.SolverModule.Board;
         }
-
         public B getSolvedBoard()
         {
             return this.TrackerModule.Board;
