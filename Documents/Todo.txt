@@ -1,0 +1,9 @@
+- make presentation use wpf
+	- convert all forms to windows (70%)
+	- decouple from WinForms framework (generalize paint and input methods)
+		- PresentationLogicGriddler
+		- PresentationLogicGriddlerRails
+		- PresentationLogicKakuru
+		- PresentationLogicSudoku
+	- make reference from WPF project to WinForms project.
+	- encapsulate classes above in the new converted windows
