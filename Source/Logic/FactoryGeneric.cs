@@ -15,7 +15,7 @@ namespace Logic
 
         public virtual B GenerateRandom() { return default(B); }
 
-
+        public event EventHandler StepGenerated;
 
         protected virtual B CreateBoardFromPuzzleObject(P puzzle)
         {
@@ -26,6 +26,16 @@ namespace Logic
         {
             return default(P);
         }
+
+        protected virtual void FireStepGenerated(object sender, EventArgs e)
+        {
+            if (this.StepGenerated != null)
+            {
+                StepGenerated(sender, e);
+            }
+        }
+
+        protected virtual void OnStepGenerated() { }
 
         /*
         public virtual B CloneBoard(B board)

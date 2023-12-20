@@ -109,7 +109,7 @@ namespace Logic.Sudoku
 
 
 
-        private static BoardSudoku GenerateRandom(int n, int m)
+        private BoardSudoku GenerateRandom(int n, int m)
         {
             BoardSudoku board = new BoardSudoku();
 
@@ -132,6 +132,7 @@ namespace Logic.Sudoku
 
             while (!solver.IsSolved())
             {
+
                 while (solver.DoCompleteStep()) ;
 
                 notSetCells.Clear();
@@ -150,22 +151,25 @@ namespace Logic.Sudoku
                         solver.Reset();
 
                         foreach (KeyValuePair<CellValueSudoku, int> fixedCell in randomFixedCells)
-                            fixedCell.Key.Value = fixedCell.Value;
+                        {
+                            solver.Board.SetCell(fixedCell.Key.Row, fixedCell.Key.Column, fixedCell.Value);
+                        }
                     }
                     else
                     {
                         CellValueSudoku randomCell = notSetCells[rand.Next(0, notSetCells.Count - 1)];
 
-                        throw new NotImplementedException();
-                        /*
-                        int randomNumberIndex = rand.Next(0, randomCell.ChoicesMap.Count - 1);
-                        while (randomCell.ChoicesMap.GetSingleBit(randomNumberIndex) == false)
-                            randomNumberIndex = rand.Next(0, randomCell.ChoicesMap.Count - 1);
+                        //throw new NotImplementedException();
+                        
+                        int randomNumberIndex = rand.Next(0, solver.GetChoiceMapForCell(randomCell).Count - 1);
+                        while (solver.GetChoiceMapForCell(randomCell).GetSingleBit(randomNumberIndex) == false)
+                            randomNumberIndex = rand.Next(0, solver.GetChoiceMapForCell(randomCell).Count - 1);
 
                         solver.SetCell(randomCell.Row, randomCell.Column, randomNumberIndex);
 
                         randomFixedCells.Add(new KeyValuePair<CellValueSudoku, int>(randomCell, (int)randomCell.Value));
-                         */
+
+                        FireStepGenerated(this, EventArgs.Empty);
                     }
                 }
             }

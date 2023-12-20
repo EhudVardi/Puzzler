@@ -12,20 +12,9 @@ namespace Presentation
         [STAThread]
         static void Main()
         {
-
-            //testing
-
-            //
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
-            //Application.Run(new Presentation.Sudoku.SolverForm());
-            //Application.Run(new Presentation.Kakuru.SolverForm());
-            //Application.Run(new Presentation.Griddler.SolverForm());
-
             Application.Run(new frm_MainForm());
-            
         }
     }
 }

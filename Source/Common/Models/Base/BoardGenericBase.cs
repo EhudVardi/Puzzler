@@ -71,6 +71,8 @@ namespace Common.Models.Base
 
         public virtual void SetCell(int row, int column, int num) { }
 
+        public virtual C GetCell(int row, int column) { return default(C); }
+
 
 
         public int Rows { get { return CellsMatrix.GetLength(0); } }

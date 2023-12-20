@@ -83,7 +83,10 @@ namespace Logic
         public override void Reset()
         {
             foreach (CellValueSudoku cell in this.Board.CellsMatrix)
+            {
                 _cellsChoiceMap[cell].Reset(true);
+                cell.Value = null;
+            }
 
             this.SolveInitiation();
         }
@@ -91,6 +94,7 @@ namespace Logic
         public override void SetCell(int row, int column, int num)
         {
             this.Board.SetCell(row, column, num);
+            this._cellsChoiceMap[this.Board.GetCell(row, column) as CellValueSudoku].SetToNumber(num);
         }
 
         ///
@@ -243,6 +247,9 @@ namespace Logic
         }
         ///
 
-        
+        public BinaryChoicesMap GetChoiceMapForCell(CellValueSudoku cell)
+        {
+            return _cellsChoiceMap[cell];
+        }
     }
 }

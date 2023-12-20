@@ -20,12 +20,16 @@ namespace Logic
         {
             this.SolverModule.StepCompleted += new EventHandler(SolverProxy_StepCompleted);
             this.SolverModule.SolveCompleted += new EventHandler(SolverProxy_SolveCompleted);
+
+            this.FactoryModule.StepGenerated += new EventHandler(FactoryModule_StepGenerated);
         }
 
         public event EventHandler StepCompleted;
         public event EventHandler SolveCompleted;
 
         public event EventHandler LoadCompleted;
+
+        public event EventHandler StepGenerated;
 
 
         protected virtual void OnStepCompleted(EventArgs e)
@@ -44,6 +48,12 @@ namespace Logic
         {
             if (LoadCompleted != null)
                 LoadCompleted(this, e);
+        }
+
+        protected virtual void OnStepGenerated(EventArgs e)
+        {
+            if (StepGenerated != null)
+                StepGenerated(this, e);
         }
 
 
@@ -115,7 +125,6 @@ namespace Logic
         }
 
 
-
         public string GetPuzzleTypeDocumentsPath()
         {
             return DataProxy.GetPuzzleTypeDocumentsPath();
@@ -137,6 +146,13 @@ namespace Logic
             OnStepCompleted(EventArgs.Empty);
         }
 
+        void FactoryModule_StepGenerated(object sender, EventArgs e)
+        {
+            OnStepGenerated(EventArgs.Empty);
+
+        }
+
+
         public bool? RequestSolveStatus()
         {
             if (this.SolverModule.Board != null)
@@ -152,6 +168,7 @@ namespace Logic
             else
                 return null;
         }
+
 
         public B getTrackedBoard()
         {

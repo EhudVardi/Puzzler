@@ -52,6 +52,11 @@ namespace Common.Models.Sudoku
             (this.CellsMatrix[i, j] as CellValueSudoku).Value = num;
         }
 
+        public override CellBase GetCell(int i, int j)
+        {
+            return this.CellsMatrix[i, j] as CellValueSudoku;
+        }
+
 
     }
 }

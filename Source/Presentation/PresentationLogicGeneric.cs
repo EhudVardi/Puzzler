@@ -32,6 +32,7 @@ namespace Presentation
             this.LogicProxy.SolveCompleted += new EventHandler(Board_SolveCompleted);
             this.LogicProxy.StepCompleted += new EventHandler(Board_StepCompleted);
             this.LogicProxy.LoadCompleted += new EventHandler(LogicProxy_LoadCompleted);
+            this.LogicProxy.StepGenerated += new EventHandler(LogicProxy_StepGenerated);
         }
 
         
@@ -60,6 +61,11 @@ namespace Presentation
         {
             this.InitDisplay();
 
+            this.OnRequestRefresh(EventArgs.Empty);
+        }
+
+        protected void LogicProxy_StepGenerated(object sender, EventArgs e)
+        {
             this.OnRequestRefresh(EventArgs.Empty);
         }
 
