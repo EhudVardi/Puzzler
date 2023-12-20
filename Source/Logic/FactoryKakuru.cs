@@ -747,6 +747,15 @@ namespace Logic.Kakuru
                 }
             }
             ////
+
+            //// after all groups are created, add all groups to the Groups proprty of the board
+            foreach (CellGroupHolderKakuru groupHolderCell in board.GroupHolderCells)
+            {
+                if (groupHolderCell.DownGroup != null)
+                    board.Groups.Add(groupHolderCell.DownGroup);
+                if (groupHolderCell.RightGroup != null)
+                    board.Groups.Add(groupHolderCell.RightGroup);
+            }
         }
 
 
