@@ -82,7 +82,7 @@ namespace PresentationLogic
                             if (valueCell.IsFixed)
                             {
                                 OnRequestDrawText(drawingContext,
-                                    valueCell.Value.ToString(), font, bText,
+                                    (valueCell.Value + 1).ToString(), font, bText,
                                     new RectangleF(
                                     cellWidth * valueCell.Column + margin,
                                     cellHeight * valueCell.Row + margin,
@@ -95,13 +95,21 @@ namespace PresentationLogic
                             if (valueCell.IsFixed)
                             {
                                 Brush brushValue;
-                                if (solvedValueCell.Value != valueCell.Value)
+
+                                //// number color depend on correctness
+                                //if (solvedValueCell.Value != valueCell.Value)
+                                //    brushValue = bIncorrect;
+                                //else
+                                //    brushValue = bCorrect;
+
+                                // number color depend on the selected cell number
+                                if (selectedValueCell.Value.HasValue == true && valueCell.Value.HasValue == true && selectedValueCell.Value == valueCell.Value)
                                     brushValue = bIncorrect;
                                 else
                                     brushValue = bCorrect;
 
                                 OnRequestDrawText(drawingContext,
-                                    valueCell.Value.ToString(), font, brushValue,
+                                    (valueCell.Value + 1).ToString(), font, brushValue,
                                     new RectangleF(
                                     cellWidth * valueCell.Column + margin,
                                     cellHeight * valueCell.Row + margin,
@@ -112,7 +120,7 @@ namespace PresentationLogic
                             break;
                         case DisplayType.Solution:
                                 OnRequestDrawText(drawingContext,
-                                    solvedValueCell.Value.ToString(), font, bCorrect,
+                                    (solvedValueCell.Value + 1).ToString(), font, bCorrect,
                                     new RectangleF(
                                     cellWidth * valueCell.Column + margin,
                                     cellHeight * valueCell.Row + margin,
@@ -123,28 +131,7 @@ namespace PresentationLogic
                         default:
                             break;
                     }
-                    if (valueCell.IsFixed)
-                    {
-                        Brush brushValue;
-                        if (solvedValueCell.Value != valueCell.Value)
-                            brushValue = bIncorrect;
-                        else
-                            brushValue = bCorrect;
-
-                        OnRequestDrawText(drawingContext,
-                            valueCell.Value.ToString(), font, brushValue,
-                            new RectangleF(
-                            cellWidth * valueCell.Column + margin,
-                            cellHeight * valueCell.Row + margin,
-                            cellWidth - margin * 2f,
-                            cellHeight - margin * 2f
-                            ), sf);
-                    }
-
                 }
-
-
-
 
                 //draw selected value cell marker
                 if (selectedValueCell != null)
@@ -194,6 +181,23 @@ namespace PresentationLogic
                 this.OnRequestRefresh(EventArgs.Empty);
             }
             catch (Exception) { }
+        }
+
+        public override void InputMouseWheel(MouseEventArgs e, Size size)
+        {
+            // for sudoku. can refactor to generic board to set specific cell with the next possible value (SetCellNextValue)
+            if (selectedValueCell != null)
+                if (selectedValueCell.Value.HasValue == false)
+                    // set to first value
+                    selectedValueCell.Value = 0;
+                else
+                {
+                    // set next value (if wheel rolled forward) or backwards (if wheel rolled backwards)
+                    int nextValue = ((int)(selectedValueCell.Value) + (e.Delta > 0 ? 1 : -1)) % (GetTrackerBoard().N * GetTrackerBoard().M);
+                    nextValue = nextValue < 0 ? nextValue + (GetTrackerBoard().N * GetTrackerBoard().M) : nextValue;
+                    selectedValueCell.Value = nextValue;
+                }
+            this.OnRequestRefresh(EventArgs.Empty);
         }
 
         #region specific
