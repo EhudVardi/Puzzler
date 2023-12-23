@@ -60,8 +60,8 @@ namespace Logic.Griddler
             {
                 for (int j = 0; j < puzzle.BaseColumnCount; j++)
                 {
-                    HorizontalLines[i].Cells.Add(CellsMatrixLeft[i, j]);
-                    HorizontalLines[i].Cells.Add(CellsMatrixRight[i, j]);
+                    HorizontalLines[i].Cells.Add(CellsMatrixLeft[i, j]); CellsMatrixLeft[i, j].Groups.Add(HorizontalLines[i]);
+                    HorizontalLines[i].Cells.Add(CellsMatrixRight[i, j]); CellsMatrixRight[i, j].Groups.Add(HorizontalLines[i]);
                 }
             }
             //Vertical
@@ -69,8 +69,8 @@ namespace Logic.Griddler
             {
                 for (int i = 0; i < puzzle.BaseRowsCount; i++)
                 {
-                    VerticalLines[i].Cells.Add(CellsMatrixRight[i, j]);
-                    VerticalLines[i].Cells.Add(CellsMatrixLeft[i, j]);
+                    VerticalLines[j].Cells.Add(CellsMatrixRight[i, j]); CellsMatrixRight[i, j].Groups.Add(VerticalLines[j]);
+                    VerticalLines[j].Cells.Add(CellsMatrixLeft[i, j]); CellsMatrixLeft[i, j].Groups.Add(VerticalLines[j]);
                 }
             }
             //Diagonal
@@ -84,9 +84,9 @@ namespace Logic.Griddler
                 while (ii >= 0 && jj >= 0)
                 {
                     if (IsRight)
-                    { group.Cells.Add(CellsMatrixRight[ii, jj]); ii--; }
+                    { group.Cells.Add(CellsMatrixRight[ii, jj]); CellsMatrixRight[ii, jj].Groups.Add(group); ii--; }
                     else
-                    { group.Cells.Add(CellsMatrixLeft[ii, jj]); jj--; }
+                    { group.Cells.Add(CellsMatrixLeft[ii, jj]); CellsMatrixLeft[ii, jj].Groups.Add(group); jj--; }
                     IsRight = !IsRight;
                 }
             }
@@ -100,9 +100,9 @@ namespace Logic.Griddler
                 while (ii >= 0 && jj >= 0)
                 {
                     if (IsRight)
-                    { group.Cells.Add(CellsMatrixRight[ii, jj]); ii--; }
+                    { group.Cells.Add(CellsMatrixRight[ii, jj]); CellsMatrixRight[ii, jj].Groups.Add(group); ii--; }
                     else
-                    { group.Cells.Add(CellsMatrixLeft[ii, jj]); jj--; }
+                    { group.Cells.Add(CellsMatrixLeft[ii, jj]); CellsMatrixRight[ii, jj].Groups.Add(group); jj--; }
                     IsRight = !IsRight;
                 }
             }
@@ -140,6 +140,11 @@ namespace Logic.Griddler
                                 CellsMatrixRight[i, j] = null;
                             }
                 }
+
+            foreach (var cell in removedCells)
+                foreach (var group in board.Groups)
+                    if (group.Cells.Contains(cell))
+                        group.Cells.Remove(cell);
 
             foreach (var group in removed)
                 board.Groups.Remove(group);

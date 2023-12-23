@@ -15,10 +15,11 @@ namespace Common.Models.Triddler
             set { _cellsMatrixRight = value; }
         }
 
+        protected CellValueTriddler[,] _cellsMatrixLeft;
         public CellValueTriddler[,] CellsMatrixLeft
         {
-            get { return (CellValueTriddler[,])CellsMatrix; }
-            set { CellsMatrix = value; }
+            get { return _cellsMatrixLeft; }
+            set { _cellsMatrixLeft = value; }
         }
 
 
@@ -50,5 +51,10 @@ namespace Common.Models.Triddler
                 return valueCells;
             }
         }
+
+        public override int Rows { get { return CellsMatrixLeft.GetLength(0); } }
+
+        public override int Columns { get { return CellsMatrixLeft.GetLength(1); } }
+
     }
 }

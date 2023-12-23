@@ -75,9 +75,9 @@ namespace Common.Models.Base
 
 
 
-        public int Rows { get { return CellsMatrix.GetLength(0); } }
+        public virtual int Rows { get { return CellsMatrix.GetLength(0); } }
 
-        public int Columns { get { return CellsMatrix.GetLength(1); } }
+        public virtual int Columns { get { return CellsMatrix.GetLength(1); } }
 
     }
      
