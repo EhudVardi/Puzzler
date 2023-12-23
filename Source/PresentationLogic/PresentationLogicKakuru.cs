@@ -142,10 +142,10 @@ namespace PresentationLogic
                         cellHeight * (groupCell.Row + 1) - margin
                         );
 
-                    //draw right line sum
+                    //draw right line sum string
                     if (groupCell.RightGroup != null)
                         OnRequestDrawText(drawingContext, 
-                            groupCell.RightGroup.Sum.ToString(), font, bText, 
+                            groupCell.RightGroup.Sum.ToString(), fontBold, bText, 
                             new RectangleF(
                             cellWidth * ((float)groupCell.Column + 0.5f) + margin, 
                             cellHeight * groupCell.Row + margin, 
@@ -153,10 +153,10 @@ namespace PresentationLogic
                             cellHeight * 0.5f - margin * 2f
                             ), sf);
 
-                    //draw down line sum
+                    //draw down line sum string
                     if (groupCell.DownGroup != null)
-                        OnRequestDrawText(drawingContext, 
-                            groupCell.DownGroup.Sum.ToString(), font, bText, 
+                        OnRequestDrawText(drawingContext,
+                            groupCell.DownGroup.Sum.ToString(), fontBold, bText, 
                             new RectangleF(
                             cellWidth * groupCell.Column + margin, 
                             cellHeight * ((float)groupCell.Row + 0.5f) + margin, 
@@ -196,6 +196,25 @@ namespace PresentationLogic
                 this.OnRequestRefresh(EventArgs.Empty);
             }
             catch (Exception ex) { }
+        }
+
+        public override void InputMouseWheel(MouseEventArgs e, Size size)
+        {
+            // for sudoku. can refactor to generic board to set specific cell with the next possible value (SetCellNextValue)
+            if (selectedValueCell != null)
+                if (selectedValueCell.Value.HasValue == false)
+                    // set to first value
+                    selectedValueCell.Value = 0;
+                else
+                {
+                    // set next value (if wheel rolled forward) or backwards (if wheel rolled backwards)
+                    //int maxValue = Math.Max(GetTrackerBoard().Rows, GetTrackerBoard().Columns);
+                    int maxValue = Math.Min(selectedValueCell.Groups[0].Sum, selectedValueCell.Groups[1].Sum);
+                    int nextValue = ((int)(selectedValueCell.Value) + (e.Delta > 0 ? 1 : -1)) % maxValue;
+                    nextValue = nextValue < 0 ? nextValue + maxValue : (nextValue == 0 ? maxValue : nextValue);
+                    selectedValueCell.Value = nextValue;
+                }
+            this.OnRequestRefresh(EventArgs.Empty);
         }
 
         public override void InputKey(KeyEventArgs e)

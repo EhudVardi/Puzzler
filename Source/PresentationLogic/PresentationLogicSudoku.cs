@@ -47,10 +47,11 @@ namespace PresentationLogic
                     Pens.Black, cellWidth * j, 0, cellWidth * j, (float)brHeight);
 
                 //boxes
+                float marginBoxes = margin / 4;
                 for (int i = 0; i < GetTrackerBoard().N; i++)
                     for (int j = 0; j < GetTrackerBoard().M; j++)
-                        OnRequestDrawRectangle(drawingContext, 
-                        Pens.Black, widthB * j + margin, heightB * i + margin, widthB - margin * 2f, heightB - margin * 2f);
+                        OnRequestDrawRectangle(drawingContext,
+                        Pens.Black, widthB * j + marginBoxes, heightB * i + marginBoxes, widthB - marginBoxes * 2f, heightB - marginBoxes * 2f);
 
                 //draw cells
                 foreach (CellValueSudoku valueCell in GetTrackerBoard().ValueCells)
@@ -193,8 +194,9 @@ namespace PresentationLogic
                 else
                 {
                     // set next value (if wheel rolled forward) or backwards (if wheel rolled backwards)
-                    int nextValue = ((int)(selectedValueCell.Value) + (e.Delta > 0 ? 1 : -1)) % (GetTrackerBoard().N * GetTrackerBoard().M);
-                    nextValue = nextValue < 0 ? nextValue + (GetTrackerBoard().N * GetTrackerBoard().M) : nextValue;
+                    int maxValue = GetTrackerBoard().N * GetTrackerBoard().M;
+                    int nextValue = ((int)(selectedValueCell.Value) + (e.Delta > 0 ? 1 : -1)) % maxValue;
+                    nextValue = nextValue < 0 ? nextValue + maxValue : nextValue;
                     selectedValueCell.Value = nextValue;
                 }
             this.OnRequestRefresh(EventArgs.Empty);

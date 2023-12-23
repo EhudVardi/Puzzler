@@ -12,17 +12,12 @@ using Common.Models.Base;
 
 namespace PresentationLogic
 {
-
-
     public class PresentationLogicGeneric<P,B> : PresentationLogicBase
     {
         public LogicLayerGeneric<P, B> LogicProxy;
         public string URL;
-        
-        public PresentationLogicGeneric()
-        {
 
-        }
+        public PresentationLogicGeneric() { }
 
         public override void Initialize()
         {
@@ -45,15 +40,8 @@ namespace PresentationLogic
         protected void Board_StepCompleted(object sender, EventArgs e) { this.OnRequestRefresh(EventArgs.Empty); }
         protected void Board_SolveCompleted(object sender, EventArgs e) { this.OnRequestRefresh(EventArgs.Empty); }
 
-        protected void LogicProxy_LoadCompleted(object sender, EventArgs e)
-        {
-            this.InitDisplay();
-            this.OnRequestRefresh(EventArgs.Empty);
-        }
-        protected void LogicProxy_StepGenerated(object sender, EventArgs e)
-        {
-            this.OnRequestRefresh(EventArgs.Empty);
-        }
+        protected void LogicProxy_LoadCompleted(object sender, EventArgs e) { this.InitDisplay(); this.OnRequestRefresh(EventArgs.Empty); }
+        protected void LogicProxy_StepGenerated(object sender, EventArgs e) { this.OnRequestRefresh(EventArgs.Empty); }
 
         public override bool? IsSolved()  { return LogicProxy.RequestSolveStatus(); }
         public override bool? IsValid()  { return LogicProxy.RequestValidStatus(); }

@@ -18,14 +18,16 @@ namespace PresentationLogic
         protected static Brush bMark = Brushes.Black;
 
         protected static Font font;
+        protected static Font fontBold;
         protected static StringFormat sf;
-        protected static float margin = 1;
+        protected static float margin = 2;
 
         protected DisplayType displayType;
 
         static PresentationLogicBase()
         {
             font = new Font(FontFamily.GenericSerif, (int)16, GraphicsUnit.Pixel);
+            fontBold = new Font(FontFamily.GenericSerif, (int)32, FontStyle.Bold, GraphicsUnit.Pixel);
             sf = new StringFormat();
             sf.Alignment = StringAlignment.Center;
             sf.LineAlignment = StringAlignment.Center;     
@@ -92,7 +94,6 @@ namespace PresentationLogic
         }
         protected virtual void OnRequestDrawText(object drawingContext, string s, Font font, Brush brush, RectangleF layoutRectangle, StringFormat format)
         {
-
             if (this.EventDrawText != null)
                 this.EventDrawText(drawingContext, s, font, brush, layoutRectangle, format);
         }

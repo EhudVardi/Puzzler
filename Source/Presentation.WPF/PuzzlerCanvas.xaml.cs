@@ -123,8 +123,8 @@ namespace Presentation.WPF
             if (g != null)
             {
                 System.Windows.Point centerPoint = new System.Windows.Point(layoutRectangle.X + layoutRectangle.Width / 2, layoutRectangle.Y + layoutRectangle.Height / 2);
-                Typeface typeface = new Typeface(new System.Windows.Media.FontFamily("Segoe UI"), FontStyles.Normal, FontWeights.Normal, FontStretches.Normal);
-                double size = Math.Sqrt(Math.Pow(layoutRectangle.Width, 2) + Math.Pow(layoutRectangle.Height, 2)) / 4;
+                Typeface typeface = new Typeface(new System.Windows.Media.FontFamily(font.Name), FontStyles.Normal, FontWeights.Normal, FontStretches.Normal);
+                double size = Math.Sqrt(Math.Pow(layoutRectangle.Width, 2) + Math.Pow(layoutRectangle.Height, 2)) / 2;
                 FormattedText formattedText = new FormattedText(
                     s, 
                     System.Globalization.CultureInfo.CurrentUICulture, 
@@ -150,7 +150,7 @@ namespace Presentation.WPF
         }
 
 
-        internal void HookEventsToPresentationLogicObject(PresentationLogicBase presentationLogicObject)
+        internal void HookEventsToPresentationLogicObject()
         {
             // hook up events
             MainWindow.PresentationLogicObject.EventDrawRectangle += presentationLogicObject_EventDrawRectangle;

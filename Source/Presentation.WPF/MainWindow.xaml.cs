@@ -66,7 +66,7 @@ namespace Presentation.WPF
                     this.ucDataGridText.SetData(puzzlesDic["FromText"]);
                     this.ucDataGridWeb.SetData(puzzlesDic["FromWeb"]);
 
-                    this.GameCanvas.HookEventsToPresentationLogicObject(PresentationLogicObject);
+                    this.GameCanvas.HookEventsToPresentationLogicObject();
                     PresentationLogicObject.Initialize();
                     PresentationLogicObject.Refresh += PresentationLogicObject_Refresh;
                     rbtnDisplayModes_Checked(null, null);
@@ -74,9 +74,7 @@ namespace Presentation.WPF
 
                 RefreshForm();
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
         }
 
         void PresentationLogicObject_Refresh(object sender, EventArgs e)
@@ -94,10 +92,10 @@ namespace Presentation.WPF
                     this.lblStatus.Text = string.Format("Valid: {0}, Solved: {1}",
                         PresentationLogicObject.IsValid(),
                         PresentationLogicObject.IsSolved());
-                    //this.lblStatusTitle.Text = "OK";
+                    this.lblStatusTitle.Text = "Status:" + " OK";
                 }
                 catch (Exception) {
-                    //this.lblStatusTitle.Text = "Error";
+                    this.lblStatusTitle.Text = "Status:" + " ERR";
                 }
             }
         }

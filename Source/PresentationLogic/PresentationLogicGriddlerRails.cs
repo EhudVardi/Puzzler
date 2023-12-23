@@ -65,73 +65,6 @@ namespace PresentationLogic
             }
         }
 
-        private void DrawColumns(object drawingContext, float cellWidth, float cellHeight, Brush colBrushFore)
-        {
-            for (int i = 0; i < this.visualBoard.ColumnRails.Count; i++)
-            {
-                Rail r = this.visualBoard.ColumnRails[i];
-                for (int j = 0; j < r.Cars.Count; j++)
-                {
-                    Car c = r.Cars[j];
-
-                    DrawCar(drawingContext, colBrushFore,
-                        (int)(cellWidth * i + margin),
-                        (int)(cellHeight * c.Position + margin),
-                        (int)(cellWidth - 2 * +margin),
-                        (int)(cellHeight * c.Size - 2 * margin));
-
-                    if (c.Equals(selectedColumnCar))
-                    {
-                        DrawCar(drawingContext, Brushes.Yellow,
-                        (int)(cellWidth * i + margin),
-                        (int)(cellHeight * c.Position + margin),
-                        (int)(cellWidth - 2 * +margin),
-                        (int)(cellHeight * c.Size - 2 * margin));
-                    }
-                }
-            }
-        }
-
-        private void DrawRows(object drawingContext, float cellWidth, float cellHeight, Brush rowBrushFore)
-        {
-            for (int i = 0; i < this.visualBoard.RowRails.Count; i++)
-            {
-                Rail r = this.visualBoard.RowRails[i];
-                for (int j = 0; j < r.Cars.Count; j++)
-                {
-                    Car c = r.Cars[j];
-
-                    DrawCar(drawingContext, rowBrushFore,
-                        (int)(cellWidth * c.Position + margin),
-                        (int)(cellHeight * i + margin),
-                        (int)(cellWidth * c.Size - 2 * +margin),
-                        (int)(cellHeight - 2 * margin));
-
-                    if (c.Equals(selectedRowCar))
-                    {
-                        DrawCar(drawingContext, Brushes.Yellow,
-                        (int)(cellWidth * c.Position + margin),
-                        (int)(cellHeight * i + margin),
-                        (int)(cellWidth * c.Size - 2 * +margin),
-                        (int)(cellHeight - 2 * margin));
-                    }
-
-                }
-            }
-        }
-
-        private void DrawCar(object drawingContext, Brush rowBrushFore, int x, int y, int w, int h)
-        {
-            try
-            {
-                OnRequestFillRectangle(drawingContext, rowBrushFore, x, y, w, h);
-            }
-            catch (Exception) { }
-        }
-
-        Car selectedRowCar = null;
-        Car selectedColumnCar = null;
-
         public override void InputMouseDown(MouseEventArgs e, Size s)
         {
             try
@@ -192,7 +125,6 @@ namespace PresentationLogic
             }
             catch (Exception ex) { }
         }
-
         public override void InputMouse(MouseEventArgs e, Size s)
         {
             switch (e.Button)
@@ -243,8 +175,6 @@ namespace PresentationLogic
 
             this.OnRequestRefresh(EventArgs.Empty);
         }
-
-
         public override void InputKey(KeyEventArgs e)
         {
             try
@@ -283,17 +213,74 @@ namespace PresentationLogic
             {
             }
         }
-      
 
         #region specific
 
+        private void DrawColumns(object drawingContext, float cellWidth, float cellHeight, Brush colBrushFore)
+        {
+            for (int i = 0; i < this.visualBoard.ColumnRails.Count; i++)
+            {
+                Rail r = this.visualBoard.ColumnRails[i];
+                for (int j = 0; j < r.Cars.Count; j++)
+                {
+                    Car c = r.Cars[j];
 
-        CellValueGriddler selectedValueCell;
+                    DrawCar(drawingContext, colBrushFore,
+                        (int)(cellWidth * i + margin),
+                        (int)(cellHeight * c.Position + margin),
+                        (int)(cellWidth - 2 * +margin),
+                        (int)(cellHeight * c.Size - 2 * margin));
 
+                    if (c.Equals(selectedColumnCar))
+                    {
+                        DrawCar(drawingContext, Brushes.Yellow,
+                        (int)(cellWidth * i + margin),
+                        (int)(cellHeight * c.Position + margin),
+                        (int)(cellWidth - 2 * +margin),
+                        (int)(cellHeight * c.Size - 2 * margin));
+                    }
+                }
+            }
+        }
+        private void DrawRows(object drawingContext, float cellWidth, float cellHeight, Brush rowBrushFore)
+        {
+            for (int i = 0; i < this.visualBoard.RowRails.Count; i++)
+            {
+                Rail r = this.visualBoard.RowRails[i];
+                for (int j = 0; j < r.Cars.Count; j++)
+                {
+                    Car c = r.Cars[j];
 
-        //###
+                    DrawCar(drawingContext, rowBrushFore,
+                        (int)(cellWidth * c.Position + margin),
+                        (int)(cellHeight * i + margin),
+                        (int)(cellWidth * c.Size - 2 * +margin),
+                        (int)(cellHeight - 2 * margin));
+
+                    if (c.Equals(selectedRowCar))
+                    {
+                        DrawCar(drawingContext, Brushes.Yellow,
+                        (int)(cellWidth * c.Position + margin),
+                        (int)(cellHeight * i + margin),
+                        (int)(cellWidth * c.Size - 2 * +margin),
+                        (int)(cellHeight - 2 * margin));
+                    }
+
+                }
+            }
+        }
+        private void DrawCar(object drawingContext, Brush rowBrushFore, int x, int y, int w, int h)
+        {
+            try
+            {
+                OnRequestFillRectangle(drawingContext, rowBrushFore, x, y, w, h);
+            }
+            catch (Exception) { }
+        }
+
         VisualBoard visualBoard;
-
+        Car selectedRowCar = null;
+        Car selectedColumnCar = null;
 
         public class VisualBoard
         {
@@ -326,7 +313,6 @@ namespace PresentationLogic
 
             }
         }
-
         public class Rail
         {
             public List<Car> Cars { get; set; }
@@ -358,7 +344,6 @@ namespace PresentationLogic
                 return bla;
             }
         }
-
         public class Car
         {
             public Rail OwnerRail { get; set; }

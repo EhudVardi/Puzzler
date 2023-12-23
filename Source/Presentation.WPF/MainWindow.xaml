@@ -9,7 +9,7 @@
         MouseUp="Window_MouseUp"
         MouseWheel="Window_MouseWheel"
         KeyDown="Window_KeyDown"
-        Width="800" Height="600" WindowStyle="None" ResizeMode="NoResize" UseLayoutRounding="True">
+        Width="800" Height="600" ResizeMode="CanResizeWithGrip" UseLayoutRounding="True">
     <Window.Resources>
         <Color x:Key="TransparentGray">#22111111</Color>
         <Color x:Key="TransparentWhite">#22FFFFFF</Color>
@@ -103,7 +103,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto" MaxWidth="300" MinWidth="150"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" Margin="3" Background="{StaticResource ResourceKey=MainPanelsBrush}">
                     <Grid.ColumnDefinitions>
