@@ -6,24 +6,106 @@
         Loaded="Window_Loaded"
         MouseDown="Window_MouseDown"
         MouseMove="Window_MouseMove"
-        MouseDoubleClick="Window_MouseDoubleClick"
         MouseUp="Window_MouseUp"
         MouseWheel="Window_MouseWheel"
         KeyDown="Window_KeyDown"
-        Width="640" Height="480">
-    <Grid >
+        Width="800" Height="600" WindowStyle="None" ResizeMode="NoResize" UseLayoutRounding="True">
+    <Window.Resources>
+        <Color x:Key="TransparentGray">#22111111</Color>
+        <Color x:Key="TransparentWhite">#22FFFFFF</Color>
+        <SolidColorBrush x:Key="MainPanelsBrush" Color="{StaticResource ResourceKey=TransparentWhite}"/>
+        <LinearGradientBrush x:Key="BorderPanelsBrushTitleBar" StartPoint="0,0" EndPoint="1,0">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Color="{StaticResource ResourceKey=TransparentWhite}" Offset="0"/>
+                <GradientStop Color="{StaticResource ResourceKey=TransparentGray}" Offset="0.5"/>
+                <GradientStop Color="{StaticResource ResourceKey=TransparentWhite}" Offset="1"/>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="BorderPanelsBrushStatusBar" StartPoint="0,0" EndPoint="1,0">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Color="{StaticResource ResourceKey=TransparentWhite}" Offset="0"/>
+                <GradientStop Color="{StaticResource ResourceKey=TransparentGray}" Offset="0.5"/>
+                <GradientStop Color="{StaticResource ResourceKey=TransparentWhite}" Offset="1"/>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="BorderPanelsBrushTop" StartPoint="0,0" EndPoint="0,.5">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Color="{StaticResource ResourceKey=TransparentGray}" Offset="0"/>
+                <GradientStop Color="{StaticResource ResourceKey=TransparentWhite}" Offset="1"/>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="BorderPanelsBrushBottom" StartPoint="0,1" EndPoint="0,.5">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Color="{StaticResource ResourceKey=TransparentGray}" Offset="0"/>
+                <GradientStop Color="{StaticResource ResourceKey=TransparentWhite}" Offset="1"/>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="BorderPanelsBrushLeft" StartPoint="0,0" EndPoint=".5,0">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Color="{StaticResource ResourceKey=TransparentGray}" Offset="0"/>
+                <GradientStop Color="{StaticResource ResourceKey=TransparentWhite}" Offset="1"/>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="BorderPanelsBrushRight" StartPoint="1,0" EndPoint=".5,0">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Color="{StaticResource ResourceKey=TransparentGray}" Offset="0"/>
+                <GradientStop Color="{StaticResource ResourceKey=TransparentWhite}" Offset="1"/>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+        <RadialGradientBrush x:Key="BorderPanelsBrushMainGrid"  GradientOrigin="0.75,0.25">
+            <GradientStop Color="Gray" Offset="0.0" />
+            <GradientStop Color="LightBlue" Offset="0.5" />
+            <GradientStop Color="White" Offset="1.0" />
+        </RadialGradientBrush>
+        <Style x:Key="BorderPanelsStyleTitleBar" TargetType="DockPanel">
+            <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushTitleBar}"/>
+        </Style>
+        <Style x:Key="BorderPanelsStyleStatusBar" TargetType="DockPanel">
+            <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushStatusBar}"/>
+        </Style>
+        <Style x:Key="BorderPanelsStyleTop" TargetType="DockPanel">
+            <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushTop}"/>
+        </Style>
+        <Style x:Key="BorderPanelsStyleBottom" TargetType="DockPanel">
+            <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushBottom}"/>
+        </Style>
+        <Style x:Key="BorderPanelsStyleLeft" TargetType="DockPanel">
+            <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushLeft}"/>
+        </Style>
+        <Style x:Key="BorderPanelsStyleRight" TargetType="DockPanel">
+            <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushRight}"/>
+        </Style>
+        <Style x:Key="BorderPanelsStyleMainGrid" TargetType="Grid">
+            <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushMainGrid}"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="7"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="7"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid >
-            <Grid Grid.Row="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="7"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="1" Grid.Column="1" Margin="2" Style="{StaticResource ResourceKey=BorderPanelsStyleMainGrid}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
+                <Grid Grid.Column="0" Margin="3" Background="{StaticResource ResourceKey=MainPanelsBrush}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
@@ -31,7 +113,8 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <GroupBox Grid.Row="0" Header="Puzzle Type" Margin="3" VerticalAlignment="Top">
                         <DockPanel>
@@ -61,48 +144,48 @@
                         </DockPanel >
                     </GroupBox>
                 </Grid>
-
                 <!--<GridSplitter Grid.Column="1" Width="5"></GridSplitter>-->
-
-
                 <DockPanel Grid.Column="1">
-                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" RenderTransformOrigin="0.5,0.5"/>
+                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" RenderTransformOrigin="0.5,0.5"  Background="{StaticResource ResourceKey=MainPanelsBrush}"/>
                 </DockPanel>
-
-
-                <DockPanel Grid.Column="2">
-                    <TabControl VerticalAlignment="Top">
+                <DockPanel Grid.Column="2" Margin="3"  Background="{StaticResource ResourceKey=MainPanelsBrush}">
+                    <TabControl VerticalAlignment="Top" Background="{StaticResource ResourceKey=MainPanelsBrush}">
                         <TabItem Header="Generator">
-                            <Grid Background="#FFE5E5E5">
+                            <DockPanel>
                                 <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridGenerator"  RenderTransformOrigin="0.5,0.5"/>
-                            </Grid>
+                            </DockPanel>
                         </TabItem>
                         <TabItem Header="Text">
-                            <Grid Background="#FFE5E5E5">
+                            <Grid>
                                 <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridText"  RenderTransformOrigin="0.5,0.5"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Web">
-                            <Grid Background="#FFE5E5E5">
+                            <Grid>
                                 <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridWeb"  RenderTransformOrigin="0.5,0.5"/>
                             </Grid>
                         </TabItem>
                     </TabControl>
                 </DockPanel>
-                
             </Grid>
-
+            <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0" Style="{StaticResource ResourceKey=BorderPanelsStyleTitleBar}" x:Name="dpnlTitleBar">
+                <Button Width="25" Margin="1" Background="{StaticResource ResourceKey=MainPanelsBrush}" DockPanel.Dock="Right" HorizontalAlignment="Right" Content="X" Click="Button_Click"></Button>
+            </DockPanel>
+            <DockPanel Grid.Row="2"  Grid.Column="0" Grid.ColumnSpan="3" Margin="0" Style="{StaticResource ResourceKey=BorderPanelsStyleStatusBar}">
+                <StatusBar DockPanel.Dock="Bottom" Background="Transparent">
+                    <StatusBarItem>
+                        <TextBlock x:Name="lblStatusTitle">Status:</TextBlock>
+                        <!--<TextBlock x:Name="lblStatusTitle">Status:</TextBlock>-->
+                    </StatusBarItem>
+                    <StatusBarItem>
+                        <TextBlock x:Name="lblStatus">---Status---</TextBlock>
+                    </StatusBarItem>
+                </StatusBar>
+            </DockPanel>
         </Grid>
-        <DockPanel Grid.Row="1" >
-            <StatusBar DockPanel.Dock="Bottom">
-                <StatusBarItem>
-                    <TextBox x:Name="lblStatusTitle">Status:</TextBox>
-                    <!--<TextBlock x:Name="lblStatusTitle">Status:</TextBlock>-->
-                </StatusBarItem>
-                <StatusBarItem>
-                    <TextBlock x:Name="lblStatus">---Status---</TextBlock>
-                </StatusBarItem>
-            </StatusBar>
-        </DockPanel>
+        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0" Style="{StaticResource ResourceKey=BorderPanelsStyleTop}"></DockPanel>
+        <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="0" Style="{StaticResource ResourceKey=BorderPanelsStyleBottom}"></DockPanel>
+        <DockPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Margin="0" Style="{StaticResource ResourceKey=BorderPanelsStyleLeft}"></DockPanel>
+        <DockPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" Margin="0" Style="{StaticResource ResourceKey=BorderPanelsStyleRight}"></DockPanel>
     </Grid>
 </Window>

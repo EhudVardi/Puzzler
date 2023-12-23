@@ -45,7 +45,11 @@ namespace Logic
             foreach (CellValueSudoku cell in this.Board.CellsMatrix)
             {
                 if (_cellsChoiceMap[cell].IsSetToNumber())
+                {
                     SetCell(cell.Row, cell.Column, _cellsChoiceMap[cell].GetNumber());
+                    bg.ReportProgress(0, -1);
+                    System.Threading.Thread.Sleep(5);
+                }
             }
 
             foreach (GroupSudoku group in this.Board.Groups)

@@ -22,8 +22,8 @@ namespace Presentation.WPF
 {
     public partial class ucPuzzlerDataGrid : UserControl
     {
-        private DataTable _GameData;
-        public DataTable GameData { get { return _GameData; } }
+        private DataTable _PuzzleDataTable;
+        public DataTable PuzzleDataTable { get { return _PuzzleDataTable; } }
 
         public class RequestLoadPuzzleEventArgs
         {
@@ -46,23 +46,23 @@ namespace Presentation.WPF
 
         public void SetData(List<string> data)
         {
-            _GameData = new DataTable();
-            _GameData.Columns.Add(new DataColumn("Puzzle Name", typeof(string)));
-            _GameData.Columns.Add(new DataColumn("Path", typeof(string)));
+            _PuzzleDataTable = new DataTable();
+            _PuzzleDataTable.Columns.Add(new DataColumn("Name", typeof(string)));
+            _PuzzleDataTable.Columns.Add(new DataColumn("Path", typeof(string)));
 
             foreach (string file in data)
             {
-                var row = _GameData.NewRow();
-                _GameData.Rows.Add(row);
+                var row = _PuzzleDataTable.NewRow();
+                _PuzzleDataTable.Rows.Add(row);
 
-                row["Puzzle Name"] = System.IO.Path.GetFileName(file);
+                row["Name"] = System.IO.Path.GetFileName(file);
                 row["Path"] = System.IO.Path.GetFullPath(file);
             }
             
             //ItemsSource="{Binding ElementName=This, Path=GameData}"
             Binding b = new Binding();
             b.ElementName = "PuzzlerDataGrid";
-            b.Path = new PropertyPath("GameData");
+            b.Path = new PropertyPath("PuzzleDataTable");
             datagrid.SetBinding(DataGrid.ItemsSourceProperty, b);
             //
         }

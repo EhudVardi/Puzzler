@@ -30,7 +30,6 @@ namespace Presentation.WPF
             this.ucDataGridText.RequestLoadPuzzle += ucDataGrid_RequestLoadPuzzle;
             this.ucDataGridWeb.RequestLoadPuzzle += ucDataGrid_RequestLoadPuzzle;
         }
-
         void ucDataGrid_RequestLoadPuzzle(object sender, ucPuzzlerDataGrid.RequestLoadPuzzleEventArgs e)
         {
             PresentationLogicObject.ReadFromFile(e.Path);
@@ -113,18 +112,20 @@ namespace Presentation.WPF
             this.rbtnSolved.IsChecked = true;
         }
 
-        private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            //System.Windows.Point location = e.GetPosition(this.GameCanvas);
-            //System.Windows.Forms.MouseEventArgs mea = new System.Windows.Forms.MouseEventArgs(System.Windows.Forms.MouseButtons.Left, 1, (int)location.X, (int)location.Y, 1);
-            //MainWindow.PresentationLogicObject.InputMouse(mea, new System.Drawing.Size((int)this.GameCanvas.ActualWidth, (int)this.GameCanvas.ActualHeight));
-            //RefreshForm();
-        }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            System.Windows.Point location = e.GetPosition(this.GameCanvas);
-            System.Windows.Forms.MouseEventArgs mea = new System.Windows.Forms.MouseEventArgs(System.Windows.Forms.MouseButtons.Left, 1, (int)location.X, (int)location.Y, 1);
-            MainWindow.PresentationLogicObject.InputMouse(mea, new System.Drawing.Size((int)this.GameCanvas.ActualWidth, (int)this.GameCanvas.ActualHeight));
+            DockPanel dp = e.OriginalSource as DockPanel;
+            if (dp != null && object.Equals(dp, dpnlTitleBar))
+            {
+                if (e.ChangedButton == MouseButton.Left)
+                    this.DragMove();
+            }
+            else
+            {
+                System.Windows.Point location = e.GetPosition(this.GameCanvas);
+                System.Windows.Forms.MouseEventArgs mea = new System.Windows.Forms.MouseEventArgs(System.Windows.Forms.MouseButtons.Left, 1, (int)location.X, (int)location.Y, 1);
+                MainWindow.PresentationLogicObject.InputMouse(mea, new System.Drawing.Size((int)this.GameCanvas.ActualWidth, (int)this.GameCanvas.ActualHeight));
+            }
             RefreshForm();
         }
         private void Window_MouseMove(object sender, MouseEventArgs e)
@@ -212,6 +213,11 @@ namespace Presentation.WPF
         {
             PresentationLogicObject.GenerateRandom();
             RefreshForm();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
