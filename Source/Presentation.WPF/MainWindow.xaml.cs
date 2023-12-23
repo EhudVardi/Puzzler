@@ -57,6 +57,9 @@ namespace Presentation.WPF
                     case "Griddler Rails":
                         PresentationLogicObject = new PresentationLogicGriddlerRails();
                         break;
+                    case "Triddler":
+                        PresentationLogicObject = new PresentationLogicTriddler();
+                        break;
                     default:
                         throw new Exception();
                         break;

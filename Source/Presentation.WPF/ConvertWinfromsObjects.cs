@@ -22,6 +22,10 @@ namespace Presentation.WPF
         {
             return new System.Windows.Media.SolidColorBrush(ConvertColor(c.Color));
         }
+        public static System.Windows.Point ConvertPoint(System.Drawing.PointF p)
+        {
+            return new System.Windows.Point(p.X, p.Y);
+        }
 
         public static System.Windows.Forms.Keys ConvertKeys(System.Windows.Input.Key key)
         {

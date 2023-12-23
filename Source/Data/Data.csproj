@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataLayerTriddler.cs" />
+    <Compile Include="DataModels\PuzzleTriddler.cs" />
     <Compile Include="DataModels\PuzzleBase.cs" />
     <Compile Include="DataModels\PuzzleGriddler.cs" />
     <Compile Include="DataLayerGriddler.cs" />

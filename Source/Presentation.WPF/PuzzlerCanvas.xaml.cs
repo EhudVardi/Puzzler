@@ -47,12 +47,13 @@ namespace Presentation.WPF
         }
 
         int i = 0;
+        bool isrenderimg = false;
         protected override void OnRender(DrawingContext drawingContext)
         {
             //Rect testRect = new Rect(this.ActualWidth*0.25, this.ActualWidth*0.25, this.ActualWidth * 0.5, this.ActualHeight * 0.5);
-            
 
-            
+
+
             ////test code for fill rectangle
             //System.Windows.Media.Brush b2 = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255,255,0,0));
             //System.Windows.Media.Pen p = new System.Windows.Media.Pen(new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 0, 255, 0)), 3);
@@ -69,7 +70,7 @@ namespace Presentation.WPF
             //System.Windows.Point textLocation = new System.Windows.Point(centerPoint.X - formattedText.WidthIncludingTrailingWhitespace / 2, centerPoint.Y - formattedText.Height/2);
             //drawingContext.DrawText(formattedText, textLocation);
 
-            
+
             //////test code for draw text
             ////string s = "9";
             ////System.Windows.Media.Brush b = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 0, 0, 255));
@@ -81,14 +82,27 @@ namespace Presentation.WPF
 
             ////drawingContext.DrawText(formattedText, origin);
 
+            ////presentationLogicObject_EventDrawPolygon(drawingContext, Pens.Black, new System.Windows.Point[] { new System.Windows.Point(20, 20), new System.Windows.Point(20, 100), new System.Windows.Point(100, 100) });
+            
             //return;
-            if (MainWindow.PresentationLogicObject != null)
+            if (isrenderimg == false)
             {
-                float x = (float)this.ActualWidth;
-                float y = (float)this.ActualHeight;
-                MainWindow.PresentationLogicObject.Draw(drawingContext, x, y);
-                base.OnRender(drawingContext);
-                i++;
+                isrenderimg = true;
+                try
+                {
+                    if (MainWindow.PresentationLogicObject != null)
+                    {
+                        float x = (float)this.ActualWidth;
+                        float y = (float)this.ActualHeight;
+                        MainWindow.PresentationLogicObject.Draw(drawingContext, x, y);
+                        base.OnRender(drawingContext);
+                        i++;
+                    }
+                }
+                finally
+                {
+                    isrenderimg = false;
+                }
             }
         }
 
@@ -148,6 +162,33 @@ namespace Presentation.WPF
                 g.DrawLine(new System.Windows.Media.Pen(new SolidColorBrush(newColor), 1), new System.Windows.Point(x1, y1), new System.Windows.Point(x2, y2));
             }
         }
+        void presentationLogicObject_EventDrawPolygon(object drawingContext, System.Drawing.Pen pen, System.Drawing.SolidBrush brush, PointF[] points)
+        {
+            DrawingContext g = drawingContext as DrawingContext;
+            if (g != null)
+            {
+                if (points.Count() > 2)
+                {
+                    var polygon = new DrawingVisual();
+                    using (DrawingContext dc = polygon.RenderOpen())
+                    {
+                        var start = ConvertWinfromsObjects.ConvertPoint(points[0]);
+
+                        var segments = new LineSegment[points.Count() - 1];
+                        for (int i = 1; i < points.Count(); i++)
+                            segments[i-1] = new LineSegment(ConvertWinfromsObjects.ConvertPoint(points[i]), true);
+
+                        var figure = new PathFigure(start, segments, true);
+                        var geo = new PathGeometry(new[] { figure });
+                        dc.DrawGeometry(System.Windows.Media.Brushes.Red, null, geo);
+                        
+                        System.Windows.Media.Pen pen2 = ConvertWinfromsObjects.ConvertPen(pen);
+                        pen2.Thickness = 3;
+                        g.DrawGeometry(ConvertWinfromsObjects.ConvertBrush(brush) /*new SolidColorBrush(newColor)*/, pen2, geo);
+                    }
+                }
+            }
+        }
 
 
         internal void HookEventsToPresentationLogicObject()
@@ -157,6 +198,7 @@ namespace Presentation.WPF
             MainWindow.PresentationLogicObject.EventFillRectangle += presentationLogicObject_EventFillRectangle;
             MainWindow.PresentationLogicObject.EventDrawText += presentationLogicObject_EventDrawText;
             MainWindow.PresentationLogicObject.EventDrawLine += presentationLogicObject_EventDrawLine;
+            MainWindow.PresentationLogicObject.EventDrawPolygon += presentationLogicObject_EventDrawPolygon;
         }
     }
 }

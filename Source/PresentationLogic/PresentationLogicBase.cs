@@ -72,12 +72,14 @@ namespace PresentationLogic
         public event FillRectangle EventFillRectangle;
         public event DrawText EventDrawText;
         public event DrawLine EventDrawLine;
+        public event DrawPolygon EventDrawPolygon;
 
         public delegate void DrawRectangle(object drawingContext, Pen pen, float x, float y, float width, float height);
         public delegate void FillRectangle(object drawingContext, Brush brush, float x, float y, float width, float height);
         public delegate void DrawText(object drawingContext, string s, Font font, Brush brush, RectangleF layoutRectangle, StringFormat format);
         //TODO: add parameter "Thickness"
         public delegate void DrawLine(object drawingContext, Pen pen, float x1, float y1, float x2, float y2);
+        public delegate void DrawPolygon(object drawingContext, Pen pen, SolidBrush brush, PointF[] points);
 
         protected virtual void OnRequestRefresh(EventArgs e)
         {
@@ -103,6 +105,11 @@ namespace PresentationLogic
         {
             if (this.EventDrawLine != null)
                 this.EventDrawLine(drawingContext, pen, x1, y1, x2, y2);
+        }
+        protected virtual void OnRequestDrawPolygon(object drawingContext, Pen pen, SolidBrush brush, PointF[] points)
+        {
+            if (this.EventDrawPolygon != null)
+                this.EventDrawPolygon(drawingContext, pen, brush, points);
         }
     }
 

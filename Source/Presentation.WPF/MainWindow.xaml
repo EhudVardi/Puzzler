@@ -138,6 +138,7 @@
                             <RadioButton x:Name="btnSelectKakuru" DockPanel.Dock="Top" Content="Kakuru" Checked="btnSelectPuzzles_Checked" ></RadioButton>
                             <RadioButton x:Name="btnSelectGriddler" DockPanel.Dock="Top" Content="Griddler" Checked="btnSelectPuzzles_Checked" ></RadioButton>
                             <RadioButton x:Name="btnSelectGriddlerRails" DockPanel.Dock="Top" Content="Rails" Checked="btnSelectPuzzles_Checked" ></RadioButton>
+                            <RadioButton x:Name="btnSelectTriddler" DockPanel.Dock="Top" Content="Triddler" Checked="btnSelectPuzzles_Checked" ></RadioButton>
                         </DockPanel>
                     </GroupBox>
                     <GroupBox Grid.Row="1" Header="Display" Margin="3" VerticalAlignment="Top">
@@ -174,7 +175,16 @@
                     </GroupBox>
                 </DockPanel>
                 <DockPanel Grid.Column="2">
-                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" RenderTransformOrigin="0.5,0.5"  Background="{StaticResource ResourceKey=MainPanelsBrush}"/>
+                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" RenderTransformOrigin="0.5,0.5"  Background="{StaticResource ResourceKey=MainPanelsBrush}" Loaded="GameCanvas_Loaded">
+                        <UserControls:PuzzlerCanvas.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+                                <SkewTransform AngleX="-30" />
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </UserControls:PuzzlerCanvas.RenderTransform>
+                    </UserControls:PuzzlerCanvas>
                 </DockPanel>
             </Grid>
             <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0" Style="{StaticResource ResourceKey=BorderPanelsStyleTitleBar}" PreviewMouseDown="dpnlTitleBar_PreviewMouseDown">

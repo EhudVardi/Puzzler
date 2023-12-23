@@ -65,6 +65,10 @@
     <Compile Include="Models\Sudoku\BoardSudoku.cs" />
     <Compile Include="Models\Sudoku\CellValueSudoku.cs" />
     <Compile Include="Models\Sudoku\GroupSudoku.cs" />
+    <Compile Include="Models\Triddler\BoardTriddler.cs" />
+    <Compile Include="Models\Triddler\CellGroupHolderTriddler.cs" />
+    <Compile Include="Models\Triddler\CellValueTriddler.cs" />
+    <Compile Include="Models\Triddler\GroupTriddler.cs" />
     <Compile Include="Presentation\GaussianBlur.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
