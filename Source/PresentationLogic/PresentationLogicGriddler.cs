@@ -132,7 +132,7 @@ namespace PresentationLogic
 
         protected  Point GetBoardCoordinates(MouseEventArgs e, Size s, BoardGriddler b)
         {
-            return new Point((int)((float)e.X / ((float)s.Width / (float)b.Columns)), (int)((float)e.Y / ((float)s.Height / (float)b.Rows)));
+            return new Point((int)((float)e.Y / ((float)s.Height / (float)b.Rows)), (int)((float)e.X / ((float)s.Width / (float)b.Columns)));
         }
 
         public override void InputKey(KeyEventArgs e)
