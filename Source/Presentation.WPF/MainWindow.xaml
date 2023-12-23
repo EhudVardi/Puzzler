@@ -175,7 +175,7 @@
                     </GroupBox>
                 </DockPanel>
                 <DockPanel Grid.Column="2">
-                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" RenderTransformOrigin="0.5,0.5"  Background="{StaticResource ResourceKey=MainPanelsBrush}" Loaded="GameCanvas_Loaded">
+                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" RenderTransformOrigin="0.5,0.5"  Background="{StaticResource ResourceKey=MainPanelsBrush}">
                         <UserControls:PuzzlerCanvas.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
