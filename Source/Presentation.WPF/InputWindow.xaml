@@ -13,7 +13,7 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.ColumnSpan="3" >
-            <TextBox x:Name="tbInput" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap"/>
+            <TextBox AcceptsReturn="True" x:Name="tbInput" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" IsEnabled="True"/>
         </DockPanel>
         <Button Name="btnOK" Grid.Row="1" Grid.Column="0" Content="OK" Click="btnOK_Click"/>
         <Button Name="btnCancel" Grid.Row="1" Grid.Column="2" Content="Cancel" Click="btnCancel_Click"/>

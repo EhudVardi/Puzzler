@@ -179,6 +179,8 @@ namespace Presentation.WPF
             if (inputWindow.DialogResult.HasValue && inputWindow.DialogResult.Value == true)
             {
                 PresentationLogicObject.ReadFromText(inputWindow.Data);
+                ResizeWindowForCurrentPuzzle();
+                RefreshForm();
             }
         }
 

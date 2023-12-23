@@ -84,7 +84,7 @@ namespace PresentationLogic
                             {
                                 OnRequestFillRectangle(
                                     drawingContext,
-                                    solvedValueCell.Value == null ? Brushes.Yellow : solvedValueCell.Value == true ? Brushes.Green : Brushes.Red,
+                                    solvedValueCell.Value == null ? Brushes.Yellow : solvedValueCell.Value == true ? Brushes.Blue : Brushes.Red,
                                     cellWidth * solvedValueCell.Column + margin,
                                     cellHeight * solvedValueCell.Row + margin,
                                     cellWidth - margin * 2f,
