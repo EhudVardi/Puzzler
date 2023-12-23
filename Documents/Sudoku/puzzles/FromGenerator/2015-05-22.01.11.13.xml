@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<SudokuPuzzle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Size>0</Size>
+  <N>4</N>
+  <M>4</M>
+  <FixedNumbers>
+    <SudokuCellFixedNumber>
+      <Row>2</Row>
+      <Column>11</Column>
+      <Number>5</Number>
+    </SudokuCellFixedNumber>
+    <SudokuCellFixedNumber>
+      <Row>12</Row>
+      <Column>10</Column>
+      <Number>2</Number>
+    </SudokuCellFixedNumber>
+  </FixedNumbers>
+</SudokuPuzzle>
