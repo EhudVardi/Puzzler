@@ -115,7 +115,12 @@ namespace PresentationLogic
                 base.Draw(drawingContext, width, height);
             }
         }
-        
+
+        public override Size GetPrefferedSize()
+        {
+            return new System.Drawing.Size(40 * GetTrackerBoard().Columns, 40 * GetTrackerBoard().Rows);
+        }
+
         public override void InputMouse(MouseEventArgs e, Size s)
         {
             try

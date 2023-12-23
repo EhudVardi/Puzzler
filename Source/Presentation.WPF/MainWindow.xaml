@@ -11,7 +11,7 @@
         KeyDown="Window_KeyDown"
         Width="800" Height="600" ResizeMode="CanResize" UseLayoutRounding="True" WindowStyle="None">
     <Window.Resources>
-        <Color x:Key="TransparentGray">#22111111</Color>
+        <Color x:Key="TransparentGray">#44551155</Color>
         <Color x:Key="TransparentWhite">#22FFFFFF</Color>
         <SolidColorBrush x:Key="MainPanelsBrush" Color="{StaticResource ResourceKey=TransparentWhite}"/>
         <LinearGradientBrush x:Key="BorderPanelsBrushTitleBar" StartPoint="0,0" EndPoint="1,0">
@@ -57,6 +57,11 @@
             <GradientStop Color="LightBlue" Offset="0.5" />
             <GradientStop Color="White" Offset="1.0" />
         </RadialGradientBrush>
+        <RadialGradientBrush x:Key="BorderPanelsBrushExitButton"  GradientOrigin="0.5,0.5">
+            <GradientStop Color="LightGray" Offset="0.0" />
+            <GradientStop Color="LightCoral" Offset="0.5" />
+            <GradientStop Color="White" Offset="1.0" />
+        </RadialGradientBrush>
         <Style x:Key="BorderPanelsStyleTitleBar" TargetType="DockPanel">
             <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushTitleBar}"/>
         </Style>
@@ -84,6 +89,12 @@
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontStretch" Value="Expanded"/>
             <Setter Property="Text" Value=" Puzzler (Created by Ehud Vardi)"/>
+        </Style>
+        <Style x:Key="BorderPanelsStyleExitButton" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushExitButton}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontStretch" Value="Normal"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -139,18 +150,18 @@
                 </Grid>
                 <!--<GridSplitter Grid.Column="1" Width="5"></GridSplitter>-->
                 <DockPanel Grid.Column="1" Margin="3"  Background="{StaticResource ResourceKey=MainPanelsBrush}">
-                    <GroupBox Grid.Row="0" Header="Library" Margin="3" VerticalAlignment="Top">
-                        <TabControl VerticalAlignment="Top" Background="{StaticResource ResourceKey=MainPanelsBrush}">
-                            <TabItem Header="Generator">
-                                <DockPanel>
+                    <GroupBox Grid.Row="0" Header="Library" Margin="3" VerticalAlignment="Stretch">
+                        <TabControl VerticalAlignment="Stretch" Background="{StaticResource ResourceKey=MainPanelsBrush}" >
+                            <TabItem Header="Generator" >
+                                <DockPanel >
                                     <Button x:Name="btnRandom" Margin="10,5,10,5" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Generate New Puzzle" Click="btnRandom_Click"/>
-                                    <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridGenerator"  RenderTransformOrigin="0.5,0.5"/>
+                                    <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridGenerator" RenderTransformOrigin="0.5,0.5" />
                                 </DockPanel>
                             </TabItem>
-                            <TabItem Header="Text">
-                                <DockPanel>
-                                    <Button x:Name="btnLoadFromText" Margin="10,5,10,5" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Read New From Text" Click="btnLoadFromText_Click"/>
-                                    <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridText"  RenderTransformOrigin="0.5,0.5"/>
+                            <TabItem Header="Text" >
+                                <DockPanel >
+                                    <Button x:Name="btnLoadFromText" Margin="10,5,10,5" DockPanel.Dock="Top" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Read New From Text" Click="btnLoadFromText_Click"/>
+                                    <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridText"  RenderTransformOrigin="0.5,0.5" DockPanel.Dock="Bottom"/>
                                 </DockPanel>
                             </TabItem>
                             <TabItem Header="Web">
@@ -166,9 +177,9 @@
                     <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" RenderTransformOrigin="0.5,0.5"  Background="{StaticResource ResourceKey=MainPanelsBrush}"/>
                 </DockPanel>
             </Grid>
-            <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0" Style="{StaticResource ResourceKey=BorderPanelsStyleTitleBar}" x:Name="dpnlTitleBar">
-                <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Center" Style="{StaticResource ResourceKey=BorderPanelsStyleAppTitle}"/>
-                <Button Width="25" Margin="1" Background="{StaticResource ResourceKey=MainPanelsBrush}" DockPanel.Dock="Right" HorizontalAlignment="Right" Content="X" Click="Button_Click"></Button>
+            <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0" Style="{StaticResource ResourceKey=BorderPanelsStyleTitleBar}" PreviewMouseDown="dpnlTitleBar_PreviewMouseDown">
+                <TextBlock DockPanel.Dock="Left" Style="{StaticResource ResourceKey=BorderPanelsStyleAppTitle}"/>
+                <Button Width="25" Margin="1" Style="{StaticResource ResourceKey=BorderPanelsStyleExitButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Content="X" x:Name="btnExitApplication"/>
             </DockPanel>
             <DockPanel Grid.Row="2"  Grid.Column="0" Grid.ColumnSpan="3" Margin="0" Style="{StaticResource ResourceKey=BorderPanelsStyleStatusBar}">
                 <StatusBar DockPanel.Dock="Bottom" Background="Transparent">

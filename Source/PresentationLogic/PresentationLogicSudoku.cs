@@ -60,10 +60,12 @@ namespace PresentationLogic
 
 
                     Brush brushBackColor;
+                    Brush brushForeColor;
 
                     if (!GetTrackerBoard().InitialCells.Contains(valueCell))
-                        brushBackColor = bNull;
-                    else brushBackColor = bFixed;
+                    { brushBackColor = bNull; brushForeColor = bCorrect; }
+                    else
+                    { brushBackColor = bFixed; brushForeColor = bText; }
 
                     //draw value cell back color (initial or not)
                     OnRequestFillRectangle(drawingContext,
@@ -83,7 +85,7 @@ namespace PresentationLogic
                             if (valueCell.IsFixed)
                             {
                                 OnRequestDrawText(drawingContext,
-                                    (valueCell.Value + 1).ToString(), font, bText,
+                                    (valueCell.Value + 1).ToString(), font, brushForeColor,
                                     new RectangleF(
                                     cellWidth * valueCell.Column + margin,
                                     cellHeight * valueCell.Row + margin,
@@ -97,17 +99,11 @@ namespace PresentationLogic
                             {
                                 Brush brushValue;
 
-                                //// number color depend on correctness
-                                //if (solvedValueCell.Value != valueCell.Value)
-                                //    brushValue = bIncorrect;
-                                //else
-                                //    brushValue = bCorrect;
-
                                 // number color depend on the selected cell number
-                                if (selectedValueCell.Value.HasValue == true && valueCell.Value.HasValue == true && selectedValueCell.Value == valueCell.Value)
+                                if (selectedValueCell != null && selectedValueCell.Value.HasValue == true && valueCell.Value.HasValue == true && selectedValueCell.Value == valueCell.Value)
                                     brushValue = bIncorrect;
                                 else
-                                    brushValue = bCorrect;
+                                    brushValue = brushForeColor;
 
                                 OnRequestDrawText(drawingContext,
                                     (valueCell.Value + 1).ToString(), font, brushValue,
@@ -121,7 +117,7 @@ namespace PresentationLogic
                             break;
                         case DisplayType.Solution:
                                 OnRequestDrawText(drawingContext,
-                                    (solvedValueCell.Value + 1).ToString(), font, bCorrect,
+                                    (solvedValueCell.Value + 1).ToString(), font, brushForeColor,
                                     new RectangleF(
                                     cellWidth * valueCell.Column + margin,
                                     cellHeight * valueCell.Row + margin,

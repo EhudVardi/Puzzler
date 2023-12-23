@@ -34,7 +34,8 @@ namespace Presentation.WPF
         }
         void ucDataGrid_RequestLoadPuzzle(object sender, ucPuzzlerDataGrid.RequestLoadPuzzleEventArgs e)
         {
-            PresentationLogicObject.ReadFromFile(e.Path);
+            PresentationLogicObject.ReadFromFile(e.Path); 
+            ResizeWindowForCurrentPuzzle();
         }
 
         private void btnSelectPuzzles_Checked(object sender, RoutedEventArgs e)
@@ -101,8 +102,13 @@ namespace Presentation.WPF
                 }
             }
         }
+        private void ResizeWindowForCurrentPuzzle()
+        {
+            System.Drawing.Size size = PresentationLogicObject.GetPrefferedSize();
+            int preferedSWidth = (int)this.GameCanvas.ActualHeight * size.Width / size.Height;
+            this.Width = this.Width + preferedSWidth - this.GameCanvas.ActualWidth;
+        }
 
-        
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.btnSelectSudoku.IsChecked = false;
@@ -113,18 +119,9 @@ namespace Presentation.WPF
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            DockPanel dp = e.OriginalSource as DockPanel;
-            if (dp != null && object.Equals(dp, dpnlTitleBar))
-            {
-                if (e.ChangedButton == MouseButton.Left)
-                    this.DragMove();
-            }
-            else
-            {
-                System.Windows.Point location = e.GetPosition(this.GameCanvas);
-                System.Windows.Forms.MouseEventArgs mea = new System.Windows.Forms.MouseEventArgs(System.Windows.Forms.MouseButtons.Left, 1, (int)location.X, (int)location.Y, 1);
-                MainWindow.PresentationLogicObject.InputMouse(mea, new System.Drawing.Size((int)this.GameCanvas.ActualWidth, (int)this.GameCanvas.ActualHeight));
-            }
+            System.Windows.Point location = e.GetPosition(this.GameCanvas);
+            System.Windows.Forms.MouseEventArgs mea = new System.Windows.Forms.MouseEventArgs(System.Windows.Forms.MouseButtons.Left, 1, (int)location.X, (int)location.Y, 1);
+            MainWindow.PresentationLogicObject.InputMouse(mea, new System.Drawing.Size((int)this.GameCanvas.ActualWidth, (int)this.GameCanvas.ActualHeight));
             RefreshForm();
         }
         private void Window_MouseMove(object sender, MouseEventArgs e)
@@ -169,21 +166,6 @@ namespace Presentation.WPF
             catch (Exception) { }
         }
 
-        private void btnLoadFromFile_Click(object sender, RoutedEventArgs e)
-        {
-            Microsoft.Win32.OpenFileDialog opf = new Microsoft.Win32.OpenFileDialog();
-            opf.InitialDirectory = System.IO.Path.GetFullPath(PresentationLogicObject.GetPuzzleTypeDocumentsPath() + Common.Configuration.PuzzlesLibraryFolder);
-            opf.RestoreDirectory = false;
-            opf.Multiselect = false;
-            opf.Filter = "xml files (*.xml)|*.xml";
-
-            bool? dr = opf.ShowDialog(this);
-            if (dr != null && dr == true)
-            {
-                PresentationLogicObject.ReadFromFile(opf.FileName);
-                RefreshForm();
-            }
-        }
         private void btnLoadFromWeb_Click(object sender, RoutedEventArgs e)
         {
             PresentationLogicObject.ReadFromWeb(null);
@@ -191,21 +173,13 @@ namespace Presentation.WPF
         }
         private void btnLoadFromText_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("not implemented yet (need to create a form to paste text)");
-            //    InputForm inputForm = new InputForm();
-            //    inputForm.StartPosition = FormStartPosition.CenterParent;
-            //    bool ok = false;
-            //    while (!ok)
-            //    {
-            //        DialogResult dr = inputForm.ShowDialog();
-            //        if (dr == DialogResult.OK)
-            //        {
-            //            if (presentationLogicObject.ReadFromText(inputForm.Data))
-            //                ok = true;
-            //        }
-            //        else if (dr == DialogResult.Cancel)
-            //            ok = true;
-            //    }
+            InputWindow inputWindow = new InputWindow();
+            inputWindow.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
+            inputWindow.ShowDialog();
+            if (inputWindow.DialogResult.HasValue && inputWindow.DialogResult.Value == true)
+            {
+                PresentationLogicObject.ReadFromText(inputWindow.Data);
+            }
         }
 
         private void btnRandom_Click(object sender, RoutedEventArgs e)
@@ -214,9 +188,15 @@ namespace Presentation.WPF
             RefreshForm();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void dpnlTitleBar_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            Application.Current.Shutdown();
+            Button b = e.Source as Button;
+            if (b != null && object.Equals(b, btnExitApplication))
+            {
+                Application.Current.Shutdown();
+            }
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
         }
     }
 }

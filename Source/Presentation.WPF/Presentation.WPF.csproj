@@ -68,6 +68,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ConvertWinfromsObjects.cs" />
+    <Compile Include="InputWindow.xaml.cs">
+      <DependentUpon>InputWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PuzzlerCanvas.xaml.cs">
       <DependentUpon>PuzzlerCanvas.xaml</DependentUpon>
     </Compile>
@@ -75,6 +78,10 @@
       <DependentUpon>ucPuzzleDataGrid.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="InputWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
