@@ -1,0 +1,5 @@
+# ignore Bin/Obj folders
+bin/
+obj/
+# ignore VS temp generated files
+.vs/
