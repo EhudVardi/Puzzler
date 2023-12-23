@@ -45,7 +45,7 @@ namespace Logic
 
         void bg_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            OnStepCompleted(EventArgs.Empty);
+            OnStepCompleted(e);
         }
 
         void bg_DoWork(object sender, DoWorkEventArgs e)
@@ -69,7 +69,7 @@ namespace Logic
 
                 DoCompleteStep();
 
-                bg.ReportProgress(0, roundCount);
+                bg.ReportProgress(roundCount, 0);
 
                 roundCount++;
             }

@@ -126,15 +126,15 @@ namespace Logic
 
         void SolverProxy_SolveCompleted(object sender, EventArgs e)
         {
-            OnSolveCompleted(EventArgs.Empty);
+            OnSolveCompleted(e);
         }
         void SolverProxy_StepCompleted(object sender, EventArgs e)
         {
-            OnStepCompleted(EventArgs.Empty);
+            OnStepCompleted(e);
         }
         void FactoryModule_StepGenerated(object sender, EventArgs e)
         {
-            OnStepGenerated(EventArgs.Empty);
+            OnStepGenerated(e);
 
         }
 

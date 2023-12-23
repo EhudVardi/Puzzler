@@ -37,7 +37,7 @@ namespace PresentationLogic
         public override string GetPuzzleTypeDocumentsPath() { return LogicProxy.GetPuzzleTypeDocumentsPath(); }
         public virtual string GetPuzzleName() { return LogicProxy.GetPuzzleName(); }
 
-        protected void Board_StepCompleted(object sender, EventArgs e) { this.OnRequestRefresh(EventArgs.Empty); }
+        protected void Board_StepCompleted(object sender, EventArgs e) { this.OnRequestRefresh(e); }
         protected void Board_SolveCompleted(object sender, EventArgs e) { this.OnRequestRefresh(EventArgs.Empty); }
 
         protected void LogicProxy_LoadCompleted(object sender, EventArgs e) { this.InitDisplay(); this.OnRequestRefresh(EventArgs.Empty); }

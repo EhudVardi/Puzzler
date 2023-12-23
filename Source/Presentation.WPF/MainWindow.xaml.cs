@@ -85,19 +85,25 @@ namespace Presentation.WPF
 
         void PresentationLogicObject_Refresh(object sender, EventArgs e)
         {
-            RefreshForm();
+            RefreshForm(e);
         }
 
         private void RefreshForm()
+        {
+            RefreshForm(EventArgs.Empty);
+        }
+        private void RefreshForm(EventArgs e)
         {
             if (PresentationLogicObject != null)
             {
                 this.GameCanvas.InvalidateVisual();
                 try
                 {
-                    this.lblStatus.Text = string.Format("Valid: {0}, Solved: {1}",
+                    this.lblStatus.Text = string.Format("Valid: {0}, Solved: {1}, Progress: {2}",
                         PresentationLogicObject.IsValid(),
-                        PresentationLogicObject.IsSolved());
+                        PresentationLogicObject.IsSolved(),
+                        ((e is System.ComponentModel.ProgressChangedEventArgs) ?
+                        "Solving..." + (e as System.ComponentModel.ProgressChangedEventArgs).ProgressPercentage.ToString() : "Idle"));
                     this.lblStatusTitle.Text = "Status:" + " OK";
                 }
                 catch (Exception) {
