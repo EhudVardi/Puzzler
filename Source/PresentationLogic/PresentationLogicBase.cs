@@ -53,6 +53,8 @@ namespace PresentationLogic
 
         public virtual void InitDisplay() { }
 
+        public virtual Size GetPrefferedSize() { return new Size(500, 500); }
+
         public virtual void Draw(object drawingContext, float width, float height) { }
         
         //TODO: replace each method's params with those: MouseButtons button, int delta, float x, float y, float sizeX, float sizeY

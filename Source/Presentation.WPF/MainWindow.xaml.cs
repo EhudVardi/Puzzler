@@ -23,6 +23,8 @@ namespace Presentation.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        internal static PresentationLogicBase PresentationLogicObject;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -100,7 +102,6 @@ namespace Presentation.WPF
             }
         }
 
-        internal static PresentationLogicBase PresentationLogicObject;
         
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

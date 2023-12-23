@@ -47,8 +47,11 @@ namespace Logic
                 if (_cellsChoiceMap[cell].IsSetToNumber())
                 {
                     SetCell(cell.Row, cell.Column, _cellsChoiceMap[cell].GetNumber());
-                    bg.ReportProgress(0, -1);
-                    System.Threading.Thread.Sleep(5);
+                    if (bg != null)
+                    {
+                        bg.ReportProgress(0, -1);
+                        System.Threading.Thread.Sleep(20);
+                    }
                 }
             }
 

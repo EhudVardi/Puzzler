@@ -9,7 +9,7 @@
         MouseUp="Window_MouseUp"
         MouseWheel="Window_MouseWheel"
         KeyDown="Window_KeyDown"
-        Width="800" Height="600" ResizeMode="CanResizeWithGrip" UseLayoutRounding="True">
+        Width="800" Height="600" ResizeMode="CanResize" UseLayoutRounding="True" WindowStyle="None">
     <Window.Resources>
         <Color x:Key="TransparentGray">#22111111</Color>
         <Color x:Key="TransparentWhite">#22FFFFFF</Color>
@@ -78,6 +78,13 @@
         <Style x:Key="BorderPanelsStyleMainGrid" TargetType="Grid">
             <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushMainGrid}"/>
         </Style>
+        <Style x:Key="BorderPanelsStyleAppTitle" TargetType="TextBlock">
+            <Setter Property="Background" Value="{StaticResource ResourceKey=MainPanelsBrush}"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontStretch" Value="Expanded"/>
+            <Setter Property="Text" Value=" Puzzler (Created by Ehud Vardi)"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -102,16 +109,14 @@
             <Grid Grid.Row="1" Grid.Column="1" Margin="2" Style="{StaticResource ResourceKey=BorderPanelsStyleMainGrid}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto" MaxWidth="300" MinWidth="150"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" Margin="3" Background="{StaticResource ResourceKey=MainPanelsBrush}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition/>
@@ -124,19 +129,7 @@
                             <RadioButton x:Name="btnSelectGriddlerRails" DockPanel.Dock="Top" Content="Rails" Checked="btnSelectPuzzles_Checked" ></RadioButton>
                         </DockPanel>
                     </GroupBox>
-                    <GroupBox Grid.Row="1" Header="Load" Margin="3" VerticalAlignment="Top">
-                        <DockPanel >
-                            <Button x:Name="btnLoadFromFile" VerticalAlignment="Top" DockPanel.Dock="Top" Content="File" Click="btnLoadFromFile_Click" ></Button>
-                            <Button x:Name="btnLoadFromWeb" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Web" Click="btnLoadFromWeb_Click" />
-                            <Button x:Name="btnLoadFromText" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Text" Click="btnLoadFromText_Click"/>
-                        </DockPanel>
-                    </GroupBox>
-                    <GroupBox Grid.Row="2" Header="Generate" Margin="3" VerticalAlignment="Top">
-                        <DockPanel >
-                            <Button x:Name="btnRandom"  VerticalAlignment="Top" DockPanel.Dock="Top" Content="Random" Click="btnRandom_Click"/>
-                        </DockPanel >
-                    </GroupBox>
-                    <GroupBox Grid.Row="3" Header="Display" Margin="3" VerticalAlignment="Top">
+                    <GroupBox Grid.Row="1" Header="Display" Margin="3" VerticalAlignment="Top">
                         <DockPanel >
                             <RadioButton x:Name="rbtnClean" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Clean" IsChecked="True" Checked="rbtnDisplayModes_Checked"></RadioButton>
                             <RadioButton x:Name="rbtnHints" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Hints" Checked="rbtnDisplayModes_Checked" ></RadioButton>
@@ -145,30 +138,36 @@
                     </GroupBox>
                 </Grid>
                 <!--<GridSplitter Grid.Column="1" Width="5"></GridSplitter>-->
-                <DockPanel Grid.Column="1">
-                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" RenderTransformOrigin="0.5,0.5"  Background="{StaticResource ResourceKey=MainPanelsBrush}"/>
+                <DockPanel Grid.Column="1" Margin="3"  Background="{StaticResource ResourceKey=MainPanelsBrush}">
+                    <GroupBox Grid.Row="0" Header="Library" Margin="3" VerticalAlignment="Top">
+                        <TabControl VerticalAlignment="Top" Background="{StaticResource ResourceKey=MainPanelsBrush}">
+                            <TabItem Header="Generator">
+                                <DockPanel>
+                                    <Button x:Name="btnRandom" Margin="10,5,10,5" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Generate New Puzzle" Click="btnRandom_Click"/>
+                                    <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridGenerator"  RenderTransformOrigin="0.5,0.5"/>
+                                </DockPanel>
+                            </TabItem>
+                            <TabItem Header="Text">
+                                <DockPanel>
+                                    <Button x:Name="btnLoadFromText" Margin="10,5,10,5" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Read New From Text" Click="btnLoadFromText_Click"/>
+                                    <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridText"  RenderTransformOrigin="0.5,0.5"/>
+                                </DockPanel>
+                            </TabItem>
+                            <TabItem Header="Web">
+                                <DockPanel>
+                                    <Button x:Name="btnLoadFromWeb" Margin="10,5,10,5" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Read New From Web" Click="btnLoadFromWeb_Click" />
+                                    <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridWeb"  RenderTransformOrigin="0.5,0.5"/>
+                                </DockPanel>
+                            </TabItem>
+                        </TabControl>
+                    </GroupBox>
                 </DockPanel>
-                <DockPanel Grid.Column="2" Margin="3"  Background="{StaticResource ResourceKey=MainPanelsBrush}">
-                    <TabControl VerticalAlignment="Top" Background="{StaticResource ResourceKey=MainPanelsBrush}">
-                        <TabItem Header="Generator">
-                            <DockPanel>
-                                <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridGenerator"  RenderTransformOrigin="0.5,0.5"/>
-                            </DockPanel>
-                        </TabItem>
-                        <TabItem Header="Text">
-                            <Grid>
-                                <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridText"  RenderTransformOrigin="0.5,0.5"/>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="Web">
-                            <Grid>
-                                <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridWeb"  RenderTransformOrigin="0.5,0.5"/>
-                            </Grid>
-                        </TabItem>
-                    </TabControl>
+                <DockPanel Grid.Column="2">
+                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" RenderTransformOrigin="0.5,0.5"  Background="{StaticResource ResourceKey=MainPanelsBrush}"/>
                 </DockPanel>
             </Grid>
             <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0" Style="{StaticResource ResourceKey=BorderPanelsStyleTitleBar}" x:Name="dpnlTitleBar">
+                <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Center" Style="{StaticResource ResourceKey=BorderPanelsStyleAppTitle}"/>
                 <Button Width="25" Margin="1" Background="{StaticResource ResourceKey=MainPanelsBrush}" DockPanel.Dock="Right" HorizontalAlignment="Right" Content="X" Click="Button_Click"></Button>
             </DockPanel>
             <DockPanel Grid.Row="2"  Grid.Column="0" Grid.ColumnSpan="3" Margin="0" Style="{StaticResource ResourceKey=BorderPanelsStyleStatusBar}">
