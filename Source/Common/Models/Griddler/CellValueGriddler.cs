@@ -29,7 +29,7 @@ namespace Common.Models.Griddler
 
 
         
-        public bool? And(bool? b1, bool? b2)
+        public static bool? AND(bool? b1, bool? b2)
         {
             if (b1 == null || b2 == null)
                 return null;
@@ -39,7 +39,7 @@ namespace Common.Models.Griddler
                 return true;
         }
 
-        public bool? OR(bool? b1, bool? b2)
+        public static bool? OR(bool? b1, bool? b2)
         {
             if (b1 == null || b2 == null)
                 return null;
@@ -49,7 +49,7 @@ namespace Common.Models.Griddler
                 return true;
         }
 
-        public bool? XOR(bool? b1, bool? b2)
+        public static bool? XOR(bool? b1, bool? b2)
         {
             if (b1 == null || b2 == null)
                 return null;
@@ -59,7 +59,7 @@ namespace Common.Models.Griddler
                 return false;
         }
 
-        public bool? NOT(bool? b1)
+        public static bool? NOT(bool? b1)
         {
             if (b1 == null)
                 return null;

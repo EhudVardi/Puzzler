@@ -60,7 +60,7 @@ namespace Logic
                             bool? firstGroupCellValue = firstIntegratedGroup.Cells[firstGroup.Cells.IndexOf(cell)].Value;
                             bool? secondGroupCellValue = secondIntegratedGroup.Cells[secondGroup.Cells.IndexOf(cell)].Value;
 
-                            if ((bool)cell.XOR(firstGroupCellValue, secondGroupCellValue))
+                            if ((bool)CellValueGriddler.XOR(firstGroupCellValue, secondGroupCellValue))
                                 return false;
                         }
             
@@ -194,7 +194,7 @@ namespace Logic
 
             for (int i = 0; i < ORLineArray.Length; i++)
                 for (int j = 0; j < _multiplexedLines.Count; j++)
-                    ORLineArray[i] = Or(ORLineArray[i].Value, _multiplexedLines[j].Get(i));
+                    ORLineArray[i] = CellValueGriddler.OR(ORLineArray[i].Value, _multiplexedLines[j].Get(i));
 
             for (int i = 0; i < ORLineArray.Length; i++)
                 if (ORLineArray[i] == true)
@@ -213,7 +213,7 @@ namespace Logic
 
             for (int i = 0; i < ANDLineArray.Length; i++)
                 for (int j = 0; j < _multiplexedLines.Count; j++)
-                    ANDLineArray[i] = And(ANDLineArray[i].Value, _multiplexedLines[j].Get(i));
+                    ANDLineArray[i] = CellValueGriddler.AND(ANDLineArray[i].Value, _multiplexedLines[j].Get(i));
 
             for (int i = 0; i < ANDLineArray.Length; i++)
                 if (ANDLineArray[i] == false)
@@ -222,31 +222,6 @@ namespace Logic
             return ANDLineArray;
 
         }
-
-
-
-
-        private bool? And(bool? b1, bool? b2)
-        {
-            if (b1 == null || b2 == null)
-                return null;
-            else if (b1 == false || b2 == false)
-                return false;
-            else
-                return true;
-        }
-
-        private bool? Or(bool? b1, bool? b2)
-        {
-            if (b1 == null || b2 == null)
-                return null;
-            else if (b1 == false && b2 == false)
-                return false;
-            else
-                return true;
-        }
-
-
 
 
         ///
