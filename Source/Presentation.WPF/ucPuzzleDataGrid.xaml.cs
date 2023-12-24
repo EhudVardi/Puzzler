@@ -69,8 +69,25 @@ namespace Presentation.WPF
 
         private void datagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            LoadSelectedRowPuzzle();
+        }
+        private void datagrid_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Enter:
+                    //load puzzle
+                    LoadSelectedRowPuzzle();
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        private void LoadSelectedRowPuzzle()
+        {
             if (datagrid.SelectedIndex == -1)
-                return; 
+                return;
 
             DataRowView drv = (datagrid.Items[datagrid.SelectedIndex] as DataRowView);
             if (drv == null)

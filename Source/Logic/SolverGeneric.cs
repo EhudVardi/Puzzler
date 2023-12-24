@@ -7,110 +7,84 @@ namespace Logic
 {
     public class SolverGeneric<B>
     {
-
         protected B _board;
-
         public B Board
         {
             get { return _board; }
             set { _board = value; }
         }
 
-
         public SolverGeneric()
         {
 
         }
-        
 
         public event EventHandler StepCompleted;
         public event EventHandler SolveCompleted;
 
-
         protected BackgroundWorker bg;
-
-
-
 
         public virtual void Solve()
         {
             bg.RunWorkerAsync();
         }
 
-
         void bg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             OnSolveCompleted(EventArgs.Empty);
         }
-
         void bg_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             OnStepCompleted(e);
         }
-
         void bg_DoWork(object sender, DoWorkEventArgs e)
         {
             SolveBoard(e);
         }
 
+        protected void ReportProgress(int precentageProgress, object state)
+        {
+            bg.ReportProgress(precentageProgress, state);
+        }
 
         public virtual void SolveBoard(DoWorkEventArgs e)
         {
             SolveInitiation();
-
-            int roundCount = 0;
-
+            int precentageProgress = 0;
             while (!IsSolved() && IsValid())
             {
                 if (bg.CancellationPending)
-                {
                     return;
-                }
 
                 DoCompleteStep();
-
-                bg.ReportProgress(roundCount, 0);
-
-                roundCount++;
+                ReportProgress(precentageProgress, null); 
+                precentageProgress++;
             }
-
         }
 
         public virtual void SolveInitiation() { }
-
         public virtual bool DoCompleteStep() { return false; }
 
-
-
         public virtual bool IsSolved() { return false; }
-
         public virtual bool IsValid() { return true; }
 
-
         public virtual void Reset() { }
-
 
         public virtual void SetCell(int row, int column, int num)
         {
 
         }
 
-
         protected virtual void OnStepCompleted(EventArgs e)
         {
             if (StepCompleted != null)
                 StepCompleted(this, e);
         }
-
         protected virtual void OnSolveCompleted(EventArgs e)
         {
             if (SolveCompleted != null)
                 SolveCompleted(this, e);
         }
-
-
-
-
 
         internal void Initialize()
         {
@@ -119,11 +93,9 @@ namespace Logic
                 if (bg.IsBusy)
                     bg.CancelAsync();
                 //while (bg.IsBusy) ;
-
                 bg.DoWork -= bg_DoWork;
                 bg.ProgressChanged -= bg_ProgressChanged;
                 bg.RunWorkerCompleted -= bg_RunWorkerCompleted;
-            
             }
             bg = new BackgroundWorker();
             bg.DoWork += new DoWorkEventHandler(bg_DoWork);

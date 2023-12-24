@@ -8,20 +8,16 @@ namespace Logic
     public class TrackerGeneric<B>
     {
         private B _board;
-
         public B Board
         {
             get { return _board; }
             set { _board = value; }
         }
 
-	
-
         public TrackerGeneric()
         {
 
         }
-
         public TrackerGeneric(B board)
         {
             this.Board = board;
