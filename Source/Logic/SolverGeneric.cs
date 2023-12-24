@@ -49,9 +49,13 @@ namespace Logic
 
         public virtual void SolveBoard(DoWorkEventArgs e)
         {
+            DateTime start = DateTime.Now;
             SolveInitiation();
+            if (IsValid() == false)
+                return;
+
             int precentageProgress = 0;
-            while (!IsSolved() && IsValid())
+            while (!IsSolved())
             {
                 if (bg.CancellationPending)
                     return;
@@ -60,6 +64,7 @@ namespace Logic
                 ReportProgress(precentageProgress, null); 
                 precentageProgress++;
             }
+            Console.WriteLine("total time = " + (DateTime.Now - start).TotalMilliseconds + "ms");
         }
 
         public virtual void SolveInitiation() { }
@@ -92,7 +97,7 @@ namespace Logic
             {
                 if (bg.IsBusy)
                     bg.CancelAsync();
-                //while (bg.IsBusy) ;
+                while (bg.IsBusy) ;
                 bg.DoWork -= bg_DoWork;
                 bg.ProgressChanged -= bg_ProgressChanged;
                 bg.RunWorkerCompleted -= bg_RunWorkerCompleted;
