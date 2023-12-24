@@ -39,16 +39,20 @@ namespace Logic
             foreach (var gv in groupsSortedByvariationCount)
             {
                 GroupGriddler group = gv.Group;
-                List<BitArray> variations = CalcAllValidVariations(group);
+                //List<BitArray> variations = CalcAllValidVariations(group);
+                List<BitArray> variations = CalcAllValidVariationConsideringExsitingLine(group);
+                
                 _groupsVariations.Add(group, variations);
                 ReflectIntegratedVariationToCells(group, variations);
+                ReportProgress((int)(groupsSortedByvariationCount.IndexOf(gv)), null);
             }
         }
 
         public override bool DoCompleteStep()
         {
             foreach (GroupGriddler group in this.Board.Groups)
-                ReflectIntegratedVariationToCells(group, _groupsVariations[group]);
+                if (_groupsVariations[group].Count > 1 || group.Cells.FindAll(c=>c.Value==null).Count > 0) //if group is not all fixed (solved)
+                    ReflectIntegratedVariationToCells(group, _groupsVariations[group]);
 
             foreach (GroupGriddler group in this.Board.Groups)
                 ReflectCellsToVariationsList(group);
@@ -67,7 +71,8 @@ namespace Logic
         {
             return true;
 
-            //foreach (CellValueGriddler cell in this.Board.CellsMatrix)
+            //foreach (CellValueGriddler cell in this.Board.ValueCells)
+
             //    foreach (GroupGriddler firstGroup in cell.Groups)
             //        foreach (GroupGriddler secondGroup in cell.Groups)
             //            if (!object.ReferenceEquals(firstGroup, secondGroup))
@@ -91,6 +96,81 @@ namespace Logic
 
 
         ///
+        private List<BitArray> CalcAllValidVariationConsideringExsitingLine(GroupGriddler group)
+        {
+            List<BitArray> lines = new List<BitArray>();
+
+            BitArray templateLine = new BitArray(group.Size);
+            templateLine.SetAll(false);
+
+            bool?[] existingLine = new bool?[group.Cells.Count];
+            for (int i = 0; i < existingLine.Length; i++)
+                existingLine[i] = group.Cells[i].Value;
+
+            CalcAllValidVariationsRecursive(group.Size, group.Numbers, -1, 0, lines, templateLine, group.Cells, existingLine);
+
+            return lines;
+        }
+
+        private void CalcAllValidVariationsRecursive(int n, List<int> nums, int currentNumI, int start, List<BitArray> lines, BitArray currentLine, List<CellValueGriddler> cells, bool?[] existingLine)
+        {
+            if (currentNumI < nums.Count - 1)
+            {
+                //calculate the minimum space that we need in order to insert the remaining nums
+                int minCellsCount = 0;
+                for (int i = currentNumI + 1; i < nums.Count; i++)
+                {
+                    minCellsCount += nums[i] + 1;
+                }
+                minCellsCount -= 2;
+
+                //calculate the gap that is the space that we can place the remaining cells.
+                int gap = n - minCellsCount - start;
+
+                //place the remaining cells in all the possible ways
+                for (int i = 0; i < gap; i++)
+                {
+                    //clone the line for the recursive call
+                    BitArray aLine = new BitArray(currentLine.Length);
+                    for (int k = 0; k < currentLine.Count; k++)
+                    {
+                        aLine.Set(k, currentLine[k]);
+                    }
+
+                    bool breaked = false;
+                    //paint the current num on the relevant cells
+                    int lastIndex = 0;
+                    for (int j = 0; j < nums[currentNumI + 1]; j++)
+                    {
+                        int index = start + j + i;
+                        lastIndex = index;
+                        aLine.Set(index, true);
+
+                        if (existingLine[index].HasValue && existingLine[index].Value != aLine[index])
+                        { breaked = true; break; }
+                    }
+                    if (breaked) 
+                        continue;
+
+                    //recursive call to the next possibility
+                    CalcAllValidVariationsRecursive(n, nums, currentNumI + 1, start + nums[currentNumI + 1] + i + 1, lines, aLine, cells, existingLine);
+                }
+            }
+            else if (currentNumI == nums.Count - 1)
+            {
+                for (int i = 0; i < currentLine.Count; i++)
+                {
+                    bool? xor = CellValueGriddler.XOR(currentLine[i], cells[i].Value);
+                    if (xor.HasValue && xor.Value == true)
+                        return;
+                }
+
+                lines.Add(currentLine);
+            }
+
+        }
+
+
         private List<BitArray> CalcAllValidVariations(GroupGriddler group)
         {
             List<BitArray> lines = new List<BitArray>();
