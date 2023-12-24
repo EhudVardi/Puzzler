@@ -172,11 +172,6 @@ namespace Logic
                         anyChanges = true;
                     group.Cells[i].Value = _groupsValidVariations[group][0][i];
                 }
-                if (bg != null)
-                {
-                    bg.ReportProgress(0, -1);
-                    System.Threading.Thread.Sleep(100);
-                }
             }
             return anyChanges;
         }

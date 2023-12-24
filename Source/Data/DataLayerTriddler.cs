@@ -16,8 +16,7 @@ namespace Data
 
         public override PuzzleTriddler TextToPuzzleObject(string text)
         {
-            throw new NotImplementedException();
-            //return StringToGriddlerPuzzle_Format1(text);
+            return StringToGriddlerPuzzle_Format1(text);
         }
 
         public override PuzzleTriddler WebToPuzzleObject(string url)
@@ -29,51 +28,69 @@ namespace Data
 
 
 
-        private PuzzleGriddler StringToGriddlerPuzzle_Format1(string text)
+        private PuzzleTriddler StringToGriddlerPuzzle_Format1(string text)
         {
-            PuzzleGriddler puzzle = null;
+            PuzzleTriddler puzzle = null;
 
             if (!string.IsNullOrEmpty(text))
             {
-                string[] rowsAndColumns = text.Split(new string[] { "-" }, StringSplitOptions.None);
-                if (rowsAndColumns.Length == 2)
+                string[] rowsAndColumnsAndDiagonals = text.Split(new string[] { "\r\n-\r\n" }, StringSplitOptions.None);
+                if (rowsAndColumnsAndDiagonals.Length == 3)
                 {
-                    string rowsData = rowsAndColumns[0];
-                    string columnsData = rowsAndColumns[1];
+                    string rowsData = rowsAndColumnsAndDiagonals[0];
+                    string columnsData = rowsAndColumnsAndDiagonals[1];
+                    string diagonalsData = rowsAndColumnsAndDiagonals[2];
 
-                    string[] rows = rowsData.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
-                    string[] columns = columnsData.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] rows = rowsData.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                    string[] columns = columnsData.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                    string[] diagonals = diagonalsData.Split(new string[] { "\r\n" }, StringSplitOptions.None);
 
-                    if (rows.Length > 0 && columns.Length > 0)
+                    if (rows.Length > 0 && columns.Length > 0 && diagonals.Length > 0)
                     {
-                        puzzle = new PuzzleGriddler();
+                        puzzle = new PuzzleTriddler();
 
-                        puzzle.RowsLength = columns.Length;
-                        puzzle.ColumnLength = rows.Length;
+                        puzzle.BaseRowsCount = rows.Length;
+                        puzzle.BaseColumnCount = columns.Length;
 
-                        puzzle.Rows = new List<List<int>>();
+                        puzzle.Horizontals = new List<List<int>>();
                         foreach (string row in rows)
                         {
                             List<int> rowList = new List<int>();
                             string[] rowValues = row.Split(new char[] { ',' });
-                            foreach (string value in rowValues)
+                            foreach (string number in rowValues)
                             {
-                                int num = Convert.ToInt32(value);
-                                rowList.Add(num);
+                                int num;
+                                if (int.TryParse(number, out num) == true)
+                                    rowList.Add(num);
                             }
-                            puzzle.Rows.Add(rowList);
+                            puzzle.Horizontals.Add(rowList);
                         }
-                        puzzle.Columns = new List<List<int>>();
+                        puzzle.Verticals = new List<List<int>>();
                         foreach (string column in columns)
                         {
                             List<int> columnList = new List<int>();
                             string[] columnNumbers = column.Split(new char[] { ',' });
                             foreach (string number in columnNumbers)
                             {
-                                int num = Convert.ToInt32(number);
-                                columnList.Add(num);
+                                int num;
+                                if (int.TryParse(number, out num) == true)
+                                    columnList.Add(num);
                             }
-                            puzzle.Columns.Add(columnList);
+                            puzzle.Verticals.Add(columnList);
+                        }
+                        puzzle.Diagonals = new List<List<int>>();
+                        foreach (string diagonal in diagonals)
+                        {
+                            List<int> diagonalList = new List<int>();
+                            string[] diagonalNumbers = diagonal.Split(new char[] { ',' });
+
+                            foreach (string number in diagonalNumbers)
+                            {
+                                int num;
+                                if (int.TryParse(number, out num) == true)
+                                    diagonalList.Add(num);
+                            }
+                            puzzle.Diagonals.Add(diagonalList);
                         }
                     }
                     else

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<TriddlerPuzzle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Horizontals>
+    <ArrayOfInt>
+      <int>2</int>
+    </ArrayOfInt>
+    <ArrayOfInt>
+      <int>2</int>
+    </ArrayOfInt>
+    <ArrayOfInt>
+      <int>8</int>
+    </ArrayOfInt>
+    <ArrayOfInt>
+      <int>2</int>
+    </ArrayOfInt>
+  </Horizontals>
+  <Verticals>
+    <ArrayOfInt>
+      <int>2</int>
+    </ArrayOfInt>
+    <ArrayOfInt>
+      <int>8</int>
+    </ArrayOfInt>
+    <ArrayOfInt>
+      <int>2</int>
+    </ArrayOfInt>
+    <ArrayOfInt>
+      <int>2</int>
+    </ArrayOfInt>
+  </Verticals>
+  <Diagonals>
+    <ArrayOfInt />
+    <ArrayOfInt />
+    <ArrayOfInt>
+      <int>1</int>
+      <int>1</int>
+    </ArrayOfInt>
+    <ArrayOfInt>
+      <int>2</int>
+      <int>2</int>
+    </ArrayOfInt>
+    <ArrayOfInt>
+      <int>3</int>
+    </ArrayOfInt>
+    <ArrayOfInt>
+      <int>3</int>
+    </ArrayOfInt>
+    <ArrayOfInt>
+      <int>1</int>
+      <int>1</int>
+    </ArrayOfInt>
+    <ArrayOfInt />
+  </Diagonals>
+  <BaseRowsCount>4</BaseRowsCount>
+  <BaseColumnCount>4</BaseColumnCount>
+  <N>4</N>
+  <N2>0</N2>
+  <M>4</M>
+  <M2>0</M2>
+</TriddlerPuzzle>
