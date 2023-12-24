@@ -104,6 +104,8 @@ namespace Presentation.WPF
                     isrenderimg = false;
                 }
             }
+
+            //this.RenderTransform.SetValue(UserControl.RenderTransformProperty, new TranslateTransform(0.3, 0.3));
         }
 
 

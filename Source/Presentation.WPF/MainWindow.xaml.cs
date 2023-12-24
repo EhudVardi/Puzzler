@@ -31,6 +31,18 @@ namespace Presentation.WPF
             this.ucDataGridGenerator.RequestLoadPuzzle += ucDataGrid_RequestLoadPuzzle;
             this.ucDataGridText.RequestLoadPuzzle += ucDataGrid_RequestLoadPuzzle;
             this.ucDataGridWeb.RequestLoadPuzzle += ucDataGrid_RequestLoadPuzzle;
+
+            //<UserControls:PuzzlerCanvas.RenderTransform>
+            //    <TransformGroup>
+            //        <ScaleTransform x:Name="ScaleTransform" ScaleX="0.5" ScaleY="0.5"/>
+            //        <SkewTransform x:Name="SkewTransform" AngleX="-30" />
+            //        <RotateTransform x:Name="RotateTransform" />
+            //        <TranslateTransform x:Name="TranslateTransform" />
+            //    </TransformGroup>
+            //</UserControls:PuzzlerCanvas.RenderTransform>
+
+            //GameCanvasScaleTransform.ScaleX = GameCanvasScaleTransform.ScaleY = 0.5;
+            //GameCanvasSkewTransform.AngleX = -60;
         }
         void ucDataGrid_RequestLoadPuzzle(object sender, ucPuzzlerDataGrid.RequestLoadPuzzleEventArgs e)
         {

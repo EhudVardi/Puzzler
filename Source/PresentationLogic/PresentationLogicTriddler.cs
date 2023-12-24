@@ -75,10 +75,16 @@ namespace PresentationLogic
                 ////draw selected value cell marker
                 if (selectedValueCell != null)
                 {
-                    PointF[] cellCoordinates = GetTriddlerCellTriangleCoordinates(cellWidth, cellHeight, selectedValueCell as CellValueTriddler);
-                    Pen pen3 = Pens.Black;
-                    Brush brush3 = new SolidBrush(Color.FromArgb(128, Color.Wheat));
-                    OnRequestDrawPolygon(drawingContext, Pens.Black, brush3 as SolidBrush, cellCoordinates);
+                    for (int i = 0; i < selectedValueCell.Groups.Count; i++)
+                    {
+                        for (int j = 0; j < selectedValueCell.Groups[i].Cells.Count; j++)
+                        {
+
+                            PointF[] cellCoordinates = GetTriddlerCellTriangleCoordinates(cellWidth, cellHeight, selectedValueCell.Groups[i].Cells[j] as CellValueTriddler);
+                            Brush brush3 = new SolidBrush(Color.FromArgb(128, Color.Wheat));
+                            OnRequestDrawPolygon(drawingContext, Pens.Black, brush3 as SolidBrush, cellCoordinates);
+                        }
+                    }
                 }
 
             }
@@ -148,9 +154,16 @@ namespace PresentationLogic
             {
                 BoardTriddler b = this.GetTrackerBoard();
                 KeyValuePair<Point, bool> p = GetBoardCoordinates(e, s, b);
-                CellValueTriddler pointedCell = (p.Value == true ? b.CellsMatrixRight /*Right Cell*/ : b.CellsMatrixLeft/*Left Cell*/ )[p.Key.X, p.Key.Y] as CellValueTriddler;
-                if (!b.InitialCells.Contains(pointedCell))
-                    selectedValueCell = pointedCell;
+                if (p.Key.X > -1 && p.Key.X < b.Rows && p.Key.Y > -1 && p.Key.Y < b.Rows) //if valid indexes
+                {
+                    CellValueTriddler pointedCell = (p.Value == true ? b.CellsMatrixRight /*Right Cell*/ : b.CellsMatrixLeft/*Left Cell*/ )[p.Key.X, p.Key.Y] as CellValueTriddler;
+                    if (!b.InitialCells.Contains(pointedCell))
+                        selectedValueCell = pointedCell;
+                }
+                else
+                {
+                    selectedValueCell = null;
+                }
                 this.OnRequestRefresh(EventArgs.Empty);
             }
             catch (Exception ex) { }
