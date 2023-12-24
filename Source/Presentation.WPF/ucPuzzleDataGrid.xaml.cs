@@ -71,13 +71,13 @@ namespace Presentation.WPF
         {
             LoadSelectedRowPuzzle();
         }
-        private void datagrid_KeyUp(object sender, KeyEventArgs e)
+        private void datagrid_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
                 case Key.Enter:
-                    //load puzzle
                     LoadSelectedRowPuzzle();
+                    e.Handled = true;
                     break;
                 default:
                     break;

@@ -11,7 +11,7 @@
 
     <Grid>
         <ScrollViewer HorizontalScrollBarVisibility="Visible">
-        <dg:DataGrid x:Name="datagrid"  Margin="5" AutoGenerateColumns="False" IsReadOnly="True" MouseDoubleClick="datagrid_MouseDoubleClick" KeyUp="datagrid_KeyUp">
+            <dg:DataGrid x:Name="datagrid"  Margin="5" AutoGenerateColumns="False" IsReadOnly="True" MouseDoubleClick="datagrid_MouseDoubleClick" PreviewKeyDown="datagrid_PreviewKeyDown">
             <dg:DataGrid.Columns>
                 <dg:DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
                 <dg:DataGridTextColumn Binding="{Binding Path}" Header="Path" Visibility="Collapsed"/>
