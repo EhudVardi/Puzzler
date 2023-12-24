@@ -34,14 +34,14 @@ namespace Data
 
             if (!string.IsNullOrEmpty(text))
             {
-                string[] rowsAndColumns = text.Split(new string[] { "-" }, StringSplitOptions.None);
+                string[] rowsAndColumns = text.Split(new string[] { "\r\n-\r\n" }, StringSplitOptions.None);
                 if (rowsAndColumns.Length == 2)
                 {
                     string rowsData = rowsAndColumns[0];
                     string columnsData = rowsAndColumns[1];
 
-                    string[] rows = rowsData.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
-                    string[] columns = columnsData.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] rows = rowsData.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] columns = columnsData.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
 
                     if (rows.Length > 0 && columns.Length > 0)
                     {

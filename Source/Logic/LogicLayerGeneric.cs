@@ -155,11 +155,15 @@ namespace Logic
 
         public B getTrackedBoard()
         {
-            return this.SolverModule.Board;
+            if (this.SolverModule != null)
+                return this.SolverModule.Board;
+            return default(B);
         }
         public B getSolvedBoard()
         {
-            return this.TrackerModule.Board;
+            if (this.TrackerModule != null)
+                return this.TrackerModule.Board;
+            return default(B);
         }
     }
 }

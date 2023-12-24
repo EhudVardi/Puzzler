@@ -18,7 +18,7 @@ namespace Data
         public override SudokuPuzzle TextToPuzzleObject(string text)
         {
             string tempFileName = Guid.NewGuid().ToString();
-            string puzzleXmlData = ParsePuzzleStringFromText_1(text);
+            string puzzleXmlData = ParsePuzzleStringFromText_2(text);
             if (puzzleXmlData != null)
             {
                 System.IO.File.WriteAllText(tempFileName, puzzleXmlData);

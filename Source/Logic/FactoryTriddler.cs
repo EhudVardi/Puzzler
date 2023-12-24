@@ -102,11 +102,10 @@ namespace Logic.Griddler
                     if (IsRight)
                     { group.Cells.Add(CellsMatrixRight[ii, jj]); CellsMatrixRight[ii, jj].Groups.Add(group); ii--; }
                     else
-                    { group.Cells.Add(CellsMatrixLeft[ii, jj]); CellsMatrixRight[ii, jj].Groups.Add(group); jj--; }
+                    { group.Cells.Add(CellsMatrixLeft[ii, jj]); CellsMatrixLeft[ii, jj].Groups.Add(group); jj--; }
                     IsRight = !IsRight;
                 }
             }
-
 
             board.CellsMatrixLeft = CellsMatrixLeft;
             board.CellsMatrixRight = CellsMatrixRight;
