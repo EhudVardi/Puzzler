@@ -75,7 +75,6 @@ namespace Presentation.WPF
                         break;
                     default:
                         throw new Exception();
-                        break;
                 }
 
                 if (PresentationLogicObject != null)
@@ -174,6 +173,8 @@ namespace Presentation.WPF
 
         private void rbtnDisplayModes_Checked(object sender, RoutedEventArgs e)
         {
+            if (PresentationLogicObject == null)
+                return;
             try
             {
                 if (rbtnClean.IsChecked == true)
