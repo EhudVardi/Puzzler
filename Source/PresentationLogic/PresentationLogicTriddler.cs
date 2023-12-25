@@ -11,6 +11,7 @@ using Logic.Griddler;
 using Data;
 using Logic;
 using Common.Models.Triddler;
+using Common.Models.Kakuru;
 
 namespace PresentationLogic
 {
@@ -24,73 +25,65 @@ namespace PresentationLogic
 
         }
 
-        public override void Draw(object drawingContext, float width, float height)
+        public override void DrawBoard(BoardTriddler trackerBoard, BoardTriddler solvedBoard, object drawingContext, float width, float height)
         {
-            try
+            float brWidth = width;
+            float brHeight = height;
+
+            float cellWidth = (float)brWidth / trackerBoard.Columns;
+            float cellHeight = (float)brHeight / trackerBoard.Rows;
+
+            //draw value cells
+            foreach (Common.Models.Griddler.CellValueGriddler valueCell in trackerBoard.ValueCells)
             {
-                float brWidth = width;
-                float brHeight = height;
+                Common.Models.Griddler.CellValueGriddler solvedValueCell = solvedBoard.ValueCells[trackerBoard.ValueCells.IndexOf(valueCell as CellValueTriddler)] as Common.Models.Griddler.CellValueGriddler;
 
-                float cellWidth = (float)brWidth / GetTrackerBoard().Columns;
-                float cellHeight = (float)brHeight / GetTrackerBoard().Rows;
+                CellValueTriddler solvedValueCellTriddler = (solvedValueCell as CellValueTriddler);
+                if (solvedValueCellTriddler == null)
+                    continue;
 
-                //draw value cells
-                foreach (Common.Models.Griddler.CellValueGriddler valueCell in GetTrackerBoard().ValueCells)
+                margin = 0;
+                PointF[] cellCoordinates = GetTriddlerCellTriangleCoordinates(cellWidth, cellHeight, solvedValueCellTriddler);
+
+
+                //draw value cell value
+                switch (this.displayType)
                 {
-                    Common.Models.Griddler.CellValueGriddler solvedValueCell = GetSolvedBoard().ValueCells[GetTrackerBoard().ValueCells.IndexOf(valueCell as CellValueTriddler)] as Common.Models.Griddler.CellValueGriddler;
-
-                    CellValueTriddler solvedValueCellTriddler = (solvedValueCell as CellValueTriddler);
-                    if (solvedValueCellTriddler == null)
-                        continue;
-
-                    margin = 0;
-                    PointF[] cellCoordinates = GetTriddlerCellTriangleCoordinates(cellWidth, cellHeight, solvedValueCellTriddler);
-                                      
-
-                    //draw value cell value
-                    switch (this.displayType)
-                    {
-                        case DisplayType.Hint:
-                        case DisplayType.Board:
-                            Pen pen = Pens.Black;
-                            Brush brush = valueCell.Value.HasValue == true ? (valueCell.Value.Value == true ? Brushes.Green : Brushes.Red) : Brushes.Transparent;
-                            OnRequestDrawPolygon(drawingContext, pen, brush as SolidBrush, cellCoordinates);
-                            break;
-                        case DisplayType.Solution:
-                            if (solvedValueCellTriddler.IsFixed)
-                            {
-                                Pen pen2 = Pens.Black;
-                                Brush brush2 = solvedValueCellTriddler.Value.HasValue == true ? (solvedValueCellTriddler.Value.Value == true ? Brushes.Green : Brushes.Red) : Brushes.Yellow;
-                                OnRequestDrawPolygon(drawingContext, pen2, brush2 as SolidBrush, cellCoordinates);
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-
-
-                    
-                }
-
-                ////draw selected value cell marker
-                if (selectedValueCell != null)
-                {
-                    for (int i = 0; i < selectedValueCell.Groups.Count; i++)
-                    {
-                        for (int j = 0; j < selectedValueCell.Groups[i].Cells.Count; j++)
+                    case DisplayType.Hint:
+                    case DisplayType.Board:
+                        Pen pen = Pens.Black;
+                        Brush brush = valueCell.Value.HasValue == true ? (valueCell.Value.Value == true ? Brushes.Green : Brushes.Red) : Brushes.Transparent;
+                        OnRequestDrawPolygon(drawingContext, pen, brush as SolidBrush, cellCoordinates);
+                        break;
+                    case DisplayType.Solution:
+                        if (solvedValueCellTriddler.IsFixed)
                         {
-
-                            PointF[] cellCoordinates = GetTriddlerCellTriangleCoordinates(cellWidth, cellHeight, selectedValueCell.Groups[i].Cells[j] as CellValueTriddler);
-                            Brush brush3 = new SolidBrush(Color.FromArgb(128, Color.Wheat));
-                            OnRequestDrawPolygon(drawingContext, Pens.Black, brush3 as SolidBrush, cellCoordinates);
+                            Pen pen2 = Pens.Black;
+                            Brush brush2 = solvedValueCellTriddler.Value.HasValue == true ? (solvedValueCellTriddler.Value.Value == true ? Brushes.Green : Brushes.Red) : Brushes.Yellow;
+                            OnRequestDrawPolygon(drawingContext, pen2, brush2 as SolidBrush, cellCoordinates);
                         }
-                    }
+                        break;
+                    default:
+                        break;
                 }
+
+
 
             }
-            catch (Exception)
+
+            ////draw selected value cell marker
+            if (selectedValueCell != null)
             {
-                base.Draw(drawingContext, width, height);
+                for (int i = 0; i < selectedValueCell.Groups.Count; i++)
+                {
+                    for (int j = 0; j < selectedValueCell.Groups[i].Cells.Count; j++)
+                    {
+
+                        PointF[] cellCoordinates = GetTriddlerCellTriangleCoordinates(cellWidth, cellHeight, selectedValueCell.Groups[i].Cells[j] as CellValueTriddler);
+                        Brush brush3 = new SolidBrush(Color.FromArgb(128, Color.Wheat));
+                        OnRequestDrawPolygon(drawingContext, Pens.Black, brush3 as SolidBrush, cellCoordinates);
+                    }
+                }
             }
         }
 

@@ -12,6 +12,7 @@ using Data;
 using Logic;
 using Common.Models.Base;
 using Common.Models.Kakuru;
+using Common.Models.Griddler;
 
 namespace PresentationLogic
 {
@@ -23,163 +24,156 @@ namespace PresentationLogic
             this.URL = "http://www.kakuroconquest.com/9x11/expert";
         }
 
-        public override void Draw(object drawingContext, float width, float height)
+        public override void DrawBoard(BoardKakuru trackerBoard, BoardKakuru solvedBoard, object drawingContext, float width, float height)
         {
-            try
+            float brWidth = width;
+            float brHeight = height;
+
+            float cellWidth = (float)brWidth / trackerBoard.Columns;
+            float cellHeight = (float)brHeight / trackerBoard.Rows;
+
+            //draw value cells
+            foreach (CellValueKakuru valueCell in trackerBoard.ValueCells)
             {
-                float brWidth = width;
-                float brHeight = height;
+                CellValueKakuru solvedValueCell = solvedBoard.CellsMatrix[valueCell.Row, valueCell.Column] as CellValueKakuru;
 
-                float cellWidth = (float)brWidth / GetTrackerBoard().Columns;
-                float cellHeight = (float)brHeight / GetTrackerBoard().Rows;
+                Brush brushBackColor;
 
-                //draw value cells
-                foreach (CellValueKakuru valueCell in GetTrackerBoard().ValueCells)
+                if (!trackerBoard.InitialCells.Contains(valueCell))
+                    brushBackColor = bNull;
+                else
+                    brushBackColor = bFixed;
+
+                //draw value cell back color (initial or not)
+                OnRequestFillRectangle(drawingContext,
+                    brushBackColor,
+                    cellWidth * valueCell.Column + margin,
+                    cellHeight * valueCell.Row + margin,
+                    cellWidth - margin * 2f,
+                    cellHeight - margin * 2f
+                    );
+
+                //draw value cell value
+                switch (this.displayType)
                 {
-                    CellValueKakuru solvedValueCell = GetSolvedBoard().CellsMatrix[valueCell.Row, valueCell.Column] as CellValueKakuru;
+                    case DisplayType.Board:
+                        if (valueCell.IsFixed)
+                        {
+                            OnRequestDrawText(drawingContext,
+                                valueCell.Value.ToString(), font, bText,
+                                new RectangleF(
+                                cellWidth * valueCell.Column + margin,
+                                cellHeight * valueCell.Row + margin,
+                                cellWidth - margin * 2f,
+                                cellHeight - margin * 2f
+                                ), sf);
+                        }
+                        break;
+                    case DisplayType.Hint:
+                        if (valueCell.IsFixed)
+                        {
+                            Brush brushValue;
+                            if (solvedValueCell.Value != valueCell.Value)
+                                brushValue = bIncorrect;
+                            else
+                                brushValue = bCorrect;
 
-                    Brush brushBackColor;
-
-                    if (!GetTrackerBoard().InitialCells.Contains(valueCell))
-                        brushBackColor = bNull;
-                    else 
-                        brushBackColor = bFixed;
-
-                    //draw value cell back color (initial or not)
-                    OnRequestFillRectangle(drawingContext, 
-                        brushBackColor, 
-                        cellWidth * valueCell.Column + margin,
-                        cellHeight * valueCell.Row + margin,
-                        cellWidth - margin * 2f,
-                        cellHeight - margin * 2f
-                        );
-
-                    //draw value cell value
-                    switch (this.displayType)
-                    {
-                        case DisplayType.Board:
-                            if (valueCell.IsFixed)
-                            {
-                                OnRequestDrawText(drawingContext, 
-                                    valueCell.Value.ToString(), font, bText,
-                                    new RectangleF(
-                                    cellWidth * valueCell.Column + margin,
-                                    cellHeight * valueCell.Row + margin,
-                                    cellWidth - margin * 2f,
-                                    cellHeight - margin * 2f
-                                    ), sf);
-                            }
-                            break;
-                        case DisplayType.Hint:
-                            if (valueCell.IsFixed)
-                            {
-                                Brush brushValue;
-                                if (solvedValueCell.Value != valueCell.Value)
-                                    brushValue = bIncorrect;
-                                else
-                                    brushValue = bCorrect;
-
-                                OnRequestDrawText(drawingContext,
-                                    valueCell.Value.ToString(), font, brushValue,
-                                    new RectangleF(
-                                    cellWidth * valueCell.Column + margin,
-                                    cellHeight * valueCell.Row + margin,
-                                    cellWidth - margin * 2f,
-                                    cellHeight - margin * 2f
-                                    ), sf);
-                            }
-                            break;
-                        case DisplayType.Solution:
-                                OnRequestDrawText(drawingContext,
-                                solvedValueCell.Value.ToString(), font, bCorrect,
-                                    new RectangleF(
-                                    cellWidth * valueCell.Column + margin,
-                                    cellHeight * valueCell.Row + margin,
-                                    cellWidth - margin * 2f,
-                                    cellHeight - margin * 2f
-                                    ), sf);
-                            break;
-                        default:
-                            break;
-                    }
-                    if (valueCell.IsFixed)
-                    {
-                        Brush brushValue;
-                        if (solvedValueCell.Value != valueCell.Value)
-                            brushValue = bIncorrect;
-                        else
-                            brushValue = bCorrect;
-
+                            OnRequestDrawText(drawingContext,
+                                valueCell.Value.ToString(), font, brushValue,
+                                new RectangleF(
+                                cellWidth * valueCell.Column + margin,
+                                cellHeight * valueCell.Row + margin,
+                                cellWidth - margin * 2f,
+                                cellHeight - margin * 2f
+                                ), sf);
+                        }
+                        break;
+                    case DisplayType.Solution:
                         OnRequestDrawText(drawingContext,
-                            valueCell.Value.ToString(), font, brushValue,
+                        solvedValueCell.Value.ToString(), font, bCorrect,
                             new RectangleF(
                             cellWidth * valueCell.Column + margin,
                             cellHeight * valueCell.Row + margin,
                             cellWidth - margin * 2f,
                             cellHeight - margin * 2f
                             ), sf);
-                    }
+                        break;
+                    default:
+                        break;
                 }
-
-                //draw group holder cells
-                foreach (CellGroupHolderKakuru groupCell in GetTrackerBoard().GroupHolderCells)
+                if (valueCell.IsFixed)
                 {
-                    //draw the rectangle
-                    OnRequestFillRectangle(drawingContext,
-                        bGroupHolder, 
-                        cellWidth * groupCell.Column + margin, 
-                        cellHeight * groupCell.Row + margin, 
-                        cellWidth - margin * 2f, 
+                    Brush brushValue;
+                    if (solvedValueCell.Value != valueCell.Value)
+                        brushValue = bIncorrect;
+                    else
+                        brushValue = bCorrect;
+
+                    OnRequestDrawText(drawingContext,
+                        valueCell.Value.ToString(), font, brushValue,
+                        new RectangleF(
+                        cellWidth * valueCell.Column + margin,
+                        cellHeight * valueCell.Row + margin,
+                        cellWidth - margin * 2f,
                         cellHeight - margin * 2f
-                        );
-
-                    //draw a cross
-                    OnRequestDrawLine(drawingContext, 
-                        new Pen(Color.Black, margin), 
-                        cellWidth * groupCell.Column + margin, 
-                        cellHeight * groupCell.Row + margin, 
-                        cellWidth * (groupCell.Column + 1) - margin, 
-                        cellHeight * (groupCell.Row + 1) - margin
-                        );
-
-                    //draw right line sum string
-                    if (groupCell.RightGroup != null)
-                        OnRequestDrawText(drawingContext, 
-                            groupCell.RightGroup.Sum.ToString(), fontBold, bText, 
-                            new RectangleF(
-                            cellWidth * ((float)groupCell.Column + 0.5f) + margin, 
-                            cellHeight * groupCell.Row + margin, 
-                            cellWidth * 0.5f - margin * 2f, 
-                            cellHeight * 0.5f - margin * 2f
-                            ), sf);
-
-                    //draw down line sum string
-                    if (groupCell.DownGroup != null)
-                        OnRequestDrawText(drawingContext,
-                            groupCell.DownGroup.Sum.ToString(), fontBold, bText, 
-                            new RectangleF(
-                            cellWidth * groupCell.Column + margin, 
-                            cellHeight * ((float)groupCell.Row + 0.5f) + margin, 
-                            cellWidth * 0.5f - margin * 2f, 
-                            cellHeight * 0.5f - margin * 2f
-                            ), sf);
-                }
-
-                //draw selected value cell marker
-                if (selectedValueCell != null)
-                {
-                    OnRequestDrawRectangle(drawingContext, 
-                        new Pen(Color.Black, margin),
-                        cellWidth * selectedValueCell.Column + margin, 
-                        cellHeight * selectedValueCell.Row + margin, 
-                        cellWidth - margin * 2f, 
-                        cellHeight - margin * 2f
-                        );
+                        ), sf);
                 }
             }
-            catch (Exception)
+
+            //draw group holder cells
+            foreach (CellGroupHolderKakuru groupCell in trackerBoard.GroupHolderCells)
             {
-                base.Draw(drawingContext, width, height);
+                //draw the rectangle
+                OnRequestFillRectangle(drawingContext,
+                    bGroupHolder,
+                    cellWidth * groupCell.Column + margin,
+                    cellHeight * groupCell.Row + margin,
+                    cellWidth - margin * 2f,
+                    cellHeight - margin * 2f
+                    );
+
+                //draw a cross
+                OnRequestDrawLine(drawingContext,
+                    new Pen(Color.Black, margin),
+                    cellWidth * groupCell.Column + margin,
+                    cellHeight * groupCell.Row + margin,
+                    cellWidth * (groupCell.Column + 1) - margin,
+                    cellHeight * (groupCell.Row + 1) - margin
+                    );
+
+                //draw right line sum string
+                if (groupCell.RightGroup != null)
+                    OnRequestDrawText(drawingContext,
+                        groupCell.RightGroup.Sum.ToString(), fontBold, bText,
+                        new RectangleF(
+                        cellWidth * ((float)groupCell.Column + 0.5f) + margin,
+                        cellHeight * groupCell.Row + margin,
+                        cellWidth * 0.5f - margin * 2f,
+                        cellHeight * 0.5f - margin * 2f
+                        ), sf);
+
+                //draw down line sum string
+                if (groupCell.DownGroup != null)
+                    OnRequestDrawText(drawingContext,
+                        groupCell.DownGroup.Sum.ToString(), fontBold, bText,
+                        new RectangleF(
+                        cellWidth * groupCell.Column + margin,
+                        cellHeight * ((float)groupCell.Row + 0.5f) + margin,
+                        cellWidth * 0.5f - margin * 2f,
+                        cellHeight * 0.5f - margin * 2f
+                        ), sf);
+            }
+
+            //draw selected value cell marker
+            if (selectedValueCell != null)
+            {
+                OnRequestDrawRectangle(drawingContext,
+                    new Pen(Color.Black, margin),
+                    cellWidth * selectedValueCell.Column + margin,
+                    cellHeight * selectedValueCell.Row + margin,
+                    cellWidth - margin * 2f,
+                    cellHeight - margin * 2f
+                    );
             }
         }
 

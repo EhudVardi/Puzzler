@@ -21,131 +21,123 @@ namespace PresentationLogic
             this.URL = "http://www.sudokuconquest.com/9x9/expert";
         }
 
-        public override void Draw(object drawingContext, float width, float height)
+        public override void DrawBoard(BoardSudoku trackerBoard, BoardSudoku solvedBoard, object drawingContext, float width, float height)
         {
-            try
-            {
-                float brWidth = width;
-                float brHeight = height;
+            float brWidth = width;
+            float brHeight = height;
 
-                float cellWidth = (float)brWidth / GetTrackerBoard().Columns;
-                float cellHeight = (float)brHeight / GetTrackerBoard().Rows;
+            float cellWidth = (float)brWidth / trackerBoard.Columns;
+            float cellHeight = (float)brHeight / trackerBoard.Rows;
 
 
-                ////draw board groups frame
-                float widthB = (float)brWidth / GetTrackerBoard().N;
-                float heightB = (float)brHeight / GetTrackerBoard().M;
+            ////draw board groups frame
+            float widthB = (float)brWidth / trackerBoard.N;
+            float heightB = (float)brHeight / trackerBoard.M;
 
-                //rows 
-                for (int i = 0; i < GetTrackerBoard().CellsMatrix.GetLength(0); i++)
-                    OnRequestDrawLine(drawingContext,
-                    Pens.Black, 0, cellHeight * i, (float)brWidth, cellHeight * i);
+            //rows 
+            for (int i = 0; i < trackerBoard.CellsMatrix.GetLength(0); i++)
+                OnRequestDrawLine(drawingContext,
+                Pens.Black, 0, cellHeight * i, (float)brWidth, cellHeight * i);
 
-                //columns
-                for (int j = 0; j < GetTrackerBoard().CellsMatrix.GetLength(1); j++)
-                    OnRequestDrawLine(drawingContext,
-                    Pens.Black, cellWidth * j, 0, cellWidth * j, (float)brHeight);
+            //columns
+            for (int j = 0; j < trackerBoard.CellsMatrix.GetLength(1); j++)
+                OnRequestDrawLine(drawingContext,
+                Pens.Black, cellWidth * j, 0, cellWidth * j, (float)brHeight);
 
-                //boxes
-                float marginBoxes = margin / 4;
-                for (int i = 0; i < GetTrackerBoard().N; i++)
-                    for (int j = 0; j < GetTrackerBoard().M; j++)
-                        OnRequestDrawRectangle(drawingContext,
-                        Pens.Black, widthB * j + marginBoxes, heightB * i + marginBoxes, widthB - marginBoxes * 2f, heightB - marginBoxes * 2f);
-
-                //draw cells
-                foreach (CellValueSudoku valueCell in GetTrackerBoard().ValueCells)
-                {
-                    CellValueSudoku solvedValueCell = GetSolvedBoard().CellsMatrix[valueCell.Row, valueCell.Column] as CellValueSudoku;
-
-
-                    Brush brushBackColor;
-                    Brush brushForeColor;
-
-                    if (!GetTrackerBoard().InitialCells.Contains(valueCell))
-                    { brushBackColor = bNull; brushForeColor = bCorrect; }
-                    else
-                    { brushBackColor = bFixed; brushForeColor = bText; }
-
-                    //draw value cell back color (initial or not)
-                    OnRequestFillRectangle(drawingContext,
-                        brushBackColor,
-                        cellWidth * valueCell.Column + margin,
-                        cellHeight * valueCell.Row + margin,
-                        cellWidth - margin * 2f,
-                        cellHeight - margin * 2f
-                        );
-
-
-                    //draw fixed cells values
-                    //draw value cell value
-                    switch (this.displayType)
-                    {
-                        case DisplayType.Board:
-                            if (valueCell.IsFixed)
-                            {
-                                OnRequestDrawText(drawingContext,
-                                    (valueCell.Value + 1).ToString(), font, brushForeColor,
-                                    new RectangleF(
-                                    cellWidth * valueCell.Column + margin,
-                                    cellHeight * valueCell.Row + margin,
-                                    cellWidth - margin * 2f,
-                                    cellHeight - margin * 2f
-                                    ), sf);
-                            }
-                            break;
-                        case DisplayType.Hint:
-                            if (valueCell.IsFixed)
-                            {
-                                Brush brushValue;
-
-                                // number color depend on the selected cell number
-                                if (selectedValueCell != null && selectedValueCell.Value.HasValue == true && valueCell.Value.HasValue == true && selectedValueCell.Value == valueCell.Value)
-                                    brushValue = bIncorrect;
-                                else
-                                    brushValue = brushForeColor;
-
-                                OnRequestDrawText(drawingContext,
-                                    (valueCell.Value + 1).ToString(), font, brushValue,
-                                    new RectangleF(
-                                    cellWidth * valueCell.Column + margin,
-                                    cellHeight * valueCell.Row + margin,
-                                    cellWidth - margin * 2f,
-                                    cellHeight - margin * 2f
-                                    ), sf);
-                            }
-                            break;
-                        case DisplayType.Solution:
-                                OnRequestDrawText(drawingContext,
-                                    (solvedValueCell.Value + 1).ToString(), font, brushForeColor,
-                                    new RectangleF(
-                                    cellWidth * valueCell.Column + margin,
-                                    cellHeight * valueCell.Row + margin,
-                                    cellWidth - margin * 2f,
-                                    cellHeight - margin * 2f
-                                    ), sf);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-
-                //draw selected value cell marker
-                if (selectedValueCell != null)
-                {
+            //boxes
+            float marginBoxes = margin / 4;
+            for (int i = 0; i < trackerBoard.N; i++)
+                for (int j = 0; j < trackerBoard.M; j++)
                     OnRequestDrawRectangle(drawingContext,
-                        new Pen(Color.Black, margin), 
-                        cellWidth * selectedValueCell.Column + margin, 
-                        cellHeight * selectedValueCell.Row + margin, 
-                        cellWidth - margin * 2f, 
-                        cellHeight - margin * 2f
-                        );
-                }
+                    Pens.Black, widthB * j + marginBoxes, heightB * i + marginBoxes, widthB - marginBoxes * 2f, heightB - marginBoxes * 2f);
 
-            }
-            catch (Exception ex)
+            //draw cells
+            foreach (CellValueSudoku valueCell in trackerBoard.ValueCells)
             {
-                base.Draw(drawingContext, width, height);
+                CellValueSudoku solvedValueCell = solvedBoard.CellsMatrix[valueCell.Row, valueCell.Column] as CellValueSudoku;
+
+
+                Brush brushBackColor;
+                Brush brushForeColor;
+
+                if (!trackerBoard.InitialCells.Contains(valueCell))
+                { brushBackColor = bNull; brushForeColor = bCorrect; }
+                else
+                { brushBackColor = bFixed; brushForeColor = bText; }
+
+                //draw value cell back color (initial or not)
+                OnRequestFillRectangle(drawingContext,
+                    brushBackColor,
+                    cellWidth * valueCell.Column + margin,
+                    cellHeight * valueCell.Row + margin,
+                    cellWidth - margin * 2f,
+                    cellHeight - margin * 2f
+                    );
+
+
+                //draw fixed cells values
+                //draw value cell value
+                switch (this.displayType)
+                {
+                    case DisplayType.Board:
+                        if (valueCell.IsFixed)
+                        {
+                            OnRequestDrawText(drawingContext,
+                                (valueCell.Value + 1).ToString(), font, brushForeColor,
+                                new RectangleF(
+                                cellWidth * valueCell.Column + margin,
+                                cellHeight * valueCell.Row + margin,
+                                cellWidth - margin * 2f,
+                                cellHeight - margin * 2f
+                                ), sf);
+                        }
+                        break;
+                    case DisplayType.Hint:
+                        if (valueCell.IsFixed)
+                        {
+                            Brush brushValue;
+
+                            // number color depend on the selected cell number
+                            if (selectedValueCell != null && selectedValueCell.Value.HasValue == true && valueCell.Value.HasValue == true && selectedValueCell.Value == valueCell.Value)
+                                brushValue = bIncorrect;
+                            else
+                                brushValue = brushForeColor;
+
+                            OnRequestDrawText(drawingContext,
+                                (valueCell.Value + 1).ToString(), font, brushValue,
+                                new RectangleF(
+                                cellWidth * valueCell.Column + margin,
+                                cellHeight * valueCell.Row + margin,
+                                cellWidth - margin * 2f,
+                                cellHeight - margin * 2f
+                                ), sf);
+                        }
+                        break;
+                    case DisplayType.Solution:
+                        OnRequestDrawText(drawingContext,
+                            (solvedValueCell.Value + 1).ToString(), font, brushForeColor,
+                            new RectangleF(
+                            cellWidth * valueCell.Column + margin,
+                            cellHeight * valueCell.Row + margin,
+                            cellWidth - margin * 2f,
+                            cellHeight - margin * 2f
+                            ), sf);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            //draw selected value cell marker
+            if (selectedValueCell != null)
+            {
+                OnRequestDrawRectangle(drawingContext,
+                    new Pen(Color.Black, margin),
+                    cellWidth * selectedValueCell.Column + margin,
+                    cellHeight * selectedValueCell.Row + margin,
+                    cellWidth - margin * 2f,
+                    cellHeight - margin * 2f
+                    );
             }
         }
 

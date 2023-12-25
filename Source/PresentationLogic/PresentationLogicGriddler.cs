@@ -11,6 +11,7 @@ using Logic.Griddler;
 using Data;
 using Logic;
 using Common.Models.Griddler;
+using Common.Models.Sudoku;
 
 namespace PresentationLogic
 {
@@ -23,97 +24,90 @@ namespace PresentationLogic
             this.LogicProxy = new LogicLayerGriddler();
         }
 
-        public override void Draw(object drawingContext, float width, float height)
+        public override void DrawBoard(BoardGriddler trackerBoard, BoardGriddler solvedBoard, object drawingContext, float width, float height)
         {
-            try
+            float brWidth = width;
+            float brHeight = height;
+
+            float cellWidth = (float)brWidth / trackerBoard.Columns;
+            float cellHeight = (float)brHeight / trackerBoard.Rows;
+
+            //draw value cells
+            foreach (CellValueGriddler valueCell in trackerBoard.ValueCells)
             {
-                float brWidth = width;
-                float brHeight = height;
+                CellValueGriddler solvedValueCell = solvedBoard.CellsMatrix[valueCell.Row, valueCell.Column] as CellValueGriddler;
 
-                float cellWidth = (float)brWidth / GetTrackerBoard().Columns;
-                float cellHeight = (float)brHeight / GetTrackerBoard().Rows;
-
-                //draw value cells
-                foreach (CellValueGriddler valueCell in GetTrackerBoard().ValueCells)
+                //draw value cell value
+                switch (this.displayType)
                 {
-                    CellValueGriddler solvedValueCell = GetSolvedBoard().CellsMatrix[valueCell.Row, valueCell.Column] as CellValueGriddler;
+                    case DisplayType.Board:
+                        OnRequestFillRectangle(
+                                drawingContext,
+                                valueCell.Value == null ? Brushes.Yellow : valueCell.Value == true ? Brushes.Green : Brushes.Red,
+                                cellWidth * valueCell.Column + margin,
+                                cellHeight * valueCell.Row + margin,
+                                cellWidth - margin * 2f,
+                                cellHeight - margin * 2f
 
-                    //draw value cell value
-                    switch (this.displayType)
-                    {
-                        case DisplayType.Board:
+                                );
+
+                        break;
+                    case DisplayType.Hint:
+                        OnRequestFillRectangle(
+                                drawingContext,
+                               valueCell.Value == null ? Brushes.Yellow : valueCell.Value == true ? Brushes.Green : Brushes.Red,
+                                cellWidth * valueCell.Column + margin,
+                                cellHeight * valueCell.Row + margin,
+                                cellWidth - margin * 2f,
+                                cellHeight - margin * 2f
+
+                                );
+                        Pen brushValue;
+                        if (solvedValueCell.Value != valueCell.Value)
+                            brushValue = Pens.Red;
+                        else
+                            brushValue = Pens.Green;
+
+                        OnRequestDrawRectangle(
+                            drawingContext,
+                            brushValue,
+                            cellWidth * valueCell.Column + margin,
+                            cellHeight * valueCell.Row + margin,
+                            cellWidth - margin * 2f,
+                            cellHeight - margin * 2f
+                            );
+
+                        break;
+                    case DisplayType.Solution:
+                        if (solvedValueCell.IsFixed)
+                        {
                             OnRequestFillRectangle(
-                                    drawingContext,
-                                    valueCell.Value == null ? Brushes.Yellow : valueCell.Value == true ? Brushes.Green : Brushes.Red,
-                                    cellWidth * valueCell.Column + margin,
-                                    cellHeight * valueCell.Row + margin,
-                                    cellWidth - margin * 2f,
-                                    cellHeight - margin * 2f
+                                drawingContext,
+                                solvedValueCell.Value == null ? Brushes.Yellow : solvedValueCell.Value == true ? Brushes.Blue : Brushes.Red,
+                                cellWidth * solvedValueCell.Column + margin,
+                                cellHeight * solvedValueCell.Row + margin,
+                                cellWidth - margin * 2f,
+                                cellHeight - margin * 2f
 
-                                    );
-                            
-                            break;
-                        case DisplayType.Hint:
-                            OnRequestFillRectangle(
-                                    drawingContext,
-                                   valueCell.Value == null ? Brushes.Yellow : valueCell.Value == true ? Brushes.Green : Brushes.Red,
-                                    cellWidth * valueCell.Column + margin,
-                                    cellHeight * valueCell.Row + margin,
-                                    cellWidth - margin * 2f,
-                                    cellHeight - margin * 2f
-
-                                    );
-                            Pen brushValue;
-                                if (solvedValueCell.Value != valueCell.Value)
-                                    brushValue = Pens.Red;
-                                else
-                                    brushValue = Pens.Green;
-
-                                OnRequestDrawRectangle(
-                                    drawingContext,
-                                    brushValue,
-                                    cellWidth * valueCell.Column + margin,
-                                    cellHeight * valueCell.Row + margin,
-                                    cellWidth - margin * 2f,
-                                    cellHeight - margin * 2f
-                                    );
-
-                            break;
-                        case DisplayType.Solution:
-                            if (solvedValueCell.IsFixed)
-                            {
-                                OnRequestFillRectangle(
-                                    drawingContext,
-                                    solvedValueCell.Value == null ? Brushes.Yellow : solvedValueCell.Value == true ? Brushes.Blue : Brushes.Red,
-                                    cellWidth * solvedValueCell.Column + margin,
-                                    cellHeight * solvedValueCell.Row + margin,
-                                    cellWidth - margin * 2f,
-                                    cellHeight - margin * 2f
-
-                                    );
-                            }
-                            break;
-                        default:
-                            break;
-                    }
+                                );
+                        }
+                        break;
+                    default:
+                        break;
                 }
-
-                //draw selected value cell marker
-                if (selectedValueCell != null)
-                    OnRequestDrawRectangle(
-                        drawingContext,
-                        new Pen(Color.Black, margin),
-                        cellWidth * selectedValueCell.Column + margin,
-                        cellHeight * selectedValueCell.Row + margin,
-                        cellWidth - margin * 2f,
-                        cellHeight - margin * 2f
-                        );
-
             }
-            catch (Exception)
-            {
-                base.Draw(drawingContext, width, height);
-            }
+
+            //draw selected value cell marker
+            if (selectedValueCell != null)
+                OnRequestDrawRectangle(
+                    drawingContext,
+                    new Pen(Color.Black, margin),
+                    cellWidth * selectedValueCell.Column + margin,
+                    cellHeight * selectedValueCell.Row + margin,
+                    cellWidth - margin * 2f,
+                    cellHeight - margin * 2f
+                    );
+
         }
 
         public override Size GetPrefferedSize()

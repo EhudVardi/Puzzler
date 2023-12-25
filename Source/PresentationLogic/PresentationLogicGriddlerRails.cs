@@ -11,6 +11,7 @@ using Logic.Griddler;
 using Data;
 using Logic;
 using Common.Models.Griddler;
+using Common.Models.Triddler;
 
 namespace PresentationLogic
 {
@@ -29,7 +30,7 @@ namespace PresentationLogic
             margin = 1;
         }
 
-        public override void Draw(object drawingContext, float width, float height)
+        public override void DrawBoard(BoardGriddler trackerBoard, BoardGriddler solvedBoard, object drawingContext, float width, float height)
         {
             try
             {
@@ -38,8 +39,8 @@ namespace PresentationLogic
                 float brWidth = width;
                 float brHeight = height;
 
-                float cellWidth = (float)brWidth / GetTrackerBoard().Columns;
-                float cellHeight = (float)brHeight / GetTrackerBoard().Rows;
+                float cellWidth = (float)brWidth / trackerBoard.Columns;
+                float cellHeight = (float)brHeight / trackerBoard.Rows;
 
                 Brush rowBrushBack = new SolidBrush(Color.FromArgb(16, Color.Red));
                 Brush rowBrushFore = new SolidBrush(Color.FromArgb(224, Color.Red));

@@ -48,23 +48,33 @@ namespace PresentationLogic
 
         public override void Draw(object drawingContext, float width, float height)
         {
-            using (Font font2 = new Font("Arial", Math.Max(Math.Min(width, height), 1) / (float)this.GetPuzzleName().Length, FontStyle.Italic, GraphicsUnit.Pixel))
+            B trackerBoard = GetTrackerBoard();
+            B solvedBoard = GetSolvedBoard();
+            if (trackerBoard != null && solvedBoard != null)
             {
-                OnRequestDrawText(drawingContext, this.GetPuzzleName(), font2, Brushes.Green,
-                    new RectangleF(width / 3, height / 3, width / 3, height / 3),
-                    StringFormat.GenericDefault);
-
-                int rectCount = 50;
-                for (int i = 0; i < rectCount / 2; i++)
+                DrawBoard(trackerBoard, solvedBoard, drawingContext, width, height);
+            }
+            else
+            {
+                using (Font font2 = new Font("Arial", Math.Max(Math.Min(width, height), 1) / (float)this.GetPuzzleName().Length, FontStyle.Italic, GraphicsUnit.Pixel))
                 {
-                    OnRequestDrawRectangle(drawingContext, Pens.Black,
-                        width / rectCount * i,
-                        height / rectCount * i,
-                        width - 2 * (width / rectCount * i),
-                        height - 2 * (height / rectCount * i));
+                    OnRequestDrawText(drawingContext, this.GetPuzzleName(), font2, Brushes.Green,
+                        new RectangleF(width / 3, height / 3, width / 3, height / 3),
+                        StringFormat.GenericDefault);
+
+                    int rectCount = 50;
+                    for (int i = 0; i < rectCount / 2; i++)
+                    {
+                        OnRequestDrawRectangle(drawingContext, Pens.Black,
+                            width / rectCount * i,
+                            height / rectCount * i,
+                            width - 2 * (width / rectCount * i),
+                            height - 2 * (height / rectCount * i));
+                    }
                 }
             }
         }
+        public virtual void DrawBoard(B trackerBoard, B solvedBoard, object drawingContext, float width, float height) { }
 
         public virtual B GetTrackerBoard() { return this.LogicProxy.getSolvedBoard(); }
         public virtual B GetSolvedBoard() { return this.LogicProxy.getTrackedBoard(); }
