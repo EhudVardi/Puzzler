@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
+using Common;
 
 namespace Presentation.WPF
 {
@@ -80,9 +81,9 @@ namespace Presentation.WPF
                 if (PresentationLogicObject != null)
                 {
                     Dictionary<string, List<string>> puzzlesDic = PresentationLogicObject.ReadFileList();
-                    this.ucDataGridGenerator.SetData(puzzlesDic["FromGenerator"]);
-                    this.ucDataGridText.SetData(puzzlesDic["FromText"]);
-                    this.ucDataGridWeb.SetData(puzzlesDic["FromWeb"]);
+                    this.ucDataGridGenerator.SetData(puzzlesDic[Configuration.FromGeneratorFolder]);
+                    this.ucDataGridText.SetData(puzzlesDic[Configuration.FromTextFolder]);
+                    this.ucDataGridWeb.SetData(puzzlesDic[Configuration.FromWebFolder]);
 
                     this.GameCanvas.HookEventsToPresentationLogicObject();
                     PresentationLogicObject.Initialize();

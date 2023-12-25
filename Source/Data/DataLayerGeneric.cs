@@ -39,11 +39,12 @@ namespace Data
         public Dictionary<string, List<string>> GetFileList()
         {
             Dictionary<string, List<string>> dic = new Dictionary<string, List<string>>();
-            string[] keys = new string[] { "FromGenerator", "FromText", "FromWeb" };
+            string[] keys = new string[] { Configuration.FromGeneratorFolder, Configuration.FromTextFolder, Configuration.FromWebFolder };
             for (int i = 0; i < keys.Length; i++)
             {
                 string puzzleType = keys[i];
                 string folder = GetPuzzleTypeDocumentsPath() + Configuration.PuzzlesLibraryFolder + puzzleType;
+                Directory.CreateDirectory(folder); // create the folder if does not exist
                 dic.Add(puzzleType, new List<string>(Directory.GetFiles(folder)));
             }
             return dic;
