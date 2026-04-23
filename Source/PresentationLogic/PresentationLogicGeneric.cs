@@ -14,6 +14,7 @@ namespace PresentationLogic
 
         public override void Initialize()
         {
+            this.LogicProxy.DataProxy.Options = this.Options;
             this.LogicProxy.SolveCompleted += new EventHandler(Board_SolveCompleted);
             this.LogicProxy.StepCompleted  += new EventHandler(Board_StepCompleted);
             this.LogicProxy.LoadCompleted  += new EventHandler(LogicProxy_LoadCompleted);

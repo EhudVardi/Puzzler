@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Data.DataModels;
 using System.IO;
 using Common;
 
@@ -10,6 +8,8 @@ namespace Data
     public class DataLayerGeneric<P>
     {
         protected string PuzzleName;
+
+        public PuzzlerOptions Options { get; set; } = PuzzlerOptions.CreateDefault();
 
         public DataLayerGeneric()
         {
@@ -39,12 +39,12 @@ namespace Data
         public Dictionary<string, List<string>> GetFileList()
         {
             Dictionary<string, List<string>> dic = new Dictionary<string, List<string>>();
-            string[] keys = new string[] { Configuration.FromGeneratorFolder, Configuration.FromTextFolder, Configuration.FromWebFolder };
+            string[] keys = new string[] { Options.FromGeneratorFolder, Options.FromTextFolder, Options.FromWebFolder };
             for (int i = 0; i < keys.Length; i++)
             {
                 string puzzleType = keys[i];
-                string folder = GetPuzzleTypeDocumentsPath() + Configuration.PuzzlesLibraryFolder + puzzleType;
-                Directory.CreateDirectory(folder); // create the folder if does not exist
+                string folder = GetPuzzleTypeDocumentsPath() + Options.PuzzlesLibraryFolder + puzzleType;
+                Directory.CreateDirectory(folder);
                 dic.Add(puzzleType, new List<string>(Directory.GetFiles(folder)));
             }
             return dic;
@@ -52,7 +52,7 @@ namespace Data
 
         public string GetPuzzleTypeDocumentsPath()
         {
-            return Configuration.GetDocumentPath() + GetPuzzleName() + "\\";
+            return Options.GetDocumentPath() + GetPuzzleName() + "\\";
         }
 
         public string GetPuzzleName() { return this.PuzzleName; }
@@ -60,7 +60,7 @@ namespace Data
         public virtual void WritePuzzle(P puzzle, string sourceTypeFolder)
         {
             string filePath = GetPuzzleTypeDocumentsPath() +
-                Configuration.PuzzlesLibraryFolder +
+                Options.PuzzlesLibraryFolder +
                 sourceTypeFolder +
                 DateTime.Now.ToString("yyyy-MM-dd.hh.mm.ss") +
                 ".xml";

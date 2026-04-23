@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Common;
 using Data;
 
 namespace Logic
@@ -60,7 +58,7 @@ namespace Logic
             P puzzleFromWeb = this.DataProxy.WebToPuzzleObject(url);
             if (LoadFromPuzzleObject(puzzleFromWeb))
             {
-                this.DataProxy.WritePuzzle(puzzleFromWeb, Configuration.FromWebFolder);
+                this.DataProxy.WritePuzzle(puzzleFromWeb, DataProxy.Options.FromWebFolder);
                 return true;
             }
             else
@@ -73,7 +71,7 @@ namespace Logic
             P puzzleFromText = this.DataProxy.TextToPuzzleObject(text);
             if (LoadFromPuzzleObject(puzzleFromText))
             {
-                this.DataProxy.WritePuzzle(puzzleFromText, Configuration.FromTextFolder);
+                this.DataProxy.WritePuzzle(puzzleFromText, DataProxy.Options.FromTextFolder);
                 return true;
             }
             else
@@ -87,7 +85,7 @@ namespace Logic
             P puzzleFromGenerator = this.FactoryModule.BoardToPuzzle(this.FactoryModule.GenerateRandom());
             if (LoadFromPuzzleObject(puzzleFromGenerator))
             {
-                this.DataProxy.WritePuzzle(puzzleFromGenerator, Configuration.FromGeneratorFolder);
+                this.DataProxy.WritePuzzle(puzzleFromGenerator, DataProxy.Options.FromGeneratorFolder);
                 return true;
             }
             else

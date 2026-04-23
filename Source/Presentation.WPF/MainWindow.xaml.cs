@@ -12,6 +12,7 @@ namespace Presentation.WPF
     public partial class MainWindow : Window
     {
         internal static PresentationLogicBase PresentationLogicObject;
+        private static readonly PuzzlerOptions _options = PuzzlerOptions.CreateDefault();
 
         public MainWindow()
         {
@@ -44,10 +45,11 @@ namespace Presentation.WPF
 
                 if (PresentationLogicObject != null)
                 {
+                    PresentationLogicObject.Options = _options;
                     Dictionary<string, List<string>> puzzlesDic = PresentationLogicObject.ReadFileList();
-                    this.ucDataGridGenerator.SetData(puzzlesDic[Configuration.FromGeneratorFolder]);
-                    this.ucDataGridText.SetData(puzzlesDic[Configuration.FromTextFolder]);
-                    this.ucDataGridWeb.SetData(puzzlesDic[Configuration.FromWebFolder]);
+                    this.ucDataGridGenerator.SetData(puzzlesDic[_options.FromGeneratorFolder]);
+                    this.ucDataGridText.SetData(puzzlesDic[_options.FromTextFolder]);
+                    this.ucDataGridWeb.SetData(puzzlesDic[_options.FromWebFolder]);
 
                     PresentationLogicObject.Initialize();
                     PresentationLogicObject.Refresh += PresentationLogicObject_Refresh;

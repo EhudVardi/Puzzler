@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Common;
 using PresentationLogic.Rendering;
 
 namespace PresentationLogic
@@ -17,6 +18,8 @@ namespace PresentationLogic
         protected static readonly PuzzlerFont font     = PuzzlerFont.DefaultSerif;
         protected static readonly PuzzlerFont fontBold = PuzzlerFont.DefaultSerifBold;
         protected static float margin = 2;
+
+        public PuzzlerOptions Options { get; set; } = PuzzlerOptions.CreateDefault();
 
         protected DisplayType displayType;
         private IDrawingSurface _surface;
