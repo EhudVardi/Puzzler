@@ -1,10 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <!-- net10.0-windows temporarily: Configuration.cs uses System.Windows.Forms.Application.StartupPath -->
-    <!-- and GaussianBlur.cs uses System.Drawing.Bitmap. Both are removed in Phase 3. -->
-    <TargetFramework>net10.0-windows</TargetFramework>
-    <UseWindowsForms>true</UseWindowsForms>
+    <TargetFramework>net10.0</TargetFramework>
   </PropertyGroup>
 
 </Project>

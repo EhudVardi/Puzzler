@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
 
 namespace Common
@@ -15,12 +13,9 @@ namespace Common
         public static string FromTextFolder = @"FromText\";
         public static string FromGeneratorFolder = @"FromGenerator\";
 
-
         public static string GetDocumentPath()
         {
-            return System.Windows.Forms.Application.StartupPath + DocumentsPath;
+            return Path.Combine(AppContext.BaseDirectory, DocumentsPath);
         }
-	
-
     }
 }
