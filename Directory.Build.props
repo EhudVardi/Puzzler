@@ -1,0 +1,5 @@
+<Project>
+  <PropertyGroup>
+    <!-- Populated in Phase 2 during SDK-style csproj migration -->
+  </PropertyGroup>
+</Project>

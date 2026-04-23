@@ -1,5 +1,20 @@
-# ignore Bin/Obj folders
+# build output
 bin/
 obj/
-# ignore VS temp generated files
+
+# Visual Studio
 .vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# NuGet
+*.nupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# OS
+Thumbs.db
+.DS_Store
