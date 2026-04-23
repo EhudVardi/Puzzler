@@ -5,7 +5,7 @@ using Common;
 
 namespace Data
 {
-    public class DataLayerGeneric<P>
+    public class DataLayerGeneric<TPuzzle>
     {
         protected string PuzzleName;
 
@@ -16,24 +16,24 @@ namespace Data
             this.PuzzleName = "Base";
         }
 
-        public virtual P TextToPuzzleObject(string text)
+        public virtual TPuzzle TextToPuzzleObject(string text)
         {
-            return default(P);
+            return default(TPuzzle);
         }
-        public virtual P WebToPuzzleObject(string url)
+        public virtual TPuzzle WebToPuzzleObject(string url)
         {
-            return default(P);
+            return default(TPuzzle);
         }
 
-        public virtual P XMLToPuzzle(string XmlFileName)
+        public virtual TPuzzle XMLToPuzzle(string XmlFileName)
         {
-            return (P)(new SerializeDeserializeObject().DeserializePuzzle(XmlFileName, typeof(P)));
+            return (TPuzzle)(new SerializeDeserializeObject().DeserializePuzzle(XmlFileName, typeof(TPuzzle)));
         }
-        public virtual void PuzzleToXML(P puzzle, string XmlFileName)
+        public virtual void PuzzleToXML(TPuzzle puzzle, string XmlFileName)
         {
             if (!Directory.Exists(Path.GetDirectoryName(XmlFileName)))
                 Directory.CreateDirectory(Path.GetDirectoryName(XmlFileName));
-            new SerializeDeserializeObject().SerializePuzzle(XmlFileName, puzzle, typeof(P));
+            new SerializeDeserializeObject().SerializePuzzle(XmlFileName, puzzle, typeof(TPuzzle));
         }
 
         public Dictionary<string, List<string>> GetFileList()
@@ -57,7 +57,7 @@ namespace Data
 
         public string GetPuzzleName() { return this.PuzzleName; }
 
-        public virtual void WritePuzzle(P puzzle, string sourceTypeFolder)
+        public virtual void WritePuzzle(TPuzzle puzzle, string sourceTypeFolder)
         {
             string filePath = GetPuzzleTypeDocumentsPath() +
                 Options.PuzzlesLibraryFolder +

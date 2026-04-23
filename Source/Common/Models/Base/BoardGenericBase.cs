@@ -1,84 +1,72 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Common.Models.Base
 {
-    public abstract class BoardGenericBase<C, G, VC, GHC>
-        where C : class
-        where G : class
-        where VC : class
-        where GHC : class
+    public abstract class BoardGenericBase<TCell, TGroup, TValueCell, TGroupHolder>
+        where TCell       : class
+        where TGroup      : class
+        where TValueCell  : class
+        where TGroupHolder : class
     {
+        public virtual int Size => CellsMatrix.GetLength(0) * CellsMatrix.GetLength(1);
 
-        public virtual int Size { get { return this.CellsMatrix.GetLength(0) * this.CellsMatrix.GetLength(1); } }
-
-
-        protected C[,] _cellsMatrix;
-        public C[,] CellsMatrix
+        protected TCell[,] _cellsMatrix;
+        public TCell[,] CellsMatrix
         {
             get { return _cellsMatrix; }
             set { _cellsMatrix = value; }
         }
 
-        protected List<G> _groups;
-        public List<G> Groups
+        protected List<TGroup> _groups;
+        public List<TGroup> Groups
         {
             get { return _groups; }
             set { _groups = value; }
         }
 
-
-        protected List<VC> _initialCells;
-        public List<VC> InitialCells
+        protected List<TValueCell> _initialCells;
+        public List<TValueCell> InitialCells
         {
             get { return _initialCells; }
             set { _initialCells = value; }
         }
 
-
-        public virtual List<VC> ValueCells 
+        public virtual List<TValueCell> ValueCells
         {
             get
             {
-                List<VC> valueCells = new List<VC>();
-                foreach (C cell in this.CellsMatrix)
-                    if (cell.GetType() == typeof(VC))
-                        valueCells.Add(cell as VC);
+                List<TValueCell> valueCells = new List<TValueCell>();
+                foreach (TCell cell in this.CellsMatrix)
+                    if (cell.GetType() == typeof(TValueCell))
+                        valueCells.Add(cell as TValueCell);
                 return valueCells;
             }
         }
 
-        public virtual List<GHC> GroupHolderCells 
+        public virtual List<TGroupHolder> GroupHolderCells
         {
             get
             {
-                List<GHC> valueCells = new List<GHC>();
-                foreach (C cell in this.CellsMatrix)
-                    if (cell.GetType() == typeof(GHC))
-                        valueCells.Add(cell as GHC);
-                return valueCells;
+                List<TGroupHolder> cells = new List<TGroupHolder>();
+                foreach (TCell cell in this.CellsMatrix)
+                    if (cell.GetType() == typeof(TGroupHolder))
+                        cells.Add(cell as TGroupHolder);
+                return cells;
             }
         }
-
 
         public BoardGenericBase()
         {
-            this.Groups = new List<G>();
-            this.InitialCells = new List<VC>();
+            this.Groups       = new List<TGroup>();
+            this.InitialCells = new List<TValueCell>();
         }
-
 
         public virtual void SetCell(int row, int column, int num) { }
 
-        public virtual C GetCell(int row, int column) { return default(C); }
+        public virtual TCell GetCell(int row, int column) { return default(TCell); }
 
-
-
-        public virtual int Rows { get { return CellsMatrix.GetLength(0); } }
-
-        public virtual int Columns { get { return CellsMatrix.GetLength(1); } }
-
+        public virtual int Rows    => CellsMatrix.GetLength(0);
+        public virtual int Columns => CellsMatrix.GetLength(1);
     }
-     
 }

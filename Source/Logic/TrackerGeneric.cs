@@ -1,24 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Common.Models.Base;
-
 namespace Logic
 {
-    public class TrackerGeneric<B>
+    public class TrackerGeneric<TBoard>
     {
-        private B _board;
-        public B Board
+        private TBoard _board;
+        public TBoard Board
         {
             get { return _board; }
             set { _board = value; }
         }
 
-        public TrackerGeneric()
-        {
+        public TrackerGeneric() { }
 
-        }
-        public TrackerGeneric(B board)
+        public TrackerGeneric(TBoard board)
         {
             this.Board = board;
         }

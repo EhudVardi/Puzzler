@@ -5,10 +5,10 @@ using PresentationLogic.Rendering;
 
 namespace PresentationLogic
 {
-    public class PresentationLogicGeneric<P,B> : PresentationLogicBase
+    public class PresentationLogicGeneric<TPuzzle, TBoard> : PresentationLogicBase
     {
-        public LogicLayerGeneric<P, B> LogicProxy;
-        public string URL;
+        public LogicLayerGeneric<TPuzzle, TBoard> LogicProxy { get; set; }
+        public string URL { get; set; }
 
         public PresentationLogicGeneric() { }
 
@@ -43,8 +43,8 @@ namespace PresentationLogic
         public override void Draw(IDrawingSurface surface, float width, float height)
         {
             base.Draw(surface, width, height);
-            B trackerBoard = GetTrackerBoard();
-            B solvedBoard  = GetSolvedBoard();
+            TBoard trackerBoard = GetTrackerBoard();
+            TBoard solvedBoard  = GetSolvedBoard();
             if (trackerBoard != null && solvedBoard != null)
             {
                 DrawBoard(trackerBoard, solvedBoard, width, height);
@@ -67,9 +67,9 @@ namespace PresentationLogic
             }
         }
 
-        public virtual void DrawBoard(B trackerBoard, B solvedBoard, float width, float height) { }
+        public virtual void DrawBoard(TBoard trackerBoard, TBoard solvedBoard, float width, float height) { }
 
-        public virtual B GetTrackerBoard() { return this.LogicProxy.getSolvedBoard(); }
-        public virtual B GetSolvedBoard()  { return this.LogicProxy.getTrackedBoard(); }
+        public virtual TBoard GetTrackerBoard() { return this.LogicProxy.getSolvedBoard(); }
+        public virtual TBoard GetSolvedBoard()  { return this.LogicProxy.getTrackedBoard(); }
     }
 }

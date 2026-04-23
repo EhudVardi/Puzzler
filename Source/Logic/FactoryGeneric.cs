@@ -1,47 +1,33 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using Data.DataModels;
-using Common.Models.Base;
 
 namespace Logic
 {
-    public class FactoryGeneric<P,B>
+    public class FactoryGeneric<TPuzzle, TBoard>
     {
+        public virtual TPuzzle BoardToPuzzle(TBoard board) { return CreatePuzzleObjectFromBoard(board); }
 
-        public virtual P BoardToPuzzle(B board) { return CreatePuzzleObjectFromBoard(board); }
+        public virtual TBoard PuzzleToBoard(TPuzzle puzzle) { return CreateBoardFromPuzzleObject(puzzle); }
 
-        public virtual B PuzzleToBoard(P puzzle) { return CreateBoardFromPuzzleObject(puzzle); }
-
-        public virtual B GenerateRandom() { return default(B); }
+        public virtual TBoard GenerateRandom() { return default(TBoard); }
 
         public event EventHandler StepGenerated;
 
-        protected virtual B CreateBoardFromPuzzleObject(P puzzle)
+        protected virtual TBoard CreateBoardFromPuzzleObject(TPuzzle puzzle)
         {
-            return default(B);
+            return default(TBoard);
         }
 
-        protected virtual P CreatePuzzleObjectFromBoard(B board)
+        protected virtual TPuzzle CreatePuzzleObjectFromBoard(TBoard board)
         {
-            return default(P);
+            return default(TPuzzle);
         }
 
         protected virtual void FireStepGenerated(object sender, EventArgs e)
         {
             if (this.StepGenerated != null)
-            {
                 StepGenerated(sender, e);
-            }
         }
 
         protected virtual void OnStepGenerated() { }
-
-        /*
-        public virtual B CloneBoard(B board)
-        {
-            return PuzzleToBoard(BoardToPuzzle(board));
-        }
-        */
     }
 }

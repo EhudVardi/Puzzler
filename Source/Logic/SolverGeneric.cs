@@ -1,23 +1,18 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
 
 namespace Logic
 {
-    public class SolverGeneric<B>
+    public class SolverGeneric<TBoard>
     {
-        protected B _board;
-        public B Board
+        protected TBoard _board;
+        public TBoard Board
         {
             get { return _board; }
             set { _board = value; }
         }
 
-        public SolverGeneric()
-        {
-
-        }
+        public SolverGeneric() { }
 
         public event EventHandler StepCompleted;
         public event EventHandler SolveCompleted;
@@ -61,7 +56,7 @@ namespace Logic
                     return;
 
                 DoCompleteStep();
-                ReportProgress(precentageProgress, null); 
+                ReportProgress(precentageProgress, null);
                 precentageProgress++;
             }
             Console.WriteLine("total time = " + (DateTime.Now - start).TotalMilliseconds + "ms");
@@ -75,10 +70,7 @@ namespace Logic
 
         public virtual void Reset() { }
 
-        public virtual void SetCell(int row, int column, int num)
-        {
-
-        }
+        public virtual void SetCell(int row, int column, int num) { }
 
         protected virtual void OnStepCompleted(EventArgs e)
         {
@@ -98,15 +90,15 @@ namespace Logic
                 if (bg.IsBusy)
                     bg.CancelAsync();
                 while (bg.IsBusy) ;
-                bg.DoWork -= bg_DoWork;
-                bg.ProgressChanged -= bg_ProgressChanged;
+                bg.DoWork             -= bg_DoWork;
+                bg.ProgressChanged    -= bg_ProgressChanged;
                 bg.RunWorkerCompleted -= bg_RunWorkerCompleted;
             }
             bg = new BackgroundWorker();
-            bg.DoWork += new DoWorkEventHandler(bg_DoWork);
-            bg.ProgressChanged += new ProgressChangedEventHandler(bg_ProgressChanged);
+            bg.DoWork             += new DoWorkEventHandler(bg_DoWork);
+            bg.ProgressChanged    += new ProgressChangedEventHandler(bg_ProgressChanged);
             bg.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bg_RunWorkerCompleted);
-            bg.WorkerReportsProgress = true;
+            bg.WorkerReportsProgress    = true;
             bg.WorkerSupportsCancellation = true;
         }
     }
