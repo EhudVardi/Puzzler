@@ -122,7 +122,7 @@ namespace Logic
         {
             List<List<int>> variations = new List<List<int>>();
 
-            Facet.Combinatorics.Variations<int> combs = new Facet.Combinatorics.Variations<int>(this.Board.NumberRange, group.Size, Facet.Combinatorics.GenerateOption.WithoutRepetition);
+            Combinatorics.Collections.Variations<int> combs = new Combinatorics.Collections.Variations<int>(this.Board.NumberRange, group.Size, Combinatorics.Collections.GenerateOption.WithoutRepetition);
 
             foreach (IList<int> comb in combs)
                 if (ValidateSumOfNumberList(group, comb, group.Sum))

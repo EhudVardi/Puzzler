@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Logic.Sudoku;
 using System.Collections;
-using Facet.Combinatorics;
+using Combinatorics.Collections;
 using Common.Logic;
 using Common.Models.Sudoku;
 

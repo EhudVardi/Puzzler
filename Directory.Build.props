@@ -1,5 +1,10 @@
 <Project>
+
   <PropertyGroup>
-    <!-- Populated in Phase 2 during SDK-style csproj migration -->
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <!-- Nullable will be enabled project-wide in Phase 10 -->
+    <!-- <Nullable>enable</Nullable> -->
   </PropertyGroup>
+
 </Project>
