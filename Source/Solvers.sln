@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.WPF", "Present
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationLogic", "PresentationLogic\PresentationLogic.csproj", "{D366A051-BC4D-487F-91A5-B3E8B3504676}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.WinForms", "Presentation.Winforms\Presentation.WinForms.csproj", "{69A1766D-50AB-452B-84A2-F47E2BD0A272}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,12 +58,6 @@ Global
 		{D366A051-BC4D-487F-91A5-B3E8B3504676}.Release with Code Analysis|Any CPU.Build.0 = Release|Any CPU
 		{D366A051-BC4D-487F-91A5-B3E8B3504676}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D366A051-BC4D-487F-91A5-B3E8B3504676}.Release|Any CPU.Build.0 = Release|Any CPU
-		{69A1766D-50AB-452B-84A2-F47E2BD0A272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{69A1766D-50AB-452B-84A2-F47E2BD0A272}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{69A1766D-50AB-452B-84A2-F47E2BD0A272}.Release with Code Analysis|Any CPU.ActiveCfg = Release|Any CPU
-		{69A1766D-50AB-452B-84A2-F47E2BD0A272}.Release with Code Analysis|Any CPU.Build.0 = Release|Any CPU
-		{69A1766D-50AB-452B-84A2-F47E2BD0A272}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{69A1766D-50AB-452B-84A2-F47E2BD0A272}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
