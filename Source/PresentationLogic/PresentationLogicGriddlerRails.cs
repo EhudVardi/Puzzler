@@ -1,17 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Logic.Sudoku;
-using System.Windows.Forms;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Drawing.Drawing2D;
-using Data.DataModels;
-using Logic.Griddler;
-using Data;
 using Logic;
+using Data.DataModels;
 using Common.Models.Griddler;
-using Common.Models.Triddler;
+using PresentationLogic.Rendering;
 
 namespace PresentationLogic
 {
@@ -30,194 +22,128 @@ namespace PresentationLogic
             margin = 1;
         }
 
-        public override void DrawBoard(BoardGriddler trackerBoard, BoardGriddler solvedBoard, object drawingContext, float width, float height)
+        public override void DrawBoard(BoardGriddler trackerBoard, BoardGriddler solvedBoard, float width, float height)
         {
             try
             {
-                //Graphics g = e.Graphics;
+                float cellWidth  = width  / trackerBoard.Columns;
+                float cellHeight = height / trackerBoard.Rows;
 
-                float brWidth = width;
-                float brHeight = height;
-
-                float cellWidth = (float)brWidth / trackerBoard.Columns;
-                float cellHeight = (float)brHeight / trackerBoard.Rows;
-
-                Brush rowBrushBack = new SolidBrush(Color.FromArgb(16, Color.Red));
-                Brush rowBrushFore = new SolidBrush(Color.FromArgb(224, Color.Red));
-
-                Brush colBrushBack = new SolidBrush(Color.FromArgb(16, Color.Green));
-                Brush colBrushFore = new SolidBrush(Color.FromArgb(224, Color.Green));
+                PuzzlerColor rowBrushBack = PuzzlerColor.Red.WithAlpha(16);
+                PuzzlerColor rowBrushFore = PuzzlerColor.Red.WithAlpha(224);
+                PuzzlerColor colBrushBack = PuzzlerColor.Green.WithAlpha(16);
+                PuzzlerColor colBrushFore = PuzzlerColor.Green.WithAlpha(224);
 
                 if (this.visualBoard.SelectedRailGroup)
                 {
-                    DrawRows(drawingContext, cellWidth, cellHeight, rowBrushFore);
-                    DrawColumns(drawingContext, cellWidth, cellHeight, colBrushBack);
+                    DrawRows(cellWidth, cellHeight, rowBrushFore);
+                    DrawColumns(cellWidth, cellHeight, colBrushBack);
                 }
                 else
                 {
-                    DrawColumns(drawingContext, cellWidth, cellHeight, colBrushFore);
-                    DrawRows(drawingContext, cellWidth, cellHeight, rowBrushBack);
+                    DrawColumns(cellWidth, cellHeight, colBrushFore);
+                    DrawRows(cellWidth, cellHeight, rowBrushBack);
                 }
-
             }
-            catch (Exception)
-            {
-                //base.Draw(e);
-            }
+            catch (Exception) { }
         }
 
-        public override void InputMouseDown(MouseEventArgs e, Size s)
+        public override void HandlePointerDown(PointerEvent e, float sizeX, float sizeY)
         {
             try
             {
-                switch (e.Button)
+                if (e.Button == PointerButton.Left)
                 {
-                    case MouseButtons.Left:
-                        BoardGriddler b = this.GetTrackerBoard();
-                        Point p = GetBoardCoordinates(e, s, b);
+                    BoardGriddler b = this.GetTrackerBoard();
+                    var (row, col) = GetBoardCoordinates(e, sizeX, sizeY, b);
 
-                        if (this.visualBoard.SelectedRailGroup) //rows
+                    if (this.visualBoard.SelectedRailGroup)
+                    {
+                        Rail r = visualBoard.RowRails[col];
+                        Car c = null;
+                        for (int i = 0; i < r.Cars.Count; i++)
                         {
-                            Rail r = visualBoard.RowRails[p.Y];
-                            Car c = null;
-                            for (int i = 0; i < r.Cars.Count; i++)
-                            {
-                                c = r.Cars[i];
-                                if (p.X >= c.Position && p.X <= (c.Position + c.Size))
-                                {
-                                    break;
-                                }
-                            }
-
-                            selectedRowCar = c;
-                            selectedColumnCar = null;
+                            c = r.Cars[i];
+                            if (row >= c.Position && row <= (c.Position + c.Size))
+                                break;
                         }
-                        else // columns
+                        selectedRowCar    = c;
+                        selectedColumnCar = null;
+                    }
+                    else
+                    {
+                        Rail r = visualBoard.ColumnRails[row];
+                        Car c = null;
+                        for (int i = 0; i < r.Cars.Count; i++)
                         {
-                            Rail r = visualBoard.ColumnRails[p.X];
-
-                            Car c = null;
-                            for (int i = 0; i < r.Cars.Count; i++)
-                            {
-                                c = r.Cars[i];
-                                if (p.Y >= c.Position && p.Y <= (c.Position + c.Size))
-                                {
-                                    break;
-                                }
-                            }
-
-                            selectedRowCar = null;
-                            selectedColumnCar = c;
+                            c = r.Cars[i];
+                            if (col >= c.Position && col <= (c.Position + c.Size))
+                                break;
                         }
+                        selectedRowCar    = null;
+                        selectedColumnCar = c;
+                    }
 
-                        this.OnRequestRefresh(EventArgs.Empty);
-
-
-                        break;
-
-                    case MouseButtons.Middle:
-                    case MouseButtons.None:
-                    case MouseButtons.Right:
-                    case MouseButtons.XButton1:
-                    case MouseButtons.XButton2:
-                    default:
-                        break;
+                    this.OnRequestRefresh(EventArgs.Empty);
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
         }
-        public override void InputMouse(MouseEventArgs e, Size s)
+
+        public override void HandlePointer(PointerEvent e, float sizeX, float sizeY)
         {
-            switch (e.Button)
+            if (e.Button == PointerButton.Left)
             {
-                case MouseButtons.Left:
+                try
+                {
+                    BoardGriddler b = this.GetTrackerBoard();
+                    int column = (int)(e.X / (sizeX / b.Columns));
+                    int row    = (int)(e.Y / (sizeY / b.Rows));
 
-                    try
+                    if (this.visualBoard.SelectedRailGroup)
                     {
-                        BoardGriddler b = this.GetTrackerBoard();
-
-                        int column = (int)((float)e.X / ((float)s.Width / (float)b.Columns));
-                        int row = (int)((float)e.Y / ((float)s.Height / (float)b.Rows));
-
-                        if (this.visualBoard.SelectedRailGroup) // rows
-                        {
-                            Rail r = this.visualBoard.RowRails[column];
-
-
-                        }
-                        else
-                        {
-
-                        }
-
-                        this.OnRequestRefresh(EventArgs.Empty);
-                    }
-                    catch (Exception ex)
-                    {
-
+                        // row rail selected — placeholder for drag logic
                     }
 
-                    break;
-                case MouseButtons.Middle:
-                case MouseButtons.None:
-                case MouseButtons.Right:
-                case MouseButtons.XButton1:
-                case MouseButtons.XButton2:
-                default:
-
-                    this.visualBoard.SelectedRailGroup = !this.visualBoard.SelectedRailGroup;
-
-                    this.selectedRowCar = null;
-                    this.selectedColumnCar = null;
-                  
-                    break;
+                    this.OnRequestRefresh(EventArgs.Empty);
+                }
+                catch (Exception) { }
             }
-
+            else
+            {
+                this.visualBoard.SelectedRailGroup = !this.visualBoard.SelectedRailGroup;
+                this.selectedRowCar    = null;
+                this.selectedColumnCar = null;
+            }
 
             this.OnRequestRefresh(EventArgs.Empty);
         }
-        public override void InputKey(KeyEventArgs e)
+
+        public override void HandleKey(KeyEvent e)
         {
             try
             {
-
                 if (e.KeyValue == 88)
                 {
-                    if (this.visualBoard.SelectedRailGroup) //row
-                    {
-                        if (this.selectedRowCar != null) this.selectedRowCar.MoveForward();
-                        //this.selectedRowCar.Position = Math.Max(0, Math.Min(this.selectedRowCar.OwnerRail.Size - this.selectedRowCar.Size, this.selectedRowCar.Position + 1));
-                    }
-                    else //column
-                    {
-                        if (this.selectedColumnCar != null) this.selectedColumnCar.MoveForward();
-                        //this.selectedColumnCar.Position = Math.Max(0, Math.Min(this.selectedColumnCar.OwnerRail.Size - this.selectedColumnCar.Size, this.selectedColumnCar.Position + 1));
-                    }
+                    if (this.visualBoard.SelectedRailGroup)
+                    { if (this.selectedRowCar    != null) this.selectedRowCar.MoveForward(); }
+                    else
+                    { if (this.selectedColumnCar != null) this.selectedColumnCar.MoveForward(); }
                 }
                 else if (e.KeyValue == 90)
                 {
-                    if (this.visualBoard.SelectedRailGroup) //row
-                    {
-                        if (this.selectedRowCar != null) this.selectedRowCar.MoveBackwards();
-                        //this.selectedRowCar.Position = Math.Max(0, Math.Min(this.selectedRowCar.OwnerRail.Size - this.selectedRowCar.Size, this.selectedRowCar.Position - 1));
-                    }
-                    else //column
-                    {
-                        if (this.selectedColumnCar != null) this.selectedColumnCar.MoveBackwards();
-                        //this.selectedColumnCar.Position = Math.Max(0, Math.Min(this.selectedColumnCar.OwnerRail.Size - this.selectedColumnCar.Size, this.selectedColumnCar.Position - 1));
-                    }
+                    if (this.visualBoard.SelectedRailGroup)
+                    { if (this.selectedRowCar    != null) this.selectedRowCar.MoveBackwards(); }
+                    else
+                    { if (this.selectedColumnCar != null) this.selectedColumnCar.MoveBackwards(); }
                 }
 
                 OnRequestRefresh(EventArgs.Empty);
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
         }
 
-        #region specific
-
-        private void DrawColumns(object drawingContext, float cellWidth, float cellHeight, Brush colBrushFore)
+        private void DrawColumns(float cellWidth, float cellHeight, PuzzlerColor color)
         {
             for (int i = 0; i < this.visualBoard.ColumnRails.Count; i++)
             {
@@ -225,25 +151,19 @@ namespace PresentationLogic
                 for (int j = 0; j < r.Cars.Count; j++)
                 {
                     Car c = r.Cars[j];
-
-                    DrawCar(drawingContext, colBrushFore,
-                        (int)(cellWidth * i + margin),
-                        (int)(cellHeight * c.Position + margin),
-                        (int)(cellWidth - 2 * +margin),
-                        (int)(cellHeight * c.Size - 2 * margin));
+                    DrawCar(color,
+                        (int)(cellWidth * i + margin), (int)(cellHeight * c.Position + margin),
+                        (int)(cellWidth - 2 * margin), (int)(cellHeight * c.Size - 2 * margin));
 
                     if (c.Equals(selectedColumnCar))
-                    {
-                        DrawCar(drawingContext, Brushes.Yellow,
-                        (int)(cellWidth * i + margin),
-                        (int)(cellHeight * c.Position + margin),
-                        (int)(cellWidth - 2 * +margin),
-                        (int)(cellHeight * c.Size - 2 * margin));
-                    }
+                        DrawCar(PuzzlerColor.Yellow,
+                            (int)(cellWidth * i + margin), (int)(cellHeight * c.Position + margin),
+                            (int)(cellWidth - 2 * margin), (int)(cellHeight * c.Size - 2 * margin));
                 }
             }
         }
-        private void DrawRows(object drawingContext, float cellWidth, float cellHeight, Brush rowBrushFore)
+
+        private void DrawRows(float cellWidth, float cellHeight, PuzzlerColor color)
         {
             for (int i = 0; i < this.visualBoard.RowRails.Count; i++)
             {
@@ -251,69 +171,50 @@ namespace PresentationLogic
                 for (int j = 0; j < r.Cars.Count; j++)
                 {
                     Car c = r.Cars[j];
-
-                    DrawCar(drawingContext, rowBrushFore,
-                        (int)(cellWidth * c.Position + margin),
-                        (int)(cellHeight * i + margin),
-                        (int)(cellWidth * c.Size - 2 * +margin),
-                        (int)(cellHeight - 2 * margin));
+                    DrawCar(color,
+                        (int)(cellWidth * c.Position + margin), (int)(cellHeight * i + margin),
+                        (int)(cellWidth * c.Size - 2 * margin), (int)(cellHeight - 2 * margin));
 
                     if (c.Equals(selectedRowCar))
-                    {
-                        DrawCar(drawingContext, Brushes.Yellow,
-                        (int)(cellWidth * c.Position + margin),
-                        (int)(cellHeight * i + margin),
-                        (int)(cellWidth * c.Size - 2 * +margin),
-                        (int)(cellHeight - 2 * margin));
-                    }
-
+                        DrawCar(PuzzlerColor.Yellow,
+                            (int)(cellWidth * c.Position + margin), (int)(cellHeight * i + margin),
+                            (int)(cellWidth * c.Size - 2 * margin), (int)(cellHeight - 2 * margin));
                 }
             }
         }
-        private void DrawCar(object drawingContext, Brush rowBrushFore, int x, int y, int w, int h)
+
+        private void DrawCar(PuzzlerColor color, int x, int y, int w, int h)
         {
-            try
-            {
-                OnRequestFillRectangle(drawingContext, rowBrushFore, x, y, w, h);
-            }
+            try { FillRect(color, x, y, w, h); }
             catch (Exception) { }
         }
 
-        VisualBoard visualBoard;
-        Car selectedRowCar = null;
-        Car selectedColumnCar = null;
+        private VisualBoard visualBoard;
+        private Car selectedRowCar    = null;
+        private Car selectedColumnCar = null;
 
         public class VisualBoard
         {
-            public List<Rail> RowRails { get; set; }
+            public List<Rail> RowRails    { get; set; }
             public List<Rail> ColumnRails { get; set; }
-
             public bool SelectedRailGroup { get; set; }
 
             public void Init(BoardGriddler b)
             {
-                RowRails = new List<Rail>();
+                RowRails    = new List<Rail>();
                 ColumnRails = new List<Rail>();
-
                 SelectedRailGroup = true;
 
                 foreach (GroupGriddler g in b.Groups)
                 {
                     Rail rail = new Rail();
                     rail.Init(g);
-                  
-                    if (g is GroupGriddlerRow)
-                    {
-                        RowRails.Add(rail);
-                    }
-                    else if (g is GroupGriddlerColumn)
-                    {
-                        ColumnRails.Add(rail);
-                    }
+                    if      (g is GroupGriddlerRow)    RowRails.Add(rail);
+                    else if (g is GroupGriddlerColumn) ColumnRails.Add(rail);
                 }
-
             }
         }
+
         public class Rail
         {
             public List<Car> Cars { get; set; }
@@ -327,10 +228,9 @@ namespace PresentationLogic
                 for (int i = 0; i < g.Numbers.Count; i++)
                 {
                     Car car = new Car(this);
-                    car.Size = g.Numbers[i];
+                    car.Size     = g.Numbers[i];
                     car.Position = movingPosition;
                     Cars.Add(car);
-
                     movingPosition += car.Size + 1;
                 }
             }
@@ -338,110 +238,60 @@ namespace PresentationLogic
             public override string ToString()
             {
                 string bla = "";
-                foreach (Car c in this.Cars)
-                {
-                    bla += c.Size + ", ";
-                }
+                foreach (Car c in this.Cars) bla += c.Size + ", ";
                 return bla;
             }
         }
+
         public class Car
         {
             public Rail OwnerRail { get; set; }
-            public int Position { get; set; }
-            public int Size { get; set; }
+            public int Position   { get; set; }
+            public int Size       { get; set; }
 
-            public Car(Rail ownerRail)
-            {
-                this.OwnerRail = ownerRail;
-
-            }
+            public Car(Rail ownerRail) { this.OwnerRail = ownerRail; }
 
             public void MoveForward()
             {
                 int i = GetIndexInRail();
-
                 bool canMove = true;
                 int x;
                 for (x = i; x < this.OwnerRail.Cars.Count; x++)
                 {
                     if (x == this.OwnerRail.Cars.Count - 1)
-                    {
-                        if (this.OwnerRail.Cars[x].Position + this.OwnerRail.Cars[x].Size >= this.OwnerRail.Size)
-                            canMove = false;
-                    }
+                    { if (this.OwnerRail.Cars[x].Position + this.OwnerRail.Cars[x].Size >= this.OwnerRail.Size) canMove = false; }
                     else
-                    {
-                        if (this.OwnerRail.Cars[x].Position + this.OwnerRail.Cars[x].Size < this.OwnerRail.Cars[x + 1].Position - 1)
-                            break;
-                    }
+                    { if (this.OwnerRail.Cars[x].Position + this.OwnerRail.Cars[x].Size < this.OwnerRail.Cars[x + 1].Position - 1) break; }
                 }
 
                 if (canMove)
                 {
-                    if (x == this.OwnerRail.Cars.Count)
-                    {
-                        for (int j = i; j < x; j++)
-                        {
-                            this.OwnerRail.Cars[j].Position++;
-                        }
-                    }
-                    else
-                    {
-                        for (int j = i; j <= x; j++)
-                        {
-                            this.OwnerRail.Cars[j].Position++;
-                        }
-                    }
+                    int end = (x == this.OwnerRail.Cars.Count) ? x - 1 : x;
+                    for (int j = i; j <= end; j++) this.OwnerRail.Cars[j].Position++;
                 }
-
             }
+
             public void MoveBackwards()
             {
                 int i = GetIndexInRail();
-
                 bool canMove = true;
                 int x;
                 for (x = i; x >= 0; x--)
                 {
                     if (x == 0)
-                    {
-                        if (this.OwnerRail.Cars[x].Position == 0)
-                            canMove = false;
-                    }
+                    { if (this.OwnerRail.Cars[x].Position == 0) canMove = false; }
                     else
-                    {
-                        if (this.OwnerRail.Cars[x - 1].Position + this.OwnerRail.Cars[x - 1].Size < this.OwnerRail.Cars[x].Position - 1)
-                            break;
-                    }
+                    { if (this.OwnerRail.Cars[x - 1].Position + this.OwnerRail.Cars[x - 1].Size < this.OwnerRail.Cars[x].Position - 1) break; }
                 }
 
                 if (canMove)
                 {
-                    if (x == -1)
-                    {
-                        for (int j = i; j > x; j--)
-                        {
-                            this.OwnerRail.Cars[j].Position--;
-                        }
-                    }
-                    else
-                    {
-                        for (int j = i; j >= x; j--)
-                        {
-                            this.OwnerRail.Cars[j].Position--;
-                        }
-                    }
-
+                    int end = (x == -1) ? 0 : x;
+                    for (int j = i; j >= end; j--) this.OwnerRail.Cars[j].Position--;
                 }
             }
 
-            public int GetIndexInRail()
-            {
-                return this.OwnerRail.Cars.IndexOf(this);
-            }
+            public int GetIndexInRail() => this.OwnerRail.Cars.IndexOf(this);
         }
-
-        #endregion
     }
 }

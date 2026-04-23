@@ -1,11 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <!-- net10.0-windows temporarily: PresentationLogicBase and puzzle-specific classes -->
-    <!-- use System.Drawing and System.Windows.Forms types. Replaced in Phase 4 with -->
-    <!-- a neutral IDrawingSurface abstraction, after which this becomes net10.0. -->
-    <TargetFramework>net10.0-windows</TargetFramework>
-    <UseWindowsForms>true</UseWindowsForms>
+    <TargetFramework>net10.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>

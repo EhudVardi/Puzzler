@@ -1,21 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using Logic.Sudoku;
-using System.Windows.Forms;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Drawing.Drawing2D;
-using Data.DataModels;
-using Logic.Griddler;
-using Data;
 using Logic;
+using Data.DataModels;
 using Common.Models.Griddler;
-using Common.Models.Sudoku;
+using PresentationLogic.Rendering;
 
 namespace PresentationLogic
 {
-
     public class PresentationLogicGriddler : PresentationLogicGeneric<PuzzleGriddler, BoardGriddler>
     {
         public PresentationLogicGriddler()
@@ -24,137 +14,92 @@ namespace PresentationLogic
             this.LogicProxy = new LogicLayerGriddler();
         }
 
-        public override void DrawBoard(BoardGriddler trackerBoard, BoardGriddler solvedBoard, object drawingContext, float width, float height)
+        public override void DrawBoard(BoardGriddler trackerBoard, BoardGriddler solvedBoard, float width, float height)
         {
-            float brWidth = width;
-            float brHeight = height;
+            float cellWidth  = width  / trackerBoard.Columns;
+            float cellHeight = height / trackerBoard.Rows;
 
-            float cellWidth = (float)brWidth / trackerBoard.Columns;
-            float cellHeight = (float)brHeight / trackerBoard.Rows;
-
-            //draw value cells
             foreach (CellValueGriddler valueCell in trackerBoard.ValueCells)
             {
                 CellValueGriddler solvedValueCell = solvedBoard.CellsMatrix[valueCell.Row, valueCell.Column] as CellValueGriddler;
 
-                //draw value cell value
                 switch (this.displayType)
                 {
                     case DisplayType.Board:
-                        OnRequestFillRectangle(
-                                drawingContext,
-                                valueCell.Value == null ? Brushes.Yellow : valueCell.Value == true ? Brushes.Green : Brushes.Red,
-                                cellWidth * valueCell.Column + margin,
-                                cellHeight * valueCell.Row + margin,
-                                cellWidth - margin * 2f,
-                                cellHeight - margin * 2f
-
-                                );
-
+                        FillRect(
+                            valueCell.Value == null ? PuzzlerColor.Yellow
+                                : valueCell.Value == true ? PuzzlerColor.Green : PuzzlerColor.Red,
+                            cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
+                            cellWidth - margin * 2f, cellHeight - margin * 2f);
                         break;
+
                     case DisplayType.Hint:
-                        OnRequestFillRectangle(
-                                drawingContext,
-                               valueCell.Value == null ? Brushes.Yellow : valueCell.Value == true ? Brushes.Green : Brushes.Red,
-                                cellWidth * valueCell.Column + margin,
-                                cellHeight * valueCell.Row + margin,
-                                cellWidth - margin * 2f,
-                                cellHeight - margin * 2f
+                        FillRect(
+                            valueCell.Value == null ? PuzzlerColor.Yellow
+                                : valueCell.Value == true ? PuzzlerColor.Green : PuzzlerColor.Red,
+                            cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
+                            cellWidth - margin * 2f, cellHeight - margin * 2f);
 
-                                );
-                        Pen brushValue;
-                        if (solvedValueCell.Value != valueCell.Value)
-                            brushValue = Pens.Red;
-                        else
-                            brushValue = Pens.Green;
+                        PuzzlerColor hintStroke = solvedValueCell.Value != valueCell.Value
+                            ? PuzzlerColor.Red : PuzzlerColor.Green;
 
-                        OnRequestDrawRectangle(
-                            drawingContext,
-                            brushValue,
-                            cellWidth * valueCell.Column + margin,
-                            cellHeight * valueCell.Row + margin,
-                            cellWidth - margin * 2f,
-                            cellHeight - margin * 2f
-                            );
-
+                        DrawRect(hintStroke, 1,
+                            cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
+                            cellWidth - margin * 2f, cellHeight - margin * 2f);
                         break;
+
                     case DisplayType.Solution:
                         if (solvedValueCell.IsFixed)
-                        {
-                            OnRequestFillRectangle(
-                                drawingContext,
-                                solvedValueCell.Value == null ? Brushes.Yellow : solvedValueCell.Value == true ? Brushes.Blue : Brushes.Red,
-                                cellWidth * solvedValueCell.Column + margin,
-                                cellHeight * solvedValueCell.Row + margin,
-                                cellWidth - margin * 2f,
-                                cellHeight - margin * 2f
-
-                                );
-                        }
-                        break;
-                    default:
+                            FillRect(
+                                solvedValueCell.Value == null ? PuzzlerColor.Yellow
+                                    : solvedValueCell.Value == true ? PuzzlerColor.Blue : PuzzlerColor.Red,
+                                cellWidth * solvedValueCell.Column + margin, cellHeight * solvedValueCell.Row + margin,
+                                cellWidth - margin * 2f, cellHeight - margin * 2f);
                         break;
                 }
             }
 
-            //draw selected value cell marker
             if (selectedValueCell != null)
-                OnRequestDrawRectangle(
-                    drawingContext,
-                    new Pen(Color.Black, margin),
-                    cellWidth * selectedValueCell.Column + margin,
-                    cellHeight * selectedValueCell.Row + margin,
-                    cellWidth - margin * 2f,
-                    cellHeight - margin * 2f
-                    );
-
+                DrawRect(PuzzlerColor.Black, margin,
+                    cellWidth * selectedValueCell.Column + margin, cellHeight * selectedValueCell.Row + margin,
+                    cellWidth - margin * 2f, cellHeight - margin * 2f);
         }
 
-        public override Size GetPrefferedSize()
+        public override (int Width, int Height) GetPrefferedSize()
         {
-            return new System.Drawing.Size(40 * GetTrackerBoard().Columns, 40 * GetTrackerBoard().Rows);
+            return (40 * GetTrackerBoard().Columns, 40 * GetTrackerBoard().Rows);
         }
 
-        public override void InputMouse(MouseEventArgs e, Size s)
+        public override void HandlePointer(PointerEvent e, float sizeX, float sizeY)
         {
             try
             {
-                BoardGriddler b = this.GetTrackerBoard();
-                Point p = GetBoardCoordinates(e, s, b);
-                CellValueGriddler pointedCell = b.CellsMatrix[p.X, p.Y] as CellValueGriddler;
+                BoardGriddler b   = this.GetTrackerBoard();
+                var (row, col) = GetBoardCoordinates(e, sizeX, sizeY, b);
+                CellValueGriddler pointedCell = b.CellsMatrix[row, col] as CellValueGriddler;
                 if (!b.InitialCells.Contains(pointedCell))
                     selectedValueCell = pointedCell;
                 this.OnRequestRefresh(EventArgs.Empty);
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
         }
 
-        protected  Point GetBoardCoordinates(MouseEventArgs e, Size s, BoardGriddler b)
+        protected (int row, int col) GetBoardCoordinates(PointerEvent e, float sizeX, float sizeY, BoardGriddler b)
         {
-            return new Point((int)((float)e.Y / ((float)s.Height / (float)b.Rows)), (int)((float)e.X / ((float)s.Width / (float)b.Columns)));
+            return ((int)(e.Y / (sizeY / b.Rows)), (int)(e.X / (sizeX / b.Columns)));
         }
 
-        public override void InputKey(KeyEventArgs e)
+        public override void HandleKey(KeyEvent e)
         {
-            BoardGriddler board = GetTrackerBoard();
+            if (selectedValueCell == null) return;
             int numRequested = e.KeyValue - 49;
-            if (selectedValueCell != null)
-                if (numRequested > -1 && numRequested < 3)
-                    if (numRequested == 0)
-                        selectedValueCell.Value = null;
-                    else if (numRequested == 1)
-                        selectedValueCell.Value = true;
-                    else if (numRequested == 2)
-                        selectedValueCell.Value = false;
-                    else
-                        selectedValueCell.Value = null;
+            if (numRequested > -1 && numRequested < 3)
+                selectedValueCell.Value = numRequested == 0 ? null : numRequested == 1 ? true : (bool?)false;
+            else
+                selectedValueCell.Value = null;
             this.OnRequestRefresh(EventArgs.Empty);
         }
 
-        #region specific
-
-        CellValueGriddler selectedValueCell;
-
-        #endregion
+        protected CellValueGriddler selectedValueCell;
     }
 }

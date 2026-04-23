@@ -1,37 +1,25 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using System.Drawing;
-using Common;
+using PresentationLogic.Rendering;
 
 namespace PresentationLogic
 {
     public class PresentationLogicBase
     {
-        protected static Brush bFixed = Brushes.Silver;
-        protected static Brush bNull = Brushes.Snow;
-        protected static Brush bCorrect = Brushes.Navy;
-        protected static Brush bIncorrect = Brushes.Red;
-        protected static Brush bGroupHolder = Brushes.Gray;
-        protected static Brush bText = Brushes.Black;
-        protected static Brush bMark = Brushes.Black;
+        protected static readonly PuzzlerColor bFixed       = PuzzlerColor.Silver;
+        protected static readonly PuzzlerColor bNull        = PuzzlerColor.Snow;
+        protected static readonly PuzzlerColor bCorrect     = PuzzlerColor.Navy;
+        protected static readonly PuzzlerColor bIncorrect   = PuzzlerColor.Red;
+        protected static readonly PuzzlerColor bGroupHolder = PuzzlerColor.Gray;
+        protected static readonly PuzzlerColor bText        = PuzzlerColor.Black;
+        protected static readonly PuzzlerColor bMark        = PuzzlerColor.Black;
 
-        protected static Font font;
-        protected static Font fontBold;
-        protected static StringFormat sf;
+        protected static readonly PuzzlerFont font     = PuzzlerFont.DefaultSerif;
+        protected static readonly PuzzlerFont fontBold = PuzzlerFont.DefaultSerifBold;
         protected static float margin = 2;
 
         protected DisplayType displayType;
-
-        static PresentationLogicBase()
-        {
-            font = new Font(FontFamily.GenericSerif, (int)16, GraphicsUnit.Pixel);
-            fontBold = new Font(FontFamily.GenericSerif, (int)32, FontStyle.Bold, GraphicsUnit.Pixel);
-            sf = new StringFormat();
-            sf.Alignment = StringAlignment.Center;
-            sf.LineAlignment = StringAlignment.Center;     
-        }
+        private IDrawingSurface _surface;
 
         public virtual void Initialize() { }
 
@@ -47,70 +35,47 @@ namespace PresentationLogic
         public virtual bool? IsSolved() { return false; }
         public virtual bool? IsValid() { return false; }
 
-        public virtual void ShowSolution() { this.displayType = DisplayType.Solution; OnRequestRefresh(EventArgs.Empty);  }
-        public virtual void ShowHints() { this.displayType = DisplayType.Hint; OnRequestRefresh(EventArgs.Empty); }
-        public virtual void ShowBoard() { this.displayType = DisplayType.Board; OnRequestRefresh(EventArgs.Empty); }
+        public virtual void ShowSolution() { this.displayType = DisplayType.Solution; OnRequestRefresh(EventArgs.Empty); }
+        public virtual void ShowHints()    { this.displayType = DisplayType.Hint;     OnRequestRefresh(EventArgs.Empty); }
+        public virtual void ShowBoard()    { this.displayType = DisplayType.Board;    OnRequestRefresh(EventArgs.Empty); }
 
         public virtual void InitDisplay() { }
 
-        public virtual Size GetPrefferedSize() { return new Size(500, 500); }
+        public virtual (int Width, int Height) GetPrefferedSize() { return (500, 500); }
 
-        public virtual void Draw(object drawingContext, float width, float height) { }
-        
-        //TODO: replace each method's params with those: MouseButtons button, int delta, float x, float y, float sizeX, float sizeY
-        public virtual void InputMouse(MouseEventArgs e, Size s) { }
-        public virtual void InputMouseDown(MouseEventArgs e, Size s) { }
-        public virtual void InputMouseMove(MouseEventArgs e, Size s) { }
-        public virtual void InputMouseUp(MouseEventArgs e, Size s) { }
-        public virtual void InputMouseWheel(MouseEventArgs e, Size size) { }
+        public virtual void Draw(IDrawingSurface surface, float width, float height)
+        {
+            _surface = surface;
+        }
 
-        //TODO: replace each method's params with those: int keyValue
-        public virtual void InputKey(KeyEventArgs e) { }
+        public virtual void HandlePointer(PointerEvent e, float sizeX, float sizeY) { }
+        public virtual void HandlePointerDown(PointerEvent e, float sizeX, float sizeY) { }
+        public virtual void HandlePointerMove(PointerEvent e, float sizeX, float sizeY) { }
+        public virtual void HandlePointerUp(PointerEvent e, float sizeX, float sizeY) { }
+        public virtual void HandlePointerWheel(PointerEvent e, float sizeX, float sizeY) { }
+        public virtual void HandleKey(KeyEvent e) { }
 
         public event EventHandler Refresh;
-        public event DrawRectangle EventDrawRectangle;
-        public event FillRectangle EventFillRectangle;
-        public event DrawText EventDrawText;
-        public event DrawLine EventDrawLine;
-        public event DrawPolygon EventDrawPolygon;
-
-        public delegate void DrawRectangle(object drawingContext, Pen pen, float x, float y, float width, float height);
-        public delegate void FillRectangle(object drawingContext, Brush brush, float x, float y, float width, float height);
-        public delegate void DrawText(object drawingContext, string s, Font font, Brush brush, RectangleF layoutRectangle, StringFormat format);
-        //TODO: add parameter "Thickness"
-        public delegate void DrawLine(object drawingContext, Pen pen, float x1, float y1, float x2, float y2);
-        public delegate void DrawPolygon(object drawingContext, Pen pen, SolidBrush brush, PointF[] points);
 
         protected virtual void OnRequestRefresh(EventArgs e)
         {
-            if (this.Refresh != null)
-                this.Refresh(null, e);
+            Refresh?.Invoke(null, e);
         }
-        protected virtual void OnRequestDrawRectangle(object drawingContext, Pen pen, float x, float y, float width, float height)
-        {
-            if (this.EventDrawRectangle != null)
-                this.EventDrawRectangle(drawingContext, pen, x, y, width, height);
-        }
-        protected virtual void OnRequestFillRectangle(object drawingContext, Brush brush, float x, float y, float width, float height)
-        {
-            if (this.EventFillRectangle != null)
-                this.EventFillRectangle(drawingContext, brush, x, y, width, height);
-        }
-        protected virtual void OnRequestDrawText(object drawingContext, string s, Font font, Brush brush, RectangleF layoutRectangle, StringFormat format)
-        {
-            if (this.EventDrawText != null)
-                this.EventDrawText(drawingContext, s, font, brush, layoutRectangle, format);
-        }
-        protected virtual void OnRequestDrawLine(object drawingContext, Pen pen, float x1, float y1, float x2, float y2)
-        {
-            if (this.EventDrawLine != null)
-                this.EventDrawLine(drawingContext, pen, x1, y1, x2, y2);
-        }
-        protected virtual void OnRequestDrawPolygon(object drawingContext, Pen pen, SolidBrush brush, PointF[] points)
-        {
-            if (this.EventDrawPolygon != null)
-                this.EventDrawPolygon(drawingContext, pen, brush, points);
-        }
+
+        protected void FillRect(PuzzlerColor fill, float x, float y, float w, float h)
+            => _surface?.FillRect(fill, x, y, w, h);
+
+        protected void DrawRect(PuzzlerColor stroke, float thickness, float x, float y, float w, float h)
+            => _surface?.DrawRect(stroke, thickness, x, y, w, h);
+
+        protected void DrawText(string text, PuzzlerFont f, PuzzlerColor color, float x, float y, float w, float h)
+            => _surface?.DrawText(text, f, color, x, y, w, h);
+
+        protected void DrawLine(PuzzlerColor color, float thickness, float x1, float y1, float x2, float y2)
+            => _surface?.DrawLine(color, thickness, x1, y1, x2, y2);
+
+        protected void DrawPolygon(PuzzlerColor stroke, float strokeThickness, PuzzlerColor fill, PuzzlerPoint[] points)
+            => _surface?.DrawPolygon(stroke, strokeThickness, fill, points);
     }
 
     public enum DisplayType
