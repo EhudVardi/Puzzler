@@ -4,9 +4,6 @@
     <TargetFramework>net10.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
-    <!-- UseWindowsForms is needed transitively because PresentationLogic still uses -->
-    <!-- System.Windows.Forms types (MouseEventArgs etc). Removed in Phase 4. -->
-    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>

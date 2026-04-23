@@ -1,53 +1,29 @@
-﻿using PresentationLogic;
+using PresentationLogic;
+using PresentationLogic.Rendering;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Drawing;
 using Common;
 
 namespace Presentation.WPF
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         internal static PresentationLogicBase PresentationLogicObject;
-        
+
         public MainWindow()
         {
             InitializeComponent();
             this.ucDataGridGenerator.RequestLoadPuzzle += ucDataGrid_RequestLoadPuzzle;
-            this.ucDataGridText.RequestLoadPuzzle += ucDataGrid_RequestLoadPuzzle;
-            this.ucDataGridWeb.RequestLoadPuzzle += ucDataGrid_RequestLoadPuzzle;
-
-            //<UserControls:PuzzlerCanvas.RenderTransform>
-            //    <TransformGroup>
-            //        <ScaleTransform x:Name="ScaleTransform" ScaleX="0.5" ScaleY="0.5"/>
-            //        <SkewTransform x:Name="SkewTransform" AngleX="-30" />
-            //        <RotateTransform x:Name="RotateTransform" />
-            //        <TranslateTransform x:Name="TranslateTransform" />
-            //    </TransformGroup>
-            //</UserControls:PuzzlerCanvas.RenderTransform>
-
-            //GameCanvasScaleTransform.ScaleX = GameCanvasScaleTransform.ScaleY = 0.5;
-            //GameCanvasSkewTransform.AngleX = -60;
+            this.ucDataGridText.RequestLoadPuzzle      += ucDataGrid_RequestLoadPuzzle;
+            this.ucDataGridWeb.RequestLoadPuzzle       += ucDataGrid_RequestLoadPuzzle;
         }
+
         void ucDataGrid_RequestLoadPuzzle(object sender, ucPuzzlerDataGrid.RequestLoadPuzzleEventArgs e)
         {
-            PresentationLogicObject.ReadFromFile(e.Path); 
+            PresentationLogicObject.ReadFromFile(e.Path);
             ResizeWindowForCurrentPuzzle();
         }
 
@@ -58,23 +34,12 @@ namespace Presentation.WPF
                 RadioButton rb = e.Source as RadioButton;
                 switch (rb.Content as string)
                 {
-                    case "Sudoku":
-                        PresentationLogicObject = new PresentationLogicSudoku();
-                        break;
-                    case "Kakuru":
-                        PresentationLogicObject = new PresentationLogicKakuru();
-                        break;
-                    case "Griddler":
-                        PresentationLogicObject = new PresentationLogicGriddler();
-                        break;
-                    case "Griddler Rails":
-                        PresentationLogicObject = new PresentationLogicGriddlerRails();
-                        break;
-                    case "Triddler":
-                        PresentationLogicObject = new PresentationLogicTriddler();
-                        break;
-                    default:
-                        throw new Exception();
+                    case "Sudoku":        PresentationLogicObject = new PresentationLogicSudoku();        break;
+                    case "Kakuru":        PresentationLogicObject = new PresentationLogicKakuru();        break;
+                    case "Griddler":      PresentationLogicObject = new PresentationLogicGriddler();      break;
+                    case "Griddler Rails":PresentationLogicObject = new PresentationLogicGriddlerRails(); break;
+                    case "Triddler":      PresentationLogicObject = new PresentationLogicTriddler();      break;
+                    default:              throw new Exception();
                 }
 
                 if (PresentationLogicObject != null)
@@ -84,7 +49,6 @@ namespace Presentation.WPF
                     this.ucDataGridText.SetData(puzzlesDic[Configuration.FromTextFolder]);
                     this.ucDataGridWeb.SetData(puzzlesDic[Configuration.FromWebFolder]);
 
-                    this.GameCanvas.HookEventsToPresentationLogicObject();
                     PresentationLogicObject.Initialize();
                     PresentationLogicObject.Refresh += PresentationLogicObject_Refresh;
                     rbtnDisplayModes_Checked(null, null);
@@ -100,10 +64,7 @@ namespace Presentation.WPF
             RefreshForm(e);
         }
 
-        private void RefreshForm()
-        {
-            RefreshForm(EventArgs.Empty);
-        }
+        private void RefreshForm()               => RefreshForm(EventArgs.Empty);
         private void RefreshForm(EventArgs e)
         {
             if (PresentationLogicObject != null)
@@ -114,19 +75,21 @@ namespace Presentation.WPF
                     this.lblStatus.Text = string.Format("Valid: {0}, Solved: {1}, Progress: {2}",
                         PresentationLogicObject.IsValid(),
                         PresentationLogicObject.IsSolved(),
-                        ((e is System.ComponentModel.ProgressChangedEventArgs) ?
-                        "Solving..." + (e as System.ComponentModel.ProgressChangedEventArgs).ProgressPercentage.ToString() : "Idle"));
-                    this.lblStatusTitle.Text = "Status:" + " OK";
+                        (e is System.ComponentModel.ProgressChangedEventArgs pce)
+                            ? "Solving..." + pce.ProgressPercentage : "Idle");
+                    this.lblStatusTitle.Text = "Status: OK";
                 }
-                catch (Exception) {
-                    this.lblStatusTitle.Text = "Status:" + " ERR";
+                catch (Exception)
+                {
+                    this.lblStatusTitle.Text = "Status: ERR";
                 }
             }
         }
+
         private void ResizeWindowForCurrentPuzzle()
         {
-            System.Drawing.Size size = PresentationLogicObject.GetPrefferedSize();
-            int preferedSWidth = (int)this.GameCanvas.ActualHeight * size.Width / size.Height;
+            var size = PresentationLogicObject.GetPrefferedSize();
+            int preferedSWidth = (int)(this.GameCanvas.ActualHeight * size.Width / size.Height);
             this.Width = this.Width + preferedSWidth - this.GameCanvas.ActualWidth;
         }
 
@@ -140,28 +103,28 @@ namespace Presentation.WPF
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            System.Windows.Point location = e.GetPosition(this.GameCanvas);
-            System.Windows.Forms.MouseEventArgs mea = new System.Windows.Forms.MouseEventArgs(System.Windows.Forms.MouseButtons.Left, 1, (int)location.X, (int)location.Y, 1);
-            MainWindow.PresentationLogicObject.InputMouse(mea, new System.Drawing.Size((int)this.GameCanvas.ActualWidth, (int)this.GameCanvas.ActualHeight));
+            if (PresentationLogicObject == null) return;
+            var location = e.GetPosition(this.GameCanvas);
+            var pev = new PointerEvent((float)location.X, (float)location.Y, PointerButton.Left);
+            PresentationLogicObject.HandlePointer(pev, (float)GameCanvas.ActualWidth, (float)GameCanvas.ActualHeight);
             RefreshForm();
         }
-        private void Window_MouseMove(object sender, MouseEventArgs e)
-        {
 
-        }
-        private void Window_MouseUp(object sender, MouseButtonEventArgs e)
-        {
+        private void Window_MouseMove(object sender, MouseEventArgs e) { }
+        private void Window_MouseUp(object sender, MouseButtonEventArgs e) { }
 
-        }
         private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            System.Windows.Forms.MouseEventArgs mea = new System.Windows.Forms.MouseEventArgs(System.Windows.Forms.MouseButtons.Left, 1, 0, 0, e.Delta);
-            MainWindow.PresentationLogicObject.InputMouseWheel(mea, new System.Drawing.Size((int)this.GameCanvas.ActualWidth, (int)this.GameCanvas.ActualHeight));
-
+            if (PresentationLogicObject == null) return;
+            var pev = new PointerEvent(0, 0, PointerButton.None, e.Delta);
+            PresentationLogicObject.HandlePointerWheel(pev, (float)GameCanvas.ActualWidth, (float)GameCanvas.ActualHeight);
         }
+
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            MainWindow.PresentationLogicObject.InputKey(new System.Windows.Forms.KeyEventArgs(ConvertWinfromsObjects.ConvertKeys(e.Key)));
+            if (PresentationLogicObject == null) return;
+            int keyValue = KeyInterop.VirtualKeyFromKey(e.Key);
+            PresentationLogicObject.HandleKey(new KeyEvent(keyValue));
             RefreshForm();
         }
 
@@ -173,17 +136,12 @@ namespace Presentation.WPF
 
         private void rbtnDisplayModes_Checked(object sender, RoutedEventArgs e)
         {
-            if (PresentationLogicObject == null)
-                return;
+            if (PresentationLogicObject == null) return;
             try
             {
-                if (rbtnClean.IsChecked == true)
-                    PresentationLogicObject.ShowBoard();
-                else if (rbtnHints.IsChecked == true)
-                    PresentationLogicObject.ShowHints();
-                else if (rbtnSolved.IsChecked == true)
-                    PresentationLogicObject.ShowSolution();
-                else { }
+                if      (rbtnClean.IsChecked  == true) PresentationLogicObject.ShowBoard();
+                else if (rbtnHints.IsChecked  == true) PresentationLogicObject.ShowHints();
+                else if (rbtnSolved.IsChecked == true) PresentationLogicObject.ShowSolution();
                 RefreshForm();
             }
             catch (Exception) { }
@@ -194,10 +152,11 @@ namespace Presentation.WPF
             PresentationLogicObject.ReadFromWeb(null);
             RefreshForm();
         }
+
         private void btnLoadFromText_Click(object sender, RoutedEventArgs e)
         {
             InputWindow inputWindow = new InputWindow();
-            inputWindow.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
+            inputWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             inputWindow.ShowDialog();
             if (inputWindow.DialogResult.HasValue && inputWindow.DialogResult.Value == true)
             {
@@ -225,5 +184,3 @@ namespace Presentation.WPF
         }
     }
 }
-
-
