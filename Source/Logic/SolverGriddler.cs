@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Logic.Griddler;
 using System.Collections;
@@ -49,7 +50,7 @@ namespace Logic
         public override bool DoCompleteStep()
         {
             foreach (GroupGriddler group in this.Board.Groups)
-                if (_groupsVariations[group].Count > 1 || group.Cells.FindAll(c=>c.Value==null).Count > 0) //if group is not all fixed (solved)
+                if (_groupsVariations[group].Count > 1 || group.Cells.Any(c => c.Value == null)) //if group is not all fixed (solved)
                     ReflectIntegratedVariationToCells(group, _groupsVariations[group]);
 
             foreach (GroupGriddler group in this.Board.Groups)
