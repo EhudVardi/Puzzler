@@ -15,7 +15,12 @@ namespace Common.Models.Base
         public TCell[,] CellsMatrix
         {
             get { return _cellsMatrix; }
-            set { _cellsMatrix = value; }
+            set
+            {
+                _cellsMatrix = value;
+                _valueCellsCache = null;
+                _groupHolderCellsCache = null;
+            }
         }
 
         protected List<TGroup> _groups = null!;
@@ -32,27 +37,35 @@ namespace Common.Models.Base
             set { _initialCells = value; }
         }
 
+        private List<TValueCell>? _valueCellsCache;
         public virtual List<TValueCell> ValueCells
         {
             get
             {
-                List<TValueCell> valueCells = new List<TValueCell>();
-                foreach (TCell cell in this.CellsMatrix)
-                    if (cell.GetType() == typeof(TValueCell) && cell is TValueCell vc)
-                        valueCells.Add(vc);
-                return valueCells;
+                if (_valueCellsCache == null)
+                {
+                    _valueCellsCache = new List<TValueCell>();
+                    foreach (TCell cell in _cellsMatrix)
+                        if (cell is TValueCell vc)
+                            _valueCellsCache.Add(vc);
+                }
+                return _valueCellsCache;
             }
         }
 
+        private List<TGroupHolder>? _groupHolderCellsCache;
         public virtual List<TGroupHolder> GroupHolderCells
         {
             get
             {
-                List<TGroupHolder> cells = new List<TGroupHolder>();
-                foreach (TCell cell in this.CellsMatrix)
-                    if (cell.GetType() == typeof(TGroupHolder) && cell is TGroupHolder gh)
-                        cells.Add(gh);
-                return cells;
+                if (_groupHolderCellsCache == null)
+                {
+                    _groupHolderCellsCache = new List<TGroupHolder>();
+                    foreach (TCell cell in _cellsMatrix)
+                        if (cell is TGroupHolder gh)
+                            _groupHolderCellsCache.Add(gh);
+                }
+                return _groupHolderCellsCache;
             }
         }
 
