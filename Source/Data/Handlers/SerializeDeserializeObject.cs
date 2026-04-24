@@ -14,46 +14,16 @@ namespace Data
 
         public void SerializePuzzle(string xmlFilePath, object puzzle, Type type)
         {
-            try
-            {
-                serializer = new XmlSerializer(type);
-                writer = new StreamWriter(xmlFilePath);
+            serializer = new XmlSerializer(type);
+            using (writer = new StreamWriter(xmlFilePath))
                 serializer.Serialize(writer.BaseStream, puzzle);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                writer.Close();
-                writer.Dispose();
-            }
         }
 
         public object DeserializePuzzle(string xmlFilePath, Type type)
         {
-            object puzzle = new object();
-            
-            try
-            {
-                serializer = new XmlSerializer(type);
-                reader = new StreamReader(xmlFilePath);
-                object deserialized = serializer.Deserialize(reader.BaseStream);
-
-                puzzle = deserialized;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                reader.Close();
-                reader.Dispose();
-            }
-
-            return puzzle;
+            serializer = new XmlSerializer(type);
+            using (reader = new StreamReader(xmlFilePath))
+                return serializer.Deserialize(reader.BaseStream);
         }
 
     }

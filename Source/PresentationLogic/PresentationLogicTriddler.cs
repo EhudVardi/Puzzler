@@ -110,23 +110,20 @@ namespace PresentationLogic
 
         public override void HandlePointer(PointerEvent e, float sizeX, float sizeY)
         {
-            try
+            BoardTriddler b = this.GetTrackerBoard();
+            if (b == null) return;
+            var ((row, col), isRight) = GetBoardCoordinates(e, sizeX, sizeY, b);
+            if (row > -1 && row < b.Rows && col > -1 && col < b.Rows)
             {
-                BoardTriddler b = this.GetTrackerBoard();
-                var ((row, col), isRight) = GetBoardCoordinates(e, sizeX, sizeY, b);
-                if (row > -1 && row < b.Rows && col > -1 && col < b.Rows)
-                {
-                    CellValueTriddler pointedCell = (isRight ? b.CellsMatrixRight : b.CellsMatrixLeft)[row, col] as CellValueTriddler;
-                    if (!b.InitialCells.Contains(pointedCell))
-                        selectedValueCell = pointedCell;
-                }
-                else
-                {
-                    selectedValueCell = null;
-                }
-                this.OnRequestRefresh(EventArgs.Empty);
+                CellValueTriddler pointedCell = (isRight ? b.CellsMatrixRight : b.CellsMatrixLeft)[row, col] as CellValueTriddler;
+                if (!b.InitialCells.Contains(pointedCell))
+                    selectedValueCell = pointedCell;
             }
-            catch (Exception) { }
+            else
+            {
+                selectedValueCell = null;
+            }
+            this.OnRequestRefresh(EventArgs.Empty);
         }
 
         protected ((int row, int col) pos, bool isRight) GetBoardCoordinates(PointerEvent e, float sizeX, float sizeY, BoardTriddler b)

@@ -10,24 +10,10 @@ namespace Data
     {
         private static string GetWebPage(string url)
         {
-            string html = null;
-            try
-            {
-                WebRequest request = WebRequest.Create(url);
-                WebResponse response = request.GetResponse();
-                Stream data = response.GetResponseStream();
-                html = String.Empty;
-                using (StreamReader sr = new StreamReader(data))
-                {
-                    html = sr.ReadToEnd();
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return html;
+            WebRequest request = WebRequest.Create(url);
+            WebResponse response = request.GetResponse();
+            using (StreamReader sr = new StreamReader(response.GetResponseStream()))
+                return sr.ReadToEnd();
         }
 
         public static HtmlAgilityPack.HtmlDocument GetWebPageAsHtmlDocument(string url)

@@ -2,9 +2,13 @@ using PresentationLogic;
 using PresentationLogic.Rendering;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Net.Http;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Xml;
 using Common;
 
 namespace Presentation.WPF
@@ -24,8 +28,13 @@ namespace Presentation.WPF
 
         void ucDataGrid_RequestLoadPuzzle(object sender, ucPuzzlerDataGrid.RequestLoadPuzzleEventArgs e)
         {
-            PresentationLogicObject.ReadFromFile(e.Path);
-            ResizeWindowForCurrentPuzzle();
+            try
+            {
+                PresentationLogicObject.ReadFromFile(e.Path);
+                ResizeWindowForCurrentPuzzle();
+            }
+            catch (IOException ex)  { ShowError(ex.Message); }
+            catch (XmlException ex) { ShowError(ex.Message); }
         }
 
         private void btnSelectPuzzles_Checked(object sender, RoutedEventArgs e)
@@ -58,7 +67,8 @@ namespace Presentation.WPF
 
                 RefreshForm();
             }
-            catch (Exception) { }
+            catch (IOException ex)  { ShowError(ex.Message); }
+            catch (XmlException ex) { ShowError(ex.Message); }
         }
 
         void PresentationLogicObject_Refresh(object sender, EventArgs e)
@@ -81,9 +91,9 @@ namespace Presentation.WPF
                             ? "Solving..." + pce.ProgressPercentage : "Idle");
                     this.lblStatusTitle.Text = "Status: OK";
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    this.lblStatusTitle.Text = "Status: ERR";
+                    this.lblStatusTitle.Text = $"Status: ERR ({ex.GetType().Name})";
                 }
             }
         }
@@ -139,20 +149,22 @@ namespace Presentation.WPF
         private void rbtnDisplayModes_Checked(object sender, RoutedEventArgs e)
         {
             if (PresentationLogicObject == null) return;
-            try
-            {
-                if      (rbtnClean.IsChecked  == true) PresentationLogicObject.ShowBoard();
-                else if (rbtnHints.IsChecked  == true) PresentationLogicObject.ShowHints();
-                else if (rbtnSolved.IsChecked == true) PresentationLogicObject.ShowSolution();
-                RefreshForm();
-            }
-            catch (Exception) { }
+            if      (rbtnClean.IsChecked  == true) PresentationLogicObject.ShowBoard();
+            else if (rbtnHints.IsChecked  == true) PresentationLogicObject.ShowHints();
+            else if (rbtnSolved.IsChecked == true) PresentationLogicObject.ShowSolution();
+            RefreshForm();
         }
 
         private void btnLoadFromWeb_Click(object sender, RoutedEventArgs e)
         {
-            PresentationLogicObject.ReadFromWeb(null);
-            RefreshForm();
+            try
+            {
+                PresentationLogicObject.ReadFromWeb(null);
+                RefreshForm();
+            }
+            catch (WebException ex)         { ShowError(ex.Message); }
+            catch (HttpRequestException ex)  { ShowError(ex.Message); }
+            catch (IOException ex)           { ShowError(ex.Message); }
         }
 
         private void btnLoadFromText_Click(object sender, RoutedEventArgs e)
@@ -162,9 +174,15 @@ namespace Presentation.WPF
             inputWindow.ShowDialog();
             if (inputWindow.DialogResult.HasValue && inputWindow.DialogResult.Value == true)
             {
-                PresentationLogicObject.ReadFromText(inputWindow.Data);
-                ResizeWindowForCurrentPuzzle();
-                RefreshForm();
+                try
+                {
+                    PresentationLogicObject.ReadFromText(inputWindow.Data);
+                    ResizeWindowForCurrentPuzzle();
+                    RefreshForm();
+                }
+                catch (FormatException ex)          { ShowError(ex.Message); }
+                catch (IndexOutOfRangeException ex)  { ShowError("Malformed input: " + ex.Message); }
+                catch (XmlException ex)              { ShowError(ex.Message); }
             }
         }
 
@@ -184,5 +202,8 @@ namespace Presentation.WPF
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
+
+        private static void ShowError(string message) =>
+            MessageBox.Show(message, "Puzzler", MessageBoxButton.OK, MessageBoxImage.Error);
     }
 }

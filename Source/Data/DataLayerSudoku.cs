@@ -207,51 +207,43 @@ namespace Data
 
         public static string ParsePuzzleStringFromText_1(string text)
         {
-            try
+            string xmlDocument = "";
+
+            xmlDocument += SudokuMainHeader + "\n";
+
+            string[] sep1 = text.Split(new char[] { '\n' });
+
+            string size = sep1[0];
+
+            xmlDocument += sizeHeader + size.ToString() + sizeFooter + "\n";
+
+            string fixedNumbers = sep1[1];
+
+            string[] sep2 = fixedNumbers.Split(new char[] { '\t' });
+
+            xmlDocument += fixedNumbersHeader + "\n";
+
+            foreach (string fixedNum in sep2)
             {
-
-                string xmlDocument = "";
-
-                xmlDocument += SudokuMainHeader + "\n";
-
-                string[] sep1 = text.Split(new char[] { '\n' });
-
-                string size = sep1[0];
-
-                xmlDocument += sizeHeader + size.ToString() + sizeFooter + "\n";
-
-                string fixedNumbers = sep1[1];
-
-                string[] sep2 = fixedNumbers.Split(new char[] { '\t' });
-
-                xmlDocument += fixedNumbersHeader + "\n";
-
-                foreach (string fixedNum in sep2)
+                if (!string.IsNullOrEmpty(fixedNum))
                 {
-                    if (!string.IsNullOrEmpty(fixedNum))
-                    {
-                        xmlDocument += sudokuCellFixedNumberHeader + "\n";
+                    xmlDocument += sudokuCellFixedNumberHeader + "\n";
 
-                        string[] sep3 = fixedNum.Split(new char[] { ',' });
+                    string[] sep3 = fixedNum.Split(new char[] { ',' });
 
-                        xmlDocument += rowHeader + sep3[0].ToString() + rowFooter + "\n";
-                        xmlDocument += columnHeader + sep3[1].ToString() + columnFooter + "\n";
-                        xmlDocument += numberHeader + sep3[2].ToString() + numberFooter + "\n";
+                    xmlDocument += rowHeader + sep3[0].ToString() + rowFooter + "\n";
+                    xmlDocument += columnHeader + sep3[1].ToString() + columnFooter + "\n";
+                    xmlDocument += numberHeader + sep3[2].ToString() + numberFooter + "\n";
 
-                        xmlDocument += sudokuCellFixedNumberFooter + "\n";
-                    }
+                    xmlDocument += sudokuCellFixedNumberFooter + "\n";
                 }
-
-                xmlDocument += fixedNumbersFooter + "\n";
-
-                xmlDocument += SudokuMainFooter + "\n";
-
-                return xmlDocument;
             }
-            catch (Exception ex)
-            {
-                return null;
-            }
+
+            xmlDocument += fixedNumbersFooter + "\n";
+
+            xmlDocument += SudokuMainFooter + "\n";
+
+            return xmlDocument;
         }
 
 

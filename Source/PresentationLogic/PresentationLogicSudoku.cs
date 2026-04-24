@@ -93,33 +93,28 @@ namespace PresentationLogic
 
         public override void HandlePointer(PointerEvent e, float sizeX, float sizeY)
         {
-            try
-            {
-                BoardSudoku b  = this.GetTrackerBoard();
-                int column = (int)(e.X / (sizeX / b.Columns));
-                int row    = (int)(e.Y / (sizeY / b.Rows));
-                CellValueSudoku pointedCell = b.CellsMatrix[row, column] as CellValueSudoku;
-                if (!b.InitialCells.Contains(pointedCell))
-                    selectedValueCell = pointedCell;
-                this.OnRequestRefresh(EventArgs.Empty);
-            }
-            catch (Exception) { }
+            BoardSudoku b = this.GetTrackerBoard();
+            if (b == null) return;
+            int column = (int)(e.X / (sizeX / b.Columns));
+            int row    = (int)(e.Y / (sizeY / b.Rows));
+            if (row < 0 || row >= b.Rows || column < 0 || column >= b.Columns) return;
+            CellValueSudoku pointedCell = b.CellsMatrix[row, column] as CellValueSudoku;
+            if (!b.InitialCells.Contains(pointedCell))
+                selectedValueCell = pointedCell;
+            this.OnRequestRefresh(EventArgs.Empty);
         }
 
         public override void HandleKey(KeyEvent e)
         {
-            try
-            {
-                BoardSudoku board = GetTrackerBoard();
-                int numRequested = e.KeyValue - 49;
-                if (selectedValueCell != null)
-                    if (numRequested > -1 && numRequested < board.Size)
-                        selectedValueCell.Value = numRequested;
-                    else
-                        selectedValueCell.Value = null;
-                this.OnRequestRefresh(EventArgs.Empty);
-            }
-            catch (Exception) { }
+            BoardSudoku board = GetTrackerBoard();
+            if (board == null) return;
+            int numRequested = e.KeyValue - 49;
+            if (selectedValueCell != null)
+                if (numRequested > -1 && numRequested < board.Size)
+                    selectedValueCell.Value = numRequested;
+                else
+                    selectedValueCell.Value = null;
+            this.OnRequestRefresh(EventArgs.Empty);
         }
 
         public override void HandlePointerWheel(PointerEvent e, float sizeX, float sizeY)

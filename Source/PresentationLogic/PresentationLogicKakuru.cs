@@ -95,17 +95,15 @@ namespace PresentationLogic
 
         public override void HandlePointer(PointerEvent e, float sizeX, float sizeY)
         {
-            try
-            {
-                BoardKakuru b = this.GetTrackerBoard();
-                int column = (int)(e.X / (sizeX / b.Columns));
-                int row    = (int)(e.Y / (sizeY / b.Rows));
-                CellValueKakuru pointedCell = b.CellsMatrix[row, column] as CellValueKakuru;
-                if (!b.InitialCells.Contains(pointedCell))
-                    selectedValueCell = pointedCell;
-                this.OnRequestRefresh(EventArgs.Empty);
-            }
-            catch (Exception) { }
+            BoardKakuru b = this.GetTrackerBoard();
+            if (b == null) return;
+            int column = (int)(e.X / (sizeX / b.Columns));
+            int row    = (int)(e.Y / (sizeY / b.Rows));
+            if (row < 0 || row >= b.Rows || column < 0 || column >= b.Columns) return;
+            CellValueKakuru pointedCell = b.CellsMatrix[row, column] as CellValueKakuru;
+            if (!b.InitialCells.Contains(pointedCell))
+                selectedValueCell = pointedCell;
+            this.OnRequestRefresh(EventArgs.Empty);
         }
 
         public override void HandlePointerWheel(PointerEvent e, float sizeX, float sizeY)

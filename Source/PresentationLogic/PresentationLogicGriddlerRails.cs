@@ -24,82 +24,74 @@ namespace PresentationLogic
 
         public override void DrawBoard(BoardGriddler trackerBoard, BoardGriddler solvedBoard, float width, float height)
         {
-            try
+            if (visualBoard == null) return;
+
+            float cellWidth  = width  / trackerBoard.Columns;
+            float cellHeight = height / trackerBoard.Rows;
+
+            PuzzlerColor rowBrushBack = PuzzlerColor.Red.WithAlpha(16);
+            PuzzlerColor rowBrushFore = PuzzlerColor.Red.WithAlpha(224);
+            PuzzlerColor colBrushBack = PuzzlerColor.Green.WithAlpha(16);
+            PuzzlerColor colBrushFore = PuzzlerColor.Green.WithAlpha(224);
+
+            if (this.visualBoard.SelectedRailGroup)
             {
-                float cellWidth  = width  / trackerBoard.Columns;
-                float cellHeight = height / trackerBoard.Rows;
-
-                PuzzlerColor rowBrushBack = PuzzlerColor.Red.WithAlpha(16);
-                PuzzlerColor rowBrushFore = PuzzlerColor.Red.WithAlpha(224);
-                PuzzlerColor colBrushBack = PuzzlerColor.Green.WithAlpha(16);
-                PuzzlerColor colBrushFore = PuzzlerColor.Green.WithAlpha(224);
-
-                if (this.visualBoard.SelectedRailGroup)
-                {
-                    DrawRows(cellWidth, cellHeight, rowBrushFore);
-                    DrawColumns(cellWidth, cellHeight, colBrushBack);
-                }
-                else
-                {
-                    DrawColumns(cellWidth, cellHeight, colBrushFore);
-                    DrawRows(cellWidth, cellHeight, rowBrushBack);
-                }
+                DrawRows(cellWidth, cellHeight, rowBrushFore);
+                DrawColumns(cellWidth, cellHeight, colBrushBack);
             }
-            catch (Exception) { }
+            else
+            {
+                DrawColumns(cellWidth, cellHeight, colBrushFore);
+                DrawRows(cellWidth, cellHeight, rowBrushBack);
+            }
         }
 
         public override void HandlePointerDown(PointerEvent e, float sizeX, float sizeY)
         {
-            try
+            if (e.Button != PointerButton.Left) return;
+            BoardGriddler b = this.GetTrackerBoard();
+            if (b == null || visualBoard == null) return;
+            var (row, col) = GetBoardCoordinates(e, sizeX, sizeY, b);
+
+            if (this.visualBoard.SelectedRailGroup)
             {
-                if (e.Button == PointerButton.Left)
+                if (col < 0 || col >= visualBoard.RowRails.Count) return;
+                Rail r = visualBoard.RowRails[col];
+                Car c = null;
+                for (int i = 0; i < r.Cars.Count; i++)
                 {
-                    BoardGriddler b = this.GetTrackerBoard();
-                    var (row, col) = GetBoardCoordinates(e, sizeX, sizeY, b);
-
-                    if (this.visualBoard.SelectedRailGroup)
-                    {
-                        Rail r = visualBoard.RowRails[col];
-                        Car c = null;
-                        for (int i = 0; i < r.Cars.Count; i++)
-                        {
-                            c = r.Cars[i];
-                            if (row >= c.Position && row <= (c.Position + c.Size))
-                                break;
-                        }
-                        selectedRowCar    = c;
-                        selectedColumnCar = null;
-                    }
-                    else
-                    {
-                        Rail r = visualBoard.ColumnRails[row];
-                        Car c = null;
-                        for (int i = 0; i < r.Cars.Count; i++)
-                        {
-                            c = r.Cars[i];
-                            if (col >= c.Position && col <= (c.Position + c.Size))
-                                break;
-                        }
-                        selectedRowCar    = null;
-                        selectedColumnCar = c;
-                    }
-
-                    this.OnRequestRefresh(EventArgs.Empty);
+                    c = r.Cars[i];
+                    if (row >= c.Position && row <= (c.Position + c.Size))
+                        break;
                 }
+                selectedRowCar    = c;
+                selectedColumnCar = null;
             }
-            catch (Exception) { }
+            else
+            {
+                if (row < 0 || row >= visualBoard.ColumnRails.Count) return;
+                Rail r = visualBoard.ColumnRails[row];
+                Car c = null;
+                for (int i = 0; i < r.Cars.Count; i++)
+                {
+                    c = r.Cars[i];
+                    if (col >= c.Position && col <= (c.Position + c.Size))
+                        break;
+                }
+                selectedRowCar    = null;
+                selectedColumnCar = c;
+            }
+
+            this.OnRequestRefresh(EventArgs.Empty);
         }
 
         public override void HandlePointer(PointerEvent e, float sizeX, float sizeY)
         {
             if (e.Button == PointerButton.Left)
             {
-                try
+                BoardGriddler b = this.GetTrackerBoard();
+                if (b != null && visualBoard != null)
                 {
-                    BoardGriddler b = this.GetTrackerBoard();
-                    int column = (int)(e.X / (sizeX / b.Columns));
-                    int row    = (int)(e.Y / (sizeY / b.Rows));
-
                     if (this.visualBoard.SelectedRailGroup)
                     {
                         // row rail selected — placeholder for drag logic
@@ -107,9 +99,8 @@ namespace PresentationLogic
 
                     this.OnRequestRefresh(EventArgs.Empty);
                 }
-                catch (Exception) { }
             }
-            else
+            else if (visualBoard != null)
             {
                 this.visualBoard.SelectedRailGroup = !this.visualBoard.SelectedRailGroup;
                 this.selectedRowCar    = null;
@@ -121,26 +112,22 @@ namespace PresentationLogic
 
         public override void HandleKey(KeyEvent e)
         {
-            try
+            if (visualBoard == null) return;
+            if (e.KeyValue == 88)
             {
-                if (e.KeyValue == 88)
-                {
-                    if (this.visualBoard.SelectedRailGroup)
-                    { if (this.selectedRowCar    != null) this.selectedRowCar.MoveForward(); }
-                    else
-                    { if (this.selectedColumnCar != null) this.selectedColumnCar.MoveForward(); }
-                }
-                else if (e.KeyValue == 90)
-                {
-                    if (this.visualBoard.SelectedRailGroup)
-                    { if (this.selectedRowCar    != null) this.selectedRowCar.MoveBackwards(); }
-                    else
-                    { if (this.selectedColumnCar != null) this.selectedColumnCar.MoveBackwards(); }
-                }
-
-                OnRequestRefresh(EventArgs.Empty);
+                if (this.visualBoard.SelectedRailGroup)
+                { if (this.selectedRowCar    != null) this.selectedRowCar.MoveForward(); }
+                else
+                { if (this.selectedColumnCar != null) this.selectedColumnCar.MoveForward(); }
             }
-            catch (Exception) { }
+            else if (e.KeyValue == 90)
+            {
+                if (this.visualBoard.SelectedRailGroup)
+                { if (this.selectedRowCar    != null) this.selectedRowCar.MoveBackwards(); }
+                else
+                { if (this.selectedColumnCar != null) this.selectedColumnCar.MoveBackwards(); }
+            }
+            OnRequestRefresh(EventArgs.Empty);
         }
 
         private void DrawColumns(float cellWidth, float cellHeight, PuzzlerColor color)
@@ -185,8 +172,8 @@ namespace PresentationLogic
 
         private void DrawCar(PuzzlerColor color, int x, int y, int w, int h)
         {
-            try { FillRect(color, x, y, w, h); }
-            catch (Exception) { }
+            if (w <= 0 || h <= 0) return;
+            FillRect(color, x, y, w, h);
         }
 
         private VisualBoard visualBoard;

@@ -87,10 +87,7 @@ namespace Data
 
         public static string ParsePuzzleStringFromText_1(string fileData)
         {
-            try
-            {
-
-                string xmlDocument = "";
+            string xmlDocument = "";
 
                 xmlDocument += kakuruMainHeader + "\n";
 
@@ -191,14 +188,6 @@ namespace Data
 
 
                 return xmlDocument;
-
-
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-
         }
 
 
