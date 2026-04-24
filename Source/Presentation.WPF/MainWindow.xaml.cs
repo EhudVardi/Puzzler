@@ -24,6 +24,11 @@ namespace Presentation.WPF
             this.ucDataGridGenerator.RequestLoadPuzzle += ucDataGrid_RequestLoadPuzzle;
             this.ucDataGridText.RequestLoadPuzzle      += ucDataGrid_RequestLoadPuzzle;
             this.ucDataGridWeb.RequestLoadPuzzle       += ucDataGrid_RequestLoadPuzzle;
+
+            this.btnSelectSudoku.Tag   = PuzzleRegistry.Find("Sudoku");
+            this.btnSelectKakuru.Tag   = PuzzleRegistry.Find("Kakuru");
+            this.btnSelectGriddler.Tag = PuzzleRegistry.Find("Griddler");
+            this.btnSelectTriddler.Tag = PuzzleRegistry.Find("Triddler");
         }
 
         void ucDataGrid_RequestLoadPuzzle(object sender, ucPuzzlerDataGrid.RequestLoadPuzzleEventArgs e)
@@ -42,29 +47,19 @@ namespace Presentation.WPF
             try
             {
                 RadioButton rb = e.Source as RadioButton;
-                switch (rb.Content as string)
-                {
-                    case "Sudoku":        PresentationLogicObject = new PresentationLogicSudoku();        break;
-                    case "Kakuru":        PresentationLogicObject = new PresentationLogicKakuru();        break;
-                    case "Griddler":      PresentationLogicObject = new PresentationLogicGriddler();      break;
-                    case "Griddler Rails":PresentationLogicObject = new PresentationLogicGriddlerRails(); break;
-                    case "Triddler":      PresentationLogicObject = new PresentationLogicTriddler();      break;
-                    default:              throw new Exception();
-                }
+                IPuzzleDescriptor descriptor = rb?.Tag as IPuzzleDescriptor
+                    ?? throw new InvalidOperationException($"No puzzle descriptor on '{rb?.Content}'");
+                PresentationLogicObject = descriptor.Create();
+                PresentationLogicObject.Options = _options;
 
-                if (PresentationLogicObject != null)
-                {
-                    PresentationLogicObject.Options = _options;
-                    Dictionary<string, List<string>> puzzlesDic = PresentationLogicObject.ReadFileList();
-                    this.ucDataGridGenerator.SetData(puzzlesDic[_options.FromGeneratorFolder]);
-                    this.ucDataGridText.SetData(puzzlesDic[_options.FromTextFolder]);
-                    this.ucDataGridWeb.SetData(puzzlesDic[_options.FromWebFolder]);
+                Dictionary<string, List<string>> puzzlesDic = PresentationLogicObject.ReadFileList();
+                this.ucDataGridGenerator.SetData(puzzlesDic[_options.FromGeneratorFolder]);
+                this.ucDataGridText.SetData(puzzlesDic[_options.FromTextFolder]);
+                this.ucDataGridWeb.SetData(puzzlesDic[_options.FromWebFolder]);
 
-                    PresentationLogicObject.Initialize();
-                    PresentationLogicObject.Refresh += PresentationLogicObject_Refresh;
-                    rbtnDisplayModes_Checked(null, null);
-                }
-
+                PresentationLogicObject.Initialize();
+                PresentationLogicObject.Refresh += PresentationLogicObject_Refresh;
+                rbtnDisplayModes_Checked(null, null);
                 RefreshForm();
             }
             catch (IOException ex)  { ShowError(ex.Message); }
