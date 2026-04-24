@@ -12,68 +12,83 @@ namespace Logic
     {
 
         Dictionary<GroupKakuru, List<List<int>>> _groupsValidVariations = null!;
+        Dictionary<(CellValueKakuru, GroupKakuru), int> _cellPositionInGroup = null!;
 
 
 
         public override void SolveInitiation()
         {
             _groupsValidVariations = new Dictionary<GroupKakuru, List<List<int>>>();
+            _cellPositionInGroup = new Dictionary<(CellValueKakuru, GroupKakuru), int>();
 
             foreach (GroupKakuru group in this.Board.Groups)
+            {
                 _groupsValidVariations.Add(group, CalculateAllSumValidVariations(group));
+                for (int i = 0; i < group.Cells.Count; i++)
+                    _cellPositionInGroup[(group.Cells[i], group)] = i;
+            }
         }
 
         public override bool DoCompleteStep()
         {
             bool anyChanges = false;
 
-            //for each fill cell, cross check each right group variation for at least one matching variation in the down group, and vice versa.
+            //for each fill cell, cross check each group variation for at least one matching variation in every other group.
             foreach (CellValueKakuru fillCell in this.Board.ValueCells)
-                foreach (GroupKakuru firstGroup in fillCell.Groups)
-                    foreach (GroupKakuru secondGroup in fillCell.Groups)
-                        if (!object.ReferenceEquals(firstGroup, secondGroup))
-                        {
-                            int cellPositionInFirstGroup = firstGroup.Cells.IndexOf(fillCell);
-                            int cellPositionInSecondGroup = secondGroup.Cells.IndexOf(fillCell);
+            {
+                var groups = fillCell.Groups;
+                for (int a = 0; a < groups.Count; a++)
+                {
+                    GroupKakuru firstGroup = groups[a];
+                    int posInFirst = _cellPositionInGroup[(fillCell, firstGroup)];
 
-                            for (int i = 0; i < _groupsValidVariations[firstGroup].Count; i++)
-                            {
-                                List<int> firstGroupVariation = _groupsValidVariations[firstGroup][i];
+                    for (int b = a + 1; b < groups.Count; b++)
+                    {
+                        GroupKakuru secondGroup = groups[b];
+                        int posInSecond = _cellPositionInGroup[(fillCell, secondGroup)];
 
-                                bool anyMatch = false;
-
-                                for (int j = 0; j < _groupsValidVariations[secondGroup].Count; j++)
-                                {
-                                    List<int> secondGroupVariation = _groupsValidVariations[secondGroup][j];
-
-                                    if (firstGroupVariation[cellPositionInFirstGroup] == secondGroupVariation[cellPositionInSecondGroup])
-                                    {
-                                        anyMatch = true;
-                                        break;
-                                    }
-                                }
-
-                                if (anyMatch == false)
-                                {
-                                    _groupsValidVariations[firstGroup].RemoveAt(i);
-                                    i--;
-                                    anyChanges = true;
-                                }
-                            }
-
-
-                        }
-
+                        anyChanges |= FilterVariationsByPosition(firstGroup, posInFirst, secondGroup, posInSecond);
+                        anyChanges |= FilterVariationsByPosition(secondGroup, posInSecond, firstGroup, posInFirst);
+                    }
+                }
+            }
 
             //for each group check if there's only one valid variation. if so, then fix all cells according to that variation
             foreach (GroupKakuru group in this.Board.Groups)
-            {
                 anyChanges |= FixAllCellsByOneValidVariation(group);
-            }
-
-
 
             return anyChanges;
+        }
+
+        private bool FilterVariationsByPosition(GroupKakuru targetGroup, int targetPos,
+                                                 GroupKakuru referenceGroup, int referencePos)
+        {
+            List<List<int>> targetVariations = _groupsValidVariations[targetGroup];
+            List<List<int>> referenceVariations = _groupsValidVariations[referenceGroup];
+
+            List<List<int>> survivors = new List<List<int>>(targetVariations.Count);
+            bool removed = false;
+
+            foreach (List<int> targetVariation in targetVariations)
+            {
+                int targetValue = targetVariation[targetPos];
+                bool anyMatch = false;
+                foreach (List<int> referenceVariation in referenceVariations)
+                {
+                    if (referenceVariation[referencePos] == targetValue)
+                    {
+                        anyMatch = true;
+                        break;
+                    }
+                }
+                if (anyMatch)
+                    survivors.Add(targetVariation);
+                else
+                    removed = true;
+            }
+
+            _groupsValidVariations[targetGroup] = survivors;
+            return removed;
         }
 
 
