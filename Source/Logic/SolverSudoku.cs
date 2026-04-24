@@ -174,62 +174,40 @@ namespace Logic
 
         public bool ApplySubGroupsToSharedGroups(GroupSudoku group)
         {
-
-            //  for each subgroup
-            //      for each pos in subgroup
-            //          List cells with that pos in that subgroup
-            //          apply pos to all shared groups of that cell list
-
             bool anyChange = false;
 
             foreach (List<CellValueSudoku> subGroup in _groupsSubGroups[group])
             {
                 for (int i = 0; i < group.Size; i++)
                 {
-                    List<CellValueSudoku> cellsWithPos = new List<CellValueSudoku>();
+                    HashSet<CellValueSudoku> cellsWithPos = new HashSet<CellValueSudoku>();
                     foreach (CellValueSudoku cell in subGroup)
-                        if (_cellsChoiceMap[cell].GetSingleBit(i) == true)
+                        if (_cellsChoiceMap[cell].GetSingleBit(i))
                             cellsWithPos.Add(cell);
 
-                    if (cellsWithPos.Count > 0)
+                    if (cellsWithPos.Count == 0)
+                        continue;
+
+                    // intersect each cell's group list → only groups shared by every cell with bit i set
+                    HashSet<GroupSudoku>? sharedGroups = null;
+                    foreach (CellValueSudoku cell in cellsWithPos)
                     {
-                        List<GroupSudoku> uniqueSharedGroup = new List<GroupSudoku>();
-                        foreach (CellValueSudoku cell in cellsWithPos)
-                            foreach (GroupSudoku cellGroup in cell.Groups)
-                                if (!uniqueSharedGroup.Contains(cellGroup)) 
-                                    uniqueSharedGroup.Add(cellGroup);
-
-                        for (int j = 0; j < uniqueSharedGroup.Count; j++)
-                        {
-                            bool shared = true;
-                            foreach (CellValueSudoku cell in cellsWithPos)
-                                if (!cell.Groups.Contains(uniqueSharedGroup[j]))
-                                {
-                                    shared = false;
-                                    break;
-                                }
-
-                            if (!shared)
-                            {
-                                uniqueSharedGroup.RemoveAt(j);
-                                j--;
-                            }
-                        }
-
-
-                        foreach (GroupSudoku sharedGroup in uniqueSharedGroup)
-                            foreach (CellValueSudoku cell in sharedGroup.Cells)
-                                if (!cellsWithPos.Contains(cell))
-                                    if (_cellsChoiceMap[cell].GetSingleBit(i))
-                                    {
-                                        _cellsChoiceMap[cell].SetSingleBit(i, false);
-                                        anyChange = true;
-                                    }
+                        if (sharedGroups == null)
+                            sharedGroups = new HashSet<GroupSudoku>(cell.Groups);
+                        else
+                            sharedGroups.IntersectWith(cell.Groups);
                     }
 
+                    foreach (GroupSudoku sharedGroup in sharedGroups!)
+                        foreach (CellValueSudoku cell in sharedGroup.Cells)
+                            if (!cellsWithPos.Contains(cell))
+                                if (_cellsChoiceMap[cell].GetSingleBit(i))
+                                {
+                                    _cellsChoiceMap[cell].SetSingleBit(i, false);
+                                    anyChange = true;
+                                }
                 }
             }
-
 
             return anyChange;
         }
