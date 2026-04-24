@@ -91,7 +91,7 @@ namespace Logic
         }
         public override void Reset() { }
 
-        public Dictionary<GroupGriddler, List<BitArray>> _groupsVariations;
+        public Dictionary<GroupGriddler, List<BitArray>> _groupsVariations = null!;
 
 
 
@@ -146,7 +146,7 @@ namespace Logic
                         lastIndex = index;
                         aLine.Set(index, true);
 
-                        if (existingLine[index].HasValue && existingLine[index].Value != aLine[index])
+                        if (existingLine[index].HasValue && existingLine[index].GetValueOrDefault() != aLine[index])
                         { breaked = true; break; }
                     }
                     if (breaked) 
@@ -334,7 +334,7 @@ namespace Logic
 
             for (int i = 0; i < ORLineArray.Length; i++)
                 for (int j = 0; j < _multiplexedLines.Count; j++)
-                    ORLineArray[i] = CellValueGriddler.OR(ORLineArray[i].Value, _multiplexedLines[j].Get(i));
+                    ORLineArray[i] = CellValueGriddler.OR(ORLineArray[i].GetValueOrDefault(), _multiplexedLines[j].Get(i));
 
             for (int i = 0; i < ORLineArray.Length; i++)
                 if (ORLineArray[i] == true)
@@ -353,7 +353,7 @@ namespace Logic
 
             for (int i = 0; i < ANDLineArray.Length; i++)
                 for (int j = 0; j < _multiplexedLines.Count; j++)
-                    ANDLineArray[i] = CellValueGriddler.AND(ANDLineArray[i].Value, _multiplexedLines[j].Get(i));
+                    ANDLineArray[i] = CellValueGriddler.AND(ANDLineArray[i].GetValueOrDefault(true), _multiplexedLines[j].Get(i));
 
             for (int i = 0; i < ANDLineArray.Length; i++)
                 if (ANDLineArray[i] == false)

@@ -33,7 +33,7 @@ namespace Data.DataModels
         }
 
 
-        private List<FixedCellSudoku> _fixedNumbers;
+        private List<FixedCellSudoku> _fixedNumbers = null!;
 
         public List<FixedCellSudoku> FixedNumbers
         {

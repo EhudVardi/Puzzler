@@ -37,7 +37,7 @@ namespace PresentationLogic
 
             foreach (CellValueSudoku valueCell in trackerBoard.ValueCells)
             {
-                CellValueSudoku solvedValueCell = solvedBoard.CellsMatrix[valueCell.Row, valueCell.Column] as CellValueSudoku;
+                CellValueSudoku? solvedValueCell = solvedBoard.CellsMatrix[valueCell.Row, valueCell.Column] as CellValueSudoku;
 
                 PuzzlerColor backColor;
                 PuzzlerColor foreColor;
@@ -55,7 +55,7 @@ namespace PresentationLogic
                 {
                     case DisplayType.Board:
                         if (valueCell.IsFixed)
-                            DrawText((valueCell.Value + 1).ToString(), font, foreColor,
+                            DrawText((valueCell.Value + 1).ToString() ?? "", font, foreColor,
                                 cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
                                 cellWidth - margin * 2f, cellHeight - margin * 2f);
                         break;
@@ -67,13 +67,13 @@ namespace PresentationLogic
                                 && selectedValueCell.Value == valueCell.Value)
                                 ? bIncorrect : foreColor;
 
-                            DrawText((valueCell.Value + 1).ToString(), font, textColor,
+                            DrawText((valueCell.Value + 1).ToString() ?? "", font, textColor,
                                 cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
                                 cellWidth - margin * 2f, cellHeight - margin * 2f);
                         }
                         break;
                     case DisplayType.Solution:
-                        DrawText((solvedValueCell.Value + 1).ToString(), font, foreColor,
+                        DrawText((solvedValueCell!.Value + 1).ToString() ?? "", font, foreColor,
                             cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
                             cellWidth - margin * 2f, cellHeight - margin * 2f);
                         break;
@@ -88,25 +88,25 @@ namespace PresentationLogic
 
         public override (int Width, int Height) GetPrefferedSize()
         {
-            return (40 * GetTrackerBoard().Columns, 40 * GetTrackerBoard().Rows);
+            return (40 * (GetTrackerBoard()?.Columns ?? 9), 40 * (GetTrackerBoard()?.Rows ?? 9));
         }
 
         public override void HandlePointer(PointerEvent e, float sizeX, float sizeY)
         {
-            BoardSudoku b = this.GetTrackerBoard();
+            BoardSudoku? b = this.GetTrackerBoard();
             if (b == null) return;
             int column = (int)(e.X / (sizeX / b.Columns));
             int row    = (int)(e.Y / (sizeY / b.Rows));
             if (row < 0 || row >= b.Rows || column < 0 || column >= b.Columns) return;
-            CellValueSudoku pointedCell = b.CellsMatrix[row, column] as CellValueSudoku;
-            if (!b.InitialCells.Contains(pointedCell))
+            CellValueSudoku? pointedCell = b.CellsMatrix[row, column] as CellValueSudoku;
+            if (pointedCell != null && !b.InitialCells.Contains(pointedCell))
                 selectedValueCell = pointedCell;
             this.OnRequestRefresh(EventArgs.Empty);
         }
 
         public override void HandleKey(KeyEvent e)
         {
-            BoardSudoku board = GetTrackerBoard();
+            BoardSudoku? board = GetTrackerBoard();
             if (board == null) return;
             int numRequested = e.KeyValue - 49;
             if (selectedValueCell != null)
@@ -127,14 +127,14 @@ namespace PresentationLogic
                 }
                 else
                 {
-                    int maxValue  = GetTrackerBoard().N * GetTrackerBoard().M;
-                    int nextValue = ((int)selectedValueCell.Value + (e.Delta > 0 ? 1 : -1)) % maxValue;
+                    int maxValue  = (GetTrackerBoard()?.N ?? 3) * (GetTrackerBoard()?.M ?? 3);
+                    int nextValue = (selectedValueCell.Value.GetValueOrDefault() + (e.Delta > 0 ? 1 : -1)) % maxValue;
                     selectedValueCell.Value = nextValue < 0 ? nextValue + maxValue : nextValue;
                 }
             }
             this.OnRequestRefresh(EventArgs.Empty);
         }
 
-        private CellValueSudoku selectedValueCell;
+        private CellValueSudoku? selectedValueCell;
     }
 }

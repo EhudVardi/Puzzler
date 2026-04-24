@@ -19,7 +19,7 @@ namespace Presentation.WPF
     /// </summary>
     public partial class InputWindow : Window
     {
-        private string _data;
+        private string _data = null!;
         public string Data
         {
             get { return _data; }

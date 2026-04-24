@@ -12,8 +12,8 @@ namespace Logic
     public class SolverSudoku : SolverGeneric<BoardSudoku>
     {
 
-        Dictionary<GroupSudoku, List<List<CellValueSudoku>>> _groupsSubGroups;
-        Dictionary<CellValueSudoku, BinaryChoicesMap> _cellsChoiceMap;
+        Dictionary<GroupSudoku, List<List<CellValueSudoku>>> _groupsSubGroups = null!;
+        Dictionary<CellValueSudoku, BinaryChoicesMap> _cellsChoiceMap = null!;
 
 
         public override void SolveInitiation()
@@ -34,7 +34,7 @@ namespace Logic
             }
             foreach (CellValueSudoku cell in Board.InitialCells)
             {
-                _cellsChoiceMap[cell].SetToNumber((int)cell.Value);
+                _cellsChoiceMap[cell].SetToNumber(cell.Value.GetValueOrDefault());
             }
         }
 
@@ -96,7 +96,7 @@ namespace Logic
         public override void SetCell(int row, int column, int num)
         {
             this.Board.SetCell(row, column, num);
-            this._cellsChoiceMap[this.Board.GetCell(row, column) as CellValueSudoku].SetToNumber(num);
+            this._cellsChoiceMap[(this.Board.GetCell(row, column) as CellValueSudoku)!].SetToNumber(num);
         }
 
         ///

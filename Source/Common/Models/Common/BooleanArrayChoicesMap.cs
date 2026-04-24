@@ -7,7 +7,7 @@ namespace Common.Logic
     public class BooleanArrayChoicesMap
     {
 
-        private bool[] _map;
+        private bool[] _map = null!;
 
         public bool[] Map
         {
@@ -51,9 +51,9 @@ namespace Common.Logic
             }
         }
 
-        public BooleanArrayChoicesMap AND(BooleanArrayChoicesMap nums)
+        public BooleanArrayChoicesMap? AND(BooleanArrayChoicesMap nums)
         {
-            BooleanArrayChoicesMap ans = null;
+            BooleanArrayChoicesMap? ans = null;
             if (this.Count == nums.Count)
             {
                 ans = new BooleanArrayChoicesMap(this.Count);
@@ -65,9 +65,9 @@ namespace Common.Logic
             return ans;
         }
 
-        public BooleanArrayChoicesMap OR(BooleanArrayChoicesMap nums)
+        public BooleanArrayChoicesMap? OR(BooleanArrayChoicesMap nums)
         {
-            BooleanArrayChoicesMap ans = null;
+            BooleanArrayChoicesMap? ans = null;
             if (this.Count == nums.Count)
             {
                 ans = new BooleanArrayChoicesMap(this.Count);

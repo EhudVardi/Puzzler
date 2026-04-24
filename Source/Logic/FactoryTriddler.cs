@@ -43,12 +43,12 @@ namespace Logic.Griddler
                 DiagonalLines.Add(groupDiagonal);
             }
 
-            CellValueTriddler[,] CellsMatrixLeft = new CellValueTriddler[puzzle.BaseRowsCount, puzzle.BaseColumnCount];
+            CellValueTriddler?[,] CellsMatrixLeft = new CellValueTriddler?[puzzle.BaseRowsCount, puzzle.BaseColumnCount];
             for (int i = 0; i < puzzle.BaseRowsCount; i++)
                 for (int j = 0; j < puzzle.BaseColumnCount; j++)
                     CellsMatrixLeft[i, j] = new CellValueTriddler(i, j, false);
 
-            CellValueTriddler[,] CellsMatrixRight = new CellValueTriddler[puzzle.BaseRowsCount, puzzle.BaseColumnCount];
+            CellValueTriddler?[,] CellsMatrixRight = new CellValueTriddler?[puzzle.BaseRowsCount, puzzle.BaseColumnCount];
             for (int i = 0; i < puzzle.BaseRowsCount; i++)
                 for (int j = 0; j < puzzle.BaseColumnCount; j++)
                     CellsMatrixRight[i, j] = new CellValueTriddler(i, j, true);
@@ -59,8 +59,8 @@ namespace Logic.Griddler
             {
                 for (int j = 0; j < puzzle.BaseColumnCount; j++)
                 {
-                    HorizontalLines[i].Cells.Add(CellsMatrixLeft[i, j]); CellsMatrixLeft[i, j].Groups.Add(HorizontalLines[i]);
-                    HorizontalLines[i].Cells.Add(CellsMatrixRight[i, j]); CellsMatrixRight[i, j].Groups.Add(HorizontalLines[i]);
+                    HorizontalLines[i].Cells.Add(CellsMatrixLeft[i, j]!); CellsMatrixLeft[i, j]!.Groups.Add(HorizontalLines[i]);
+                    HorizontalLines[i].Cells.Add(CellsMatrixRight[i, j]!); CellsMatrixRight[i, j]!.Groups.Add(HorizontalLines[i]);
                 }
             }
             //Vertical
@@ -68,8 +68,8 @@ namespace Logic.Griddler
             {
                 for (int i = 0; i < puzzle.BaseRowsCount; i++)
                 {
-                    VerticalLines[j].Cells.Add(CellsMatrixRight[i, j]); CellsMatrixRight[i, j].Groups.Add(VerticalLines[j]);
-                    VerticalLines[j].Cells.Add(CellsMatrixLeft[i, j]); CellsMatrixLeft[i, j].Groups.Add(VerticalLines[j]);
+                    VerticalLines[j].Cells.Add(CellsMatrixRight[i, j]!); CellsMatrixRight[i, j]!.Groups.Add(VerticalLines[j]);
+                    VerticalLines[j].Cells.Add(CellsMatrixLeft[i, j]!); CellsMatrixLeft[i, j]!.Groups.Add(VerticalLines[j]);
                 }
             }
             //Diagonal
@@ -83,9 +83,9 @@ namespace Logic.Griddler
                 while (ii >= 0 && jj >= 0)
                 {
                     if (IsRight)
-                    { group.Cells.Add(CellsMatrixRight[ii, jj]); CellsMatrixRight[ii, jj].Groups.Add(group); ii--; }
+                    { group.Cells.Add(CellsMatrixRight[ii, jj]!); CellsMatrixRight[ii, jj]!.Groups.Add(group); ii--; }
                     else
-                    { group.Cells.Add(CellsMatrixLeft[ii, jj]); CellsMatrixLeft[ii, jj].Groups.Add(group); jj--; }
+                    { group.Cells.Add(CellsMatrixLeft[ii, jj]!); CellsMatrixLeft[ii, jj]!.Groups.Add(group); jj--; }
                     IsRight = !IsRight;
                 }
             }
@@ -99,9 +99,9 @@ namespace Logic.Griddler
                 while (ii >= 0 && jj >= 0)
                 {
                     if (IsRight)
-                    { group.Cells.Add(CellsMatrixRight[ii, jj]); CellsMatrixRight[ii, jj].Groups.Add(group); ii--; }
+                    { group.Cells.Add(CellsMatrixRight[ii, jj]!); CellsMatrixRight[ii, jj]!.Groups.Add(group); ii--; }
                     else
-                    { group.Cells.Add(CellsMatrixLeft[ii, jj]); CellsMatrixLeft[ii, jj].Groups.Add(group); jj--; }
+                    { group.Cells.Add(CellsMatrixLeft[ii, jj]!); CellsMatrixLeft[ii, jj]!.Groups.Add(group); jj--; }
                     IsRight = !IsRight;
                 }
             }
@@ -126,7 +126,7 @@ namespace Logic.Griddler
                         for (int j = 0; j < CellsMatrixLeft.GetLength(1); j++)
                             if (object.ReferenceEquals(CellsMatrixLeft[i, j], cell))
                             {
-                                removedCells.Add(CellsMatrixLeft[i, j]);
+                                removedCells.Add(CellsMatrixLeft[i, j]!);
                                 CellsMatrixLeft[i, j] = null;
 
                             }
@@ -134,7 +134,7 @@ namespace Logic.Griddler
                         for (int j = 0; j < CellsMatrixRight.GetLength(1); j++)
                             if (object.ReferenceEquals(CellsMatrixRight[i, j], cell))
                             {
-                                removedCells.Add(CellsMatrixRight[i, j]);
+                                removedCells.Add(CellsMatrixRight[i, j]!);
                                 CellsMatrixRight[i, j] = null;
                             }
                 }

@@ -8,18 +8,18 @@ namespace Common.Models.Kakuru
 
     public class CellGroupHolderKakuru : CellGroupHolderBase
     {
-        private GroupKakuru _rightGroup;
+        private GroupKakuru? _rightGroup;
 
-        public GroupKakuru RightGroup
+        public GroupKakuru? RightGroup
         {
             get { return _rightGroup; }
             set { _rightGroup = value; }
         }
 
 
-        private GroupKakuru _downGroup;
+        private GroupKakuru? _downGroup;
 
-        public GroupKakuru DownGroup
+        public GroupKakuru? DownGroup
         {
             get { return _downGroup; }
             set { _downGroup = value; }

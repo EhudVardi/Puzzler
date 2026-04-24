@@ -6,10 +6,10 @@ namespace Logic
 {
     public class LogicLayerGeneric<TPuzzle, TBoard>
     {
-        public DataLayerGeneric<TPuzzle>       DataProxy     { get; set; }
-        public FactoryGeneric<TPuzzle, TBoard> FactoryModule { get; set; }
-        public SolverGeneric<TBoard>           SolverModule  { get; set; }
-        public TrackerGeneric<TBoard>          TrackerModule { get; set; }
+        public DataLayerGeneric<TPuzzle>       DataProxy     { get; set; } = null!;
+        public FactoryGeneric<TPuzzle, TBoard> FactoryModule { get; set; } = null!;
+        public SolverGeneric<TBoard>           SolverModule  { get; set; } = null!;
+        public TrackerGeneric<TBoard>          TrackerModule { get; set; } = null!;
 
         protected void AttachSolverEvents()
         {
@@ -18,10 +18,10 @@ namespace Logic
             this.FactoryModule.StepGenerated  += new EventHandler(FactoryModule_StepGenerated);
         }
 
-        public event EventHandler StepCompleted;
-        public event EventHandler SolveCompleted;
-        public event EventHandler LoadCompleted;
-        public event EventHandler StepGenerated;
+        public event EventHandler? StepCompleted;
+        public event EventHandler? SolveCompleted;
+        public event EventHandler? LoadCompleted;
+        public event EventHandler? StepGenerated;
 
         protected virtual void OnStepCompleted(EventArgs e)
         {
@@ -50,20 +50,20 @@ namespace Logic
         }
         public virtual bool ReadFromWeb(string url)
         {
-            TPuzzle puzzleFromWeb = this.DataProxy.WebToPuzzleObject(url);
+            TPuzzle? puzzleFromWeb = this.DataProxy.WebToPuzzleObject(url);
             if (LoadFromPuzzleObject(puzzleFromWeb))
             {
-                this.DataProxy.WritePuzzle(puzzleFromWeb, DataProxy.Options.FromWebFolder);
+                this.DataProxy.WritePuzzle(puzzleFromWeb!, DataProxy.Options.FromWebFolder);
                 return true;
             }
             return false;
         }
         public virtual bool ReadFromText(string text)
         {
-            TPuzzle puzzleFromText = this.DataProxy.TextToPuzzleObject(text);
+            TPuzzle? puzzleFromText = this.DataProxy.TextToPuzzleObject(text);
             if (LoadFromPuzzleObject(puzzleFromText))
             {
-                this.DataProxy.WritePuzzle(puzzleFromText, DataProxy.Options.FromTextFolder);
+                this.DataProxy.WritePuzzle(puzzleFromText!, DataProxy.Options.FromTextFolder);
                 return true;
             }
             return false;
@@ -71,26 +71,29 @@ namespace Logic
 
         public virtual bool GenerateRandom()
         {
-            TPuzzle puzzleFromGenerator = this.FactoryModule.BoardToPuzzle(this.FactoryModule.GenerateRandom());
+            TBoard? generatedBoard = this.FactoryModule.GenerateRandom();
+            TPuzzle? puzzleFromGenerator = generatedBoard != null ? this.FactoryModule.BoardToPuzzle(generatedBoard) : default;
             if (LoadFromPuzzleObject(puzzleFromGenerator))
             {
-                this.DataProxy.WritePuzzle(puzzleFromGenerator, DataProxy.Options.FromGeneratorFolder);
+                this.DataProxy.WritePuzzle(puzzleFromGenerator!, DataProxy.Options.FromGeneratorFolder);
                 return true;
             }
             return false;
         }
 
-        public virtual bool LoadFromPuzzleObject(TPuzzle puzzle)
+        public virtual bool LoadFromPuzzleObject(TPuzzle? puzzle)
         {
             if (puzzle == null)
                 return false;
 
-            TBoard board = this.FactoryModule.PuzzleToBoard(puzzle);
+            TBoard? board = this.FactoryModule.PuzzleToBoard(puzzle);
+            if (board == null)
+                return false;
 
-            this.TrackerModule = new TrackerGeneric<TBoard>(this.FactoryModule.PuzzleToBoard(puzzle));
+            this.TrackerModule = new TrackerGeneric<TBoard>(this.FactoryModule.PuzzleToBoard(puzzle)!);
 
             this.SolverModule.Initialize();
-            this.SolverModule.Board = board;
+            this.SolverModule.Board = board!;
             this.SolverModule.Solve();
 
             this.OnLoadCompleted(EventArgs.Empty);
@@ -101,9 +104,9 @@ namespace Logic
         public string GetPuzzleTypeDocumentsPath() { return DataProxy.GetPuzzleTypeDocumentsPath(); }
         public string GetPuzzleName()               { return DataProxy.GetPuzzleName(); }
 
-        void SolverProxy_SolveCompleted(object sender, EventArgs e) { OnSolveCompleted(e); }
-        void SolverProxy_StepCompleted(object sender, EventArgs e)  { OnStepCompleted(e); }
-        void FactoryModule_StepGenerated(object sender, EventArgs e){ OnStepGenerated(e); }
+        void SolverProxy_SolveCompleted(object? sender, EventArgs e) { OnSolveCompleted(e); }
+        void SolverProxy_StepCompleted(object? sender, EventArgs e)  { OnStepCompleted(e); }
+        void FactoryModule_StepGenerated(object? sender, EventArgs e){ OnStepGenerated(e); }
 
         public bool? RequestSolveStatus()
         {
@@ -116,12 +119,12 @@ namespace Logic
             return null;
         }
 
-        public TBoard getTrackedBoard()
+        public TBoard? getTrackedBoard()
         {
             if (this.SolverModule != null) return this.SolverModule.Board;
             return default(TBoard);
         }
-        public TBoard getSolvedBoard()
+        public TBoard? getSolvedBoard()
         {
             if (this.TrackerModule != null) return this.TrackerModule.Board;
             return default(TBoard);

@@ -9,7 +9,7 @@ namespace Common.Logic
     {
         #region properties and members
 
-        private BitArray _map;
+        private BitArray _map = null!;
 
         public BitArray Map
         {
@@ -72,9 +72,9 @@ namespace Common.Logic
 
         #region logical operations
 
-        public static BinaryChoicesMap AND(BinaryChoicesMap nums1, BinaryChoicesMap nums2)
+        public static BinaryChoicesMap? AND(BinaryChoicesMap nums1, BinaryChoicesMap nums2)
         {
-            BinaryChoicesMap ans = null;
+            BinaryChoicesMap? ans = null;
             if (nums1.Count == nums2.Count)
             {
                 ans = new BinaryChoicesMap(nums1);
@@ -91,9 +91,9 @@ namespace Common.Logic
             return this;
         }
 
-        public static BinaryChoicesMap OR(BinaryChoicesMap nums1, BinaryChoicesMap nums2)
+        public static BinaryChoicesMap? OR(BinaryChoicesMap nums1, BinaryChoicesMap nums2)
         {
-            BinaryChoicesMap ans = null;
+            BinaryChoicesMap? ans = null;
             if (nums1.Count == nums2.Count)
             {
                 ans = new BinaryChoicesMap(nums1);
@@ -122,9 +122,9 @@ namespace Common.Logic
             return this;
         }
 
-        public static BinaryChoicesMap XOR(BinaryChoicesMap nums1, BinaryChoicesMap nums2)
+        public static BinaryChoicesMap? XOR(BinaryChoicesMap nums1, BinaryChoicesMap nums2)
         {
-            BinaryChoicesMap ans = null;
+            BinaryChoicesMap? ans = null;
             if (nums1.Count == nums2.Count)
             {
                 ans = new BinaryChoicesMap(nums1);

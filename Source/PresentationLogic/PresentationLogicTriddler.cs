@@ -20,11 +20,9 @@ namespace PresentationLogic
             float cellWidth  = width  / trackerBoard.Columns;
             float cellHeight = height / trackerBoard.Rows;
 
-            foreach (CellValueGriddler valueCell in trackerBoard.ValueCells)
+            foreach (CellValueTriddler valueCell in trackerBoard.ValueCells)
             {
-                CellValueGriddler solvedValueCell = solvedBoard.ValueCells[trackerBoard.ValueCells.IndexOf(valueCell as CellValueTriddler)] as CellValueGriddler;
-
-                CellValueTriddler solvedValueCellTriddler = solvedValueCell as CellValueTriddler;
+                CellValueTriddler? solvedValueCellTriddler = solvedBoard.ValueCells[trackerBoard.ValueCells.IndexOf(valueCell)];
                 if (solvedValueCellTriddler == null)
                     continue;
 
@@ -58,8 +56,9 @@ namespace PresentationLogic
                 {
                     for (int j = 0; j < selectedValueCell.Groups[i].Cells.Count; j++)
                     {
-                        PuzzlerPoint[] coords = GetTriddlerCellTriangleCoordinates(cellWidth, cellHeight,
-                            selectedValueCell.Groups[i].Cells[j] as CellValueTriddler);
+                        CellValueTriddler? groupCell = selectedValueCell.Groups[i].Cells[j] as CellValueTriddler;
+                        if (groupCell == null) continue;
+                        PuzzlerPoint[] coords = GetTriddlerCellTriangleCoordinates(cellWidth, cellHeight, groupCell);
                         DrawPolygon(PuzzlerColor.Black, 1, PuzzlerColor.Wheat.WithAlpha(128), coords);
                     }
                 }
@@ -110,13 +109,13 @@ namespace PresentationLogic
 
         public override void HandlePointer(PointerEvent e, float sizeX, float sizeY)
         {
-            BoardTriddler b = this.GetTrackerBoard();
+            BoardTriddler? b = this.GetTrackerBoard();
             if (b == null) return;
             var ((row, col), isRight) = GetBoardCoordinates(e, sizeX, sizeY, b);
             if (row > -1 && row < b.Rows && col > -1 && col < b.Rows)
             {
-                CellValueTriddler pointedCell = (isRight ? b.CellsMatrixRight : b.CellsMatrixLeft)[row, col] as CellValueTriddler;
-                if (!b.InitialCells.Contains(pointedCell))
+                CellValueTriddler? pointedCell = (isRight ? b.CellsMatrixRight : b.CellsMatrixLeft)[row, col];
+                if (pointedCell != null && !b.InitialCells.Contains(pointedCell))
                     selectedValueCell = pointedCell;
             }
             else
@@ -134,6 +133,6 @@ namespace PresentationLogic
                 (floatColIndex - (int)floatColIndex) > (floatRowIndex - (int)floatRowIndex));
         }
 
-        private CellValueGriddler selectedValueCell;
+        private CellValueTriddler? selectedValueCell;
     }
 }

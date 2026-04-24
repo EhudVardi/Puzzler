@@ -22,17 +22,17 @@ namespace Presentation.WPF
 {
     public partial class ucPuzzlerDataGrid : UserControl
     {
-        private DataTable _PuzzleDataTable;
+        private DataTable _PuzzleDataTable = null!;
         public DataTable PuzzleDataTable { get { return _PuzzleDataTable; } }
 
         public class RequestLoadPuzzleEventArgs
         {
-            public string Path { get; set; }
+            public string Path { get; set; } = null!;
             public RequestLoadPuzzleEventArgs() { }
             public RequestLoadPuzzleEventArgs(string path) { this.Path = path; }
         }
         public delegate void RequestLoadPuzzleEventHandler(object sender, RequestLoadPuzzleEventArgs e);
-        public event RequestLoadPuzzleEventHandler RequestLoadPuzzle;
+        public event RequestLoadPuzzleEventHandler? RequestLoadPuzzle;
         protected virtual void OnRequestLoadPuzzle(RequestLoadPuzzleEventArgs e)
         {
             if (RequestLoadPuzzle != null)
@@ -89,7 +89,7 @@ namespace Presentation.WPF
             if (datagrid.SelectedIndex == -1)
                 return;
 
-            DataRowView drv = (datagrid.Items[datagrid.SelectedIndex] as DataRowView);
+            DataRowView? drv = (datagrid.Items[datagrid.SelectedIndex] as DataRowView);
             if (drv == null)
                 return;
 

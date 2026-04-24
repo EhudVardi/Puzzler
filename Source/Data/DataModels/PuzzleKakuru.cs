@@ -24,7 +24,7 @@ namespace Data.DataModels
             set { _columns = value; }
         }
 
-        private List<int> _numberRange;
+        private List<int> _numberRange = null!;
 
         public List<int> NumberRange
         {
@@ -33,7 +33,7 @@ namespace Data.DataModels
         }
 
 
-        private List<DefinedGroupKakuru> _sumLines;
+        private List<DefinedGroupKakuru> _sumLines = null!;
 
         public List<DefinedGroupKakuru> SumLines
         {
@@ -41,7 +41,7 @@ namespace Data.DataModels
             set { _sumLines = value; }
         }
 
-        private List<FixedCellKakuru> _fixedCell;
+        private List<FixedCellKakuru> _fixedCell = null!;
 
         public List<FixedCellKakuru> FixedCells
         {

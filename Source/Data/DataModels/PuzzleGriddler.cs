@@ -8,7 +8,7 @@ namespace Data.DataModels
     [System.Xml.Serialization.XmlType("GriddlerPuzzle")]
     public class PuzzleGriddler : PuzzleBase
     {
-        private List<List<int>> _rows;
+        private List<List<int>> _rows = null!;
 
         public List<List<int>> Rows
         {
@@ -16,7 +16,7 @@ namespace Data.DataModels
             set { _rows = value; }
         }
 
-        private List<List<int>> _columns;
+        private List<List<int>> _columns = null!;
 
         public List<List<int>> Columns
         {

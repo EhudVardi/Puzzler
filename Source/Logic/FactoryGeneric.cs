@@ -4,20 +4,20 @@ namespace Logic
 {
     public class FactoryGeneric<TPuzzle, TBoard>
     {
-        public virtual TPuzzle BoardToPuzzle(TBoard board) { return CreatePuzzleObjectFromBoard(board); }
+        public virtual TPuzzle? BoardToPuzzle(TBoard board) { return CreatePuzzleObjectFromBoard(board); }
 
-        public virtual TBoard PuzzleToBoard(TPuzzle puzzle) { return CreateBoardFromPuzzleObject(puzzle); }
+        public virtual TBoard? PuzzleToBoard(TPuzzle puzzle) { return CreateBoardFromPuzzleObject(puzzle); }
 
-        public virtual TBoard GenerateRandom() { return default(TBoard); }
+        public virtual TBoard? GenerateRandom() { return default(TBoard); }
 
-        public event EventHandler StepGenerated;
+        public event EventHandler? StepGenerated;
 
-        protected virtual TBoard CreateBoardFromPuzzleObject(TPuzzle puzzle)
+        protected virtual TBoard? CreateBoardFromPuzzleObject(TPuzzle puzzle)
         {
             return default(TBoard);
         }
 
-        protected virtual TPuzzle CreatePuzzleObjectFromBoard(TBoard board)
+        protected virtual TPuzzle? CreatePuzzleObjectFromBoard(TBoard board)
         {
             return default(TPuzzle);
         }

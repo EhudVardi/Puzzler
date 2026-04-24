@@ -8,9 +8,9 @@ namespace Data
 {
     public class SerializeDeserializeObject
     {
-        XmlSerializer serializer;
-        StreamWriter writer;
-        StreamReader reader;
+        XmlSerializer serializer = null!;
+        StreamWriter writer = null!;
+        StreamReader reader = null!;
 
         public void SerializePuzzle(string xmlFilePath, object puzzle, Type type)
         {
@@ -19,7 +19,7 @@ namespace Data
                 serializer.Serialize(writer.BaseStream, puzzle);
         }
 
-        public object DeserializePuzzle(string xmlFilePath, Type type)
+        public object? DeserializePuzzle(string xmlFilePath, Type type)
         {
             serializer = new XmlSerializer(type);
             using (reader = new StreamReader(xmlFilePath))
@@ -30,18 +30,18 @@ namespace Data
 
 	internal class SerializeableObject<T> where T : class
     {
-        internal string Serialize(T p_obj)
+        internal string? Serialize(T p_obj)
         {
-            string xmlStr = null;
+            string? xmlStr = null;
             XmlSerializer s = new XmlSerializer(typeof(T));
             TextWriter w = new StringWriter();
             s.Serialize(w, typeof(T));
             xmlStr = w.ToString();
             return xmlStr;
         }
-        internal T Deserialize(string p_strXml)
+        internal T? Deserialize(string p_strXml)
         {
-            T xmlobj;
+            T? xmlobj;
             XmlSerializer s = new XmlSerializer(typeof(T));
             TextReader r = new StringReader(p_strXml);
             xmlobj = s.Deserialize(r) as T;
@@ -50,14 +50,14 @@ namespace Data
     }
     internal class SerializableLogMessage : SerializeableObject<SerializableLogMessage>
     {
-        internal string p_category { get; set; }
-        internal string p_additionalInfo { get; set; }
-        internal object exType { get; set; }
-        internal object exMessage { get; set; }
-        internal object exHelpLink { get; set; }
-        internal object exErrorCode { get; set; }
-        internal object exNativeErrorCode { get; set; }
-        internal object exStackTrace { get; set; }
+        internal string? p_category { get; set; }
+        internal string? p_additionalInfo { get; set; }
+        internal object? exType { get; set; }
+        internal object? exMessage { get; set; }
+        internal object? exHelpLink { get; set; }
+        internal object? exErrorCode { get; set; }
+        internal object? exNativeErrorCode { get; set; }
+        internal object? exStackTrace { get; set; }
 
         public SerializableLogMessage()
         {

@@ -3,8 +3,7 @@
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <!-- Nullable will be enabled project-wide in Phase 10 -->
-    <!-- <Nullable>enable</Nullable> -->
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
 </Project>

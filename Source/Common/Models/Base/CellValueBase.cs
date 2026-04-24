@@ -6,7 +6,7 @@ namespace Common.Models.Base
 {
     public class CellValueBase<T, G> : CellBase
     {
-        protected T _value;
+        protected T _value = default!;
 
         public virtual T Value
         {
@@ -14,7 +14,7 @@ namespace Common.Models.Base
             set { _value = value; }
         }
 
-        protected List<G> _groups;
+        protected List<G> _groups = null!;
 
         public virtual List<G> Groups
         {

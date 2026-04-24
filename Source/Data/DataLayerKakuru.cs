@@ -14,10 +14,10 @@ namespace Data
         }
 
 
-        public override PuzzleKakuru TextToPuzzleObject(string text)
+        public override PuzzleKakuru? TextToPuzzleObject(string text)
         {
             string tempFileName = Guid.NewGuid().ToString();
-            string puzzleXmlData = ParsePuzzleStringFromText_1(text);
+            string? puzzleXmlData = ParsePuzzleStringFromText_1(text);
             if (puzzleXmlData != null)
             {
                 System.IO.File.WriteAllText(tempFileName, puzzleXmlData);
@@ -30,7 +30,7 @@ namespace Data
         public override PuzzleKakuru WebToPuzzleObject(string url)
         {
             string tempFileName = Guid.NewGuid().ToString();
-            System.IO.File.WriteAllText(tempFileName, ParsePuzzleStringFromText_1(ReadAndParseKakuruPuzzleFromWebPage(url)));
+            System.IO.File.WriteAllText(tempFileName, ParsePuzzleStringFromText_1(ReadAndParseKakuruPuzzleFromWebPage(url) ?? ""));
 
             return XMLToPuzzle(tempFileName);
         }
@@ -204,9 +204,9 @@ namespace Data
 
 
 
-        public string ReadAndParseKakuruPuzzleFromWebPage(string url)
+        public string? ReadAndParseKakuruPuzzleFromWebPage(string url)
         {
-            HtmlAgilityPack.HtmlDocument doc = WebHandler.GetWebPageAsHtmlDocument(url);
+            HtmlAgilityPack.HtmlDocument? doc = WebHandler.GetWebPageAsHtmlDocument(url);
 
             if (doc != null)
             {

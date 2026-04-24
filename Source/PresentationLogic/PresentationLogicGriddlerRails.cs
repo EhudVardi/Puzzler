@@ -18,7 +18,9 @@ namespace PresentationLogic
         public override void InitDisplay()
         {
             visualBoard = new VisualBoard();
-            visualBoard.Init(this.GetSolvedBoard());
+            BoardGriddler? solvedBoardForInit = this.GetSolvedBoard();
+            if (solvedBoardForInit != null)
+                visualBoard.Init(solvedBoardForInit);
             margin = 1;
         }
 
@@ -49,7 +51,7 @@ namespace PresentationLogic
         public override void HandlePointerDown(PointerEvent e, float sizeX, float sizeY)
         {
             if (e.Button != PointerButton.Left) return;
-            BoardGriddler b = this.GetTrackerBoard();
+            BoardGriddler? b = this.GetTrackerBoard();
             if (b == null || visualBoard == null) return;
             var (row, col) = GetBoardCoordinates(e, sizeX, sizeY, b);
 
@@ -57,7 +59,7 @@ namespace PresentationLogic
             {
                 if (col < 0 || col >= visualBoard.RowRails.Count) return;
                 Rail r = visualBoard.RowRails[col];
-                Car c = null;
+                Car? c = null;
                 for (int i = 0; i < r.Cars.Count; i++)
                 {
                     c = r.Cars[i];
@@ -71,7 +73,7 @@ namespace PresentationLogic
             {
                 if (row < 0 || row >= visualBoard.ColumnRails.Count) return;
                 Rail r = visualBoard.ColumnRails[row];
-                Car c = null;
+                Car? c = null;
                 for (int i = 0; i < r.Cars.Count; i++)
                 {
                     c = r.Cars[i];
@@ -89,7 +91,7 @@ namespace PresentationLogic
         {
             if (e.Button == PointerButton.Left)
             {
-                BoardGriddler b = this.GetTrackerBoard();
+                BoardGriddler? b = this.GetTrackerBoard();
                 if (b != null && visualBoard != null)
                 {
                     if (this.visualBoard.SelectedRailGroup)
@@ -132,7 +134,7 @@ namespace PresentationLogic
 
         private void DrawColumns(float cellWidth, float cellHeight, PuzzlerColor color)
         {
-            for (int i = 0; i < this.visualBoard.ColumnRails.Count; i++)
+            for (int i = 0; i < this.visualBoard!.ColumnRails.Count; i++)
             {
                 Rail r = this.visualBoard.ColumnRails[i];
                 for (int j = 0; j < r.Cars.Count; j++)
@@ -152,7 +154,7 @@ namespace PresentationLogic
 
         private void DrawRows(float cellWidth, float cellHeight, PuzzlerColor color)
         {
-            for (int i = 0; i < this.visualBoard.RowRails.Count; i++)
+            for (int i = 0; i < this.visualBoard!.RowRails.Count; i++)
             {
                 Rail r = this.visualBoard.RowRails[i];
                 for (int j = 0; j < r.Cars.Count; j++)
@@ -176,14 +178,14 @@ namespace PresentationLogic
             FillRect(color, x, y, w, h);
         }
 
-        private VisualBoard visualBoard;
-        private Car selectedRowCar    = null;
-        private Car selectedColumnCar = null;
+        private VisualBoard? visualBoard;
+        private Car? selectedRowCar    = null;
+        private Car? selectedColumnCar = null;
 
         public class VisualBoard
         {
-            public List<Rail> RowRails    { get; set; }
-            public List<Rail> ColumnRails { get; set; }
+            public List<Rail> RowRails    { get; set; } = null!;
+            public List<Rail> ColumnRails { get; set; } = null!;
             public bool SelectedRailGroup { get; set; }
 
             public void Init(BoardGriddler b)
@@ -204,7 +206,7 @@ namespace PresentationLogic
 
         public class Rail
         {
-            public List<Car> Cars { get; set; }
+            public List<Car> Cars { get; set; } = null!;
             public int Size { get; set; }
 
             internal void Init(GroupGriddler g)

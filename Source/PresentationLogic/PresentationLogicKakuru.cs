@@ -21,7 +21,7 @@ namespace PresentationLogic
 
             foreach (CellValueKakuru valueCell in trackerBoard.ValueCells)
             {
-                CellValueKakuru solvedValueCell = solvedBoard.CellsMatrix[valueCell.Row, valueCell.Column] as CellValueKakuru;
+                CellValueKakuru? solvedValueCell = solvedBoard.CellsMatrix[valueCell.Row, valueCell.Column] as CellValueKakuru;
 
                 PuzzlerColor backColor = trackerBoard.InitialCells.Contains(valueCell) ? bFixed : bNull;
 
@@ -33,29 +33,29 @@ namespace PresentationLogic
                 {
                     case DisplayType.Board:
                         if (valueCell.IsFixed)
-                            DrawText(valueCell.Value.ToString(), font, bText,
+                            DrawText(valueCell.Value.ToString() ?? "", font, bText,
                                 cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
                                 cellWidth - margin * 2f, cellHeight - margin * 2f);
                         break;
                     case DisplayType.Hint:
                         if (valueCell.IsFixed)
                         {
-                            PuzzlerColor textColor = solvedValueCell.Value != valueCell.Value ? bIncorrect : bCorrect;
-                            DrawText(valueCell.Value.ToString(), font, textColor,
+                            PuzzlerColor textColor = solvedValueCell!.Value != valueCell.Value ? bIncorrect : bCorrect;
+                            DrawText(valueCell.Value.ToString() ?? "", font, textColor,
                                 cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
                                 cellWidth - margin * 2f, cellHeight - margin * 2f);
                         }
                         break;
                     case DisplayType.Solution:
-                        DrawText(solvedValueCell.Value.ToString(), font, bCorrect,
+                        DrawText(solvedValueCell!.Value.ToString() ?? "", font, bCorrect,
                             cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
                             cellWidth - margin * 2f, cellHeight - margin * 2f);
                         break;
                 }
                 if (valueCell.IsFixed)
                 {
-                    PuzzlerColor textColor2 = solvedValueCell.Value != valueCell.Value ? bIncorrect : bCorrect;
-                    DrawText(valueCell.Value.ToString(), font, textColor2,
+                    PuzzlerColor textColor2 = solvedValueCell!.Value != valueCell.Value ? bIncorrect : bCorrect;
+                    DrawText(valueCell.Value.ToString() ?? "", font, textColor2,
                         cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
                         cellWidth - margin * 2f, cellHeight - margin * 2f);
                 }
@@ -90,18 +90,18 @@ namespace PresentationLogic
 
         public override (int Width, int Height) GetPrefferedSize()
         {
-            return (40 * GetTrackerBoard().Columns, 40 * GetTrackerBoard().Rows);
+            return (40 * (GetTrackerBoard()?.Columns ?? 10), 40 * (GetTrackerBoard()?.Rows ?? 10));
         }
 
         public override void HandlePointer(PointerEvent e, float sizeX, float sizeY)
         {
-            BoardKakuru b = this.GetTrackerBoard();
+            BoardKakuru? b = this.GetTrackerBoard();
             if (b == null) return;
             int column = (int)(e.X / (sizeX / b.Columns));
             int row    = (int)(e.Y / (sizeY / b.Rows));
             if (row < 0 || row >= b.Rows || column < 0 || column >= b.Columns) return;
-            CellValueKakuru pointedCell = b.CellsMatrix[row, column] as CellValueKakuru;
-            if (!b.InitialCells.Contains(pointedCell))
+            CellValueKakuru? pointedCell = b.CellsMatrix[row, column] as CellValueKakuru;
+            if (pointedCell != null && !b.InitialCells.Contains(pointedCell))
                 selectedValueCell = pointedCell;
             this.OnRequestRefresh(EventArgs.Empty);
         }
@@ -117,7 +117,7 @@ namespace PresentationLogic
                 else
                 {
                     int maxValue  = Math.Min(selectedValueCell.Groups[0].Sum, selectedValueCell.Groups[1].Sum);
-                    int nextValue = ((int)selectedValueCell.Value + (e.Delta > 0 ? 1 : -1)) % maxValue;
+                    int nextValue = (selectedValueCell.Value.GetValueOrDefault() + (e.Delta > 0 ? 1 : -1)) % maxValue;
                     selectedValueCell.Value = nextValue < 0 ? nextValue + maxValue : (nextValue == 0 ? maxValue : nextValue);
                 }
             }
@@ -126,7 +126,8 @@ namespace PresentationLogic
 
         public override void HandleKey(KeyEvent e)
         {
-            BoardKakuru board = GetTrackerBoard();
+            BoardKakuru? board = GetTrackerBoard();
+            if (board == null) return;
             int numRequested = e.KeyValue - 49;
             if (selectedValueCell != null)
                 if (numRequested > -1 && numRequested < board.NumberRange.Count)
@@ -136,6 +137,6 @@ namespace PresentationLogic
             this.OnRequestRefresh(EventArgs.Empty);
         }
 
-        private CellValueKakuru selectedValueCell;
+        private CellValueKakuru? selectedValueCell;
     }
 }

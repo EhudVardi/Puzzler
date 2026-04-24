@@ -11,21 +11,21 @@ namespace Common.Models.Base
     {
         public virtual int Size => CellsMatrix.GetLength(0) * CellsMatrix.GetLength(1);
 
-        protected TCell[,] _cellsMatrix;
+        protected TCell[,] _cellsMatrix = null!;
         public TCell[,] CellsMatrix
         {
             get { return _cellsMatrix; }
             set { _cellsMatrix = value; }
         }
 
-        protected List<TGroup> _groups;
+        protected List<TGroup> _groups = null!;
         public List<TGroup> Groups
         {
             get { return _groups; }
             set { _groups = value; }
         }
 
-        protected List<TValueCell> _initialCells;
+        protected List<TValueCell> _initialCells = null!;
         public List<TValueCell> InitialCells
         {
             get { return _initialCells; }
@@ -38,8 +38,8 @@ namespace Common.Models.Base
             {
                 List<TValueCell> valueCells = new List<TValueCell>();
                 foreach (TCell cell in this.CellsMatrix)
-                    if (cell.GetType() == typeof(TValueCell))
-                        valueCells.Add(cell as TValueCell);
+                    if (cell.GetType() == typeof(TValueCell) && cell is TValueCell vc)
+                        valueCells.Add(vc);
                 return valueCells;
             }
         }
@@ -50,8 +50,8 @@ namespace Common.Models.Base
             {
                 List<TGroupHolder> cells = new List<TGroupHolder>();
                 foreach (TCell cell in this.CellsMatrix)
-                    if (cell.GetType() == typeof(TGroupHolder))
-                        cells.Add(cell as TGroupHolder);
+                    if (cell.GetType() == typeof(TGroupHolder) && cell is TGroupHolder gh)
+                        cells.Add(gh);
                 return cells;
             }
         }
@@ -64,7 +64,7 @@ namespace Common.Models.Base
 
         public virtual void SetCell(int row, int column, int num) { }
 
-        public virtual TCell GetCell(int row, int column) { return default(TCell); }
+        public virtual TCell? GetCell(int row, int column) { return default(TCell); }
 
         public virtual int Rows    => CellsMatrix.GetLength(0);
         public virtual int Columns => CellsMatrix.GetLength(1);

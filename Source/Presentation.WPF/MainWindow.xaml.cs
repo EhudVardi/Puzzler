@@ -15,7 +15,7 @@ namespace Presentation.WPF
 {
     public partial class MainWindow : Window
     {
-        internal static PresentationLogicBase PresentationLogicObject;
+        internal static PresentationLogicBase PresentationLogicObject = null!;
         private static readonly PuzzlerOptions _options = PuzzlerOptions.CreateDefault();
 
         public MainWindow()
@@ -46,16 +46,16 @@ namespace Presentation.WPF
         {
             try
             {
-                RadioButton rb = e.Source as RadioButton;
+                RadioButton? rb = e.Source as RadioButton;
                 IPuzzleDescriptor descriptor = rb?.Tag as IPuzzleDescriptor
                     ?? throw new InvalidOperationException($"No puzzle descriptor on '{rb?.Content}'");
                 PresentationLogicObject = descriptor.Create();
                 PresentationLogicObject.Options = _options;
 
-                Dictionary<string, List<string>> puzzlesDic = PresentationLogicObject.ReadFileList();
-                this.ucDataGridGenerator.SetData(puzzlesDic[_options.FromGeneratorFolder]);
-                this.ucDataGridText.SetData(puzzlesDic[_options.FromTextFolder]);
-                this.ucDataGridWeb.SetData(puzzlesDic[_options.FromWebFolder]);
+                Dictionary<string, List<string>>? puzzlesDic = PresentationLogicObject.ReadFileList();
+                this.ucDataGridGenerator.SetData(puzzlesDic?[_options.FromGeneratorFolder] ?? new System.Collections.Generic.List<string>());
+                this.ucDataGridText.SetData(puzzlesDic?[_options.FromTextFolder] ?? new System.Collections.Generic.List<string>());
+                this.ucDataGridWeb.SetData(puzzlesDic?[_options.FromWebFolder] ?? new System.Collections.Generic.List<string>());
 
                 PresentationLogicObject.Initialize();
                 PresentationLogicObject.Refresh += PresentationLogicObject_Refresh;
@@ -66,7 +66,7 @@ namespace Presentation.WPF
             catch (XmlException ex) { ShowError(ex.Message); }
         }
 
-        void PresentationLogicObject_Refresh(object sender, EventArgs e)
+        void PresentationLogicObject_Refresh(object? sender, EventArgs e)
         {
             RefreshForm(e);
         }
@@ -141,7 +141,7 @@ namespace Presentation.WPF
             RefreshForm();
         }
 
-        private void rbtnDisplayModes_Checked(object sender, RoutedEventArgs e)
+        private void rbtnDisplayModes_Checked(object? sender, RoutedEventArgs? e)
         {
             if (PresentationLogicObject == null) return;
             if      (rbtnClean.IsChecked  == true) PresentationLogicObject.ShowBoard();
@@ -154,7 +154,7 @@ namespace Presentation.WPF
         {
             try
             {
-                PresentationLogicObject.ReadFromWeb(null);
+                PresentationLogicObject.ReadFromWeb(string.Empty);
                 RefreshForm();
             }
             catch (WebException ex)         { ShowError(ex.Message); }
@@ -189,7 +189,7 @@ namespace Presentation.WPF
 
         private void dpnlTitleBar_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            Button b = e.Source as Button;
+            Button? b = e.Source as Button;
             if (b != null && object.Equals(b, btnExitApplication))
             {
                 Application.Current.Shutdown();

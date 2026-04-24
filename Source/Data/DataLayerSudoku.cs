@@ -15,10 +15,10 @@ namespace Data
 
 
 
-        public override SudokuPuzzle TextToPuzzleObject(string text)
+        public override SudokuPuzzle? TextToPuzzleObject(string text)
         {
             string tempFileName = Guid.NewGuid().ToString();
-            string puzzleXmlData = ParsePuzzleStringFromText_2(text);
+            string? puzzleXmlData = ParsePuzzleStringFromText_2(text);
             if (puzzleXmlData != null)
             {
                 System.IO.File.WriteAllText(tempFileName, puzzleXmlData);
@@ -31,7 +31,7 @@ namespace Data
         public override SudokuPuzzle WebToPuzzleObject(string url)
         {
             string tempFileName = Guid.NewGuid().ToString();
-            System.IO.File.WriteAllText(tempFileName, ParsePuzzleStringFromText_2(ReadAndParseSudokuPuzzleFromWebPage(url)));
+            System.IO.File.WriteAllText(tempFileName, ParsePuzzleStringFromText_2(ReadAndParseSudokuPuzzleFromWebPage(url) ?? ""));
 
             return XMLToPuzzle(tempFileName);
         }
@@ -249,9 +249,9 @@ namespace Data
 
 
 
-        public string ReadAndParseSudokuPuzzleFromWebPage(string url)
+        public string? ReadAndParseSudokuPuzzleFromWebPage(string url)
         {
-            HtmlAgilityPack.HtmlDocument doc = WebHandler.GetWebPageAsHtmlDocument(url);
+            HtmlAgilityPack.HtmlDocument? doc = WebHandler.GetWebPageAsHtmlDocument(url);
 
             if (doc != null)
             {

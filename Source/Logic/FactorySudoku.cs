@@ -25,7 +25,7 @@ namespace Logic.Sudoku
             foreach (FixedCellSudoku fixedNum in puzzle.FixedNumbers)
             {
                 board.SetCell(fixedNum.Row, fixedNum.Column, fixedNum.Number);
-                board.InitialCells.Add(board.CellsMatrix[fixedNum.Row, fixedNum.Column] as CellValueSudoku);
+                board.InitialCells.Add((board.CellsMatrix[fixedNum.Row, fixedNum.Column] as CellValueSudoku)!);
             }
 
             return board;
@@ -44,7 +44,7 @@ namespace Logic.Sudoku
             foreach (CellValueSudoku valueCell in board.ValueCells)
             {
                 if (valueCell.IsFixed)
-                    puzzle.FixedNumbers.Add(new FixedCellSudoku(valueCell.Row, valueCell.Column, (int)valueCell.Value));
+                    puzzle.FixedNumbers.Add(new FixedCellSudoku(valueCell.Row, valueCell.Column, valueCell.Value.GetValueOrDefault()));
             }        
 
             return puzzle;
@@ -72,8 +72,8 @@ namespace Logic.Sudoku
             {
                 List<CellValueSudoku> cells = new List<CellValueSudoku>();
                 for (int j = 0; j < board.CellsMatrix.GetLength(1); j++)
-                    cells.Add(board.CellsMatrix[i, j] as CellValueSudoku);
-                
+                    cells.Add((board.CellsMatrix[i, j] as CellValueSudoku)!);
+
                 GroupSudoku sg = new GroupSudoku(cells);
                 rows.Add(sg);
             }
@@ -82,7 +82,7 @@ namespace Logic.Sudoku
             {
                 List<CellValueSudoku> cells = new List<CellValueSudoku>();
                 for (int j = 0; j < board.CellsMatrix.GetLength(1); j++)
-                    cells.Add(board.CellsMatrix[j, i] as CellValueSudoku);
+                    cells.Add((board.CellsMatrix[j, i] as CellValueSudoku)!);
 
                 GroupSudoku sg = new GroupSudoku(cells);
                 columns.Add(sg);
@@ -94,7 +94,7 @@ namespace Logic.Sudoku
                     List<CellValueSudoku> cells = new List<CellValueSudoku>();
                     for (int x = 0; x < n; x++)
                         for (int y = 0; y < m; y++)
-                            cells.Add(board.CellsMatrix[i * n + x, j * m + y] as CellValueSudoku);
+                            cells.Add((board.CellsMatrix[i * n + x, j * m + y] as CellValueSudoku)!);
 
                     GroupSudoku sg = new GroupSudoku(cells);
                     boxes.Add(sg);
@@ -166,7 +166,7 @@ namespace Logic.Sudoku
 
                         solver.SetCell(randomCell.Row, randomCell.Column, randomNumberIndex);
 
-                        randomFixedCells.Add(new KeyValuePair<CellValueSudoku, int>(randomCell, (int)randomCell.Value));
+                        randomFixedCells.Add(new KeyValuePair<CellValueSudoku, int>(randomCell, randomCell.Value.GetValueOrDefault()));
 
                         FireStepGenerated(this, EventArgs.Empty);
                     }
@@ -177,7 +177,7 @@ namespace Logic.Sudoku
             solver.Reset();
 
             foreach (KeyValuePair<CellValueSudoku, int> fixedCell in randomFixedCells)
-                (board.CellsMatrix[fixedCell.Key.Row, fixedCell.Key.Column] as CellValueSudoku).Value = fixedCell.Value;
+                (board.CellsMatrix[fixedCell.Key.Row, fixedCell.Key.Column] as CellValueSudoku)!.Value = fixedCell.Value;
 
 
             return board;

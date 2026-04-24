@@ -5,7 +5,7 @@ namespace Logic
 {
     public class SolverGeneric<TBoard>
     {
-        protected TBoard _board;
+        protected TBoard _board = default!;
         public TBoard Board
         {
             get { return _board; }
@@ -14,30 +14,30 @@ namespace Logic
 
         public SolverGeneric() { }
 
-        public event EventHandler StepCompleted;
-        public event EventHandler SolveCompleted;
+        public event EventHandler? StepCompleted;
+        public event EventHandler? SolveCompleted;
 
-        protected BackgroundWorker bg;
+        protected BackgroundWorker bg = null!;
 
         public virtual void Solve()
         {
             bg.RunWorkerAsync();
         }
 
-        void bg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        void bg_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
             OnSolveCompleted(EventArgs.Empty);
         }
-        void bg_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        void bg_ProgressChanged(object? sender, ProgressChangedEventArgs e)
         {
             OnStepCompleted(e);
         }
-        void bg_DoWork(object sender, DoWorkEventArgs e)
+        void bg_DoWork(object? sender, DoWorkEventArgs e)
         {
             SolveBoard(e);
         }
 
-        protected void ReportProgress(int precentageProgress, object state)
+        protected void ReportProgress(int precentageProgress, object? state)
         {
             bg.ReportProgress(precentageProgress, state);
         }

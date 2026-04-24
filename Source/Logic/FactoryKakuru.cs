@@ -57,7 +57,7 @@ namespace Logic.Kakuru
 
             foreach (DefinedGroupKakuru line in puzzle.SumLines)
             {
-                CellGroupHolderKakuru lineCell = board.CellsMatrix[line.RowI, line.ColumnI] as CellGroupHolderKakuru;
+                CellGroupHolderKakuru lineCell = (board.CellsMatrix[line.RowI, line.ColumnI] as CellGroupHolderKakuru)!;
 
                 lineCell.Row = line.RowI;
                 lineCell.Column = line.ColumnI;
@@ -70,7 +70,7 @@ namespace Logic.Kakuru
                     downGroup.Cells = new List<CellValueKakuru>();
                     for (int i = 0; i < line.Size; i++)
                     {
-                        CellValueKakuru fillCell = board.CellsMatrix[line.RowI + i + 1, line.ColumnI] as CellValueKakuru;
+                        CellValueKakuru fillCell = (board.CellsMatrix[line.RowI + i + 1, line.ColumnI] as CellValueKakuru)!;
                         downGroup.Cells.Add(fillCell);
                         fillCell.Groups.Add(downGroup);
                     }
@@ -87,7 +87,7 @@ namespace Logic.Kakuru
                     rightGroup.Cells = new List<CellValueKakuru>();
                     for (int j = 0; j < line.Size; j++)
                     {
-                        CellValueKakuru fillCell = board.CellsMatrix[line.RowI, line.ColumnI + j + 1] as CellValueKakuru;
+                        CellValueKakuru fillCell = (board.CellsMatrix[line.RowI, line.ColumnI + j + 1] as CellValueKakuru)!;
                         rightGroup.Cells.Add(fillCell);
                         fillCell.Groups.Add(rightGroup);
                     }
@@ -100,7 +100,7 @@ namespace Logic.Kakuru
 
             foreach (FixedCellKakuru fixedCell in puzzle.FixedCells)
             {
-                CellValueKakuru fillCell = board.CellsMatrix[fixedCell.Row, fixedCell.Column] as CellValueKakuru;
+                CellValueKakuru? fillCell = board.CellsMatrix[fixedCell.Row, fixedCell.Column] as CellValueKakuru;
                 if (fillCell != null)
                 {
                     fillCell.Value = fixedCell.Value;
@@ -131,12 +131,12 @@ namespace Logic.Kakuru
 
             foreach (CellBase cell in board.CellsMatrix)
             {
-                CellGroupHolderKakuru lineCell = cell as CellGroupHolderKakuru;
+                CellGroupHolderKakuru? lineCell = cell as CellGroupHolderKakuru;
 
                 if (lineCell != null)
                 {
-                    GroupKakuru downGroup = lineCell.DownGroup;
-                    GroupKakuru rightGroup = lineCell.RightGroup;
+                    GroupKakuru? downGroup = lineCell.DownGroup;
+                    GroupKakuru? rightGroup = lineCell.RightGroup;
 
                     if (downGroup != null)
                     {
@@ -167,12 +167,12 @@ namespace Logic.Kakuru
 
             foreach (CellBase cell in board.CellsMatrix)
             {
-                CellValueKakuru fillCell = cell as CellValueKakuru;
+                CellValueKakuru? fillCell = cell as CellValueKakuru;
 
                 if (fillCell != null)
                 {
                     if (fillCell.Value != null)
-                        puzzle.FixedCells.Add(new FixedCellKakuru(fillCell.Row, fillCell.Column, (int)fillCell.Value));
+                        puzzle.FixedCells.Add(new FixedCellKakuru(fillCell.Row, fillCell.Column, fillCell.Value.GetValueOrDefault()));
 
                 }
             }
@@ -706,14 +706,14 @@ namespace Logic.Kakuru
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    CellGroupHolderKakuru lineCell = board.CellsMatrix[i, j] as CellGroupHolderKakuru;
+                    CellGroupHolderKakuru? lineCell = board.CellsMatrix[i, j] as CellGroupHolderKakuru;
 
                     if (lineCell != null)
                     {
                         int currRow = i;
                         while (currRow < rows - 1 && board.CellsMatrix[currRow + 1, j].GetType() == typeof(CellValueKakuru))
                         {
-                            CellValueKakuru fillCell = board.CellsMatrix[currRow + 1, j] as CellValueKakuru;
+                            CellValueKakuru fillCell = (board.CellsMatrix[currRow + 1, j] as CellValueKakuru)!;
                             if (lineCell.DownGroup == null)
                             {
                                 lineCell.DownGroup = new GroupKakuru();
@@ -730,7 +730,7 @@ namespace Logic.Kakuru
                         int currColumn = j;
                         while (currColumn < columns - 1 && board.CellsMatrix[i, currColumn + 1].GetType() == typeof(CellValueKakuru))
                         {
-                            CellValueKakuru fillCell = board.CellsMatrix[i, currColumn + 1] as CellValueKakuru;
+                            CellValueKakuru fillCell = (board.CellsMatrix[i, currColumn + 1] as CellValueKakuru)!;
                             if (lineCell.RightGroup == null)
                             {
                                 lineCell.RightGroup = new GroupKakuru();
@@ -768,7 +768,7 @@ namespace Logic.Kakuru
             {
                 for (int j = 0; j < board.CellsMatrix.GetLength(1); j++)
                 {
-                    CellValueKakuru fillCell = board.CellsMatrix[i, j] as CellValueKakuru;
+                    CellValueKakuru? fillCell = board.CellsMatrix[i, j] as CellValueKakuru;
 
                     if (fillCell != null)
                     {
@@ -780,7 +780,7 @@ namespace Logic.Kakuru
                             {
                                 if (!object.ReferenceEquals(fillCell, relatedCell))
                                     if (relatedCell.IsFixed)
-                                        possibleNumbers.Remove((int)relatedCell.Value);
+                                        possibleNumbers.Remove(relatedCell.Value.GetValueOrDefault());
                             }
                         }
 
@@ -819,7 +819,7 @@ namespace Logic.Kakuru
             {
                 for (int j = 0; j < board.CellsMatrix.GetLength(1); j++)
                 {
-                    CellValueKakuru fillCell = board.CellsMatrix[i, j] as CellValueKakuru;
+                    CellValueKakuru? fillCell = board.CellsMatrix[i, j] as CellValueKakuru;
 
                     if (fillCell != null)
                     {
@@ -831,7 +831,7 @@ namespace Logic.Kakuru
                             {
                                 if (!object.ReferenceEquals(fillCell, relatedCell))
                                     if (relatedCell.IsFixed)
-                                        possibleNumbers.Remove((int)relatedCell.Value);
+                                        possibleNumbers.Remove(relatedCell.Value.GetValueOrDefault());
                             }
                         }
 
@@ -864,7 +864,7 @@ namespace Logic.Kakuru
             {
                 for (int j = 0; j < board.CellsMatrix.GetLength(1); j++)
                 {
-                    CellValueKakuru fillCell = board.CellsMatrix[i, j] as CellValueKakuru;
+                    CellValueKakuru? fillCell = board.CellsMatrix[i, j] as CellValueKakuru;
 
                     if (fillCell != null && fillCell.Value == null)
                     {
@@ -890,7 +890,7 @@ namespace Logic.Kakuru
             for (int i = 0; i < board.CellsMatrix.GetLength(0); i++)
                 for (int j = 0; j < board.CellsMatrix.GetLength(1); j++)
                 {
-                    CellValueKakuru fillCell = board.CellsMatrix[i,j] as CellValueKakuru;
+                    CellValueKakuru? fillCell = board.CellsMatrix[i,j] as CellValueKakuru;
                     if (fillCell != null)
                         clonedMatrixValues[i, j] = fillCell.Value;
                 }
@@ -898,7 +898,7 @@ namespace Logic.Kakuru
             //clering all values from original board matrix
             foreach (CellBase cell in board.CellsMatrix)
             {
-                CellValueKakuru fillCell = cell as CellValueKakuru;
+                CellValueKakuru? fillCell = cell as CellValueKakuru;
                 if (fillCell != null)
                     fillCell.Value = null;
             }
@@ -925,10 +925,10 @@ namespace Logic.Kakuru
                 {
                     //look for a fill cell which has no value and randomly set its value from one of the variation of one of the groups it belongs
                     //take the first empty fill cell found
-                    CellValueKakuru emptyFillCell = null;
+                    CellValueKakuru? emptyFillCell = null;
                     foreach (CellBase cell in board.CellsMatrix)
                     {
-                        CellValueKakuru fillCell = cell as CellValueKakuru;
+                        CellValueKakuru? fillCell = cell as CellValueKakuru;
                         if (fillCell != null && fillCell.IsFixed == false)
                         {
                             emptyFillCell = fillCell;
@@ -956,7 +956,7 @@ namespace Logic.Kakuru
                 //clear all fill cells
                 foreach (CellBase cell in board.CellsMatrix)
                 {
-                    CellValueKakuru fillCell = cell as CellValueKakuru;
+                    CellValueKakuru? fillCell = cell as CellValueKakuru;
 
                     if (fillCell != null)
                     {
@@ -967,7 +967,7 @@ namespace Logic.Kakuru
                 //fix all must cells except the tested cell
                 for (int j = 0; j < mustBeFixedFillCells.Count; j++)
                     if (j != i)
-                        (board.CellsMatrix[mustBeFixedFillCells[j].Row, mustBeFixedFillCells[j].Column] as CellValueKakuru).Value = clonedMatrixValues[mustBeFixedFillCells[j].Row,mustBeFixedFillCells[j].Column];
+                        (board.CellsMatrix[mustBeFixedFillCells[j].Row, mustBeFixedFillCells[j].Column] as CellValueKakuru)!.Value = clonedMatrixValues[mustBeFixedFillCells[j].Row,mustBeFixedFillCells[j].Column];
 
                 //try to solve with that tested cell unfixed
                 solver.SolveInitiation();
@@ -987,7 +987,7 @@ namespace Logic.Kakuru
 
             foreach (CellBase cell in board.CellsMatrix)
             {
-                CellValueKakuru fillCell = cell as CellValueKakuru;
+                CellValueKakuru? fillCell = cell as CellValueKakuru;
 
                 if (fillCell != null)
                 {

@@ -7,7 +7,7 @@ namespace Common.Models.Base
     public abstract class GroupBase<C>
     {
 
-        protected List<C> _cells;
+        protected List<C> _cells = null!;
 
         public virtual List<C> Cells
         {

@@ -14,12 +14,12 @@ namespace Data
 
 
 
-        public override PuzzleGriddler TextToPuzzleObject(string text)
+        public override PuzzleGriddler? TextToPuzzleObject(string text)
         {
             return StringToGriddlerPuzzle_Format1(text);
         }
 
-        public override PuzzleGriddler WebToPuzzleObject(string url)
+        public override PuzzleGriddler? WebToPuzzleObject(string url)
         {
             return null;
         }
@@ -28,9 +28,9 @@ namespace Data
 
 
 
-        private PuzzleGriddler StringToGriddlerPuzzle_Format1(string text)
+        private PuzzleGriddler? StringToGriddlerPuzzle_Format1(string text)
         {
-            PuzzleGriddler puzzle = null;
+            PuzzleGriddler? puzzle = null;
 
             if (!string.IsNullOrEmpty(text))
             {

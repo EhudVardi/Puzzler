@@ -11,7 +11,7 @@ namespace Common.Models.Kakuru
     public class BoardKakuru : BoardGeneric<GroupKakuru, CellValueKakuru, CellGroupHolderKakuru>
     {
 
-        private List<int> _numberList;
+        private List<int> _numberList = null!;
         public List<int> NumberRange
         {
             get { return _numberList; }
@@ -31,7 +31,7 @@ namespace Common.Models.Kakuru
                     else if (this.CellsMatrix[i, j].GetType() == typeof(CellGroupHolderKakuru))
                         sb.Append("X");
                     else if (this.CellsMatrix[i, j].GetType() == typeof(CellValueKakuru))
-                        sb.Append((this.CellsMatrix[i, j] as CellValueKakuru).Value == null ? 0 : (this.CellsMatrix[i, j] as CellValueKakuru).Value);
+                        sb.Append((this.CellsMatrix[i, j] as CellValueKakuru)!.Value == null ? 0 : (this.CellsMatrix[i, j] as CellValueKakuru)!.Value);
                     else
                         sb.Append("N");
                 }

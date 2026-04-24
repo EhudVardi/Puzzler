@@ -22,18 +22,18 @@ namespace PresentationLogic
         public PuzzlerOptions Options { get; set; } = PuzzlerOptions.CreateDefault();
 
         protected DisplayType displayType;
-        private IDrawingSurface _surface;
+        private IDrawingSurface _surface = null!;
 
         public virtual void Initialize() { }
 
-        public virtual Dictionary<string, List<string>> ReadFileList() { return null; }
+        public virtual Dictionary<string, List<string>>? ReadFileList() { return null; }
         public virtual bool ReadFromFile(string fileName) { return false; }
         public virtual bool ReadFromWeb(string url) { return false; }
         public virtual bool ReadFromText(string text) { return false; }
 
         public virtual bool GenerateRandom() { return false; }
 
-        public virtual string GetPuzzleTypeDocumentsPath() { return null; }
+        public virtual string? GetPuzzleTypeDocumentsPath() { return null; }
 
         public virtual bool? IsSolved() { return false; }
         public virtual bool? IsValid() { return false; }
@@ -58,7 +58,7 @@ namespace PresentationLogic
         public virtual void HandlePointerWheel(PointerEvent e, float sizeX, float sizeY) { }
         public virtual void HandleKey(KeyEvent e) { }
 
-        public event EventHandler Refresh;
+        public event EventHandler? Refresh;
 
         protected virtual void OnRequestRefresh(EventArgs e)
         {

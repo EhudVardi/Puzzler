@@ -8,15 +8,15 @@ namespace Common.Models.Triddler
 {
     public class BoardTriddler : BoardGeneric<GroupTriddler, CellValueTriddler, CellGroupHolderTriddler>
     {
-        protected CellValueTriddler[,] _cellsMatrixRight;
-        public CellValueTriddler[,] CellsMatrixRight
+        protected CellValueTriddler?[,] _cellsMatrixRight = null!;
+        public CellValueTriddler?[,] CellsMatrixRight
         {
             get { return _cellsMatrixRight; }
             set { _cellsMatrixRight = value; }
         }
 
-        protected CellValueTriddler[,] _cellsMatrixLeft;
-        public CellValueTriddler[,] CellsMatrixLeft
+        protected CellValueTriddler?[,] _cellsMatrixLeft = null!;
+        public CellValueTriddler?[,] CellsMatrixLeft
         {
             get { return _cellsMatrixLeft; }
             set { _cellsMatrixLeft = value; }
@@ -42,12 +42,12 @@ namespace Common.Models.Triddler
             get
             {
                 List<CellValueTriddler> valueCells = new List<CellValueTriddler>();
-                foreach (CellBase cell in this.CellsMatrixLeft)
+                foreach (CellValueTriddler? cell in this.CellsMatrixLeft)
                     if (cell != null && cell.GetType() == typeof(CellValueTriddler))
-                        valueCells.Add(cell as CellValueTriddler);
-                foreach (CellBase cell in this.CellsMatrixRight)
+                        valueCells.Add(cell);
+                foreach (CellValueTriddler? cell in this.CellsMatrixRight)
                     if (cell != null && cell.GetType() == typeof(CellValueTriddler))
-                        valueCells.Add(cell as CellValueTriddler);
+                        valueCells.Add(cell);
                 return valueCells;
             }
         }

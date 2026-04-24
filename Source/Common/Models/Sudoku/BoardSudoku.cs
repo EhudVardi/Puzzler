@@ -49,10 +49,10 @@ namespace Common.Models.Sudoku
 
         public override void SetCell(int i, int j, int num)
         {
-            (this.CellsMatrix[i, j] as CellValueSudoku).Value = num;
+            (this.CellsMatrix[i, j] as CellValueSudoku)!.Value = num;
         }
 
-        public override CellBase GetCell(int i, int j)
+        public override CellBase? GetCell(int i, int j)
         {
             return this.CellsMatrix[i, j] as CellValueSudoku;
         }

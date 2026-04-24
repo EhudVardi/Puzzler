@@ -21,7 +21,7 @@ namespace PresentationLogic
 
             foreach (CellValueGriddler valueCell in trackerBoard.ValueCells)
             {
-                CellValueGriddler solvedValueCell = solvedBoard.CellsMatrix[valueCell.Row, valueCell.Column] as CellValueGriddler;
+                CellValueGriddler? solvedValueCell = solvedBoard.CellsMatrix[valueCell.Row, valueCell.Column] as CellValueGriddler;
 
                 switch (this.displayType)
                 {
@@ -40,7 +40,7 @@ namespace PresentationLogic
                             cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
                             cellWidth - margin * 2f, cellHeight - margin * 2f);
 
-                        PuzzlerColor hintStroke = solvedValueCell.Value != valueCell.Value
+                        PuzzlerColor hintStroke = solvedValueCell!.Value != valueCell.Value
                             ? PuzzlerColor.Red : PuzzlerColor.Green;
 
                         DrawRect(hintStroke, 1,
@@ -49,7 +49,7 @@ namespace PresentationLogic
                         break;
 
                     case DisplayType.Solution:
-                        if (solvedValueCell.IsFixed)
+                        if (solvedValueCell!.IsFixed)
                             FillRect(
                                 solvedValueCell.Value == null ? PuzzlerColor.Yellow
                                     : solvedValueCell.Value == true ? PuzzlerColor.Blue : PuzzlerColor.Red,
@@ -67,17 +67,17 @@ namespace PresentationLogic
 
         public override (int Width, int Height) GetPrefferedSize()
         {
-            return (40 * GetTrackerBoard().Columns, 40 * GetTrackerBoard().Rows);
+            return (40 * (GetTrackerBoard()?.Columns ?? 10), 40 * (GetTrackerBoard()?.Rows ?? 10));
         }
 
         public override void HandlePointer(PointerEvent e, float sizeX, float sizeY)
         {
-            BoardGriddler b = this.GetTrackerBoard();
+            BoardGriddler? b = this.GetTrackerBoard();
             if (b == null) return;
             var (row, col) = GetBoardCoordinates(e, sizeX, sizeY, b);
             if (row < 0 || row >= b.Rows || col < 0 || col >= b.Columns) return;
-            CellValueGriddler pointedCell = b.CellsMatrix[row, col] as CellValueGriddler;
-            if (!b.InitialCells.Contains(pointedCell))
+            CellValueGriddler? pointedCell = b.CellsMatrix[row, col] as CellValueGriddler;
+            if (pointedCell != null && !b.InitialCells.Contains(pointedCell))
                 selectedValueCell = pointedCell;
             this.OnRequestRefresh(EventArgs.Empty);
         }
@@ -98,6 +98,6 @@ namespace PresentationLogic
             this.OnRequestRefresh(EventArgs.Empty);
         }
 
-        protected CellValueGriddler selectedValueCell;
+        protected CellValueGriddler? selectedValueCell;
     }
 }

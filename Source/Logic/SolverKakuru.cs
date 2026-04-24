@@ -11,7 +11,7 @@ namespace Logic
     public class SolverKakuru : SolverGeneric<BoardKakuru>
     {
 
-        Dictionary<GroupKakuru, List<List<int>>> _groupsValidVariations;
+        Dictionary<GroupKakuru, List<List<int>>> _groupsValidVariations = null!;
 
 
 

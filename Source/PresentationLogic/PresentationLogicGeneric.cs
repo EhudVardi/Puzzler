@@ -7,8 +7,8 @@ namespace PresentationLogic
 {
     public class PresentationLogicGeneric<TPuzzle, TBoard> : PresentationLogicBase
     {
-        public LogicLayerGeneric<TPuzzle, TBoard> LogicProxy { get; set; }
-        public string URL { get; set; }
+        public LogicLayerGeneric<TPuzzle, TBoard> LogicProxy { get; set; } = null!;
+        public string URL { get; set; } = null!;
 
         public PresentationLogicGeneric() { }
 
@@ -21,21 +21,21 @@ namespace PresentationLogic
             this.LogicProxy.StepGenerated  += new EventHandler(LogicProxy_StepGenerated);
         }
 
-        public override Dictionary<string, List<string>> ReadFileList() { return this.LogicProxy.ReadFileList(); }
+        public override Dictionary<string, List<string>>? ReadFileList() { return this.LogicProxy.ReadFileList(); }
         public override bool ReadFromFile(string fileName) { return this.LogicProxy.ReadFromFile(fileName); }
         public override bool ReadFromWeb(string url)       { return this.LogicProxy.ReadFromWeb(this.URL); }
         public override bool ReadFromText(string text)     { return LogicProxy.ReadFromText(text); }
 
         public override bool GenerateRandom() { return LogicProxy.GenerateRandom(); }
 
-        public override string GetPuzzleTypeDocumentsPath() { return LogicProxy.GetPuzzleTypeDocumentsPath(); }
+        public override string? GetPuzzleTypeDocumentsPath() { return LogicProxy.GetPuzzleTypeDocumentsPath(); }
         public virtual string GetPuzzleName() { return LogicProxy.GetPuzzleName(); }
 
-        protected void Board_StepCompleted(object sender, EventArgs e)  { this.OnRequestRefresh(e); }
-        protected void Board_SolveCompleted(object sender, EventArgs e) { this.OnRequestRefresh(EventArgs.Empty); }
+        protected void Board_StepCompleted(object? sender, EventArgs e)  { this.OnRequestRefresh(e); }
+        protected void Board_SolveCompleted(object? sender, EventArgs e) { this.OnRequestRefresh(EventArgs.Empty); }
 
-        protected void LogicProxy_LoadCompleted(object sender, EventArgs e) { this.InitDisplay(); this.OnRequestRefresh(EventArgs.Empty); }
-        protected void LogicProxy_StepGenerated(object sender, EventArgs e) { this.OnRequestRefresh(EventArgs.Empty); }
+        protected void LogicProxy_LoadCompleted(object? sender, EventArgs e) { this.InitDisplay(); this.OnRequestRefresh(EventArgs.Empty); }
+        protected void LogicProxy_StepGenerated(object? sender, EventArgs e) { this.OnRequestRefresh(EventArgs.Empty); }
 
         public override bool? IsSolved() { return LogicProxy.RequestSolveStatus(); }
         public override bool? IsValid()  { return LogicProxy.RequestValidStatus(); }
@@ -43,8 +43,8 @@ namespace PresentationLogic
         public override void Draw(IDrawingSurface surface, float width, float height)
         {
             base.Draw(surface, width, height);
-            TBoard trackerBoard = GetTrackerBoard();
-            TBoard solvedBoard  = GetSolvedBoard();
+            TBoard? trackerBoard = GetTrackerBoard();
+            TBoard? solvedBoard  = GetSolvedBoard();
             if (trackerBoard != null && solvedBoard != null)
             {
                 DrawBoard(trackerBoard, solvedBoard, width, height);
@@ -69,7 +69,7 @@ namespace PresentationLogic
 
         public virtual void DrawBoard(TBoard trackerBoard, TBoard solvedBoard, float width, float height) { }
 
-        public virtual TBoard GetTrackerBoard() { return this.LogicProxy.getSolvedBoard(); }
-        public virtual TBoard GetSolvedBoard()  { return this.LogicProxy.getTrackedBoard(); }
+        public virtual TBoard? GetTrackerBoard() { return this.LogicProxy.getSolvedBoard(); }
+        public virtual TBoard? GetSolvedBoard()  { return this.LogicProxy.getTrackedBoard(); }
     }
 }

@@ -16,24 +16,25 @@ namespace Data
             this.PuzzleName = "Base";
         }
 
-        public virtual TPuzzle TextToPuzzleObject(string text)
+        public virtual TPuzzle? TextToPuzzleObject(string text)
         {
             return default(TPuzzle);
         }
-        public virtual TPuzzle WebToPuzzleObject(string url)
+        public virtual TPuzzle? WebToPuzzleObject(string url)
         {
             return default(TPuzzle);
         }
 
         public virtual TPuzzle XMLToPuzzle(string XmlFileName)
         {
-            return (TPuzzle)(new SerializeDeserializeObject().DeserializePuzzle(XmlFileName, typeof(TPuzzle)));
+            return (TPuzzle)(new SerializeDeserializeObject().DeserializePuzzle(XmlFileName, typeof(TPuzzle))!);
         }
         public virtual void PuzzleToXML(TPuzzle puzzle, string XmlFileName)
         {
-            if (!Directory.Exists(Path.GetDirectoryName(XmlFileName)))
-                Directory.CreateDirectory(Path.GetDirectoryName(XmlFileName));
-            new SerializeDeserializeObject().SerializePuzzle(XmlFileName, puzzle, typeof(TPuzzle));
+            string? dir = Path.GetDirectoryName(XmlFileName);
+            if (dir != null && !Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
+            new SerializeDeserializeObject().SerializePuzzle(XmlFileName, puzzle!, typeof(TPuzzle));
         }
 
         public Dictionary<string, List<string>> GetFileList()

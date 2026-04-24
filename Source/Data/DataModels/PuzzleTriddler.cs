@@ -8,21 +8,21 @@ namespace Data.DataModels
     [System.Xml.Serialization.XmlType("TriddlerPuzzle")]
     public class PuzzleTriddler : PuzzleBase
     {
-        private List<List<int>> _horizontals;
+        private List<List<int>> _horizontals = null!;
         public List<List<int>> Horizontals
         {
             get { return _horizontals; }
             set { _horizontals = value; }
         }
 
-        private List<List<int>> _verticals;
+        private List<List<int>> _verticals = null!;
         public List<List<int>> Verticals
         {
             get { return _verticals; }
             set { _verticals = value; }
         }
 
-        private List<List<int>> _diagonals;
+        private List<List<int>> _diagonals = null!;
         public List<List<int>> Diagonals
         {
             get { return _diagonals; }
