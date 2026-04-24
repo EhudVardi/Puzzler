@@ -135,43 +135,47 @@ namespace Logic
 
         public List<List<int>> CalculateAllSumValidVariations(GroupKakuru group)
         {
-            List<List<int>> variations = new List<List<int>>();
-
-            Combinatorics.Collections.Variations<int> combs = new Combinatorics.Collections.Variations<int>(this.Board.NumberRange, group.Size, Combinatorics.Collections.GenerateOption.WithoutRepetition);
-
-            foreach (IList<int> comb in combs)
-                if (ValidateSumOfNumberList(group, comb, group.Sum))
-                    variations.Add(new List<int>(comb));
-
-            return variations;
+            List<List<int>> results = new List<List<int>>();
+            List<int> numberRange = this.Board.NumberRange; // sorted ascending
+            bool[] used = new bool[numberRange.Count];
+            CollectVariations(group, numberRange, used, new List<int>(group.Size), 0, 0, group.Sum, results);
+            return results;
         }
 
-
-
-        private bool ValidateSumOfNumberList(GroupKakuru group, IList<int> comb, int targetSum)
+        private void CollectVariations(GroupKakuru group, List<int> numberRange, bool[] used,
+                                       List<int> current, int position, int runningSum,
+                                       int targetSum, List<List<int>> results)
         {
-            //validate sum of variation
-            int sumTemp = 0;
-            foreach (int num in comb)
-                sumTemp += num;
+            int remaining = group.Size - position;
 
-            bool isValid = true;
+            if (remaining == 0)
+            {
+                if (runningSum == targetSum)
+                    results.Add(new List<int>(current));
+                return;
+            }
 
-            if (sumTemp == targetSum) // if variation sum matches
+            int needed = targetSum - runningSum;
+
+            for (int di = 0; di < numberRange.Count; di++)
             {
-                //validate combination according to fixed cells.
-                for (int i = 0; i < comb.Count; i++)
-                    if (group.Cells[i].IsFixed && group.Cells[i].Value != comb[i])
-                    {
-                        isValid = false;
-                        break;
-                    }
+                if (used[di]) continue;
+                int digit = numberRange[di];
+
+                // numberRange is sorted ascending: once digit exceeds what's needed, all later ones will too
+                if (digit > needed)
+                    break;
+
+                if (group.Cells[position].IsFixed && group.Cells[position].Value != digit)
+                    continue;
+
+                used[di] = true;
+                current.Add(digit);
+                CollectVariations(group, numberRange, used, current, position + 1,
+                                  runningSum + digit, targetSum, results);
+                current.RemoveAt(current.Count - 1);
+                used[di] = false;
             }
-            else
-            {
-                isValid = false;
-            }
-            return isValid;
         }
 
 
