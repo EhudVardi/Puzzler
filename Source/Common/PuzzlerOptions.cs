@@ -5,7 +5,7 @@ namespace Common
 {
     public class PuzzlerOptions
     {
-        public string DocumentsRelativePath { get; set; } = @"..\Documents\";
+        public string DocumentsRelativePath { get; set; } = @"..\..\..\..\..\Documents\";
         public string PuzzlesLibraryFolder  { get; set; } = @"Puzzles\";
         public string FromWebFolder         { get; set; } = @"FromWeb\";
         public string FromTextFolder        { get; set; } = @"FromText\";
