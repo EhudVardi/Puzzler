@@ -284,16 +284,25 @@ namespace Logic
 
         private void ReflectCellsToVariationsList(GroupGriddler group)
         {
-            List<BitArray> integratedArray = _groupsVariations[group];
+            List<BitArray> current = _groupsVariations[group];
+            List<BitArray> survivors = new List<BitArray>(current.Count);
 
-            for (int i = 0; i < integratedArray.Count; i++)
+            foreach (BitArray variation in current)
+            {
+                bool valid = true;
                 for (int j = 0; j < group.Size; j++)
-                    if (group.Cells[j].Value != null)
-                        if (integratedArray[i].Get(j) != group.Cells[j].Value)
-                        {
-                            integratedArray.RemoveAt(i);
-                            break;
-                        }
+                {
+                    if (group.Cells[j].Value != null && variation.Get(j) != group.Cells[j].Value)
+                    {
+                        valid = false;
+                        break;
+                    }
+                }
+                if (valid)
+                    survivors.Add(variation);
+            }
+
+            _groupsVariations[group] = survivors;
         }
 
 
