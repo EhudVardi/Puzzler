@@ -10,11 +10,16 @@ namespace Common.Logic
         #region properties and members
 
         private BitArray _map = null!;
+        private int _onesCount;
 
         public BitArray Map
         {
             get { return _map; }
-            set { _map = value; }
+            set
+            {
+                _map = value;
+                _onesCount = ComputeOnes();
+            }
         }
 
         public int Count
@@ -22,25 +27,9 @@ namespace Common.Logic
             get { return _map.Count; }
         }
 
-        public int Ones
-        {
-            get 
-            {
-                int ans = 0;
+        public int Ones => _onesCount;
 
-                for (int i = 0; i < this.Count; i++)
-                    if (this._map[i] == true)
-                        ans++;
-
-                return ans;
-            }
-        }
-
-        public int Zeros
-        {
-            get { return this.Count - this.Ones; }
-        }
-
+        public int Zeros => Count - _onesCount;
 
         #endregion
 
@@ -48,24 +37,27 @@ namespace Common.Logic
 
         public BinaryChoicesMap()
         {
-
+            _onesCount = 0;
         }
 
         public BinaryChoicesMap(int n)
         {
             _map = new BitArray(n, true);
+            _onesCount = n;
         }
 
         public BinaryChoicesMap(int n, bool value)
             : this(n)
         {
             _map.SetAll(value);
+            _onesCount = value ? n : 0;
         }
 
         public BinaryChoicesMap(BinaryChoicesMap numbers)
             : this(numbers.Count)
         {
-            this.Map = new BitArray(numbers.Map);
+            _map = new BitArray(numbers.Map);
+            _onesCount = numbers._onesCount;
         }
 
         #endregion
@@ -78,7 +70,7 @@ namespace Common.Logic
             if (nums1.Count == nums2.Count)
             {
                 ans = new BinaryChoicesMap(nums1);
-                ans.Map.And(nums2.Map);
+                ans.AND(nums2);
             }
             return ans;
         }
@@ -86,7 +78,8 @@ namespace Common.Logic
         {
             if (this.Count == nums2.Count)
             {
-                this.Map.And(nums2.Map);
+                this._map.And(nums2._map);
+                _onesCount = ComputeOnes();
             }
             return this;
         }
@@ -97,7 +90,7 @@ namespace Common.Logic
             if (nums1.Count == nums2.Count)
             {
                 ans = new BinaryChoicesMap(nums1);
-                ans.Map.Or(nums2.Map);
+                ans.OR(nums2);
             }
             return ans;
         }
@@ -105,7 +98,8 @@ namespace Common.Logic
         {
             if (this.Count == nums2.Count)
             {
-                this.Map.Or(nums2.Map);
+                this._map.Or(nums2._map);
+                _onesCount = ComputeOnes();
             }
             return this;
         }
@@ -113,12 +107,13 @@ namespace Common.Logic
         public static BinaryChoicesMap NOT(BinaryChoicesMap nums)
         {
             BinaryChoicesMap ans = new BinaryChoicesMap(nums);
-            ans.Map.Not();
+            ans.NOT();
             return ans;
         }
         public BinaryChoicesMap NOT()
         {
-            this.Map.Not();
+            this._map.Not();
+            _onesCount = Count - _onesCount;
             return this;
         }
 
@@ -128,7 +123,7 @@ namespace Common.Logic
             if (nums1.Count == nums2.Count)
             {
                 ans = new BinaryChoicesMap(nums1);
-                ans.Map.Xor(nums2.Map);
+                ans.XOR(nums2);
             }
             return ans;
         }
@@ -136,7 +131,8 @@ namespace Common.Logic
         {
             if (this.Count == nums2.Count)
             {
-                this.Map.Xor(nums2.Map);
+                this._map.Xor(nums2._map);
+                _onesCount = ComputeOnes();
             }
             return this;
         }
@@ -147,18 +143,23 @@ namespace Common.Logic
 
         public void SetSingleBit(int num, bool value)
         {
-            this.Map.Set(num, value);
+            bool current = this._map[num];
+            if (current != value)
+            {
+                this._map.Set(num, value);
+                _onesCount += value ? 1 : -1;
+            }
         }
         public bool GetSingleBit(int num)
         {
-            return this.Map[num];
+            return this._map[num];
         }
-       
+
         public bool BinaryEqualTo(BinaryChoicesMap numbers)
         {
             for (int i = 0; i < this.Count; i++)
             {
-                if ((this.Map[i] ^ numbers.Map[i]))
+                if ((this._map[i] ^ numbers._map[i]))
                     return false;
             }
             return true;
@@ -170,8 +171,9 @@ namespace Common.Logic
 
         public void SetToNumber(int num)
         {
-            this.Map.SetAll(false);
-            this.Map.Set(num, true);
+            this._map.SetAll(false);
+            this._map.Set(num, true);
+            _onesCount = 1;
         }
 
         public int GetNumber()
@@ -180,21 +182,19 @@ namespace Common.Logic
             {
                 for (int i = 0; i < this.Count; i++)
                 {
-                    if (this.Map[i] == true)
+                    if (this._map[i] == true)
                         return i;
                 }
             }
             return -1;
         }
 
-        public bool IsSetToNumber()
-        {
-            return this.Ones == 1 ? true : false;
-        }
+        public bool IsSetToNumber() => _onesCount == 1;
 
         public void Reset(bool value)
         {
-            this.Map.SetAll(value);
+            this._map.SetAll(value);
+            _onesCount = value ? Count : 0;
         }
 
         #endregion
@@ -216,5 +216,16 @@ namespace Common.Logic
 
         #endregion
 
+        #region private helpers
+
+        private int ComputeOnes()
+        {
+            int count = 0;
+            for (int i = 0; i < _map.Count; i++)
+                if (_map[i]) count++;
+            return count;
+        }
+
+        #endregion
     }
 }
