@@ -29,21 +29,17 @@ namespace Logic
             foreach (GroupGriddler group in this.Board.Groups)
                 groupsSortedByvariationCount.Add(new GroupVariations(group, CalcValidVariationsCount(group)));
 
-            groupsSortedByvariationCount.Sort(delegate(GroupVariations gv1, GroupVariations gv2)
-            {
-                return gv1.VariationCount.CompareTo(gv2.VariationCount);
-            });
+            groupsSortedByvariationCount.Sort((gv1, gv2) => gv1.VariationCount.CompareTo(gv2.VariationCount));
 
             _groupsVariations = new Dictionary<GroupGriddler, List<BitArray>>();
+            int progress = 0;
             foreach (var gv in groupsSortedByvariationCount)
             {
                 GroupGriddler group = gv.Group;
-                //List<BitArray> variations = CalcAllValidVariations(group);
                 List<BitArray> variations = CalcAllValidVariationConsideringExsitingLine(group);
-                
                 _groupsVariations.Add(group, variations);
                 ReflectIntegratedVariationToCells(group, variations);
-                ReportProgress((int)(groupsSortedByvariationCount.IndexOf(gv)), null);
+                ReportProgress(progress++, null);
             }
         }
 
@@ -128,12 +124,7 @@ namespace Logic
                 //place the remaining cells in all the possible ways
                 for (int i = 0; i < gap; i++)
                 {
-                    //clone the line for the recursive call
-                    BitArray aLine = new BitArray(currentLine.Length);
-                    for (int k = 0; k < currentLine.Count; k++)
-                    {
-                        aLine.Set(k, currentLine[k]);
-                    }
+                    BitArray aLine = new BitArray(currentLine);
 
                     bool breaked = false;
                     //paint the current num on the relevant cells
@@ -236,9 +227,7 @@ namespace Logic
         private int CalcValidVariationsCount(GroupGriddler group)
         {
             int lines = 0;
-
             CalcAllValidVariationsRecursive(group.Size, group.Numbers, -1, 0, ref lines);
-
             return lines;
         }
 
@@ -246,32 +235,20 @@ namespace Logic
         {
             if (currentNumI < nums.Count - 1)
             {
-                //calculate the minimum space that we need in order to insert the remaining nums
                 int minCellsCount = 0;
                 for (int i = currentNumI + 1; i < nums.Count; i++)
-                {
                     minCellsCount += nums[i] + 1;
-                }
                 minCellsCount -= 2;
 
-                //calculate the gap that is the space that we can place the remaining cells.
                 int gap = n - minCellsCount - start;
-
-                //place the remaining cells in all the possible ways
                 for (int i = 0; i < gap; i++)
-                {
-                    //recursive call to the next possibility
                     CalcAllValidVariationsRecursive(n, nums, currentNumI + 1, start + nums[currentNumI + 1] + i + 1, ref lines);
-                }
             }
             else if (currentNumI == nums.Count - 1)
             {
                 lines++;
             }
-
         }
-
-
 
         private void ReflectIntegratedVariationToCells(GroupGriddler group, List<BitArray> _groupsVariations)
         {
