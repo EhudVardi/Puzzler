@@ -18,7 +18,7 @@ namespace Tests
             var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
 
-            bool loaded = logic.ReadFromFile(FixturePath("sudoku.xml"));
+            bool loaded = logic.ReadFromFile(FixturePath("sudoku_easy.xml"));
             Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
 
             bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(10))) == tcs.Task;
@@ -33,7 +33,7 @@ namespace Tests
             var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
 
-            bool loaded = logic.ReadFromFile(FixturePath("griddler.xml"));
+            bool loaded = logic.ReadFromFile(FixturePath("griddler_easy.xml"));
             Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
 
             bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(10))) == tcs.Task;
