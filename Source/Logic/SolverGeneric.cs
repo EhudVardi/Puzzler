@@ -55,10 +55,24 @@ namespace Logic
                 if (bg.CancellationPending)
                     return;
 
-                DoCompleteStep();
+                if (!DoCompleteStep())
+                    break;
+
                 ReportProgress(precentageProgress, null);
                 precentageProgress++;
             }
+
+            // FUTURE — backtracking hook:
+            // Once the propagation loop above exits without IsSolved(), replace it with a
+            // PropagateAndBranch() method that snapshots state, picks the minimum-candidates
+            // group/cell, and tries each candidate recursively. Pre-requisites per solver:
+            //   SolverSudoku/SolverKakuru: already implemented in a previous branch — see git log.
+            //   SolverGriddler/SolverTriddler: DoCompleteStep() must return false on no-progress
+            //     (compare total variation count before/after); IsValid() must check every group
+            //     has at least one variation remaining (currently returns true unconditionally).
+            // The BackgroundWorker runs PropagateAndBranch only at the outermost level;
+            // recursive branch calls invoke it synchronously on the same thread.
+
             Console.WriteLine("total time = " + (DateTime.Now - start).TotalMilliseconds + "ms");
         }
 

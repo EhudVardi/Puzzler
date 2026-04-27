@@ -14,6 +14,8 @@ namespace Logic
 
         Dictionary<GroupSudoku, List<List<CellValueSudoku>>> _groupsSubGroups = null!;
         Dictionary<CellValueSudoku, BinaryChoicesMap> _cellsChoiceMap = null!;
+        Dictionary<int, List<CellValueSudoku>> _cellsByRow = null!;
+        Dictionary<int, List<CellValueSudoku>> _cellsByColumn = null!;
 
 
         public override void SolveInitiation()
@@ -36,27 +38,57 @@ namespace Logic
             {
                 _cellsChoiceMap[cell].SetToNumber(cell.Value.GetValueOrDefault());
             }
+
+            _cellsByRow = new Dictionary<int, List<CellValueSudoku>>();
+            _cellsByColumn = new Dictionary<int, List<CellValueSudoku>>();
+            foreach (CellValueSudoku cell in Board.CellsMatrix)
+            {
+                if (!_cellsByRow.ContainsKey(cell.Row)) _cellsByRow[cell.Row] = new List<CellValueSudoku>();
+                _cellsByRow[cell.Row].Add(cell);
+                if (!_cellsByColumn.ContainsKey(cell.Column)) _cellsByColumn[cell.Column] = new List<CellValueSudoku>();
+                _cellsByColumn[cell.Column].Add(cell);
+            }
         }
 
         public override bool DoCompleteStep()
         {
-            bool anyChange = false;
-
-            foreach (CellValueSudoku cell in this.Board.CellsMatrix)
-            {
-                if (_cellsChoiceMap[cell].IsSetToNumber())
-                {
-                    SetCell(cell.Row, cell.Column, _cellsChoiceMap[cell].GetNumber());
+            // Level 1: naked singles — propagate newly-determined single-candidate cells
+            bool anySet = false;
+            foreach (CellValueSudoku cell in Board.CellsMatrix)
+                if (!cell.IsFixed && _cellsChoiceMap[cell].IsSetToNumber())
+                { 
+                    SetCell(cell.Row, cell.Column, _cellsChoiceMap[cell].GetNumber()); 
+                        anySet = true;
                 }
-            }
+            if (anySet) 
+                return true;
 
-            foreach (GroupSudoku group in this.Board.Groups)
-            {
-                anyChange |= FragmentSubGroups(group);
-                anyChange |= ApplySubGroupsToSharedGroups(group);
-            }
+            // Level 2: hidden singles — candidate appears in only one cell in its group
+            if (FindHiddenSingles()) 
+                return true;
 
-            return anyChange;
+            // Level 3: naked sets; if a new set is found, apply pointing pairs immediately
+            foreach (GroupSudoku group in Board.Groups)
+                if (FragmentSubGroups(group))
+                {
+                    ApplySubGroupsToSharedGroups(group);
+                    return true;
+                }
+
+            // Level 4: hidden sets (pairs / triples)
+            foreach (GroupSudoku group in Board.Groups)
+                if (FindHiddenSets(group)) 
+                    return true;
+
+            // Level 5: X-Wing (fish size 2)
+            if (FindFish(2))
+                return true;
+
+            // Level 6: Swordfish (fish size 3)
+            if (FindFish(3))
+                return true;
+
+            return false;
         }
 
         public override bool IsSolved()
@@ -168,7 +200,8 @@ namespace Logic
                 permutationSize++;
             }
 
-            subGroups.Add(subGroup);
+            if (subGroup.Count > 0)
+                subGroups.Add(subGroup);
         }
 
 
@@ -188,7 +221,7 @@ namespace Logic
                     if (cellsWithPos.Count == 0)
                         continue;
 
-                    // intersect each cell's group list → only groups shared by every cell with bit i set
+                    // intersect each cell's group list -> only groups shared by every cell with bit i set
                     HashSet<GroupSudoku>? sharedGroups = null;
                     foreach (CellValueSudoku cell in cellsWithPos)
                     {
@@ -212,6 +245,153 @@ namespace Logic
             return anyChange;
         }
 
+
+        // Hidden single: if a candidate d appears in only one unsolved cell in a group,
+        // that cell must be d — reduce it to that single candidate.
+        internal bool FindHiddenSingles()
+        {
+            foreach (GroupSudoku group in Board.Groups)
+            {
+                int size = group.Size;
+                for (int d = 0; d < size; d++)
+                {
+                    // count ALL cells (fixed + unfixed) with candidate d so a fixed cell
+                    // already holding d prevents us from incorrectly firing for d again
+                    CellValueSudoku? singleCell = null;
+                    bool moreThanOne = false;
+                    foreach (CellValueSudoku cell in group.Cells)
+                    {
+                        if (_cellsChoiceMap[cell].GetSingleBit(d))
+                        {
+                            if (singleCell == null) singleCell = cell;
+                            else { moreThanOne = true; break; }
+                        }
+                    }
+                    if (singleCell != null && !moreThanOne
+                        && !singleCell.IsFixed && !_cellsChoiceMap[singleCell].IsSetToNumber())
+                    {
+                        _cellsChoiceMap[singleCell].SetToNumber(d);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        // Hidden pairs/triples: if k candidates appear only in exactly k cells of a group,
+        // all other candidates can be removed from those k cells.
+        internal bool FindHiddenSets(GroupSudoku group)
+        {
+            bool anyChange = false;
+            int size = group.Size;
+
+            List<CellValueSudoku> unsolvedCells = new List<CellValueSudoku>();
+            foreach (CellValueSudoku cell in group.Cells)
+                if (!_cellsChoiceMap[cell].IsSetToNumber())
+                    unsolvedCells.Add(cell);
+
+            List<int> activeCandidates = new List<int>();
+            for (int d = 0; d < size; d++)
+                foreach (CellValueSudoku cell in unsolvedCells)
+                    if (_cellsChoiceMap[cell].GetSingleBit(d))
+                    { activeCandidates.Add(d); break; }
+
+            for (int setSize = 2; setSize <= 3; setSize++)
+            {
+                if (unsolvedCells.Count <= setSize || activeCandidates.Count < setSize)
+                    continue;
+
+                Combinations<int> combos = new Combinations<int>(activeCandidates, setSize);
+                foreach (IList<int> candidateSet in combos)
+                {
+                    List<CellValueSudoku> cellsWithAny = new List<CellValueSudoku>();
+                    foreach (CellValueSudoku cell in unsolvedCells)
+                        foreach (int d in candidateSet)
+                            if (_cellsChoiceMap[cell].GetSingleBit(d))
+                            { cellsWithAny.Add(cell); break; }
+
+                    if (cellsWithAny.Count != setSize)
+                        continue;
+
+                    foreach (CellValueSudoku cell in cellsWithAny)
+                        for (int d = 0; d < size; d++)
+                            if (!candidateSet.Contains(d) && _cellsChoiceMap[cell].GetSingleBit(d))
+                            {
+                                _cellsChoiceMap[cell].SetSingleBit(d, false);
+                                anyChange = true;
+                            }
+                }
+            }
+
+            return anyChange;
+        }
+
+        // X-Wing (fishSize=2) and Swordfish (fishSize=3): if candidate d appears in exactly
+        // fishSize base lines and those lines share exactly fishSize cover positions, eliminate
+        // d from all other cells in those cover positions.
+        internal bool FindFish(int fishSize)
+        {
+            bool anyChange = false;
+            anyChange |= FindFishInDirection(fishSize, _cellsByRow, _cellsByColumn, c => c.Row, c => c.Column);
+            anyChange |= FindFishInDirection(fishSize, _cellsByColumn, _cellsByRow, c => c.Column, c => c.Row);
+            return anyChange;
+        }
+
+        internal bool FindFishInDirection(
+            int fishSize,
+            Dictionary<int, List<CellValueSudoku>> baseLines,
+            Dictionary<int, List<CellValueSudoku>> coverLines,
+            Func<CellValueSudoku, int> getBaseIndex,
+            Func<CellValueSudoku, int> getCoverIndex)
+        {
+            bool anyChange = false;
+            int size = Board.Size;
+
+            for (int d = 0; d < size; d++)
+            {
+                Dictionary<int, List<int>> baseToCoverPositions = new Dictionary<int, List<int>>();
+                foreach (var kvp in baseLines)
+                {
+                    List<int> positions = new List<int>();
+                    foreach (CellValueSudoku cell in kvp.Value)
+                        if (!_cellsChoiceMap[cell].IsSetToNumber() && _cellsChoiceMap[cell].GetSingleBit(d))
+                            positions.Add(getCoverIndex(cell));
+
+                    if (positions.Count >= 2 && positions.Count <= fishSize)
+                        baseToCoverPositions[kvp.Key] = positions;
+                }
+
+                if (baseToCoverPositions.Count < fishSize)
+                    continue;
+
+                List<int> baseLineKeys = new List<int>(baseToCoverPositions.Keys);
+                Combinations<int> combos = new Combinations<int>(baseLineKeys, fishSize);
+
+                foreach (IList<int> baseCombo in combos)
+                {
+                    HashSet<int> coverPositions = new HashSet<int>();
+                    foreach (int baseKey in baseCombo)
+                        foreach (int pos in baseToCoverPositions[baseKey])
+                            coverPositions.Add(pos);
+
+                    if (coverPositions.Count != fishSize)
+                        continue;
+
+                    HashSet<int> baseComboSet = new HashSet<int>(baseCombo);
+                    foreach (int coverPos in coverPositions)
+                        foreach (CellValueSudoku cell in coverLines[coverPos])
+                            if (!baseComboSet.Contains(getBaseIndex(cell))
+                                && !_cellsChoiceMap[cell].IsSetToNumber()
+                                && _cellsChoiceMap[cell].GetSingleBit(d))
+                            {
+                                _cellsChoiceMap[cell].SetSingleBit(d, false);
+                                anyChange = true;
+                            }
+                }
+            }
+
+            return anyChange;
+        }
 
 
         public bool IsGroupValid(GroupSudoku group)
