@@ -43,9 +43,11 @@ namespace Tests
         }
 
         [Theory]
-        [InlineData("sudoku_easy.xml",   "Easy")]
-        [InlineData("sudoku_medium.xml", "Medium")]
-        [InlineData("sudoku_hard.xml",   "Hard")]
+        [InlineData("sudoku_9x9_easy.xml",                  "9x9 Easy")]
+        [InlineData("sudoku_16x16_medium.xml",              "16x16 Medium")]
+        [InlineData("sudoku_25x25_hard.xml",              "25x25 Hard")]   // very slow — skip until backtracking is implemented
+        [InlineData("sudoku_9x9_hard_needs_backtracking.xml", "9x9 Hard (backtrack needed)")]
+        [InlineData("sudoku_9x9_hard_s18.xml",              "9x9 Hard S18")]
         public async Task Sudoku_Benchmark(string fileName, string difficulty)
         {
             var path = FixturePath(fileName);

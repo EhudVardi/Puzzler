@@ -18,7 +18,7 @@ namespace Tests
             var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
 
-            bool loaded = logic.ReadFromFile(FixturePath("sudoku_easy.xml"));
+            bool loaded = logic.ReadFromFile(FixturePath("sudoku_9x9_easy.xml"));
             Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
 
             bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(10))) == tcs.Task;
