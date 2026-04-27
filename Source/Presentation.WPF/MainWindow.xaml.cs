@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Xml;
 using Common;
 
@@ -51,6 +52,7 @@ namespace Presentation.WPF
                     ?? throw new InvalidOperationException($"No puzzle descriptor on '{rb?.Content}'");
                 PresentationLogicObject = descriptor.Create();
                 PresentationLogicObject.Options = _options;
+                ((SkewTransform)((TransformGroup)GameCanvas.RenderTransform).Children[1]).AngleX = descriptor.BoardSkewAngle;
 
                 Dictionary<string, List<string>>? puzzlesDic = PresentationLogicObject.ReadFileList();
                 this.ucDataGridGenerator.SetData(puzzlesDic?[_options.FromGeneratorFolder] ?? new System.Collections.Generic.List<string>());

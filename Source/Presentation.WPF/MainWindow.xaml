@@ -193,7 +193,7 @@
                         <UserControls:PuzzlerCanvas.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="0.63" ScaleY="0.63"/>
-                                <SkewTransform AngleX="-30" />
+                                <SkewTransform AngleX="0" />
                                 <RotateTransform/>
                                 <TranslateTransform/>
                             </TransformGroup>
