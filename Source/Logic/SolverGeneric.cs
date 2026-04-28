@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Logic
@@ -62,19 +63,35 @@ namespace Logic
                 precentageProgress++;
             }
 
-            // FUTURE — backtracking hook:
-            // Once the propagation loop above exits without IsSolved(), replace it with a
-            // PropagateAndBranch() method that snapshots state, picks the minimum-candidates
-            // group/cell, and tries each candidate recursively. Pre-requisites per solver:
-            //   SolverSudoku/SolverKakuru: already implemented in a previous branch — see git log.
-            //   SolverGriddler/SolverTriddler: DoCompleteStep() must return false on no-progress
-            //     (compare total variation count before/after); IsValid() must check every group
-            //     has at least one variation remaining (currently returns true unconditionally).
-            // The BackgroundWorker runs PropagateAndBranch only at the outermost level;
-            // recursive branch calls invoke it synchronously on the same thread.
+            if (!IsSolved())
+                BacktrackSolve();
 
             Console.WriteLine("total time = " + (DateTime.Now - start).TotalMilliseconds + "ms");
         }
+
+        private bool BacktrackSolve()
+        {
+            while (!IsSolved() && DoCompleteStep()) { }
+
+            if (!IsValid()) return false;
+            if (IsSolved()) return true;
+
+            foreach (Action tryBranch in GetBranches())
+            {
+                if (bg.CancellationPending) return false;
+                object snapshot = TakeSnapshot();
+                tryBranch();
+                if (BacktrackSolve()) return true;
+                RestoreSnapshot(snapshot);
+            }
+            return false;
+        }
+
+        protected virtual IEnumerable<Action> GetBranches() => Array.Empty<Action>();
+        protected virtual object TakeSnapshot() =>
+            throw new NotSupportedException($"{GetType().Name} does not support backtracking");
+        protected virtual void RestoreSnapshot(object snapshot) =>
+            throw new NotSupportedException($"{GetType().Name} does not support backtracking");
 
         public virtual void SolveInitiation() { }
         public virtual bool DoCompleteStep() { return false; }
