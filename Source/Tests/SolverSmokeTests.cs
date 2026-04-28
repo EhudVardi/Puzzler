@@ -70,5 +70,20 @@ namespace Tests
             Assert.True(finished, "Solver did not complete within 10 seconds");
             Assert.True(logic.RequestSolveStatus() == true, "Griddler was not solved after completion");
         }
+
+        [Fact]
+        public async Task Griddler_HardPuzzle_SolvesWithBacktracking()
+        {
+            var logic = new LogicLayerGriddler();
+            var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
+
+            bool loaded = logic.ReadFromFile(FixturePath("griddler_hard.xml"));
+            Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
+
+            bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(60))) == tcs.Task;
+            Assert.True(finished, "Griddler hard solver did not complete within 60 seconds");
+            Assert.True(logic.RequestSolveStatus() == true, "Griddler hard was not solved after completion");
+        }
     }
 }
