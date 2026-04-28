@@ -27,6 +27,21 @@ namespace Tests
         }
 
         [Fact]
+        public async Task Sudoku_HardPuzzle_SolvesWithBacktracking()
+        {
+            var logic = new LogicLayerSudoku();
+            var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
+
+            bool loaded = logic.ReadFromFile(FixturePath("sudoku_9x9_hard_needs_backtracking.xml"));
+            Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
+
+            bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(30))) == tcs.Task;
+            Assert.True(finished, "Solver did not complete within 30 seconds");
+            Assert.True(logic.RequestSolveStatus() == true, "Hard Sudoku was not solved after completion");
+        }
+
+        [Fact]
         public async Task Griddler_KnownPuzzle_LoadsAndSolvesWithinTimeout()
         {
             var logic = new LogicLayerGriddler();
