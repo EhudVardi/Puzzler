@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Logic.Sudoku;
 using System.Collections;
@@ -411,5 +412,63 @@ namespace Logic
         {
             return _cellsChoiceMap[cell];
         }
+
+        protected override object TakeSnapshot()
+        {
+            var maps = new Dictionary<CellValueSudoku, BinaryChoicesMap>();
+            var values = new Dictionary<CellValueSudoku, int?>();
+            foreach (CellValueSudoku cell in Board.CellsMatrix)
+            {
+                maps[cell] = new BinaryChoicesMap(_cellsChoiceMap[cell]);
+                values[cell] = cell.Value;
+            }
+            var subGroups = new Dictionary<GroupSudoku, List<List<CellValueSudoku>>>();
+            foreach (var kvp in _groupsSubGroups)
+                subGroups[kvp.Key] = kvp.Value.Select(sg => new List<CellValueSudoku>(sg)).ToList();
+
+            return new SudokuSnapshot(maps, values, subGroups);
+        }
+
+        protected override void RestoreSnapshot(object snapshot)
+        {
+            var s = (SudokuSnapshot)snapshot;
+            foreach (CellValueSudoku cell in Board.CellsMatrix)
+            {
+                _cellsChoiceMap[cell] = new BinaryChoicesMap(s.ChoiceMaps[cell]);
+                cell.Value = s.CellValues[cell];
+            }
+            foreach (var kvp in s.SubGroups)
+                _groupsSubGroups[kvp.Key] = kvp.Value.Select(sg => new List<CellValueSudoku>(sg)).ToList();
+        }
+
+        protected override IEnumerable<Action> GetBranches()
+        {
+            CellValueSudoku? best = null;
+            int bestOnes = int.MaxValue;
+            foreach (CellValueSudoku cell in Board.CellsMatrix)
+            {
+                int ones = _cellsChoiceMap[cell].Ones;
+                if (!cell.IsFixed && ones > 1 && ones < bestOnes)
+                {
+                    best = cell;
+                    bestOnes = ones;
+                }
+            }
+            if (best == null) yield break;
+
+            int size = Board.Size;
+            for (int d = 0; d < size; d++)
+            {
+                if (!_cellsChoiceMap[best].GetSingleBit(d)) continue;
+                int candidate = d;
+                CellValueSudoku branchCell = best;
+                yield return () => SetCell(branchCell.Row, branchCell.Column, candidate);
+            }
+        }
+
+        private sealed record SudokuSnapshot(
+            Dictionary<CellValueSudoku, BinaryChoicesMap> ChoiceMaps,
+            Dictionary<CellValueSudoku, int?> CellValues,
+            Dictionary<GroupSudoku, List<List<CellValueSudoku>>> SubGroups);
     }
 }
