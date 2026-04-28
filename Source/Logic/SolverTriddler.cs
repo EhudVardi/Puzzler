@@ -47,14 +47,20 @@ namespace Logic
 
         public override bool DoCompleteStep()
         {
+            int totalBefore = 0;
+            foreach (var kvp in _groupsVariations) totalBefore += kvp.Value.Count;
+
             foreach (GroupGriddler group in this.Board.Groups)
-                if (_groupsVariations[group].Count > 1 || group.Cells.Any(c => c.Value == null)) //if group is not all fixed (solved)
+                if (_groupsVariations[group].Count > 1 || group.Cells.Any(c => c.Value == null))
                     ReflectIntegratedVariationToCells(group, _groupsVariations[group]);
 
             foreach (GroupGriddler group in this.Board.Groups)
                 ReflectCellsToVariationsList(group);
 
-            return true;
+            int totalAfter = 0;
+            foreach (var kvp in _groupsVariations) totalAfter += kvp.Value.Count;
+
+            return totalAfter < totalBefore;
         }
         public override bool IsSolved()
         {
@@ -66,25 +72,10 @@ namespace Logic
         }
         public override bool IsValid()
         {
+            foreach (var kvp in _groupsVariations)
+                if (kvp.Value.Count == 0)
+                    return false;
             return true;
-
-            //foreach (CellValueGriddler cell in this.Board.ValueCells)
-
-            //    foreach (GroupGriddler firstGroup in cell.Groups)
-            //        foreach (GroupGriddler secondGroup in cell.Groups)
-            //            if (!object.ReferenceEquals(firstGroup, secondGroup))
-            //            {
-            //                GroupGriddler firstIntegratedGroup = SolverGriddler.GetIntegratedGroup(firstGroup);
-            //                GroupGriddler secondIntegratedGroup = SolverGriddler.GetIntegratedGroup(secondGroup);
-
-            //                bool? firstGroupCellValue = firstIntegratedGroup.Cells[firstGroup.Cells.IndexOf(cell)].Value;
-            //                bool? secondGroupCellValue = secondIntegratedGroup.Cells[secondGroup.Cells.IndexOf(cell)].Value;
-
-            //                if ((bool)CellValueGriddler.XOR(firstGroupCellValue, secondGroupCellValue))
-            //                    return false;
-            //            }
-
-            //return true;
         }
         public override void Reset() { }
 
