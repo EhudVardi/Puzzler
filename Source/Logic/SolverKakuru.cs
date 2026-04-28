@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Collections;
 using Logic.Kakuru;
@@ -199,5 +200,61 @@ namespace Logic
 
 
         ///
+
+
+
+        private sealed record KakuruSnapshot(
+            Dictionary<GroupKakuru, List<List<int>>> Variations,
+            Dictionary<CellValueKakuru, int?> CellValues);
+
+        protected override object TakeSnapshot()
+        {
+            var variations = new Dictionary<GroupKakuru, List<List<int>>>();
+            foreach (var kvp in _groupsValidVariations)
+                variations[kvp.Key] = kvp.Value.Select(v => new List<int>(v)).ToList();
+
+            var values = new Dictionary<CellValueKakuru, int?>();
+            foreach (CellValueKakuru cell in Board.ValueCells)
+                values[cell] = cell.Value;
+
+            return new KakuruSnapshot(variations, values);
+        }
+
+        protected override void RestoreSnapshot(object snapshot)
+        {
+            var s = (KakuruSnapshot)snapshot;
+            foreach (var kvp in s.Variations)
+                _groupsValidVariations[kvp.Key] = kvp.Value.Select(v => new List<int>(v)).ToList();
+            foreach (var kvp in s.CellValues)
+                kvp.Key.Value = kvp.Value;
+        }
+
+        protected override IEnumerable<Action> GetBranches()
+        {
+            GroupKakuru? best = null;
+            int bestCount = int.MaxValue;
+            foreach (GroupKakuru group in Board.Groups)
+            {
+                int count = _groupsValidVariations[group].Count;
+                if (count > 1 && count < bestCount)
+                {
+                    best = group;
+                    bestCount = count;
+                }
+            }
+            if (best == null) yield break;
+
+            var candidates = new List<List<int>>(_groupsValidVariations[best]);
+            foreach (List<int> variation in candidates)
+            {
+                List<int> captured = variation;
+                GroupKakuru group = best;
+                yield return () =>
+                {
+                    _groupsValidVariations[group] = new List<List<int>> { captured };
+                    FixAllCellsByOneValidVariation(group);
+                };
+            }
+        }
     }
 }

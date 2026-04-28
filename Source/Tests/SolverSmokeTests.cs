@@ -42,6 +42,21 @@ namespace Tests
         }
 
         [Fact]
+        public async Task Kakuru_HardPuzzle_SolvesWithBacktracking()
+        {
+            var logic = new LogicLayerKakuru();
+            var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
+
+            bool loaded = logic.ReadFromFile(FixturePath("kakuru_hard.xml"));
+            Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
+
+            bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(30))) == tcs.Task;
+            Assert.True(finished, "Kakuru hard solver did not complete within 30 seconds");
+            Assert.True(logic.RequestSolveStatus() == true, "Kakuru hard was not solved after completion");
+        }
+
+        [Fact]
         public async Task Griddler_KnownPuzzle_LoadsAndSolvesWithinTimeout()
         {
             var logic = new LogicLayerGriddler();
