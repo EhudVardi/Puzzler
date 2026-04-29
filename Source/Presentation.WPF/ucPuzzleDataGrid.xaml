@@ -8,9 +8,41 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
 
+    <UserControl.Resources>
+        <Style x:Key="DarkColumnHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background"  Value="#16162A"/>
+            <Setter Property="Foreground"  Value="#E0E0F0"/>
+            <Setter Property="BorderBrush" Value="#3A3A50"/>
+            <Setter Property="Padding"     Value="6,4"/>
+        </Style>
+        <Style x:Key="DarkRowStyle" TargetType="DataGridRow">
+            <Setter Property="Background" Value="#252538"/>
+            <Setter Property="Foreground" Value="#E0E0F0"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#7C6AF7"/>
+                    <Setter Property="Foreground" Value="#FFFFFF"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#3A3A50"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
         <ScrollViewer HorizontalScrollBarVisibility="Visible">
-            <DataGrid x:Name="datagrid" Margin="5" AutoGenerateColumns="False" IsReadOnly="True" MouseDoubleClick="datagrid_MouseDoubleClick" PreviewKeyDown="datagrid_PreviewKeyDown">
+            <DataGrid x:Name="datagrid" Margin="5" AutoGenerateColumns="False" IsReadOnly="True"
+                      MouseDoubleClick="datagrid_MouseDoubleClick" PreviewKeyDown="datagrid_PreviewKeyDown"
+                      Background="#252538"
+                      Foreground="#E0E0F0"
+                      BorderBrush="#3A3A50"
+                      RowBackground="#252538"
+                      AlternatingRowBackground="#2A2A3C"
+                      GridLinesVisibility="Horizontal"
+                      HorizontalGridLinesBrush="#3A3A50"
+                      ColumnHeaderStyle="{StaticResource DarkColumnHeaderStyle}"
+                      RowStyle="{StaticResource DarkRowStyle}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
                     <DataGridTextColumn Binding="{Binding Path}" Header="Path" Visibility="Collapsed"/>

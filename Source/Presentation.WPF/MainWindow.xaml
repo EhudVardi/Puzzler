@@ -9,105 +9,142 @@
         MouseUp="Window_MouseUp"
         MouseWheel="Window_MouseWheel"
         KeyDown="Window_KeyDown"
-        Width="800" Height="600" ResizeMode="CanResize" UseLayoutRounding="True" WindowStyle="None">
+        Width="800" Height="600" ResizeMode="CanResize" UseLayoutRounding="True" WindowStyle="None"
+        Background="#1E1E2E">
     <Window.Resources>
-        <Color x:Key="TransparentGray">#44551155</Color>
-        <Color x:Key="TransparentWhite">#22FFFFFF</Color>
-        <SolidColorBrush x:Key="MainPanelsBrush" Color="{StaticResource ResourceKey=TransparentWhite}"/>
-        <LinearGradientBrush x:Key="BorderPanelsBrushTitleBar" StartPoint="0,0" EndPoint="1,0">
-            <LinearGradientBrush.GradientStops>
-                <GradientStop Color="{StaticResource ResourceKey=TransparentWhite}" Offset="0"/>
-                <GradientStop Color="{StaticResource ResourceKey=TransparentGray}" Offset="0.5"/>
-                <GradientStop Color="{StaticResource ResourceKey=TransparentWhite}" Offset="1"/>
-            </LinearGradientBrush.GradientStops>
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="BorderPanelsBrushStatusBar" StartPoint="0,0" EndPoint="1,0">
-            <LinearGradientBrush.GradientStops>
-                <GradientStop Color="{StaticResource ResourceKey=TransparentWhite}" Offset="0"/>
-                <GradientStop Color="{StaticResource ResourceKey=TransparentGray}" Offset="0.5"/>
-                <GradientStop Color="{StaticResource ResourceKey=TransparentWhite}" Offset="1"/>
-            </LinearGradientBrush.GradientStops>
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="BorderPanelsBrushTop" StartPoint="0,0" EndPoint="0,.5">
-            <LinearGradientBrush.GradientStops>
-                <GradientStop Color="{StaticResource ResourceKey=TransparentGray}" Offset="0"/>
-                <GradientStop Color="{StaticResource ResourceKey=TransparentWhite}" Offset="1"/>
-            </LinearGradientBrush.GradientStops>
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="BorderPanelsBrushBottom" StartPoint="0,1" EndPoint="0,.5">
-            <LinearGradientBrush.GradientStops>
-                <GradientStop Color="{StaticResource ResourceKey=TransparentGray}" Offset="0"/>
-                <GradientStop Color="{StaticResource ResourceKey=TransparentWhite}" Offset="1"/>
-            </LinearGradientBrush.GradientStops>
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="BorderPanelsBrushLeft" StartPoint="0,0" EndPoint=".5,0">
-            <LinearGradientBrush.GradientStops>
-                <GradientStop Color="{StaticResource ResourceKey=TransparentGray}" Offset="0"/>
-                <GradientStop Color="{StaticResource ResourceKey=TransparentWhite}" Offset="1"/>
-            </LinearGradientBrush.GradientStops>
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="BorderPanelsBrushRight" StartPoint="1,0" EndPoint=".5,0">
-            <LinearGradientBrush.GradientStops>
-                <GradientStop Color="{StaticResource ResourceKey=TransparentGray}" Offset="0"/>
-                <GradientStop Color="{StaticResource ResourceKey=TransparentWhite}" Offset="1"/>
-            </LinearGradientBrush.GradientStops>
-        </LinearGradientBrush>
-        <RadialGradientBrush x:Key="BorderPanelsBrushMainGrid"  GradientOrigin="0.75,0.25">
-            <GradientStop Color="Gray" Offset="0.0" />
-            <GradientStop Color="LightBlue" Offset="0.5" />
-            <GradientStop Color="White" Offset="1.0" />
-        </RadialGradientBrush>
-        <RadialGradientBrush x:Key="BorderPanelsBrushExitButton"  GradientOrigin="0.5,0.5">
-            <GradientStop Color="LightGray" Offset="0.0" />
-            <GradientStop Color="LightCoral" Offset="0.5" />
-            <GradientStop Color="White" Offset="1.0" />
-        </RadialGradientBrush>
+        <!-- Flat dark palette -->
+        <SolidColorBrush x:Key="AppBackgroundBrush"      Color="#1E1E2E"/>
+        <SolidColorBrush x:Key="SurfaceBrush"            Color="#252538"/>
+        <SolidColorBrush x:Key="ChromeBrush"             Color="#16162A"/>
+        <SolidColorBrush x:Key="AccentBrush"             Color="#7C6AF7"/>
+        <SolidColorBrush x:Key="PanelBorderBrush"        Color="#3A3A50"/>
+        <SolidColorBrush x:Key="ForegroundBrush"         Color="#E0E0F0"/>
+        <SolidColorBrush x:Key="MutedForegroundBrush"    Color="#6B6B8A"/>
+
+        <!-- Kept for inline references elsewhere -->
+        <SolidColorBrush x:Key="MainPanelsBrush"         Color="#252538"/>
+
+        <!-- Legacy brush keys re-mapped to flat equivalents -->
+        <SolidColorBrush x:Key="BorderPanelsBrushTitleBar"   Color="#16162A"/>
+        <SolidColorBrush x:Key="BorderPanelsBrushStatusBar"  Color="#16162A"/>
+        <SolidColorBrush x:Key="BorderPanelsBrushTop"        Color="#16162A"/>
+        <SolidColorBrush x:Key="BorderPanelsBrushBottom"     Color="#16162A"/>
+        <SolidColorBrush x:Key="BorderPanelsBrushLeft"       Color="#16162A"/>
+        <SolidColorBrush x:Key="BorderPanelsBrushRight"      Color="#16162A"/>
+        <SolidColorBrush x:Key="BorderPanelsBrushMainGrid"   Color="#1E1E2E"/>
+        <SolidColorBrush x:Key="BorderPanelsBrushExitButton" Color="#4A1F1F"/>
+
+        <!-- Implicit dark-theme foreground for standard controls -->
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
+        </Style>
+        <Style TargetType="RadioButton">
+            <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
+        </Style>
+        <Style TargetType="GroupBox">
+            <Setter Property="Foreground"   Value="{StaticResource ForegroundBrush}"/>
+            <Setter Property="BorderBrush"  Value="{StaticResource PanelBorderBrush}"/>
+        </Style>
+        <Style TargetType="TabControl">
+            <Setter Property="Background"  Value="{StaticResource SurfaceBrush}"/>
+            <Setter Property="Foreground"  Value="{StaticResource ForegroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PanelBorderBrush}"/>
+        </Style>
+        <Style TargetType="TabItem">
+            <Setter Property="Foreground" Value="{StaticResource MutedForegroundBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding"    Value="6,3"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border x:Name="TabBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{StaticResource PanelBorderBrush}"
+                                BorderThickness="1,1,1,0"
+                                CornerRadius="4,4,0,0"
+                                Margin="2,2,2,0"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter ContentSource="Header"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              TextElement.Foreground="{TemplateBinding Foreground}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="TabBorder" Property="Background"    Value="{StaticResource AccentBrush}"/>
+                                <Setter TargetName="TabBorder" Property="BorderBrush"   Value="{StaticResource AccentBrush}"/>
+                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                    <Condition Property="IsSelected"  Value="False"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="TabBorder" Property="Background" Value="{StaticResource PanelBorderBrush}"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="StatusBar">
+            <Setter Property="Background"   Value="Transparent"/>
+            <Setter Property="Foreground"   Value="{StaticResource ForegroundBrush}"/>
+        </Style>
+        <Style TargetType="StatusBarItem">
+            <Setter Property="Foreground"   Value="{StaticResource ForegroundBrush}"/>
+        </Style>
+
+        <!-- Named styles (keys unchanged so XAML references still resolve) -->
         <Style x:Key="BorderPanelsStyleTitleBar" TargetType="DockPanel">
-            <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushTitleBar}"/>
+            <Setter Property="Background" Value="{StaticResource BorderPanelsBrushTitleBar}"/>
         </Style>
         <Style x:Key="BorderPanelsStyleStatusBar" TargetType="DockPanel">
-            <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushStatusBar}"/>
+            <Setter Property="Background" Value="{StaticResource BorderPanelsBrushStatusBar}"/>
         </Style>
         <Style x:Key="BorderPanelsStyleTop" TargetType="DockPanel">
-            <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushTop}"/>
+            <Setter Property="Background" Value="{StaticResource BorderPanelsBrushTop}"/>
         </Style>
         <Style x:Key="BorderPanelsStyleBottom" TargetType="DockPanel">
-            <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushBottom}"/>
+            <Setter Property="Background" Value="{StaticResource BorderPanelsBrushBottom}"/>
         </Style>
         <Style x:Key="BorderPanelsStyleLeft" TargetType="DockPanel">
-            <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushLeft}"/>
+            <Setter Property="Background" Value="{StaticResource BorderPanelsBrushLeft}"/>
         </Style>
         <Style x:Key="BorderPanelsStyleRight" TargetType="DockPanel">
-            <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushRight}"/>
+            <Setter Property="Background" Value="{StaticResource BorderPanelsBrushRight}"/>
         </Style>
         <Style x:Key="BorderPanelsStyleMainGrid" TargetType="Grid">
-            <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushMainGrid}"/>
+            <Setter Property="Background" Value="{StaticResource BorderPanelsBrushMainGrid}"/>
         </Style>
         <Style x:Key="BorderPanelsStyleAppTitle" TargetType="TextBlock">
-            <Setter Property="Background" Value="{StaticResource ResourceKey=MainPanelsBrush}"/>
-            <Setter Property="FontStyle" Value="Italic"/>
-            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Background"  Value="Transparent"/>
+            <Setter Property="Foreground"  Value="{StaticResource ForegroundBrush}"/>
+            <Setter Property="FontStyle"   Value="Italic"/>
+            <Setter Property="FontSize"    Value="18"/>
             <Setter Property="FontStretch" Value="Expanded"/>
-            <Setter Property="Text" Value=" Puzzler"/>
+            <Setter Property="Text"        Value=" Puzzler"/>
         </Style>
         <Style x:Key="BorderPanelsStyleExitButton" TargetType="Button">
-            <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushExitButton}"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background"  Value="{StaticResource BorderPanelsBrushExitButton}"/>
+            <Setter Property="Foreground"  Value="{StaticResource ForegroundBrush}"/>
+            <Setter Property="FontWeight"  Value="Bold"/>
+            <Setter Property="FontSize"    Value="14"/>
             <Setter Property="FontStretch" Value="Normal"/>
         </Style>
         <Style x:Key="BorderPanelsStyleAppSignature" TargetType="TextBlock">
-            <Setter Property="Background" Value="{StaticResource ResourceKey=BorderPanelsBrushExitButton}"/>
-            <Setter Property="FontWeight" Value="Light"/>
-            <Setter Property="FontStyle" Value="Italic"/>
-            <Setter Property="FontSize" Value="9"/>
-            <Setter Property="FontStretch" Value="UltraExpanded"/>
-            <Setter Property="FontFamily" Value="Vivaldi"/>
-            <Setter Property="Text" Value="Ehud Vardi"/>
-            <Setter Property="TextAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+            <Setter Property="Background"                    Value="Transparent"/>
+            <Setter Property="Foreground"                    Value="{StaticResource MutedForegroundBrush}"/>
+            <Setter Property="FontWeight"                    Value="Light"/>
+            <Setter Property="FontStyle"                     Value="Italic"/>
+            <Setter Property="FontSize"                      Value="9"/>
+            <Setter Property="FontStretch"                   Value="UltraExpanded"/>
+            <Setter Property="FontFamily"                    Value="Vivaldi"/>
+            <Setter Property="Text"                          Value="Ehud Vardi"/>
+            <Setter Property="TextAlignment"                 Value="Center"/>
+            <Setter Property="VerticalAlignment"             Value="Center"/>
+            <Setter Property="HorizontalAlignment"           Value="Center"/>
+            <Setter Property="TextBlock.VerticalAlignment"   Value="Center"/>
             <Setter Property="TextBlock.HorizontalAlignment" Value="Right"/>
         </Style>
     </Window.Resources>
@@ -189,7 +226,7 @@
                     </GroupBox>
                 </DockPanel>
                 <DockPanel Grid.Column="2">
-                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" Background="{StaticResource ResourceKey=MainPanelsBrush}" RenderTransformOrigin="0.5,0.5">
+                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" Background="Transparent" RenderTransformOrigin="0.5,0.5">
                         <UserControls:PuzzlerCanvas.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="0.63" ScaleY="0.63"/>
