@@ -343,5 +343,59 @@ namespace Logic
 
 
         ///
+
+        private sealed record TriddlerSnapshot(
+            Dictionary<GroupGriddler, List<BitArray>> Variations,
+            Dictionary<CellValueGriddler, bool?> CellValues);
+
+        protected override object TakeSnapshot()
+        {
+            var variations = new Dictionary<GroupGriddler, List<BitArray>>();
+            foreach (var kvp in _groupsVariations)
+                variations[kvp.Key] = kvp.Value.Select(ba => new BitArray(ba)).ToList();
+
+            var values = new Dictionary<CellValueGriddler, bool?>();
+            foreach (CellValueGriddler cell in Board.ValueCells)
+                values[cell] = cell.Value;
+
+            return new TriddlerSnapshot(variations, values);
+        }
+
+        protected override void RestoreSnapshot(object snapshot)
+        {
+            var s = (TriddlerSnapshot)snapshot;
+            foreach (var kvp in s.Variations)
+                _groupsVariations[kvp.Key] = kvp.Value.Select(ba => new BitArray(ba)).ToList();
+            foreach (var kvp in s.CellValues)
+                kvp.Key.Value = kvp.Value;
+        }
+
+        protected override IEnumerable<Action> GetBranches()
+        {
+            GroupGriddler? best = null;
+            int bestCount = int.MaxValue;
+            foreach (GroupGriddler group in this.Board.Groups)
+            {
+                int count = _groupsVariations[group].Count;
+                if (count > 1 && count < bestCount)
+                {
+                    best = group;
+                    bestCount = count;
+                }
+            }
+            if (best == null) yield break;
+
+            var candidates = new List<BitArray>(_groupsVariations[best]);
+            foreach (BitArray variation in candidates)
+            {
+                BitArray captured = variation;
+                GroupGriddler group = best;
+                yield return () =>
+                {
+                    _groupsVariations[group] = new List<BitArray> { captured };
+                    ReflectIntegratedVariationToCells(group, _groupsVariations[group]);
+                };
+            }
+        }
     }
 }
