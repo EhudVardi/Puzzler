@@ -271,58 +271,62 @@
                     <ColumnDefinition Width="200"></ColumnDefinition>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" Margin="3" Background="{StaticResource ResourceKey=MainPanelsBrush}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <GroupBox Grid.Row="0" Header="Puzzle Type" Margin="3" VerticalAlignment="Top">
-                        <DockPanel>
-                            <RadioButton x:Name="btnSelectSudoku" DockPanel.Dock="Top" Content="Sudoku" Checked="btnSelectPuzzles_Checked"></RadioButton>
-                            <RadioButton x:Name="btnSelectKakuru" DockPanel.Dock="Top" Content="Kakuru" Checked="btnSelectPuzzles_Checked" ></RadioButton>
-                            <RadioButton x:Name="btnSelectGriddler" DockPanel.Dock="Top" Content="Griddler" Checked="btnSelectPuzzles_Checked" ></RadioButton>
-                            <!--<RadioButton x:Name="btnSelectGriddlerRails" DockPanel.Dock="Top" Content="Rails" Checked="btnSelectPuzzles_Checked" ></RadioButton>-->
-                            <RadioButton x:Name="btnSelectTriddler" DockPanel.Dock="Top" Content="Triddler" Checked="btnSelectPuzzles_Checked" ></RadioButton>
-                        </DockPanel>
-                    </GroupBox>
-                    <GroupBox Grid.Row="1" Header="Display" Margin="3" VerticalAlignment="Top">
-                        <DockPanel >
-                            <RadioButton x:Name="rbtnClean" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Clean" IsChecked="True" Checked="rbtnDisplayModes_Checked"></RadioButton>
-                            <RadioButton x:Name="rbtnHints" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Hints" Checked="rbtnDisplayModes_Checked" ></RadioButton>
-                            <RadioButton x:Name="rbtnSolved" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Solved"  Checked="rbtnDisplayModes_Checked"></RadioButton>
-                        </DockPanel >
-                    </GroupBox>
-                </Grid>
-                <!--<GridSplitter Grid.Column="1" Width="5"></GridSplitter>-->
-                <DockPanel Grid.Column="1" Margin="3"  Background="{StaticResource ResourceKey=MainPanelsBrush}">
-                    <GroupBox Grid.Row="0" Header="Library" Margin="3" VerticalAlignment="Stretch">
-                        <TabControl VerticalAlignment="Stretch" Background="{StaticResource ResourceKey=MainPanelsBrush}" >
-                            <TabItem Header="Generator" >
-                                <DockPanel >
-                                    <Button x:Name="btnRandom" Margin="10,5,10,5" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Generate New Puzzle" Click="btnRandom_Click"/>
-                                    <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridGenerator" RenderTransformOrigin="0.5,0.5" />
+                <Border Grid.Column="0" Margin="5" Background="{StaticResource SurfaceBrush}"
+                        CornerRadius="8" BorderBrush="{StaticResource PanelBorderBrush}" BorderThickness="1" Padding="4">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#000000" Opacity="0.35" BlurRadius="10" ShadowDepth="2" Direction="315"/>
+                    </Border.Effect>
+                    <StackPanel>
+                        <GroupBox Header="Puzzle Type" Margin="3" VerticalAlignment="Top">
+                            <DockPanel>
+                                <RadioButton x:Name="btnSelectSudoku"   DockPanel.Dock="Top" Content="Sudoku"   Checked="btnSelectPuzzles_Checked"/>
+                                <RadioButton x:Name="btnSelectKakuru"   DockPanel.Dock="Top" Content="Kakuru"   Checked="btnSelectPuzzles_Checked"/>
+                                <RadioButton x:Name="btnSelectGriddler" DockPanel.Dock="Top" Content="Griddler" Checked="btnSelectPuzzles_Checked"/>
+                                <RadioButton x:Name="btnSelectTriddler" DockPanel.Dock="Top" Content="Triddler" Checked="btnSelectPuzzles_Checked"/>
+                            </DockPanel>
+                        </GroupBox>
+                        <GroupBox Header="Display" Margin="3" VerticalAlignment="Top">
+                            <DockPanel>
+                                <RadioButton x:Name="rbtnClean"  DockPanel.Dock="Top" Content="Clean"  IsChecked="True" Checked="rbtnDisplayModes_Checked"/>
+                                <RadioButton x:Name="rbtnHints"  DockPanel.Dock="Top" Content="Hints"  Checked="rbtnDisplayModes_Checked"/>
+                                <RadioButton x:Name="rbtnSolved" DockPanel.Dock="Top" Content="Solved" Checked="rbtnDisplayModes_Checked"/>
+                            </DockPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="1" Margin="5" Background="{StaticResource SurfaceBrush}"
+                        CornerRadius="8" BorderBrush="{StaticResource PanelBorderBrush}" BorderThickness="1" Padding="4">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#000000" Opacity="0.35" BlurRadius="10" ShadowDepth="2" Direction="315"/>
+                    </Border.Effect>
+                    <GroupBox Header="Library" VerticalAlignment="Stretch">
+                        <TabControl VerticalAlignment="Stretch" Background="{StaticResource SurfaceBrush}">
+                            <TabItem Header="Generator">
+                                <DockPanel>
+                                    <Button x:Name="btnRandom" Margin="10,5" DockPanel.Dock="Top" Content="Generate New Puzzle" Click="btnRandom_Click"/>
+                                    <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridGenerator"/>
                                 </DockPanel>
                             </TabItem>
-                            <TabItem Header="Text" >
-                                <DockPanel >
-                                    <Button x:Name="btnLoadFromText" Margin="10,5,10,5" DockPanel.Dock="Top" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Read New From Text" Click="btnLoadFromText_Click"/>
-                                    <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridText"  RenderTransformOrigin="0.5,0.5" DockPanel.Dock="Bottom"/>
+                            <TabItem Header="Text">
+                                <DockPanel>
+                                    <Button x:Name="btnLoadFromText" Margin="10,5" DockPanel.Dock="Top" Content="Read New From Text" Click="btnLoadFromText_Click"/>
+                                    <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridText"/>
                                 </DockPanel>
                             </TabItem>
                             <TabItem Header="Web">
                                 <DockPanel>
-                                    <Button x:Name="btnLoadFromWeb" Margin="10,5,10,5" VerticalAlignment="Top" DockPanel.Dock="Top" Content="Read New From Web" Click="btnLoadFromWeb_Click" />
-                                    <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridWeb"  RenderTransformOrigin="0.5,0.5"/>
+                                    <Button x:Name="btnLoadFromWeb" Margin="10,5" DockPanel.Dock="Top" Content="Read New From Web" Click="btnLoadFromWeb_Click"/>
+                                    <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridWeb"/>
                                 </DockPanel>
                             </TabItem>
                         </TabControl>
                     </GroupBox>
-                </DockPanel>
-                <DockPanel Grid.Column="2">
+                </Border>
+                <Border Grid.Column="2" Margin="5" Background="{StaticResource SurfaceBrush}"
+                        CornerRadius="8" BorderBrush="{StaticResource PanelBorderBrush}" BorderThickness="1">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#000000" Opacity="0.35" BlurRadius="10" ShadowDepth="2" Direction="315"/>
+                    </Border.Effect>
                     <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" Background="Transparent" RenderTransformOrigin="0.5,0.5">
                         <UserControls:PuzzlerCanvas.RenderTransform>
                             <TransformGroup>
@@ -333,7 +337,7 @@
                             </TransformGroup>
                         </UserControls:PuzzlerCanvas.RenderTransform>
                     </UserControls:PuzzlerCanvas>
-                </DockPanel>
+                </Border>
             </Grid>
             <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0" Style="{StaticResource ResourceKey=BorderPanelsStyleTitleBar}" PreviewMouseDown="dpnlTitleBar_PreviewMouseDown">
                 <TextBlock DockPanel.Dock="Left" Style="{StaticResource ResourceKey=BorderPanelsStyleAppTitle}"/>
