@@ -10,7 +10,7 @@
         MouseWheel="Window_MouseWheel"
         KeyDown="Window_KeyDown"
         Width="800" Height="600" ResizeMode="CanResize" UseLayoutRounding="True" WindowStyle="None"
-        Background="#1E1E2E">
+        Background="#1E1E2E" FontFamily="Segoe UI" FontSize="12">
     <Window.Resources>
         <!-- Flat dark palette -->
         <SolidColorBrush x:Key="AppBackgroundBrush"      Color="#1E1E2E"/>
@@ -81,8 +81,10 @@
             </Setter>
         </Style>
         <Style TargetType="GroupBox">
-            <Setter Property="Foreground"   Value="{StaticResource ForegroundBrush}"/>
-            <Setter Property="BorderBrush"  Value="{StaticResource PanelBorderBrush}"/>
+            <Setter Property="Foreground"  Value="{StaticResource ForegroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PanelBorderBrush}"/>
+            <Setter Property="FontSize"    Value="11"/>
+            <Setter Property="FontWeight"  Value="SemiBold"/>
         </Style>
         <Style TargetType="TabControl">
             <Setter Property="Background"  Value="{StaticResource SurfaceBrush}"/>
@@ -161,11 +163,13 @@
             </Setter>
         </Style>
         <Style TargetType="StatusBar">
-            <Setter Property="Background"   Value="Transparent"/>
-            <Setter Property="Foreground"   Value="{StaticResource ForegroundBrush}"/>
+            <Setter Property="Background"  Value="Transparent"/>
+            <Setter Property="Foreground"  Value="{StaticResource MutedForegroundBrush}"/>
+            <Setter Property="FontSize"    Value="10"/>
         </Style>
         <Style TargetType="StatusBarItem">
-            <Setter Property="Foreground"   Value="{StaticResource ForegroundBrush}"/>
+            <Setter Property="Foreground"  Value="{StaticResource MutedForegroundBrush}"/>
+            <Setter Property="FontSize"    Value="10"/>
         </Style>
 
         <!-- Named styles (keys unchanged so XAML references still resolve) -->
@@ -201,10 +205,9 @@
         <Style x:Key="BorderPanelsStyleExitButton" TargetType="Button">
             <Setter Property="Background"  Value="{StaticResource BorderPanelsBrushExitButton}"/>
             <Setter Property="Foreground"  Value="{StaticResource ForegroundBrush}"/>
-            <Setter Property="FontWeight"  Value="Bold"/>
-            <Setter Property="FontSize"    Value="14"/>
-            <Setter Property="FontStretch" Value="Normal"/>
-            <Setter Property="Cursor"      Value="Hand"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize"   Value="14"/>
+            <Setter Property="Cursor"     Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
