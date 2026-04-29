@@ -81,10 +81,44 @@
             </Setter>
         </Style>
         <Style TargetType="GroupBox">
-            <Setter Property="Foreground"  Value="{StaticResource ForegroundBrush}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource PanelBorderBrush}"/>
-            <Setter Property="FontSize"    Value="11"/>
-            <Setter Property="FontWeight"  Value="SemiBold"/>
+            <Setter Property="Foreground"      Value="{StaticResource ForegroundBrush}"/>
+            <Setter Property="BorderBrush"     Value="{StaticResource PanelBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize"        Value="11"/>
+            <Setter Property="FontWeight"      Value="SemiBold"/>
+            <Setter Property="Padding"         Value="4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GroupBox">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <!-- outer border -->
+                            <Border Grid.RowSpan="2"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="4"/>
+                            <!-- inner border — dimmed, creates the double-line -->
+                            <Border Grid.RowSpan="2"
+                                    Margin="2"
+                                    BorderBrush="#505068"
+                                    BorderThickness="1"
+                                    CornerRadius="3"/>
+                            <!-- header clips through both borders -->
+                            <Border Grid.Row="0"
+                                    HorizontalAlignment="Left"
+                                    Background="{StaticResource SurfaceBrush}"
+                                    Margin="8,-1,0,0"
+                                    Padding="4,0">
+                                <ContentPresenter ContentSource="Header" RecognizesAccessKey="True"/>
+                            </Border>
+                            <ContentPresenter Grid.Row="1" Margin="{TemplateBinding Padding}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style TargetType="TabControl">
             <Setter Property="Background"  Value="{StaticResource SurfaceBrush}"/>
