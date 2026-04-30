@@ -38,6 +38,7 @@ namespace Presentation.WPF
             {
                 PresentationLogicObject.ReadFromFile(e.Path);
                 ResizeWindowForCurrentPuzzle();
+                RecomputeBoardScale();
             }
             catch (IOException ex)  { ShowError(ex.Message); }
             catch (XmlException ex) { ShowError(ex.Message); }
@@ -63,6 +64,7 @@ namespace Presentation.WPF
                 PresentationLogicObject.Refresh += PresentationLogicObject_Refresh;
                 rbtnDisplayModes_Checked(null, null);
                 RefreshForm();
+                RecomputeBoardScale();
             }
             catch (IOException ex)  { ShowError(ex.Message); }
             catch (XmlException ex) { ShowError(ex.Message); }
@@ -100,6 +102,26 @@ namespace Presentation.WPF
             var size = PresentationLogicObject.GetPrefferedSize();
             int preferedSWidth = (int)(this.GameCanvas.ActualHeight * size.Width / size.Height);
             this.Width = this.Width + preferedSWidth - this.GameCanvas.ActualWidth;
+        }
+
+        private void RecomputeBoardScale()
+        {
+            if (PresentationLogicObject == null) return;
+            double w = GameCanvas.ActualWidth, h = GameCanvas.ActualHeight;
+            if (w <= 0 || h <= 0) return;
+
+            var transforms = ((TransformGroup)GameCanvas.RenderTransform).Children;
+            var scaleTransform = (ScaleTransform)transforms[0];
+            double skewRad = ((SkewTransform)transforms[1]).AngleX * Math.PI / 180.0;
+
+            // DrawBoard already auto-fits content to the canvas size it's given. The
+            // only thing the ScaleTransform needs to do is shrink to make headroom
+            // for skew (Triddler), since skew widens the rendered bounding box.
+            double tan = Math.Abs(Math.Tan(skewRad));
+            double scale = tan < 1e-6 ? 1.0 : w / (w + tan * h);
+
+            scaleTransform.ScaleX = scale;
+            scaleTransform.ScaleY = scale;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -140,6 +162,7 @@ namespace Presentation.WPF
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
             base.OnRenderSizeChanged(sizeInfo);
+            RecomputeBoardScale();
             RefreshForm();
         }
 
@@ -175,6 +198,7 @@ namespace Presentation.WPF
                 {
                     PresentationLogicObject.ReadFromText(inputWindow.Data);
                     ResizeWindowForCurrentPuzzle();
+                    RecomputeBoardScale();
                     RefreshForm();
                 }
                 catch (FormatException ex)          { ShowError(ex.Message); }

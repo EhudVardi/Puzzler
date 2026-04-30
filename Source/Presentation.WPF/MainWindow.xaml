@@ -367,7 +367,7 @@
                     <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" Background="Transparent" RenderTransformOrigin="0.5,0.5">
                         <UserControls:PuzzlerCanvas.RenderTransform>
                             <TransformGroup>
-                                <ScaleTransform ScaleX="0.63" ScaleY="0.63"/>
+                                <ScaleTransform ScaleX="1" ScaleY="1"/>
                                 <SkewTransform AngleX="0" />
                                 <RotateTransform/>
                                 <TranslateTransform/>
