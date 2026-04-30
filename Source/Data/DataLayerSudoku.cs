@@ -290,10 +290,9 @@ namespace Data
             try
             {
                 var doc = XDocument.Load(filePath);
-                int n = int.Parse(doc.Root?.Element("N")?.Value ?? "0");
-                int m = int.Parse(doc.Root?.Element("M")?.Value ?? "0");
-                int size = n * m;
-                return size > 0 ? $"{size}×{size}" : string.Empty;
+                string n = doc.Root?.Element("N")?.Value ?? "";
+                string m = doc.Root?.Element("M")?.Value ?? "";
+                return (n != "" && m != "") ? $"{n}×{m}" : string.Empty;
             }
             catch { return string.Empty; }
         }
