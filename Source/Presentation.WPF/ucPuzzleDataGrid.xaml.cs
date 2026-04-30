@@ -44,18 +44,20 @@ namespace Presentation.WPF
             InitializeComponent();
         }
 
-        public void SetData(List<string> data)
+        public void SetData(List<(string path, string size)> data)
         {
             _PuzzleDataTable = new DataTable();
             _PuzzleDataTable.Columns.Add(new DataColumn("Name", typeof(string)));
+            _PuzzleDataTable.Columns.Add(new DataColumn("Size", typeof(string)));
             _PuzzleDataTable.Columns.Add(new DataColumn("Path", typeof(string)));
 
-            foreach (string file in data)
+            foreach (var (file, size) in data)
             {
                 var row = _PuzzleDataTable.NewRow();
                 _PuzzleDataTable.Rows.Add(row);
 
-                row["Name"] = System.IO.Path.GetFileName(file);
+                row["Name"] = System.IO.Path.GetFileNameWithoutExtension(file);
+                row["Size"] = size;
                 row["Path"] = System.IO.Path.GetFullPath(file);
             }
             
@@ -93,7 +95,7 @@ namespace Presentation.WPF
             if (drv == null)
                 return;
 
-            OnRequestLoadPuzzle(new RequestLoadPuzzleEventArgs((string)drv[1]));
+            OnRequestLoadPuzzle(new RequestLoadPuzzleEventArgs((string)drv["Path"]));
         }
     }
 }

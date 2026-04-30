@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 using Data.DataModels;
 
 namespace Data
@@ -109,6 +110,18 @@ namespace Data
             }
 
             return puzzle;
+        }
+
+        public override string GetPuzzleSizeLabel(string filePath)
+        {
+            try
+            {
+                var doc = XDocument.Load(filePath);
+                string rows = doc.Root?.Element("BaseRowsCount")?.Value ?? "";
+                string cols = doc.Root?.Element("BaseColumnCount")?.Value ?? "";
+                return (rows != "" && cols != "") ? $"{rows}×{cols}" : string.Empty;
+            }
+            catch { return string.Empty; }
         }
 
     }

@@ -44,6 +44,7 @@ namespace Logic
         {
             return this.DataProxy.GetFileList();
         }
+        public string GetPuzzleSizeLabel(string filePath) => DataProxy.GetPuzzleSizeLabel(filePath);
         public virtual bool ReadFromFile(string fileName)
         {
             return LoadFromPuzzleObject(this.DataProxy.XMLToPuzzle(fileName));

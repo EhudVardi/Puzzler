@@ -22,6 +22,7 @@ namespace PresentationLogic
         }
 
         public override Dictionary<string, List<string>>? ReadFileList() { return this.LogicProxy.ReadFileList(); }
+        public override string GetPuzzleSizeLabel(string filePath) => LogicProxy.GetPuzzleSizeLabel(filePath);
         public override bool ReadFromFile(string fileName) { return this.LogicProxy.ReadFromFile(fileName); }
         public override bool ReadFromWeb(string url)       { return this.LogicProxy.ReadFromWeb(this.URL); }
         public override bool ReadFromText(string text)     { return LogicProxy.ReadFromText(text); }

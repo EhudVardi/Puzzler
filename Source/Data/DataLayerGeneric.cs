@@ -67,5 +67,7 @@ namespace Data
                 ".xml";
             PuzzleToXML(puzzle, filePath);
         }
+
+        public virtual string GetPuzzleSizeLabel(string filePath) => string.Empty;
     }
 }

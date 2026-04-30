@@ -108,6 +108,7 @@
                       RowHeaderWidth="0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+                    <DataGridTextColumn Binding="{Binding Size}" Header="Size"/>
                     <DataGridTextColumn Binding="{Binding Path}" Header="Path" Visibility="Collapsed"/>
                 </DataGrid.Columns>
             </DataGrid>

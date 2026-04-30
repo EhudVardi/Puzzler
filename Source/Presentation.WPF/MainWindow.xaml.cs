@@ -56,9 +56,9 @@ namespace Presentation.WPF
                 ((SkewTransform)((TransformGroup)GameCanvas.RenderTransform).Children[1]).AngleX = descriptor.BoardSkewAngle;
 
                 Dictionary<string, List<string>>? puzzlesDic = PresentationLogicObject.ReadFileList();
-                this.ucDataGridGenerator.SetData(puzzlesDic?[_options.FromGeneratorFolder] ?? new System.Collections.Generic.List<string>());
-                this.ucDataGridText.SetData(puzzlesDic?[_options.FromTextFolder] ?? new System.Collections.Generic.List<string>());
-                this.ucDataGridWeb.SetData(puzzlesDic?[_options.FromWebFolder] ?? new System.Collections.Generic.List<string>());
+                this.ucDataGridGenerator.SetData(ToPathSizeList(puzzlesDic?[_options.FromGeneratorFolder]));
+                this.ucDataGridText.SetData(ToPathSizeList(puzzlesDic?[_options.FromTextFolder]));
+                this.ucDataGridWeb.SetData(ToPathSizeList(puzzlesDic?[_options.FromWebFolder]));
 
                 PresentationLogicObject.Initialize();
                 PresentationLogicObject.Refresh += PresentationLogicObject_Refresh;
@@ -68,6 +68,12 @@ namespace Presentation.WPF
             }
             catch (IOException ex)  { ShowError(ex.Message); }
             catch (XmlException ex) { ShowError(ex.Message); }
+        }
+
+        private List<(string path, string size)> ToPathSizeList(List<string>? paths)
+        {
+            if (paths == null) return new();
+            return paths.ConvertAll(p => (p, PresentationLogicObject.GetPuzzleSizeLabel(p)));
         }
 
         void PresentationLogicObject_Refresh(object? sender, EventArgs e)

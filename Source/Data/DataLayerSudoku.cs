@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 using HtmlAgilityPack;
 using Data.DataModels;
 
@@ -282,6 +283,19 @@ namespace Data
             }
             else
                 return null;
+        }
+
+        public override string GetPuzzleSizeLabel(string filePath)
+        {
+            try
+            {
+                var doc = XDocument.Load(filePath);
+                int n = int.Parse(doc.Root?.Element("N")?.Value ?? "0");
+                int m = int.Parse(doc.Root?.Element("M")?.Value ?? "0");
+                int size = n * m;
+                return size > 0 ? $"{size}×{size}" : string.Empty;
+            }
+            catch { return string.Empty; }
         }
 
     }
