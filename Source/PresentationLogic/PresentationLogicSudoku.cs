@@ -19,13 +19,6 @@ namespace PresentationLogic
             float cellWidth  = width  / trackerBoard.Columns;
             float cellHeight = height / trackerBoard.Rows;
 
-            float widthB  = width  / trackerBoard.N;
-            float heightB = height / trackerBoard.M;
-
-            // --- watermark: active number faintly over the whole board ---
-            var watermarkColor = bText.WithAlpha(28);
-            DrawText((activeNumber + 1).ToString(), fontBold, watermarkColor, 0, 0, width, height);
-
             // --- cell backgrounds ---
             foreach (CellValueSudoku valueCell in trackerBoard.ValueCells)
             {
@@ -44,19 +37,21 @@ namespace PresentationLogic
                     cellWidth - margin * 2f, cellHeight - margin * 2f);
             }
 
-            // --- grid lines and box borders ---
-            for (int i = 0; i < trackerBoard.CellsMatrix.GetLength(0); i++)
-                DrawLine(PuzzlerColor.Black, 1, 0, cellHeight * i, width, cellHeight * i);
+            // --- grid lines (thicker on block boundaries) ---
+            const float thinLine  = 1f;
+            const float thickLine = 6f;
 
-            for (int j = 0; j < trackerBoard.CellsMatrix.GetLength(1); j++)
-                DrawLine(PuzzlerColor.Black, 1, cellWidth * j, 0, cellWidth * j, height);
+            for (int i = 0; i <= trackerBoard.Rows; i++)
+            {
+                float t = (i % trackerBoard.N == 0) ? thickLine : thinLine;
+                DrawLine(PuzzlerColor.Black, t, 0, cellHeight * i, width, cellHeight * i);
+            }
 
-            float marginBoxes = margin / 4;
-            for (int i = 0; i < trackerBoard.N; i++)
-                for (int j = 0; j < trackerBoard.M; j++)
-                    DrawRect(PuzzlerColor.Black, 1,
-                        widthB * j + marginBoxes, heightB * i + marginBoxes,
-                        widthB - marginBoxes * 2f, heightB - marginBoxes * 2f);
+            for (int j = 0; j <= trackerBoard.Columns; j++)
+            {
+                float t = (j % trackerBoard.M == 0) ? thickLine : thinLine;
+                DrawLine(PuzzlerColor.Black, t, cellWidth * j, 0, cellWidth * j, height);
+            }
 
             // --- cell digits and hints ---
             int hintRows = trackerBoard.N;   // sub-grid rows per cell
@@ -114,6 +109,10 @@ namespace PresentationLogic
                 DrawRect(PuzzlerColor.Black, margin,
                     cellWidth * selectedValueCell.Column + margin, cellHeight * selectedValueCell.Row + margin,
                     cellWidth - margin * 2f, cellHeight - margin * 2f);
+
+            // // --- watermark: active number faintly over the whole board ---
+            // var watermarkColor = bText.WithAlpha(28);
+            // DrawText((activeNumber + 1).ToString(), fontBold, watermarkColor, 0, 0, width, height);
         }
 
         public override (int Width, int Height) GetPrefferedSize()
