@@ -18,7 +18,7 @@ namespace Tests
             var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
 
-            bool loaded = logic.ReadFromFile(FixturePath("sudoku_9x9_easy.xml"));
+            bool loaded = logic.ReadFromFile(FixturePath("sudoku_9x9_easy.json"));
             Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
 
             bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(10))) == tcs.Task;
@@ -33,7 +33,7 @@ namespace Tests
             var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
 
-            bool loaded = logic.ReadFromFile(FixturePath("sudoku_9x9_hard_needs_backtracking.xml"));
+            bool loaded = logic.ReadFromFile(FixturePath("sudoku_9x9_hard_needs_backtracking.json"));
             Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
 
             bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(30))) == tcs.Task;
@@ -48,7 +48,7 @@ namespace Tests
             var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
 
-            bool loaded = logic.ReadFromFile(FixturePath("kakuru_hard.xml"));
+            bool loaded = logic.ReadFromFile(FixturePath("kakuru_hard.json"));
             Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
 
             bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(30))) == tcs.Task;
@@ -63,7 +63,7 @@ namespace Tests
             var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
 
-            bool loaded = logic.ReadFromFile(FixturePath("griddler_easy.xml"));
+            bool loaded = logic.ReadFromFile(FixturePath("griddler_easy.json"));
             Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
 
             bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(10))) == tcs.Task;
@@ -78,7 +78,7 @@ namespace Tests
             var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
 
-            bool loaded = logic.ReadFromFile(FixturePath("griddler_hard.xml"));
+            bool loaded = logic.ReadFromFile(FixturePath("griddler_hard.json"));
             Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
 
             bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(60))) == tcs.Task;
@@ -93,7 +93,7 @@ namespace Tests
             var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
 
-            bool loaded = logic.ReadFromFile(FixturePath("triddler_hard.xml"));
+            bool loaded = logic.ReadFromFile(FixturePath("triddler_hard.json"));
             Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
 
             bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(60))) == tcs.Task;

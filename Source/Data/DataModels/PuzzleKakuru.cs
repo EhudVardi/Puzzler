@@ -5,7 +5,6 @@ using Data.DataModels;
 
 namespace Data.DataModels
 {
-    [System.Xml.Serialization.XmlType("KakuruPuzzle")]
     public class PuzzleKakuru : PuzzleBase
     {
         private int _rows;
@@ -61,7 +60,6 @@ namespace Data.DataModels
         }
     }
 
-    [System.Xml.Serialization.XmlType("KakuruSumLine")]
     public class DefinedGroupKakuru
     {
         private int _rowI;
@@ -112,7 +110,6 @@ namespace Data.DataModels
     }
 
 
-    [System.Xml.Serialization.XmlType("KakuruFixedCell")]
     public class FixedCellKakuru
     {
         private int _row;

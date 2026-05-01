@@ -5,7 +5,6 @@ using Data.DataModels;
 
 namespace Data.DataModels
 {
-    [System.Xml.Serialization.XmlType("GriddlerPuzzle")]
     public class PuzzleGriddler : PuzzleBase
     {
         private List<List<int>> _rows = null!;

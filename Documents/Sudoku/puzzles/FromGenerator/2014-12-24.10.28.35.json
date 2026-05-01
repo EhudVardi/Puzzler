@@ -1,0 +1,152 @@
+{
+  "Size": 0,
+  "N": 3,
+  "M": 3,
+  "FixedNumbers": [
+    {
+      "Row": 0,
+      "Column": 1,
+      "Number": 4
+    },
+    {
+      "Row": 0,
+      "Column": 5,
+      "Number": 5
+    },
+    {
+      "Row": 0,
+      "Column": 7,
+      "Number": 1
+    },
+    {
+      "Row": 1,
+      "Column": 0,
+      "Number": 0
+    },
+    {
+      "Row": 1,
+      "Column": 3,
+      "Number": 7
+    },
+    {
+      "Row": 1,
+      "Column": 4,
+      "Number": 3
+    },
+    {
+      "Row": 1,
+      "Column": 6,
+      "Number": 4
+    },
+    {
+      "Row": 2,
+      "Column": 3,
+      "Number": 2
+    },
+    {
+      "Row": 2,
+      "Column": 5,
+      "Number": 1
+    },
+    {
+      "Row": 3,
+      "Column": 3,
+      "Number": 3
+    },
+    {
+      "Row": 3,
+      "Column": 4,
+      "Number": 5
+    },
+    {
+      "Row": 3,
+      "Column": 5,
+      "Number": 6
+    },
+    {
+      "Row": 3,
+      "Column": 6,
+      "Number": 0
+    },
+    {
+      "Row": 3,
+      "Column": 7,
+      "Number": 7
+    },
+    {
+      "Row": 4,
+      "Column": 0,
+      "Number": 3
+    },
+    {
+      "Row": 4,
+      "Column": 2,
+      "Number": 6
+    },
+    {
+      "Row": 4,
+      "Column": 4,
+      "Number": 7
+    },
+    {
+      "Row": 4,
+      "Column": 6,
+      "Number": 5
+    },
+    {
+      "Row": 4,
+      "Column": 7,
+      "Number": 2
+    },
+    {
+      "Row": 5,
+      "Column": 0,
+      "Number": 1
+    },
+    {
+      "Row": 5,
+      "Column": 8,
+      "Number": 4
+    },
+    {
+      "Row": 6,
+      "Column": 1,
+      "Number": 3
+    },
+    {
+      "Row": 6,
+      "Column": 2,
+      "Number": 2
+    },
+    {
+      "Row": 6,
+      "Column": 3,
+      "Number": 4
+    },
+    {
+      "Row": 6,
+      "Column": 5,
+      "Number": 0
+    },
+    {
+      "Row": 7,
+      "Column": 0,
+      "Number": 5
+    },
+    {
+      "Row": 7,
+      "Column": 4,
+      "Number": 6
+    },
+    {
+      "Row": 8,
+      "Column": 6,
+      "Number": 6
+    },
+    {
+      "Row": 8,
+      "Column": 7,
+      "Number": 0
+    }
+  ]
+}

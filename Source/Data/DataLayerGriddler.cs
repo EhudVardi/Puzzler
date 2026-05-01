@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
-using System.Xml.Linq;
+using System.Text.Json;
 using Data.DataModels;
 
 namespace Data
@@ -98,10 +99,12 @@ namespace Data
         {
             try
             {
-                var doc = XDocument.Load(filePath);
-                string rowsLen = doc.Root?.Element("RowsLength")?.Value ?? "";
-                string colLen  = doc.Root?.Element("ColumnLength")?.Value ?? "";
-                return (rowsLen != "" && colLen != "") ? $"{rowsLen}×{colLen}" : string.Empty;
+                using var stream = File.OpenRead(filePath);
+                using var doc = JsonDocument.Parse(stream);
+                var root = doc.RootElement;
+                if (root.TryGetProperty("RowsLength", out var rowsLen) && root.TryGetProperty("ColumnLength", out var colLen))
+                    return $"{rowsLen.GetInt32()}×{colLen.GetInt32()}";
+                return string.Empty;
             }
             catch { return string.Empty; }
         }

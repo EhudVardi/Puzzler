@@ -25,16 +25,16 @@ namespace Data
             return default(TPuzzle);
         }
 
-        public virtual TPuzzle XMLToPuzzle(string XmlFileName)
+        public virtual TPuzzle LoadPuzzle(string fileName)
         {
-            return (TPuzzle)(new SerializeDeserializeObject().DeserializePuzzle(XmlFileName, typeof(TPuzzle))!);
+            return (TPuzzle)(new SerializeDeserializeObject().DeserializePuzzleJson(fileName, typeof(TPuzzle))!);
         }
-        public virtual void PuzzleToXML(TPuzzle puzzle, string XmlFileName)
+        public virtual void SavePuzzle(TPuzzle puzzle, string fileName)
         {
-            string? dir = Path.GetDirectoryName(XmlFileName);
+            string? dir = Path.GetDirectoryName(fileName);
             if (dir != null && !Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
-            new SerializeDeserializeObject().SerializePuzzle(XmlFileName, puzzle!, typeof(TPuzzle));
+            new SerializeDeserializeObject().SerializePuzzleJson(fileName, puzzle!, typeof(TPuzzle));
         }
 
         public Dictionary<string, List<string>> GetFileList()
@@ -46,7 +46,7 @@ namespace Data
                 string puzzleType = keys[i];
                 string folder = GetPuzzleTypeDocumentsPath() + Options.PuzzlesLibraryFolder + puzzleType;
                 Directory.CreateDirectory(folder);
-                dic.Add(puzzleType, new List<string>(Directory.GetFiles(folder)));
+                dic.Add(puzzleType, new List<string>(Directory.GetFiles(folder, "*.json")));
             }
             return dic;
         }
@@ -64,8 +64,8 @@ namespace Data
                 Options.PuzzlesLibraryFolder +
                 sourceTypeFolder +
                 DateTime.Now.ToString("yyyy-MM-dd.hh.mm.ss") +
-                ".xml";
-            PuzzleToXML(puzzle, filePath);
+                ".json";
+            SavePuzzle(puzzle, filePath);
         }
 
         public virtual string GetPuzzleSizeLabel(string filePath) => string.Empty;

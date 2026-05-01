@@ -43,11 +43,11 @@ namespace Tests
         }
 
         [Theory]
-        [InlineData("sudoku_9x9_easy.xml",                  "9x9 Easy")]
-        [InlineData("sudoku_16x16_medium.xml",              "16x16 Medium")]
-        [InlineData("sudoku_25x25_hard.xml",              "25x25 Hard")]   // very slow — skip until backtracking is implemented
-        [InlineData("sudoku_9x9_hard_needs_backtracking.xml", "9x9 Hard (backtrack needed)")]
-        [InlineData("sudoku_9x9_hard_s18.xml",              "9x9 Hard S18")]
+        [InlineData("sudoku_9x9_easy.json",                  "9x9 Easy")]
+        [InlineData("sudoku_16x16_medium.json",              "16x16 Medium")]
+        [InlineData("sudoku_25x25_hard.json",              "25x25 Hard")]   // very slow — skip until backtracking is implemented
+        [InlineData("sudoku_9x9_hard_needs_backtracking.json", "9x9 Hard (backtrack needed)")]
+        [InlineData("sudoku_9x9_hard_s18.json",              "9x9 Hard S18")]
         public async Task Sudoku_Benchmark(string fileName, string difficulty)
         {
             var path = FixturePath(fileName);
@@ -65,9 +65,9 @@ namespace Tests
         }
 
         [Theory]
-        [InlineData("griddler_easy.xml",   "Easy")]
-        [InlineData("griddler_medium.xml", "Medium")]
-        [InlineData("griddler_hard.xml",   "Hard")]
+        [InlineData("griddler_easy.json",   "Easy")]
+        [InlineData("griddler_medium.json", "Medium")]
+        [InlineData("griddler_hard.json",   "Hard")]
         public async Task Griddler_Benchmark(string fileName, string difficulty)
         {
             var path = FixturePath(fileName);
@@ -85,9 +85,9 @@ namespace Tests
         }
 
         [Theory]
-        [InlineData("kakuru_easy.xml",   "Easy")]
-        [InlineData("kakuru_medium.xml", "Medium")]
-        [InlineData("kakuru_hard.xml",   "Hard")]
+        [InlineData("kakuru_easy.json",   "Easy")]
+        [InlineData("kakuru_medium.json", "Medium")]
+        [InlineData("kakuru_hard.json",   "Hard")]
         public async Task Kakuru_Benchmark(string fileName, string difficulty)
         {
             var path = FixturePath(fileName);
@@ -105,9 +105,9 @@ namespace Tests
         }
 
         [Theory]
-        [InlineData("triddler_easy.xml",   "Easy")]
-        [InlineData("triddler_medium.xml", "Medium")]
-        [InlineData("triddler_hard.xml",   "Hard")]
+        [InlineData("triddler_easy.json",   "Easy")]
+        [InlineData("triddler_medium.json", "Medium")]
+        [InlineData("triddler_hard.json",   "Hard")]
         public async Task Triddler_Benchmark(string fileName, string difficulty)
         {
             var path = FixturePath(fileName);

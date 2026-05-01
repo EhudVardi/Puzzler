@@ -5,7 +5,6 @@ using Data.DataModels;
 
 namespace Data.DataModels
 {
-    [System.Xml.Serialization.XmlType("SudokuPuzzle")]
     public class SudokuPuzzle : PuzzleBase
     {
         private int _size;
@@ -53,7 +52,6 @@ namespace Data.DataModels
         }
     }
 
-    [System.Xml.Serialization.XmlType("SudokuCellFixedNumber")]
     public class FixedCellSudoku
     {
         private int _row;

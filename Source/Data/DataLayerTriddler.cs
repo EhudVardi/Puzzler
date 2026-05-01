@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
-using System.Xml.Linq;
+using System.Text.Json;
 using Data.DataModels;
 
 namespace Data
@@ -116,10 +117,12 @@ namespace Data
         {
             try
             {
-                var doc = XDocument.Load(filePath);
-                string rows = doc.Root?.Element("BaseRowsCount")?.Value ?? "";
-                string cols = doc.Root?.Element("BaseColumnCount")?.Value ?? "";
-                return (rows != "" && cols != "") ? $"{rows}×{cols}" : string.Empty;
+                using var stream = File.OpenRead(filePath);
+                using var doc = JsonDocument.Parse(stream);
+                var root = doc.RootElement;
+                if (root.TryGetProperty("BaseRowsCount", out var rows) && root.TryGetProperty("BaseColumnCount", out var cols))
+                    return $"{rows.GetInt32()}×{cols.GetInt32()}";
+                return string.Empty;
             }
             catch { return string.Empty; }
         }
