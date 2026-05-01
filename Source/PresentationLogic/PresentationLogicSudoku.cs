@@ -22,6 +22,29 @@ namespace PresentationLogic
             float widthB  = width  / trackerBoard.N;
             float heightB = height / trackerBoard.M;
 
+            // --- watermark: active number faintly over the whole board ---
+            var watermarkColor = bText.WithAlpha(28);
+            DrawText((activeNumber + 1).ToString(), fontBold, watermarkColor, 0, 0, width, height);
+
+            // --- cell backgrounds ---
+            foreach (CellValueSudoku valueCell in trackerBoard.ValueCells)
+            {
+                bool matchesActive = valueCell.Value.HasValue && valueCell.Value == activeNumber;
+
+                PuzzlerColor backColor;
+                if (matchesActive)
+                    backColor = PuzzlerColor.Wheat;
+                else if (!trackerBoard.InitialCells.Contains(valueCell))
+                    backColor = bNull;
+                else
+                    backColor = bFixed;
+
+                FillRect(backColor,
+                    cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
+                    cellWidth - margin * 2f, cellHeight - margin * 2f);
+            }
+
+            // --- grid lines and box borders ---
             for (int i = 0; i < trackerBoard.CellsMatrix.GetLength(0); i++)
                 DrawLine(PuzzlerColor.Black, 1, 0, cellHeight * i, width, cellHeight * i);
 
@@ -35,51 +58,58 @@ namespace PresentationLogic
                         widthB * j + marginBoxes, heightB * i + marginBoxes,
                         widthB - marginBoxes * 2f, heightB - marginBoxes * 2f);
 
+            // --- cell digits and hints ---
+            int hintRows = trackerBoard.N;   // sub-grid rows per cell
+            int hintCols = trackerBoard.M;   // sub-grid cols per cell
+
             foreach (CellValueSudoku valueCell in trackerBoard.ValueCells)
             {
                 CellValueSudoku? solvedValueCell = solvedBoard.CellsMatrix[valueCell.Row, valueCell.Column] as CellValueSudoku;
+                bool isFixed = trackerBoard.InitialCells.Contains(valueCell);
+                PuzzlerColor foreColor = isFixed ? bText : bCorrect;
 
-                PuzzlerColor backColor;
-                PuzzlerColor foreColor;
-
-                if (!trackerBoard.InitialCells.Contains(valueCell))
-                { backColor = bNull; foreColor = bCorrect; }
-                else
-                { backColor = bFixed; foreColor = bText; }
-
-                FillRect(backColor,
-                    cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
-                    cellWidth - margin * 2f, cellHeight - margin * 2f);
+                float cx = cellWidth  * valueCell.Column + margin;
+                float cy = cellHeight * valueCell.Row    + margin;
+                float cw = cellWidth  - margin * 2f;
+                float ch = cellHeight - margin * 2f;
 
                 switch (this.displayType)
                 {
                     case DisplayType.Board:
-                        if (valueCell.IsFixed)
-                            DrawText((valueCell.Value + 1).ToString() ?? "", font, foreColor,
-                                cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
-                                cellWidth - margin * 2f, cellHeight - margin * 2f);
-                        break;
                     case DisplayType.Hint:
-                        if (valueCell.IsFixed)
+                        if (valueCell.Value.HasValue)
                         {
-                            PuzzlerColor textColor = (selectedValueCell != null
-                                && selectedValueCell.Value.HasValue && valueCell.Value.HasValue
+                            PuzzlerColor textColor = foreColor;
+                            if (this.displayType == DisplayType.Hint && isFixed
+                                && selectedValueCell?.Value.HasValue == true
                                 && selectedValueCell.Value == valueCell.Value)
-                                ? bIncorrect : foreColor;
+                                textColor = bIncorrect;
 
-                            DrawText((valueCell.Value + 1).ToString() ?? "", font, textColor,
-                                cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
-                                cellWidth - margin * 2f, cellHeight - margin * 2f);
+                            DrawText((valueCell.Value + 1).ToString() ?? "", font, textColor, cx, cy, cw, ch);
+                        }
+                        else if (!isFixed && valueCell.Hints.Count > 0)
+                        {
+                            float subW = cw / hintCols;
+                            float subH = ch / hintRows;
+                            foreach (int k in valueCell.Hints)
+                            {
+                                int sr = k / hintCols;
+                                int sc = k % hintCols;
+                                float sx = cx + sc * subW;
+                                float sy = cy + sr * subH;
+                                PuzzlerColor hintColor = (k == activeNumber) ? bCorrect : PuzzlerColor.Gray;
+                                DrawText((k + 1).ToString(), font, hintColor, sx, sy, subW, subH);
+                            }
                         }
                         break;
+
                     case DisplayType.Solution:
-                        DrawText((solvedValueCell!.Value + 1).ToString() ?? "", font, foreColor,
-                            cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
-                            cellWidth - margin * 2f, cellHeight - margin * 2f);
+                        DrawText((solvedValueCell!.Value + 1).ToString() ?? "", font, foreColor, cx, cy, cw, ch);
                         break;
                 }
             }
 
+            // --- selected cell border (top-most layer) ---
             if (selectedValueCell != null)
                 DrawRect(PuzzlerColor.Black, margin,
                     cellWidth * selectedValueCell.Column + margin, cellHeight * selectedValueCell.Row + margin,
@@ -98,43 +128,39 @@ namespace PresentationLogic
             int column = (int)(e.X / (sizeX / b.Columns));
             int row    = (int)(e.Y / (sizeY / b.Rows));
             if (row < 0 || row >= b.Rows || column < 0 || column >= b.Columns) return;
-            CellValueSudoku? pointedCell = b.CellsMatrix[row, column] as CellValueSudoku;
-            if (pointedCell != null && !b.InitialCells.Contains(pointedCell))
-                selectedValueCell = pointedCell;
-            this.OnRequestRefresh(EventArgs.Empty);
-        }
 
-        public override void HandleKey(KeyEvent e)
-        {
-            BoardSudoku? board = GetTrackerBoard();
-            if (board == null) return;
-            int numRequested = e.KeyValue - 49;
-            if (selectedValueCell != null)
-                if (numRequested > -1 && numRequested < board.Size)
-                    selectedValueCell.Value = numRequested;
-                else
-                    selectedValueCell.Value = null;
+            if (b.CellsMatrix[row, column] is not CellValueSudoku pointedCell) return;
+            if (b.InitialCells.Contains(pointedCell)) return;
+
+            if (!ReferenceEquals(pointedCell, selectedValueCell))
+            {
+                selectedValueCell = pointedCell;
+            }
+            else if (e.Button == PointerButton.Left)
+            {
+                if (pointedCell.Value == activeNumber) pointedCell.Value = null;
+                else                                   pointedCell.Value = activeNumber;
+            }
+            else if (e.Button == PointerButton.Right)
+            {
+                if (!pointedCell.Hints.Add(activeNumber))
+                    pointedCell.Hints.Remove(activeNumber);
+            }
+
             this.OnRequestRefresh(EventArgs.Empty);
         }
 
         public override void HandlePointerWheel(PointerEvent e, float sizeX, float sizeY)
         {
-            if (selectedValueCell != null)
-            {
-                if (!selectedValueCell.Value.HasValue)
-                {
-                    selectedValueCell.Value = 0;
-                }
-                else
-                {
-                    int maxValue  = (GetTrackerBoard()?.N ?? 3) * (GetTrackerBoard()?.M ?? 3);
-                    int nextValue = (selectedValueCell.Value.GetValueOrDefault() + (e.Delta > 0 ? 1 : -1)) % maxValue;
-                    selectedValueCell.Value = nextValue < 0 ? nextValue + maxValue : nextValue;
-                }
-            }
+            BoardSudoku? b = GetTrackerBoard();
+            if (b == null) return;
+            int max  = b.Size;
+            int next = (activeNumber + (e.Delta > 0 ? 1 : -1)) % max;
+            activeNumber = next < 0 ? next + max : next;
             this.OnRequestRefresh(EventArgs.Empty);
         }
 
         private CellValueSudoku? selectedValueCell;
+        private int activeNumber;
     }
 }

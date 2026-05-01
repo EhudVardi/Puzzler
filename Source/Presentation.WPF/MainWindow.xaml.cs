@@ -141,8 +141,15 @@ namespace Presentation.WPF
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (PresentationLogicObject == null) return;
+            PointerButton btn = e.ChangedButton switch
+            {
+                MouseButton.Left  => PointerButton.Left,
+                MouseButton.Right => PointerButton.Right,
+                _                 => PointerButton.None,
+            };
+            if (btn == PointerButton.None) return;
             var location = e.GetPosition(this.GameCanvas);
-            var pev = new PointerEvent((float)location.X, (float)location.Y, PointerButton.Left);
+            var pev = new PointerEvent((float)location.X, (float)location.Y, btn);
             PresentationLogicObject.HandlePointer(pev, (float)GameCanvas.ActualWidth, (float)GameCanvas.ActualHeight);
             RefreshForm();
         }

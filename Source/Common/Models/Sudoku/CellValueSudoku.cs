@@ -42,6 +42,8 @@ namespace Common.Models.Sudoku
         }
         */
 
+        public HashSet<int> Hints { get; } = new HashSet<int>();
+
         public CellValueSudoku(int n)
         {
             //this.ChoicesMap = new BinaryChoicesMap(n);
@@ -59,6 +61,7 @@ namespace Common.Models.Sudoku
         {
             //this.ChoicesMap.Reset(value);
             this.Value = null;
+            this.Hints.Clear();
         }
 
 
