@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Logic;
 using Data.DataModels;
 using Common.Models.Kakuru;
@@ -19,45 +21,66 @@ namespace PresentationLogic
             float cellWidth  = width  / trackerBoard.Columns;
             float cellHeight = height / trackerBoard.Rows;
 
+            int hintCols = Math.Max(1, (int)Math.Ceiling(Math.Sqrt(trackerBoard.NumberRange.Count)));
+            int hintRows = hintCols;
+            PuzzlerColor fadedColor = bText.WithAlpha(96);
+
             foreach (CellValueKakuru valueCell in trackerBoard.ValueCells)
             {
                 CellValueKakuru? solvedValueCell = solvedBoard.CellsMatrix[valueCell.Row, valueCell.Column] as CellValueKakuru;
+                bool isFixed = trackerBoard.InitialCells.Contains(valueCell);
 
-                PuzzlerColor backColor = trackerBoard.InitialCells.Contains(valueCell) ? bFixed : bNull;
-
+                PuzzlerColor backColor = isFixed ? bFixed : bNull;
                 FillRect(backColor,
                     cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
                     cellWidth - margin * 2f, cellHeight - margin * 2f);
 
-                switch (this.displayType)
+                float cx = cellWidth  * valueCell.Column + margin;
+                float cy = cellHeight * valueCell.Row    + margin;
+                float cw = cellWidth  - margin * 2f;
+                float ch = cellHeight - margin * 2f;
+
+                if (this.displayType == DisplayType.Solution)
                 {
-                    case DisplayType.Board:
-                        if (valueCell.IsFixed)
-                            DrawText(valueCell.Value.ToString() ?? "", font, bText,
-                                cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
-                                cellWidth - margin * 2f, cellHeight - margin * 2f);
-                        break;
-                    case DisplayType.Hint:
-                        if (valueCell.IsFixed)
-                        {
-                            PuzzlerColor textColor = solvedValueCell!.Value != valueCell.Value ? bIncorrect : bCorrect;
-                            DrawText(valueCell.Value.ToString() ?? "", font, textColor,
-                                cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
-                                cellWidth - margin * 2f, cellHeight - margin * 2f);
-                        }
-                        break;
-                    case DisplayType.Solution:
-                        DrawText(solvedValueCell!.Value.ToString() ?? "", font, bCorrect,
-                            cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
-                            cellWidth - margin * 2f, cellHeight - margin * 2f);
-                        break;
+                    DrawText(solvedValueCell?.Value.ToString() ?? "", font, bCorrect, cx, cy, cw, ch);
+                    continue;
                 }
-                if (valueCell.IsFixed)
+
+                if (valueCell.Value.HasValue)
                 {
-                    PuzzlerColor textColor2 = solvedValueCell!.Value != valueCell.Value ? bIncorrect : bCorrect;
-                    DrawText(valueCell.Value.ToString() ?? "", font, textColor2,
-                        cellWidth * valueCell.Column + margin, cellHeight * valueCell.Row + margin,
-                        cellWidth - margin * 2f, cellHeight - margin * 2f);
+                    PuzzlerColor textColor;
+                    if (this.displayType == DisplayType.Hint)
+                        textColor = isFixed
+                            ? bText
+                            : (solvedValueCell?.Value == valueCell.Value ? bCorrect : bIncorrect);
+                    else
+                        textColor = isFixed ? bText : bCorrect;
+
+                    DrawText(valueCell.Value.ToString() ?? "", font, textColor, cx, cy, cw, ch);
+                }
+                else
+                {
+                    if (ReferenceEquals(valueCell, selectedValueCell) && _activeCandidate.HasValue)
+                        DrawText(_activeCandidate.Value.ToString(), fontBold, fadedColor, cx, cy, cw, ch);
+
+                    if (valueCell.Hints.Count > 0)
+                    {
+                        float subW = cw / hintCols;
+                        float subH = ch / hintRows;
+                        foreach (int hv in valueCell.Hints)
+                        {
+                            int idx = trackerBoard.NumberRange.IndexOf(hv);
+                            if (idx < 0) continue;
+                            int sr = idx / hintCols;
+                            int sc = idx % hintCols;
+                            float sx = cx + sc * subW;
+                            float sy = cy + sr * subH;
+                            PuzzlerColor hintColor = (_activeCandidate.HasValue && hv == _activeCandidate.Value)
+                                ? bCorrect
+                                : PuzzlerColor.Gray;
+                            DrawText(hv.ToString(), font, hintColor, sx, sy, subW, subH);
+                        }
+                    }
                 }
             }
 
@@ -100,43 +123,87 @@ namespace PresentationLogic
             int column = (int)(e.X / (sizeX / b.Columns));
             int row    = (int)(e.Y / (sizeY / b.Rows));
             if (row < 0 || row >= b.Rows || column < 0 || column >= b.Columns) return;
-            CellValueKakuru? pointedCell = b.CellsMatrix[row, column] as CellValueKakuru;
-            if (pointedCell != null && !b.InitialCells.Contains(pointedCell))
+
+            if (b.CellsMatrix[row, column] is not CellValueKakuru pointedCell) return;
+            if (b.InitialCells.Contains(pointedCell)) return;
+
+            if (!ReferenceEquals(pointedCell, selectedValueCell))
+            {
                 selectedValueCell = pointedCell;
+                UpdateActiveCandidateForSelection();
+            }
+            else if (e.Button == PointerButton.Left)
+            {
+                if (pointedCell.Value.HasValue)
+                {
+                    pointedCell.Value = null;
+                    UpdateActiveCandidateForSelection();
+                }
+                else if (_activeCandidate.HasValue)
+                {
+                    pointedCell.Value = _activeCandidate;
+                    _activeCandidate = null;
+                }
+            }
+            else if (e.Button == PointerButton.Right)
+            {
+                if (!pointedCell.Value.HasValue && _activeCandidate.HasValue)
+                {
+                    if (!pointedCell.Hints.Add(_activeCandidate.Value))
+                        pointedCell.Hints.Remove(_activeCandidate.Value);
+                }
+            }
+
             this.OnRequestRefresh(EventArgs.Empty);
         }
 
         public override void HandlePointerWheel(PointerEvent e, float sizeX, float sizeY)
         {
-            if (selectedValueCell != null)
+            BoardKakuru? b = GetTrackerBoard();
+            if (b == null || selectedValueCell == null) return;
+            if (selectedValueCell.Value.HasValue) return;
+
+            List<int> possibles = ComputePossibleValues(selectedValueCell, b);
+            if (possibles.Count == 0)
             {
-                if (!selectedValueCell.Value.HasValue)
-                {
-                    selectedValueCell.Value = 0;
-                }
-                else
-                {
-                    int maxValue  = Math.Min(selectedValueCell.Groups[0].Sum, selectedValueCell.Groups[1].Sum);
-                    int nextValue = (selectedValueCell.Value.GetValueOrDefault() + (e.Delta > 0 ? 1 : -1)) % maxValue;
-                    selectedValueCell.Value = nextValue < 0 ? nextValue + maxValue : (nextValue == 0 ? maxValue : nextValue);
-                }
+                _activeCandidate = null;
+                this.OnRequestRefresh(EventArgs.Empty);
+                return;
             }
+
+            int idx = _activeCandidate.HasValue ? possibles.IndexOf(_activeCandidate.Value) : -1;
+            int delta = e.Delta > 0 ? 1 : -1;
+            int next  = ((idx < 0 ? 0 : idx) + delta) % possibles.Count;
+            if (next < 0) next += possibles.Count;
+            _activeCandidate = possibles[next];
+
             this.OnRequestRefresh(EventArgs.Empty);
         }
 
-        public override void HandleKey(KeyEvent e)
+        private void UpdateActiveCandidateForSelection()
         {
-            BoardKakuru? board = GetTrackerBoard();
-            if (board == null) return;
-            int numRequested = e.KeyValue - 49;
-            if (selectedValueCell != null)
-                if (numRequested > -1 && numRequested < board.NumberRange.Count)
-                    selectedValueCell.Value = board.NumberRange[numRequested];
-                else
-                    selectedValueCell.Value = null;
-            this.OnRequestRefresh(EventArgs.Empty);
+            BoardKakuru? b = GetTrackerBoard();
+            if (b == null || selectedValueCell == null || selectedValueCell.Value.HasValue)
+            {
+                _activeCandidate = null;
+                return;
+            }
+            List<int> possibles = ComputePossibleValues(selectedValueCell, b);
+            _activeCandidate = possibles.Count > 0 ? possibles[0] : (int?)null;
+        }
+
+        private static List<int> ComputePossibleValues(CellValueKakuru cell, BoardKakuru board)
+        {
+            HashSet<int> topo = board.GetCellTopologyValues(cell);
+            HashSet<int> excluded = new();
+            foreach (var group in cell.Groups)
+                foreach (var sibling in group.Cells)
+                    if (!ReferenceEquals(sibling, cell) && sibling.Value.HasValue)
+                        excluded.Add(sibling.Value!.Value);
+            return topo.Where(v => !excluded.Contains(v)).OrderBy(v => v).ToList();
         }
 
         private CellValueKakuru? selectedValueCell;
+        private int? _activeCandidate;
     }
 }

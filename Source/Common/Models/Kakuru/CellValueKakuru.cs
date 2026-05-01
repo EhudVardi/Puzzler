@@ -8,12 +8,14 @@ namespace Common.Models.Kakuru
 {
     public class CellValueKakuru:CellValueBase<int?, GroupKakuru>
     {
+        public HashSet<int> Hints { get; } = new HashSet<int>();
+
         public CellValueKakuru()
         {
 
         }
 
-        public CellValueKakuru(int row, int column) : base(row, column) 
+        public CellValueKakuru(int row, int column) : base(row, column)
         {
 
         }
@@ -26,7 +28,11 @@ namespace Common.Models.Kakuru
             this.Groups = fillCell.Groups;
         }
 
-        
+        public void Reset()
+        {
+            this.Value = null;
+            this.Hints.Clear();
+        }
     }
 
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using Common.Logic;
@@ -16,6 +17,45 @@ namespace Common.Models.Kakuru
         {
             get { return _numberList; }
             set { _numberList = value; }
+        }
+
+        private readonly Dictionary<CellValueKakuru, HashSet<int>> _topoCache = new();
+
+        public HashSet<int> GetCellTopologyValues(CellValueKakuru cell)
+        {
+            if (_topoCache.TryGetValue(cell, out var cached)) return cached;
+
+            HashSet<int>? intersection = null;
+            foreach (var group in cell.Groups)
+            {
+                var groupUnion = new HashSet<int>();
+                CollectGroupValueUnion(group.Sum, group.Size, 0, groupUnion, new List<int>());
+                intersection = intersection == null
+                    ? groupUnion
+                    : new HashSet<int>(intersection.Where(groupUnion.Contains));
+            }
+
+            var result = intersection ?? new HashSet<int>();
+            _topoCache[cell] = result;
+            return result;
+        }
+
+        private void CollectGroupValueUnion(int remainingSum, int remainingCells, int startIndex, HashSet<int> union, List<int> chosen)
+        {
+            if (remainingCells == 0)
+            {
+                if (remainingSum == 0)
+                    foreach (int v in chosen) union.Add(v);
+                return;
+            }
+            for (int i = startIndex; i < _numberList.Count; i++)
+            {
+                int v = _numberList[i];
+                if (v > remainingSum) break;
+                chosen.Add(v);
+                CollectGroupValueUnion(remainingSum - v, remainingCells - 1, i + 1, union, chosen);
+                chosen.RemoveAt(chosen.Count - 1);
+            }
         }
 
 
