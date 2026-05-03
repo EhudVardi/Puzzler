@@ -112,11 +112,16 @@ namespace Logic.Griddler
             board.Groups.AddRange(VerticalLines);
             board.Groups.AddRange(DiagonalLines);
 
-            //TODO: apply Trimming of diagonal groups ("denting") by (n2,m2), to the board.
-            //for N2 remove all cells in Diagonal last group in list
-            //for M2 remove all cells in Diagonal first group in list
-            List<GroupTriddler> removed = DiagonalLines.GetRange(0, puzzle.N2);
-            removed.AddRange(DiagonalLines.GetRange(DiagonalLines.Count - puzzle.M2, puzzle.M2));
+            // Derive corner trimming ("denting") from the diagonal patterns: leading
+            // and trailing diagonals with empty Numbers represent corners outside the
+            // puzzle's intended shape and should be removed from the board.
+            int n2 = 0;
+            while (n2 < DiagonalLines.Count && DiagonalLines[n2].Numbers.Count == 0) n2++;
+            int m2 = 0;
+            while (m2 < DiagonalLines.Count - n2 && DiagonalLines[DiagonalLines.Count - 1 - m2].Numbers.Count == 0) m2++;
+
+            List<GroupTriddler> removed = DiagonalLines.GetRange(0, n2);
+            removed.AddRange(DiagonalLines.GetRange(DiagonalLines.Count - m2, m2));
 
             List<CellValueTriddler> removedCells = new List<CellValueTriddler>();
             foreach (var group in removed)
@@ -157,10 +162,6 @@ namespace Logic.Griddler
 
             puzzle.BaseColumnCount = board.Columns;
             puzzle.BaseRowsCount = board.Rows;
-            //puzzle.N = board.N ;
-            //puzzle.N2 = board.N2;
-            //puzzle.M = board.M ;
-            //puzzle.M2 = board.M2;
             puzzle.Horizontals = new List<List<int>>();
             puzzle.Verticals = new List<List<int>>();
             puzzle.Diagonals = new List<List<int>>();

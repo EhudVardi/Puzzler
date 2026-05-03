@@ -28,8 +28,6 @@ namespace Data.DataModels
             set { _diagonals = value; }
         }
 
-
-
         private int _rowsLength;
         public int BaseRowsCount
         {
@@ -44,53 +42,8 @@ namespace Data.DataModels
             set { _columnLength = value; }
         }
 
-
-        private int _n;
-        public int N
-        {
-            get { return _n; }
-            set { _n = value; }
-        }
-
-        private int _n2;
-        public int N2
-        {
-            get { return _n2; }
-            set { _n2 = value; }
-        }
-
-        private int _m;
-        public int M
-        {
-            get { return _m; }
-            set { _m = value; }
-        }
-
-        private int _m2;
-        public int M2
-        {
-            get { return _m2; }
-            set { _m2 = value; }
-        }
-
-
         public PuzzleTriddler()
         {
-
         }
-
-        public PuzzleTriddler(List<List<int>> Horizontals, List<List<int>> Verticals, List<List<int>> Diagonals, int RowsLength, int ColumnLength, int n, int n2, int m, int m2)
-        {
-            this.Horizontals = Horizontals;
-            this.Verticals = Verticals;
-            this.Diagonals = Diagonals;
-            this.BaseRowsCount = RowsLength;
-            this.BaseColumnCount = ColumnLength;
-            this.N = n;
-            this.N2 = n2;
-            this.M = m;
-            this.M2 = m2;
-        }
-
     }
 }

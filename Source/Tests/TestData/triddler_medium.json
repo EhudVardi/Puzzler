@@ -476,9 +476,5 @@
     []
   ],
   "BaseRowsCount": 32,
-  "BaseColumnCount": 32,
-  "N": 0,
-  "N2": 0,
-  "M": 0,
-  "M2": 0
+  "BaseColumnCount": 32
 }
