@@ -364,16 +364,7 @@
                     <Border.Effect>
                         <DropShadowEffect Color="#000000" Opacity="0.35" BlurRadius="10" ShadowDepth="2" Direction="315"/>
                     </Border.Effect>
-                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" Background="Transparent" RenderTransformOrigin="0.5,0.5">
-                        <UserControls:PuzzlerCanvas.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleX="1" ScaleY="1"/>
-                                <SkewTransform AngleX="0" />
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </UserControls:PuzzlerCanvas.RenderTransform>
-                    </UserControls:PuzzlerCanvas>
+                    <UserControls:PuzzlerCanvas x:Name="GameCanvas" Margin="3" Background="Transparent"/>
                 </Border>
             </Grid>
             <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0" Style="{StaticResource ResourceKey=BorderPanelsStyleTitleBar}" PreviewMouseDown="dpnlTitleBar_PreviewMouseDown">

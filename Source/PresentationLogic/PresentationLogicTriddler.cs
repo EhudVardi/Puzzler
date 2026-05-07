@@ -29,7 +29,7 @@ namespace PresentationLogic
                 if (solvedValueCell == null)
                     continue;
 
-                PuzzlerPoint[] cellCoordinates = GetTriangleCoordinates(L.cellSize, valueCell.Row, valueCell.Column, valueCell.IsRight, L.gridOriginX, L.gridOriginY);
+                PuzzlerPoint[] cellCoordinates = GetCellTriangle(valueCell.Row, valueCell.Column, valueCell.IsRight, L);
 
                 switch (this.displayType)
                 {
@@ -60,7 +60,7 @@ namespace PresentationLogic
                     {
                         CellValueTriddler? groupCell = selectedValueCell.Groups[i].Cells[j] as CellValueTriddler;
                         if (groupCell == null) continue;
-                        PuzzlerPoint[] coords = GetTriangleCoordinates(L.cellSize, groupCell.Row, groupCell.Column, groupCell.IsRight, L.gridOriginX, L.gridOriginY);
+                        PuzzlerPoint[] coords = GetCellTriangle(groupCell.Row, groupCell.Column, groupCell.IsRight, L);
                         DrawPolygon(PuzzlerColor.Black, 1, PuzzlerColor.Wheat.WithAlpha(128), coords);
                     }
                 }
@@ -73,118 +73,130 @@ namespace PresentationLogic
             var vertGroups  = board.Groups.OfType<GroupTriddlerVerical>().ToList();
             var diagGroups  = board.Groups.OfType<GroupTriddlerDiagonal>().ToList();
 
+            // Horizontal axis: triangles extending left from each row's first actual cell.
+            // If the first cell is Left(△): slot 0 = Right(r, leftCol-1) sharing its TR-BR with Left's TL-BL.
+            // If the first cell is Right(▽): slot 0 = Left(r, leftCol) sharing its diagonal with Right's diagonal.
             for (int r = 0; r < horizGroups.Count; r++)
             {
                 List<int> nums = horizGroups[r].Numbers;
-                int offset = L.maxHorizPatternLen - nums.Count;
-                float cy = L.gridOriginY + L.cellSize * r;
+                if (nums.Count == 0) continue;
+                int leftCol = LeftmostCol(board, r);
+                if (leftCol < 0) continue;
+                bool firstIsLeft = board.CellsMatrixLeft[r, leftCol] != null;
                 for (int k = 0; k < nums.Count; k++)
                 {
-                    float cx = L.originX + L.cellSize * (offset + k);
-                    DrawHeaderRect(cx, cy, L.cellSize, nums[k]);
+                    int slot = nums.Count - 1 - k;
+                    int col; bool isRight;
+                    if (firstIsLeft) { col = leftCol - 1 - slot / 2;       isRight = (slot % 2 == 0); }
+                    else             { col = leftCol - (slot + 1) / 2;     isRight = (slot % 2 == 1); }
+                    DrawHeaderTriangle(r, col, isRight, nums[k], L);
                 }
             }
 
+            // Vertical axis: triangles extending above each column's first actual cell.
+            // If the first cell is Right(▽): slot 0 = Left(topRow-1, c) sharing its BL-BR with Right's TL-TR.
+            // If the first cell is Left(△): slot 0 = Right(topRow, c) sharing its diagonal with Left's diagonal.
             for (int c = 0; c < vertGroups.Count; c++)
             {
                 List<int> nums = vertGroups[c].Numbers;
-                int offset = L.maxVertPatternLen - nums.Count;
-                float cx = L.gridOriginX + L.cellSize * c;
+                if (nums.Count == 0) continue;
+                int topRow = TopmostRow(board, c);
+                if (topRow < 0) continue;
+                bool firstIsRight = board.CellsMatrixRight[topRow, c] != null;
                 for (int k = 0; k < nums.Count; k++)
                 {
-                    float cy = L.originY + L.cellSize * (offset + k);
-                    DrawHeaderRect(cx, cy, L.cellSize, nums[k]);
+                    int slot = nums.Count - 1 - k;
+                    int row; bool isRight;
+                    if (firstIsRight) { row = topRow - 1 - slot / 2;       isRight = (slot % 2 == 1); }
+                    else              { row = topRow - (slot + 1) / 2;     isRight = (slot % 2 == 0); }
+                    DrawHeaderTriangle(row, c, isRight, nums[k], L);
                 }
             }
 
-            int R = board.Rows;
-            int C = board.Columns;
-            for (int d = 0; d < diagGroups.Count; d++)
+            // Diagonal axis: alternating triangles stepping down-right from each diagonal's anchor cell.
+            foreach (var group in diagGroups)
             {
-                List<int> nums = diagGroups[d].Numbers;
-                int anchorRow, anchorCol;
-                bool anchorIsRight;
-                if (d < R)
-                { anchorRow = d;     anchorCol = C - 1;          anchorIsRight = true;  }
-                else
-                { anchorRow = R - 1; anchorCol = R + C - 1 - d;  anchorIsRight = false; }
-
+                List<int> nums = group.Numbers;
+                if (nums.Count == 0 || group.Cells.Count == 0) continue;
+                var anchor = group.Cells[0] as CellValueTriddler;
+                if (anchor == null) continue;
+                bool anchorIsRight = anchor.IsRight;
                 for (int k = 1; k <= nums.Count; k++)
                 {
-                    int rOff, cOff;
-                    bool stepIsRight;
+                    int rOff, cOff; bool stepIsRight;
                     if (anchorIsRight)
                     {
-                        rOff = k / 2;
-                        cOff = (k + 1) / 2;
+                        rOff       = k / 2;
+                        cOff       = (k + 1) / 2;
                         stepIsRight = (k % 2 == 0);
                     }
                     else
                     {
-                        rOff = (k + 1) / 2;
-                        cOff = k / 2;
+                        rOff       = (k + 1) / 2;
+                        cOff       = k / 2;
                         stepIsRight = (k % 2 == 1);
                     }
-                    int triRow = anchorRow + rOff;
-                    int triCol = anchorCol + cOff;
-
-                    PuzzlerPoint[] coords = GetTriangleCoordinates(L.cellSize, triRow, triCol, stepIsRight, L.gridOriginX, L.gridOriginY);
-                    DrawPolygon(PuzzlerColor.Black, 1, bFixed, coords);
-
-                    float tx, ty;
-                    if (stepIsRight)
-                    {
-                        tx = L.gridOriginX + L.cellSize * triCol + L.cellSize * 5f / 12f;
-                        ty = L.gridOriginY + L.cellSize * triRow + L.cellSize * 1f / 12f;
-                    }
-                    else
-                    {
-                        tx = L.gridOriginX + L.cellSize * triCol + L.cellSize * 1f / 12f;
-                        ty = L.gridOriginY + L.cellSize * triRow + L.cellSize * 5f / 12f;
-                    }
-                    DrawText(nums[k - 1].ToString(), fontBold, bText, tx, ty, L.cellSize / 2f, L.cellSize / 2f);
+                    DrawHeaderTriangle(anchor.Row + rOff, anchor.Column + cOff, stepIsRight, nums[k - 1], L);
                 }
             }
         }
 
-        private void DrawHeaderRect(float x, float y, float size, int number)
+        // Draws one header triangle (silver fill + number) at extended grid coords (row, col, isRight).
+        private void DrawHeaderTriangle(int row, int col, bool isRight, int number, Layout L)
         {
-            const float m = 2f;
-            FillRect(bFixed, x + m, y + m, size - m * 2f, size - m * 2f);
-            DrawText(number.ToString(), fontBold, bText, x + m, y + m, size - m * 2f, size - m * 2f);
-        }
-
-        private static PuzzlerPoint[] GetTriangleCoordinates(float cellSize, int row, int col, bool isRight, float originX, float originY)
-        {
-            float x0 = originX + cellSize * col;
-            float y0 = originY + cellSize * row;
+            DrawPolygon(PuzzlerColor.Black, 1, bFixed, GetCellTriangle(row, col, isRight, L));
+            float lr = row + L.vertRows;
+            float lc = col + L.horizCols;
+            float cx, cy;
             if (isRight)
             {
-                return new[]
-                {
-                    new PuzzlerPoint(x0,            y0),
-                    new PuzzlerPoint(x0 + cellSize, y0),
-                    new PuzzlerPoint(x0 + cellSize, y0 + cellSize),
-                };
+                cx = Vx(lc + 2f / 3f, lr + 1f / 3f, L);
+                cy = Vy(lr + 1f / 3f, L);
             }
-            return new[]
+            else
             {
-                new PuzzlerPoint(x0,            y0),
-                new PuzzlerPoint(x0,            y0 + cellSize),
-                new PuzzlerPoint(x0 + cellSize, y0 + cellSize),
-            };
+                cx = Vx(lc + 1f / 3f, lr + 2f / 3f, L);
+                cy = Vy(lr + 2f / 3f, L);
+            }
+            DrawText(number.ToString(), fontBold, bText, cx - L.s * 0.3f, cy - L.h * 0.3f, L.s * 0.6f, L.h * 0.6f);
         }
+
+        // Equilateral triangle cell from grid coordinates (row, col, isRight).
+        // Right(▽) = [TL, TR, BR]; Left(△) = [TL, BL, BR].
+        private static PuzzlerPoint[] GetCellTriangle(int row, int col, bool isRight, Layout L)
+        {
+            float lr = row + L.vertRows;
+            float lc = col + L.horizCols;
+            float tlX = Vx(lc,     lr,     L),  tlY = Vy(lr,     L);
+            float trX = Vx(lc + 1, lr,     L),  trY = Vy(lr,     L);
+            float blX = Vx(lc,     lr + 1, L),  blY = Vy(lr + 1, L);
+            float brX = Vx(lc + 1, lr + 1, L),  brY = Vy(lr + 1, L);
+            if (isRight)
+                return new[] { new PuzzlerPoint(tlX, tlY), new PuzzlerPoint(trX, trY), new PuzzlerPoint(brX, brY) };
+            else
+                return new[] { new PuzzlerPoint(tlX, tlY), new PuzzlerPoint(blX, blY), new PuzzlerPoint(brX, brY) };
+        }
+
+        // Screen X of layout point (layoutCol, layoutRow).
+        private static float Vx(float layoutCol, float layoutRow, Layout L) =>
+            layoutCol * L.s + L.oX - layoutRow * L.s / 2;
+
+        // Screen Y of layout row.
+        private static float Vy(float layoutRow, Layout L) =>
+            layoutRow * L.h + L.oY;
 
         private struct Layout
         {
-            public float originX;
-            public float originY;
-            public float gridOriginX;
-            public float gridOriginY;
-            public float cellSize;
-            public int maxHorizPatternLen;
-            public int maxVertPatternLen;
-            public int maxDiagPatternLen;
+            public float s;         // equilateral triangle edge length
+            public float h;         // row height = s·√3/2
+            public float oX;        // screen X origin (layout col 0, row 0)
+            public float oY;        // screen Y origin
+            public int   horizCols; // ⌈maxH/2⌉ — layout columns reserved for horizontal headers
+            public int   vertRows;  // ⌈maxV/2⌉ — layout rows reserved for vertical headers
+            public int   diagSlots; // ⌈maxD/2⌉ — extra rows/cols for diagonal headers
+            public int   maxH;      // raw max horizontal pattern count
+            public int   maxV;      // raw max vertical pattern count
+            public int   maxD;      // raw max diagonal pattern count
         }
 
         private static (int hMax, int vMax, int dMax) GetMaxPatternLengths(BoardTriddler b)
@@ -202,22 +214,30 @@ namespace PresentationLogic
         private Layout ComputeLayout(BoardTriddler b, float width, float height)
         {
             var (hMax, vMax, dMax) = GetMaxPatternLengths(b);
-            int diagExtra = (dMax + 1) / 2;
-            int totalCols = hMax + b.Columns + diagExtra;
-            int totalRows = vMax + b.Rows + diagExtra;
-            float cellSize = Math.Min(width / totalCols, height / totalRows);
-            float originX = (width  - cellSize * totalCols) / 2f;
-            float originY = (height - cellSize * totalRows) / 2f;
+            int horizCols = (hMax + 1) / 2;
+            int vertRows  = (vMax + 1) / 2;
+            int diagSlots = (dMax + 1) / 2;
+            int totalCols = horizCols + b.Columns + diagSlots;
+            int totalRows = vertRows  + b.Rows    + diagSlots;
+            float sqrt3over2 = (float)Math.Sqrt(3) / 2f;
+            float sW = width  / (totalCols + totalRows * 0.5f);
+            float sH = totalRows > 0 ? height / (totalRows * sqrt3over2) : sW;
+            float s  = Math.Min(sW, sH);
+            float h  = s * sqrt3over2;
+            float oX = (width  - (totalCols + totalRows * 0.5f) * s) / 2f + totalRows * s / 2f;
+            float oY = (height - totalRows * h) / 2f;
             return new Layout
             {
-                originX = originX,
-                originY = originY,
-                gridOriginX = originX + cellSize * hMax,
-                gridOriginY = originY + cellSize * vMax,
-                cellSize = cellSize,
-                maxHorizPatternLen = hMax,
-                maxVertPatternLen = vMax,
-                maxDiagPatternLen = dMax,
+                s         = s,
+                h         = h,
+                oX        = oX,
+                oY        = oY,
+                horizCols = horizCols,
+                vertRows  = vertRows,
+                diagSlots = diagSlots,
+                maxH      = hMax,
+                maxV      = vMax,
+                maxD      = dMax,
             };
         }
 
@@ -226,8 +246,32 @@ namespace PresentationLogic
             BoardTriddler? b = GetTrackerBoard();
             if (b == null) return (40 * 10, 40 * 10);
             var (hMax, vMax, dMax) = GetMaxPatternLengths(b);
-            int diagExtra = (dMax + 1) / 2;
-            return (40 * (hMax + b.Columns + diagExtra), 40 * (vMax + b.Rows + diagExtra));
+            int horizCols = (hMax + 1) / 2;
+            int vertRows  = (vMax + 1) / 2;
+            int diagSlots = (dMax + 1) / 2;
+            int totalCols = horizCols + b.Columns + diagSlots;
+            int totalRows = vertRows  + b.Rows    + diagSlots;
+            int w = (int)((totalCols + totalRows * 0.5) * 40);
+            int h = (int)(totalRows * 40 * Math.Sqrt(3) / 2);
+            return (Math.Max(w, 100), Math.Max(h, 100));
+        }
+
+        // Leftmost surviving column in the given grid row (-1 if entire row is null).
+        private static int LeftmostCol(BoardTriddler board, int row)
+        {
+            for (int c = 0; c < board.Columns; c++)
+                if (board.CellsMatrixLeft[row, c] != null || board.CellsMatrixRight[row, c] != null)
+                    return c;
+            return -1;
+        }
+
+        // Topmost surviving row in the given grid column (-1 if entire column is null).
+        private static int TopmostRow(BoardTriddler board, int col)
+        {
+            for (int r = 0; r < board.Rows; r++)
+                if (board.CellsMatrixLeft[r, col] != null || board.CellsMatrixRight[r, col] != null)
+                    return r;
+            return -1;
         }
 
         public override void HandlePointerWheel(PointerEvent e, float sizeX, float sizeY)
@@ -271,13 +315,15 @@ namespace PresentationLogic
         protected ((int row, int col) pos, bool isRight) GetBoardCoordinates(PointerEvent e, float sizeX, float sizeY, BoardTriddler b)
         {
             var L = ComputeLayout(b, sizeX, sizeY);
-            if (L.cellSize <= 0) return ((-1, -1), false);
-            double floatColIndex = (e.X - L.gridOriginX) / L.cellSize;
-            double floatRowIndex = (e.Y - L.gridOriginY) / L.cellSize;
-            int row = (int)Math.Floor(floatRowIndex);
-            int col = (int)Math.Floor(floatColIndex);
-            double fracR = floatRowIndex - row;
-            double fracC = floatColIndex - col;
+            if (L.s <= 0) return ((-1, -1), false);
+            double yIdx = (e.Y - L.oY) / L.h;
+            int layoutRow = (int)Math.Floor(yIdx);
+            double xIdx = (e.X - L.oX + layoutRow * L.s / 2) / L.s;
+            int layoutCol = (int)Math.Floor(xIdx);
+            double fracR = yIdx - layoutRow;
+            double fracC = xIdx - layoutCol;
+            int row = layoutRow - L.vertRows;
+            int col = layoutCol - L.horizCols;
             return ((row, col), fracC > fracR);
         }
 
