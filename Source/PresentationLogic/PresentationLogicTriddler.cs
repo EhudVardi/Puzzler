@@ -137,7 +137,7 @@ namespace PresentationLogic
                         cOff       = k / 2;
                         stepIsRight = (k % 2 == 1);
                     }
-                    DrawHeaderTriangle(anchor.Row + rOff, anchor.Column + cOff, stepIsRight, nums[k - 1], L, bDiag);
+                    DrawHeaderTriangle(anchor.Row + rOff, anchor.Column + cOff, stepIsRight, nums[nums.Count - k], L, bDiag);
                 }
             }
         }
@@ -182,25 +182,33 @@ namespace PresentationLogic
         }
 
         // Fixed-size compass rose in the top-left corner, independent of puzzle zoom.
+        // All three arrows converge on a common tip point.
         private void DrawAxisArrows(float width, float height)
         {
             float sq32     = (float)Math.Sqrt(3) / 2f;
             float arrowLen = Math.Min(width, height) * 0.07f;
             float headSize = arrowLen * 0.35f;
             float lineW    = Math.Max(1.5f, arrowLen * 0.08f);
+            float margin   = arrowLen * 0.5f;
 
-            // Common origin; offset right enough that ↙ tip (cx - arrowLen/2) stays on canvas.
-            float cx = arrowLen * 1.1f;
-            float cy = arrowLen * 0.4f;
-
+            // Three directions pointing TOWARD the common tip (cx, cy).
+            // Horizontal →, Vertical ↙, Diagonal ↖ (inverted — reading direction into board).
             (float dx, float dy, PuzzlerColor col)[] axes =
             {
                 ( 1f,    0f,   bHoriz),   // →
                 (-0.5f,  sq32, bVert ),   // ↙
-                ( 0.5f,  sq32, bDiag ),   // ↘
+                (-0.5f, -sq32, bDiag ),   // ↖
             };
+
+            // Place the tip so every tail stays on-canvas:
+            //   → tail is at (cx - arrowLen), needs > margin       → cx > arrowLen + margin
+            //   ↙ tail is at (cy - sq32*arrowLen), needs > margin  → cy > sq32*arrowLen + margin
+            //   ↖ tail is at (cy + sq32*arrowLen), stays low       → fine for top-left placement
+            float cx = arrowLen + margin * 2f;
+            float cy = sq32 * arrowLen + margin * 2f;
+
             foreach (var (dx, dy, col) in axes)
-                DrawArrow(cx, cy, dx, dy, arrowLen, headSize, lineW, col);
+                DrawArrow(cx - dx * arrowLen, cy - dy * arrowLen, dx, dy, arrowLen, headSize, lineW, col);
         }
 
         private void DrawArrow(float x, float y, float dx, float dy, float len, float headSize, float lineW, PuzzlerColor color)
