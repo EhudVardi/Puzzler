@@ -37,7 +37,7 @@ namespace PresentationLogic
                     case DisplayType.Hint:
                     case DisplayType.Board:
                         PuzzlerColor fill = valueCell.Value.HasValue
-                            ? (valueCell.Value.Value ? PuzzlerColor.Green : PuzzlerColor.Red)
+                            ? (valueCell.Value.Value ? cellTrue : cellFalse)
                             : PuzzlerColor.Transparent;
                         DrawPolygon(PuzzlerColor.Black, 1, fill, cellCoordinates);
                         break;
@@ -45,7 +45,7 @@ namespace PresentationLogic
                         if (solvedValueCell.IsFixed)
                         {
                             PuzzlerColor fill2 = solvedValueCell.Value.HasValue
-                                ? (solvedValueCell.Value.Value ? PuzzlerColor.Green : PuzzlerColor.Red)
+                                ? (solvedValueCell.Value.Value ? cellTrue : cellFalse)
                                 : PuzzlerColor.Yellow;
                             DrawPolygon(PuzzlerColor.Black, 1, fill2, cellCoordinates);
                         }
@@ -142,9 +142,11 @@ namespace PresentationLogic
             }
         }
 
-        private static readonly PuzzlerColor bHoriz = PuzzlerColor.FromArgb(255, 160, 190, 240); // cornflower blue
-        private static readonly PuzzlerColor bVert  = PuzzlerColor.FromArgb(255, 255, 255, 140); // lemon yellow
-        private static readonly PuzzlerColor bDiag  = PuzzlerColor.FromArgb(255, 255, 175, 180); // rose pink
+        private static readonly PuzzlerColor bHoriz    = PuzzlerColor.FromArgb(255, 160, 190, 240); // cornflower blue
+        private static readonly PuzzlerColor bVert     = PuzzlerColor.FromArgb(255, 255, 255, 140); // lemon yellow
+        private static readonly PuzzlerColor bDiag     = PuzzlerColor.FromArgb(255, 255, 175, 180); // rose pink
+        private static readonly PuzzlerColor cellTrue  = PuzzlerColor.FromArgb(255,   0, 240, 200); // vivid teal
+        private static readonly PuzzlerColor cellFalse = PuzzlerColor.FromArgb(255,  55,  20,  95); // very dark purple
 
         private void DrawHeaderTriangle(int row, int col, bool isRight, int number, Layout L, PuzzlerColor fill)
         {
