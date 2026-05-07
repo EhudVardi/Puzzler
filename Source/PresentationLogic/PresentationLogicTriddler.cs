@@ -370,7 +370,7 @@ namespace PresentationLogic
             if (L.s <= 0) return ((-1, -1), false);
             double yIdx = (e.Y - L.oY) / L.h;
             int layoutRow = (int)Math.Floor(yIdx);
-            double xIdx = (e.X - L.oX + layoutRow * L.s / 2) / L.s;
+            double xIdx = (e.X - L.oX + yIdx * L.s / 2) / L.s;
             int layoutCol = (int)Math.Floor(xIdx);
             double fracR = yIdx - layoutRow;
             double fracC = xIdx - layoutCol;
