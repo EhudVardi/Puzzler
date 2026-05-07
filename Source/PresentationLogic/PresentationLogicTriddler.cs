@@ -142,9 +142,9 @@ namespace PresentationLogic
             }
         }
 
-        private static readonly PuzzlerColor bHoriz = PuzzlerColor.FromArgb(255, 176, 196, 232); // periwinkle
-        private static readonly PuzzlerColor bVert  = PuzzlerColor.FromArgb(255, 240, 240, 160); // pale yellow
-        private static readonly PuzzlerColor bDiag  = PuzzlerColor.FromArgb(255, 240, 176, 180); // pale pink
+        private static readonly PuzzlerColor bHoriz = PuzzlerColor.FromArgb(255, 160, 190, 240); // cornflower blue
+        private static readonly PuzzlerColor bVert  = PuzzlerColor.FromArgb(255, 255, 255, 140); // lemon yellow
+        private static readonly PuzzlerColor bDiag  = PuzzlerColor.FromArgb(255, 255, 175, 180); // rose pink
 
         private void DrawHeaderTriangle(int row, int col, bool isRight, int number, Layout L, PuzzlerColor fill)
         {
