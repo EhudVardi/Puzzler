@@ -23,6 +23,21 @@ namespace PresentationLogic
             DrawHeaders(trackerBoard, L);
             DrawAxisArrows(width, height);
 
+
+            if (selectedValueCell != null)
+            {
+                for (int i = 0; i < selectedValueCell.Groups.Count; i++)
+                {
+                    for (int j = 0; j < selectedValueCell.Groups[i].Cells.Count; j++)
+                    {
+                        CellValueTriddler? groupCell = selectedValueCell.Groups[i].Cells[j] as CellValueTriddler;
+                        if (groupCell == null) continue;
+                        PuzzlerPoint[] coords = GetCellTriangle(groupCell.Row, groupCell.Column, groupCell.IsRight, L);
+                        DrawPolygon(PuzzlerColor.Black, 1, PuzzlerColor.Wheat.WithAlpha(128), coords);
+                    }
+                }
+            }
+            
             margin = 0;
             foreach (CellValueTriddler valueCell in trackerBoard.ValueCells)
             {
@@ -50,20 +65,6 @@ namespace PresentationLogic
                             DrawPolygon(PuzzlerColor.Black, 1, fill2, cellCoordinates);
                         }
                         break;
-                }
-            }
-
-            if (selectedValueCell != null)
-            {
-                for (int i = 0; i < selectedValueCell.Groups.Count; i++)
-                {
-                    for (int j = 0; j < selectedValueCell.Groups[i].Cells.Count; j++)
-                    {
-                        CellValueTriddler? groupCell = selectedValueCell.Groups[i].Cells[j] as CellValueTriddler;
-                        if (groupCell == null) continue;
-                        PuzzlerPoint[] coords = GetCellTriangle(groupCell.Row, groupCell.Column, groupCell.IsRight, L);
-                        DrawPolygon(PuzzlerColor.Black, 1, PuzzlerColor.Wheat.WithAlpha(128), coords);
-                    }
                 }
             }
         }
