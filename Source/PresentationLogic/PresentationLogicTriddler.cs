@@ -21,6 +21,7 @@ namespace PresentationLogic
             var L = ComputeLayout(trackerBoard, width, height);
 
             DrawHeaders(trackerBoard, L);
+            DrawAxisArrows(width, height);
 
             margin = 0;
             foreach (CellValueTriddler valueCell in trackerBoard.ValueCells)
@@ -89,7 +90,7 @@ namespace PresentationLogic
                     int col; bool isRight;
                     if (firstIsLeft) { col = leftCol - 1 - slot / 2;       isRight = (slot % 2 == 0); }
                     else             { col = leftCol - (slot + 1) / 2;     isRight = (slot % 2 == 1); }
-                    DrawHeaderTriangle(r, col, isRight, nums[k], L);
+                    DrawHeaderTriangle(r, col, isRight, nums[k], L, bHoriz);
                 }
             }
 
@@ -109,7 +110,7 @@ namespace PresentationLogic
                     int row; bool isRight;
                     if (firstIsRight) { row = topRow - 1 - slot / 2;       isRight = (slot % 2 == 1); }
                     else              { row = topRow - (slot + 1) / 2;     isRight = (slot % 2 == 0); }
-                    DrawHeaderTriangle(row, c, isRight, nums[k], L);
+                    DrawHeaderTriangle(row, c, isRight, nums[k], L, bVert);
                 }
             }
 
@@ -136,15 +137,18 @@ namespace PresentationLogic
                         cOff       = k / 2;
                         stepIsRight = (k % 2 == 1);
                     }
-                    DrawHeaderTriangle(anchor.Row + rOff, anchor.Column + cOff, stepIsRight, nums[k - 1], L);
+                    DrawHeaderTriangle(anchor.Row + rOff, anchor.Column + cOff, stepIsRight, nums[k - 1], L, bDiag);
                 }
             }
         }
 
-        // Draws one header triangle (silver fill + number) at extended grid coords (row, col, isRight).
-        private void DrawHeaderTriangle(int row, int col, bool isRight, int number, Layout L)
+        private static readonly PuzzlerColor bHoriz = PuzzlerColor.FromArgb(255, 176, 196, 232); // periwinkle
+        private static readonly PuzzlerColor bVert  = PuzzlerColor.FromArgb(255, 240, 240, 160); // pale yellow
+        private static readonly PuzzlerColor bDiag  = PuzzlerColor.FromArgb(255, 240, 176, 180); // pale pink
+
+        private void DrawHeaderTriangle(int row, int col, bool isRight, int number, Layout L, PuzzlerColor fill)
         {
-            DrawPolygon(PuzzlerColor.Black, 1, bFixed, GetCellTriangle(row, col, isRight, L));
+            DrawPolygon(PuzzlerColor.Black, 1, fill, GetCellTriangle(row, col, isRight, L));
             float lr = row + L.vertRows;
             float lc = col + L.horizCols;
             float cx, cy;
@@ -175,6 +179,43 @@ namespace PresentationLogic
                 return new[] { new PuzzlerPoint(tlX, tlY), new PuzzlerPoint(trX, trY), new PuzzlerPoint(brX, brY) };
             else
                 return new[] { new PuzzlerPoint(tlX, tlY), new PuzzlerPoint(blX, blY), new PuzzlerPoint(brX, brY) };
+        }
+
+        // Fixed-size compass rose in the top-left corner, independent of puzzle zoom.
+        private void DrawAxisArrows(float width, float height)
+        {
+            float sq32     = (float)Math.Sqrt(3) / 2f;
+            float arrowLen = Math.Min(width, height) * 0.07f;
+            float headSize = arrowLen * 0.35f;
+            float lineW    = Math.Max(1.5f, arrowLen * 0.08f);
+
+            // Common origin; offset right enough that ↙ tip (cx - arrowLen/2) stays on canvas.
+            float cx = arrowLen * 1.1f;
+            float cy = arrowLen * 0.4f;
+
+            (float dx, float dy, PuzzlerColor col)[] axes =
+            {
+                ( 1f,    0f,   bHoriz),   // →
+                (-0.5f,  sq32, bVert ),   // ↙
+                ( 0.5f,  sq32, bDiag ),   // ↘
+            };
+            foreach (var (dx, dy, col) in axes)
+                DrawArrow(cx, cy, dx, dy, arrowLen, headSize, lineW, col);
+        }
+
+        private void DrawArrow(float x, float y, float dx, float dy, float len, float headSize, float lineW, PuzzlerColor color)
+        {
+            float tipX  = x + dx * len,              tipY  = y + dy * len;
+            float baseX = tipX - dx * headSize,       baseY = tipY - dy * headSize;
+            DrawLine(color, lineW, x, y, baseX, baseY);
+            float px = -dy, py = dx;   // perpendicular unit vector
+            float hw = headSize * 0.45f;
+            DrawPolygon(color, 0, color, new[]
+            {
+                new PuzzlerPoint(tipX, tipY),
+                new PuzzlerPoint(baseX + px * hw, baseY + py * hw),
+                new PuzzlerPoint(baseX - px * hw, baseY - py * hw),
+            });
         }
 
         // Screen X of layout point (layoutCol, layoutRow).
