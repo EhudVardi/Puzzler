@@ -5,7 +5,7 @@ using PresentationLogic;
 
 namespace Presentation.WPF
 {
-    public enum PuzzleType { Sudoku, Kakuru, Griddler, Triddler }
+    public enum PuzzleType { Sudoku, Kakuru, Griddler, Triddler, Yakugo }
 
     public interface IPuzzleDescriptor
     {
@@ -37,7 +37,8 @@ namespace Presentation.WPF
             new Descriptor(PuzzleType.Sudoku,   "Sudoku",   () => new PresentationLogicSudoku()),
             new Descriptor(PuzzleType.Kakuru,   "Kakuru",   () => new PresentationLogicKakuru()),
             new Descriptor(PuzzleType.Griddler, "Griddler", () => new PresentationLogicGriddler()),
-            new Descriptor(PuzzleType.Triddler, "Triddler", () => new PresentationLogicTriddler()),
+            new Descriptor(PuzzleType.Triddler,        "Triddler",        () => new PresentationLogicTriddler()),
+            new Descriptor(PuzzleType.Yakugo, "Yakugo", () => new PresentationLogicYakugo()),
         };
 
         public static IPuzzleDescriptor Find(string displayName) =>

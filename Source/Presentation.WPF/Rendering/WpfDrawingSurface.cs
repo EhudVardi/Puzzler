@@ -29,7 +29,7 @@ namespace Presentation.WPF
                 FontStyles.Normal,
                 font.Bold ? FontWeights.Bold : FontWeights.Normal,
                 FontStretches.Normal);
-            double size = Math.Sqrt((double)width * width + (double)height * height) / 2;
+            double size = Math.Min(width, height) * 0.75;
             size = Math.Max(size, 1);
             var ft = new FormattedText(
                 text,

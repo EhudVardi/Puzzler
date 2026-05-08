@@ -26,10 +26,11 @@ namespace Presentation.WPF
             this.ucDataGridText.RequestLoadPuzzle      += ucDataGrid_RequestLoadPuzzle;
             this.ucDataGridWeb.RequestLoadPuzzle       += ucDataGrid_RequestLoadPuzzle;
 
-            this.btnSelectSudoku.Tag   = PuzzleRegistry.Find("Sudoku");
-            this.btnSelectKakuru.Tag   = PuzzleRegistry.Find("Kakuru");
-            this.btnSelectGriddler.Tag = PuzzleRegistry.Find("Griddler");
-            this.btnSelectTriddler.Tag = PuzzleRegistry.Find("Triddler");
+            this.btnSelectSudoku.Tag          = PuzzleRegistry.Find("Sudoku");
+            this.btnSelectKakuru.Tag          = PuzzleRegistry.Find("Kakuru");
+            this.btnSelectGriddler.Tag        = PuzzleRegistry.Find("Griddler");
+            this.btnSelectTriddler.Tag        = PuzzleRegistry.Find("Triddler");
+            this.btnSelectYakugo.Tag = PuzzleRegistry.Find("Yakugo");
         }
 
         void ucDataGrid_RequestLoadPuzzle(object sender, ucPuzzlerDataGrid.RequestLoadPuzzleEventArgs e)
@@ -139,6 +140,15 @@ namespace Presentation.WPF
             if (PresentationLogicObject == null) return;
             var pev = new PointerEvent(0, 0, PointerButton.None, e.Delta);
             PresentationLogicObject.HandlePointerWheel(pev, (float)GameCanvas.ActualWidth, (float)GameCanvas.ActualHeight);
+        }
+
+        private void Window_TextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            if (PresentationLogicObject is PresentationLogic.PresentationLogicYakugo vt)
+            {
+                vt.HandleTextInput(e.Text);
+                RefreshForm();
+            }
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)

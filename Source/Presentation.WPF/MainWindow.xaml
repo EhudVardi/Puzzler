@@ -9,6 +9,7 @@
         MouseUp="Window_MouseUp"
         MouseWheel="Window_MouseWheel"
         KeyDown="Window_KeyDown"
+        TextInput="Window_TextInput"
         Width="800" Height="600" ResizeMode="CanResize" UseLayoutRounding="True" WindowStyle="None"
         Background="#1E1E2E" FontFamily="Segoe UI" FontSize="12">
     <Window.Resources>
@@ -319,7 +320,8 @@
                                 <RadioButton x:Name="btnSelectSudoku"   DockPanel.Dock="Top" Content="Sudoku"   Checked="btnSelectPuzzles_Checked"/>
                                 <RadioButton x:Name="btnSelectKakuru"   DockPanel.Dock="Top" Content="Kakuru"   Checked="btnSelectPuzzles_Checked"/>
                                 <RadioButton x:Name="btnSelectGriddler" DockPanel.Dock="Top" Content="Griddler" Checked="btnSelectPuzzles_Checked"/>
-                                <RadioButton x:Name="btnSelectTriddler" DockPanel.Dock="Top" Content="Triddler" Checked="btnSelectPuzzles_Checked"/>
+                                <RadioButton x:Name="btnSelectTriddler"        DockPanel.Dock="Top" Content="Triddler"        Checked="btnSelectPuzzles_Checked"/>
+                                <RadioButton x:Name="btnSelectYakugo" DockPanel.Dock="Top" Content="Yakugo" Checked="btnSelectPuzzles_Checked"/>
                             </DockPanel>
                         </GroupBox>
                         <GroupBox Header="Display" Margin="3" VerticalAlignment="Top">
