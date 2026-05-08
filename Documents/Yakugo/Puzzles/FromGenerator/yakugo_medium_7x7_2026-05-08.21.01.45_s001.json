@@ -1,0 +1,261 @@
+{
+  "Rows": 7,
+  "Cols": 7,
+  "SourceLanguage": "en",
+  "TargetLanguage": "he",
+  "Cells": [
+    {
+      "Row": 0,
+      "Col": 2,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "word",
+          "Target": "מילה",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "house",
+          "Target": "בית",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 5,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "wind",
+          "Target": "רוח",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 3,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "star",
+          "Target": "כוכב",
+          "Dir": "Down"
+        },
+        {
+          "Source": "water",
+          "Target": "מים",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 2,
+      "Col": 0,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "teacher",
+          "Target": "מורה",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 3,
+      "Col": 6,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "cat",
+          "Target": "חתול",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 4,
+      "Col": 6,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "king",
+          "Target": "מלכ",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 5,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "morning",
+          "Target": "בוקר",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 6,
+      "Col": 5,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "family",
+          "Target": "משפחה",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 4,
+      "Kind": "Letter"
+    }
+  ]
+}

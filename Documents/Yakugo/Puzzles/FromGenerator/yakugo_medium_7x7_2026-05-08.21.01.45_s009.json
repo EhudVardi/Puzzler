@@ -6,102 +6,119 @@
   "Cells": [
     {
       "Row": 0,
+      "Col": 0,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "teacher",
+          "Target": "מורה",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 1,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "window",
+          "Target": "חלונ",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
       "Col": 2,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "story",
-          "Target": "סיפור",
+          "Source": "family",
+          "Target": "משפחה",
           "Dir": "Down"
         }
       ]
     },
     {
       "Row": 1,
-      "Col": 0,
+      "Col": 6,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "number",
-          "Target": "מספר",
-          "Dir": "Right"
+          "Source": "dream",
+          "Target": "חלומ",
+          "Dir": "Left"
         }
       ]
     },
     {
       "Row": 2,
-      "Col": 0,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "dance",
-          "Target": "ריקוד",
-          "Dir": "Right"
-        }
-      ]
-    },
-    {
-      "Row": 3,
       "Col": 3,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "bread",
-          "Target": "לחמ",
+          "Source": "girl",
+          "Target": "ילדה",
           "Dir": "Down"
         }
       ]
     },
     {
       "Row": 3,
-      "Col": 4,
+      "Col": 5,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "milk",
-          "Target": "חלב",
-          "Dir": "Down"
+          "Source": "bird",
+          "Target": "ציפור",
+          "Dir": "Left"
         }
       ]
     },
     {
       "Row": 4,
-      "Col": 0,
+      "Col": 6,
       "Kind": "Clue",
       "Clues": [
         {
           "Source": "table",
           "Target": "שולחנ",
-          "Dir": "Right"
+          "Dir": "Left"
         }
       ]
     },
     {
       "Row": 5,
-      "Col": 0,
+      "Col": 6,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "flower",
-          "Target": "פרח",
-          "Dir": "Right"
+          "Source": "puzzle",
+          "Target": "חידה",
+          "Dir": "Left"
         }
       ]
     },
     {
       "Row": 6,
-      "Col": 0,
+      "Col": 5,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "rain",
-          "Target": "גשמ",
-          "Dir": "Right"
+          "Source": "love",
+          "Target": "אהבה",
+          "Dir": "Left"
         }
       ]
     },
     {
       "Row": 1,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
       "Col": 1,
       "Kind": "Letter"
     },
@@ -121,28 +138,33 @@
       "Kind": "Letter"
     },
     {
-      "Row": 2,
-      "Col": 1,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 2,
-      "Col": 2,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 2,
-      "Col": 3,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 2,
-      "Col": 4,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 2,
+      "Row": 1,
       "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 1,
       "Kind": "Letter"
     },
     {
@@ -151,6 +173,21 @@
       "Kind": "Letter"
     },
     {
+      "Row": 3,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
       "Row": 4,
       "Col": 1,
       "Kind": "Letter"
@@ -177,11 +214,6 @@
     },
     {
       "Row": 5,
-      "Col": 1,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 5,
       "Col": 2,
       "Kind": "Letter"
     },
@@ -193,6 +225,11 @@
     {
       "Row": 5,
       "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 5,
       "Kind": "Letter"
     },
     {

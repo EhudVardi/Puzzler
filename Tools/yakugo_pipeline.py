@@ -80,7 +80,8 @@ def run_pipeline(
         for seed in range(seeds_per_size):
             # Each seed tries 5 internal variants; keeps the best
             state, placed = best_of(
-                words, rows, cols, count=5, base_seed=seed * 100
+                words, rows, cols, count=5, base_seed=seed * 100,
+                target_lang=tgt_lang,
             )
 
             if len(placed) < threshold:

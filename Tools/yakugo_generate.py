@@ -51,7 +51,15 @@ Word = Dict[str, str]   # {"Source": "...", "Target": "..."}
 DIRS: Dict[str, Tuple[int, int]] = {
     "Right": (0,  1),
     "Down":  (1,  0),
+    "Left":  (0, -1),
 }
+
+RTL_LANGUAGES = {"he", "ar", "fa", "ur"}
+
+
+def horizontal_dir(target_lang: str) -> str:
+    """Return the correct horizontal direction for the target language."""
+    return "Left" if target_lang in RTL_LANGUAGES else "Right"
 
 
 # ── Core helpers ───────────────────────────────────────────────────────────────
@@ -105,7 +113,7 @@ def can_place(state: State, origin_r: int, origin_c: int,
     if len(existing_dirs) >= 2:
         return False
     if existing_dirs:
-        is_horiz = lambda d: d == "Right"
+        is_horiz = lambda d: d in ("Right", "Left")
         if is_horiz(direction) == is_horiz(next(iter(existing_dirs))):
             return False  # parallel directions not allowed in same cell
 
@@ -142,11 +150,13 @@ def place(state: State, origin_r: int, origin_c: int, direction: str,
 # ── Generator ──────────────────────────────────────────────────────────────────
 
 def generate(words: List[Word], rows: int, cols: int,
-             seed: int = 0) -> Tuple[State, List[Word]]:
+             seed: int = 0,
+             target_lang: str = "en") -> Tuple[State, List[Word]]:
     """
     Greedy crossword placement.  Returns (state, list-of-placed-words).
     """
     rng = random.Random(seed)
+    horiz = horizontal_dir(target_lang)
 
     # Group by target length, shuffle within each group for variety, then sort
     # longest-first so long words claim good positions before short ones.
@@ -169,7 +179,7 @@ def generate(words: List[Word], rows: int, cols: int,
         best_score: float = -1.0
         best: Optional[Tuple[int, int, str]] = None
 
-        for direction in ("Down", "Right"):
+        for direction in ("Down", horiz):
             for origin_r in range(rows):
                 for origin_c in range(cols):
                     if not can_place(state, origin_r, origin_c,
@@ -198,11 +208,12 @@ def generate(words: List[Word], rows: int, cols: int,
 
 
 def best_of(words: List[Word], rows: int, cols: int,
-            count: int = 1, base_seed: int = 0) -> Tuple[State, List[Word]]:
+            count: int = 1, base_seed: int = 0,
+            target_lang: str = "en") -> Tuple[State, List[Word]]:
     """Run `count` seeds and return the result that placed the most words."""
-    best_state, best_placed = generate(words, rows, cols, base_seed)
+    best_state, best_placed = generate(words, rows, cols, base_seed, target_lang)
     for i in range(1, count):
-        state, placed = generate(words, rows, cols, base_seed + i)
+        state, placed = generate(words, rows, cols, base_seed + i, target_lang)
         if len(placed) > len(best_placed):
             best_state, best_placed = state, placed
     return best_state, best_placed
@@ -385,7 +396,8 @@ def main() -> None:
         generated = []
         for name, ex in EXAMPLES.items():
             state, placed = best_of(
-                ex["words"], ex["rows"], ex["cols"], count=20, base_seed=0
+                ex["words"], ex["rows"], ex["cols"], count=20, base_seed=0,
+                target_lang=ex["target_lang"],
             )
             puzzle = state_to_puzzle(
                 state, ex["rows"], ex["cols"], ex["source_lang"], ex["target_lang"]
@@ -406,7 +418,8 @@ def main() -> None:
 
     words, src_lang, tgt_lang = load_wordlist(args.wordlist)
     state, placed = best_of(
-        words, args.rows, args.cols, count=args.count, base_seed=args.seed
+        words, args.rows, args.cols, count=args.count, base_seed=args.seed,
+        target_lang=tgt_lang,
     )
 
     if args.preview:

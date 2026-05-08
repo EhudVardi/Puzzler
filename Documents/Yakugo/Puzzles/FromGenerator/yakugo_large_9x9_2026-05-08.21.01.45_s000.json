@@ -5,150 +5,211 @@
   "TargetLanguage": "he",
   "Cells": [
     {
-      "Row": 1,
-      "Col": 1,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "story",
-          "Target": "סיפור",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 1,
-      "Col": 6,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "word",
-          "Target": "מילה",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 1,
-      "Col": 7,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "cat",
-          "Target": "חתול",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 1,
-      "Col": 8,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "time",
-          "Target": "זמנ",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 2,
-      "Col": 3,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "game",
-          "Target": "משחק",
-          "Dir": "Down"
-        },
-        {
-          "Source": "rain",
-          "Target": "גשמ",
-          "Dir": "Right"
-        }
-      ]
-    },
-    {
-      "Row": 3,
-      "Col": 0,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "day",
-          "Target": "יומ",
-          "Dir": "Right"
-        }
-      ]
-    },
-    {
-      "Row": 3,
-      "Col": 5,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "puzzle",
-          "Target": "חידה",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 4,
+      "Row": 0,
       "Col": 2,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "chair",
-          "Target": "כיסא",
+          "Source": "road",
+          "Target": "דרכ",
           "Dir": "Down"
         }
       ]
     },
     {
-      "Row": 4,
-      "Col": 4,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "morning",
-          "Target": "בוקר",
-          "Dir": "Down"
-        },
-        {
-          "Source": "window",
-          "Target": "חלונ",
-          "Dir": "Right"
-        }
-      ]
-    },
-    {
-      "Row": 6,
-      "Col": 0,
+      "Row": 0,
+      "Col": 5,
       "Kind": "Clue",
       "Clues": [
         {
           "Source": "dance",
           "Target": "ריקוד",
-          "Dir": "Right"
+          "Dir": "Down"
         }
       ]
     },
     {
-      "Row": 8,
+      "Row": 1,
+      "Col": 1,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "food",
+          "Target": "אוכל",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "teacher",
+          "Target": "מורה",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 2,
+      "Col": 0,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "year",
+          "Target": "שנה",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 2,
+      "Col": 7,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "bird",
+          "Target": "ציפור",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 3,
       "Col": 3,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "wind",
-          "Target": "רוח",
-          "Dir": "Right"
+          "Source": "dream",
+          "Target": "חלומ",
+          "Dir": "Down"
         }
       ]
     },
     {
+      "Row": 3,
+      "Col": 6,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "sky",
+          "Target": "שמים",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 4,
+      "Col": 7,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "table",
+          "Target": "שולחנ",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 5,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "night",
+          "Target": "לילה",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 5,
+      "Col": 7,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "man",
+          "Target": "איש",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 6,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "woman",
+          "Target": "אישה",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 7,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "number",
+          "Target": "מספר",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 8,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "sun",
+          "Target": "שמש",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
       "Row": 2,
       "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 3,
       "Kind": "Letter"
     },
     {
@@ -167,13 +228,8 @@
       "Kind": "Letter"
     },
     {
-      "Row": 2,
-      "Col": 7,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 2,
-      "Col": 8,
+      "Row": 3,
+      "Col": 0,
       "Kind": "Letter"
     },
     {
@@ -188,75 +244,65 @@
     },
     {
       "Row": 3,
-      "Col": 3,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 3,
-      "Col": 6,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 3,
-      "Col": 7,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 3,
-      "Col": 8,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 4,
-      "Col": 1,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 4,
-      "Col": 3,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 4,
       "Col": 5,
       "Kind": "Letter"
     },
     {
       "Row": 4,
-      "Col": 6,
+      "Col": 0,
       "Kind": "Letter"
     },
     {
       "Row": 4,
-      "Col": 7,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 4,
-      "Col": 8,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 5,
       "Col": 1,
       "Kind": "Letter"
     },
     {
-      "Row": 5,
+      "Row": 4,
       "Col": 2,
       "Kind": "Letter"
     },
     {
-      "Row": 5,
+      "Row": 4,
       "Col": 3,
       "Kind": "Letter"
     },
     {
-      "Row": 5,
+      "Row": 4,
       "Col": 4,
       "Kind": "Letter"
     },
     {
+      "Row": 4,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
       "Row": 5,
       "Col": 5,
       "Kind": "Letter"
@@ -264,21 +310,6 @@
     {
       "Row": 5,
       "Col": 6,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 5,
-      "Col": 7,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 6,
-      "Col": 1,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 6,
-      "Col": 2,
       "Kind": "Letter"
     },
     {
@@ -294,6 +325,26 @@
     {
       "Row": 6,
       "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 1,
       "Kind": "Letter"
     },
     {
@@ -303,22 +354,17 @@
     },
     {
       "Row": 7,
-      "Col": 4,
+      "Col": 3,
       "Kind": "Letter"
     },
     {
       "Row": 7,
-      "Col": 5,
+      "Col": 6,
       "Kind": "Letter"
     },
     {
-      "Row": 8,
-      "Col": 2,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 8,
-      "Col": 4,
+      "Row": 7,
+      "Col": 7,
       "Kind": "Letter"
     },
     {
@@ -329,6 +375,11 @@
     {
       "Row": 8,
       "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 7,
       "Kind": "Letter"
     }
   ]
