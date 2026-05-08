@@ -315,14 +315,9 @@ namespace PresentationLogic
                 return;
             }
 
-            // Letter key — map virtual-key to a character, write it, advance
-            char? ch = VkToChar(vk);
-            if (ch.HasValue)
-            {
-                SetCurrentCell(ch.Value);
-                AdvanceCursor(+1);
-                OnRequestRefresh(EventArgs.Empty);
-            }
+            // All printable characters are handled exclusively by HandleTextInput,
+            // which fires after KeyDown for any keystroke that produces text and works
+            // correctly for both Latin and Hebrew keyboard layouts without double-firing.
         }
 
         private bool IsAdvanceKey(int vk)
@@ -367,25 +362,7 @@ namespace PresentationLogic
             cell.Value = value;
         }
 
-        // Map Windows virtual-key codes to printable characters (A-Z + Hebrew via Alt/input)
-        private static char? VkToChar(int vk)
-        {
-            // VK_A=0x41 … VK_Z=0x5A → 'A'…'Z'
-            if (vk >= 0x41 && vk <= 0x5A)
-                return (char)('A' + (vk - 0x41));
-
-            // Digits 0–9
-            if (vk >= 0x30 && vk <= 0x39)
-                return (char)('0' + (vk - 0x30));
-
-            // Hebrew letters arrive as OEM / Unicode key values from WPF KeyDown;
-            // WPF KeyEventArgs.Key won't carry them cleanly, so we rely on TextInput
-            // for non-Latin scripts. Return null here and let the TextInput handler
-            // (wired separately via HandleTextInput) set the cell.
-            return null;
-        }
-
-        // Called from PresentationLogicBase when WPF TextInput fires (non-Latin input)
+        // Called from PresentationLogicBase when WPF TextInput fires
         public void HandleTextInput(string text)
         {
             if (string.IsNullOrEmpty(text)) return;
