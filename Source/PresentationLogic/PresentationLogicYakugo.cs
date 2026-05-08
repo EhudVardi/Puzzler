@@ -40,6 +40,7 @@ namespace PresentationLogic
         private static readonly PuzzlerColor cEmpty         = PuzzlerColor.FromArgb(255,  28,  28,  42);
         private static readonly PuzzlerColor cBoardBorder   = PuzzlerColor.FromArgb(255,  70,  70,  95);
         private static readonly PuzzlerColor cMissLetter    = PuzzlerColor.FromArgb(255, 200,  80,  80);
+        private static readonly PuzzlerColor cDirectionStrip = PuzzlerColor.FromArgb(255,  28,  28,  42);
 
         private const float HeaderH = 36f;
 
@@ -98,7 +99,7 @@ namespace PresentationLogic
                 DrawLine(cBoardBorder, 1, c * cellW, HeaderH, c * cellW, height);
         }
 
-        private const float ArrowW   = 22f;
+        private const float StripW   = 10f;
         private const float MaxTextH = 26f;
 
         private void DrawClueCell(CellGroupHolderYakugo holder,
@@ -123,28 +124,44 @@ namespace PresentationLogic
                 if (i > 0)
                     DrawLine(cDivider, 1, x, sy, x + w, sy);
 
+                // Direction strip — dark band at the edge the word extends toward
+                DrawDirectionStrip(g.Direction, x, sy, w, slotH);
+
                 const float padX = 4f;
                 float textH = Math.Min(slotH * 0.55f, MaxTextH);
-                float textW = w - padX * 2 - ArrowW;
-                float textY = sy + (slotH - textH) * 0.5f;  // vertically centered in slot
+                float textW = w - padX * 2;
+                float textY = sy + (slotH - textH) * 0.5f;
 
-                // Source text
                 string label = g.SourceText;
                 if (g.LengthPattern != null)
                     label += $" ({string.Join(",", g.LengthPattern)})";
                 DrawText(label, font, cSourceText, x + padX, textY, textW, textH);
 
-                // Arrow glyph — fixed column on the right
-                DrawText(g.Direction.Glyph(), fontBold, cArrow,
-                    x + w - ArrowW, textY, ArrowW, textH);
-
-                // Solved check mark — small, top-right corner
                 if (isSolved)
                     DrawText("✓", font, cCheckMark,
-                        x + w - ArrowW, sy + 2f, ArrowW, ArrowW);
+                        x + w - 20f, sy + 2f, 18f, 18f);
             }
 
             DrawRect(cClueBorder, 1, x, y, w, h);
+        }
+
+        private void DrawDirectionStrip(YGDirection direction, float x, float y, float w, float h)
+        {
+            switch (direction)
+            {
+                case YGDirection.Down:
+                    FillRect(cDirectionStrip, x + 1, y + h - StripW, w - 2, StripW - 1);
+                    break;
+                case YGDirection.Up:
+                    FillRect(cDirectionStrip, x + 1, y + 1, w - 2, StripW);
+                    break;
+                case YGDirection.Left:
+                    FillRect(cDirectionStrip, x + 1, y + 1, StripW, h - 2);
+                    break;
+                case YGDirection.Right:
+                    FillRect(cDirectionStrip, x + w - StripW - 1, y + 1, StripW, h - 2);
+                    break;
+            }
         }
 
         private void DrawLetterCell(CellValueYakugo cell, BoardYakugo board,
