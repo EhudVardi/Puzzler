@@ -2,58 +2,2217 @@
   "SourceLanguage": "en",
   "TargetLanguage": "he",
   "Words": [
-    {"Source": "day",          "Target": "יומ"},
-    {"Source": "child",        "Target": "ילד"},
-    {"Source": "king",         "Target": "מלכ"},
-    {"Source": "road",         "Target": "דרכ"},
-    {"Source": "bread",        "Target": "לחמ"},
-    {"Source": "milk",         "Target": "חלב"},
-    {"Source": "moon",         "Target": "ירח"},
-    {"Source": "door",         "Target": "דלת"},
-    {"Source": "time",         "Target": "זמנ"},
-    {"Source": "friend",       "Target": "חבר"},
-    {"Source": "teacher",      "Target": "מורה"},
-    {"Source": "morning",      "Target": "בוקר"},
-    {"Source": "evening",      "Target": "ערב"},
-    {"Source": "love",         "Target": "אהבה"},
-    {"Source": "chicken coop", "Target": "לול"},
-    {"Source": "flower",       "Target": "פרח"},
-    {"Source": "stone",        "Target": "אבנ"},
-    {"Source": "book",         "Target": "ספר"},
-    {"Source": "star",         "Target": "כוכב"},
-    {"Source": "year",         "Target": "שנה"},
-    {"Source": "hour",         "Target": "שעה"},
-    {"Source": "cat",          "Target": "חתול"},
-    {"Source": "dog",          "Target": "כלב"},
-    {"Source": "water",        "Target": "מים"},
-    {"Source": "man",          "Target": "איש"},
-    {"Source": "woman",        "Target": "אישה"},
-    {"Source": "girl",         "Target": "ילדה"},
-    {"Source": "house",        "Target": "בית"},
-    {"Source": "table",        "Target": "שולחנ"},
-    {"Source": "chair",        "Target": "כיסא"},
-    {"Source": "window",       "Target": "חלונ"},
-    {"Source": "bird",         "Target": "ציפור"},
-    {"Source": "family",       "Target": "משפחה"},
-    {"Source": "city",         "Target": "עיר"},
-    {"Source": "sky",          "Target": "שמים"},
-    {"Source": "night",        "Target": "לילה"},
-    {"Source": "smile",        "Target": "חיוכ"},
-    {"Source": "dream",        "Target": "חלומ"},
-    {"Source": "sun",          "Target": "שמש"},
-    {"Source": "rain",         "Target": "גשמ"},
-    {"Source": "wind",         "Target": "רוח"},
-    {"Source": "food",         "Target": "אוכל"},
-    {"Source": "color",        "Target": "צבע"},
-    {"Source": "letter",       "Target": "מכתב"},
-    {"Source": "number",       "Target": "מספר"},
-    {"Source": "voice",        "Target": "קול"},
-    {"Source": "word",         "Target": "מילה"},
-    {"Source": "story",        "Target": "סיפור"},
-    {"Source": "song",         "Target": "שיר"},
-    {"Source": "game",         "Target": "משחק"},
-    {"Source": "puzzle",       "Target": "חידה"},
-    {"Source": "sentence",     "Target": "משפט"},
-    {"Source": "dance",        "Target": "ריקוד"}
+    {
+      "Source": "day",
+      "Target": "יומ"
+    },
+    {
+      "Source": "child",
+      "Target": "ילד"
+    },
+    {
+      "Source": "king",
+      "Target": "מלכ"
+    },
+    {
+      "Source": "road",
+      "Target": "דרכ"
+    },
+    {
+      "Source": "bread",
+      "Target": "לחמ"
+    },
+    {
+      "Source": "milk",
+      "Target": "חלב"
+    },
+    {
+      "Source": "moon",
+      "Target": "ירח"
+    },
+    {
+      "Source": "door",
+      "Target": "דלת"
+    },
+    {
+      "Source": "time",
+      "Target": "זמנ"
+    },
+    {
+      "Source": "friend",
+      "Target": "חבר"
+    },
+    {
+      "Source": "teacher",
+      "Target": "מורה"
+    },
+    {
+      "Source": "morning",
+      "Target": "בוקר"
+    },
+    {
+      "Source": "evening",
+      "Target": "ערב"
+    },
+    {
+      "Source": "love",
+      "Target": "אהבה"
+    },
+    {
+      "Source": "chicken coop",
+      "Target": "לול"
+    },
+    {
+      "Source": "flower",
+      "Target": "פרח"
+    },
+    {
+      "Source": "stone",
+      "Target": "אבנ"
+    },
+    {
+      "Source": "book",
+      "Target": "ספר"
+    },
+    {
+      "Source": "star",
+      "Target": "כוכב"
+    },
+    {
+      "Source": "year",
+      "Target": "שנה"
+    },
+    {
+      "Source": "hour",
+      "Target": "שעה"
+    },
+    {
+      "Source": "cat",
+      "Target": "חתול"
+    },
+    {
+      "Source": "dog",
+      "Target": "כלב"
+    },
+    {
+      "Source": "water",
+      "Target": "מים"
+    },
+    {
+      "Source": "man",
+      "Target": "איש"
+    },
+    {
+      "Source": "woman",
+      "Target": "אישה"
+    },
+    {
+      "Source": "girl",
+      "Target": "ילדה"
+    },
+    {
+      "Source": "house",
+      "Target": "בית"
+    },
+    {
+      "Source": "table",
+      "Target": "שולחנ"
+    },
+    {
+      "Source": "chair",
+      "Target": "כיסא"
+    },
+    {
+      "Source": "window",
+      "Target": "חלונ"
+    },
+    {
+      "Source": "bird",
+      "Target": "ציפור"
+    },
+    {
+      "Source": "family",
+      "Target": "משפחה"
+    },
+    {
+      "Source": "city",
+      "Target": "עיר"
+    },
+    {
+      "Source": "sky",
+      "Target": "שמים"
+    },
+    {
+      "Source": "night",
+      "Target": "לילה"
+    },
+    {
+      "Source": "smile",
+      "Target": "חיוכ"
+    },
+    {
+      "Source": "dream",
+      "Target": "חלומ"
+    },
+    {
+      "Source": "sun",
+      "Target": "שמש"
+    },
+    {
+      "Source": "rain",
+      "Target": "גשמ"
+    },
+    {
+      "Source": "wind",
+      "Target": "רוח"
+    },
+    {
+      "Source": "food",
+      "Target": "אוכל"
+    },
+    {
+      "Source": "color",
+      "Target": "צבע"
+    },
+    {
+      "Source": "letter",
+      "Target": "מכתב"
+    },
+    {
+      "Source": "number",
+      "Target": "מספר"
+    },
+    {
+      "Source": "voice",
+      "Target": "קול"
+    },
+    {
+      "Source": "word",
+      "Target": "מילה"
+    },
+    {
+      "Source": "story",
+      "Target": "סיפור"
+    },
+    {
+      "Source": "song",
+      "Target": "שיר"
+    },
+    {
+      "Source": "game",
+      "Target": "משחק"
+    },
+    {
+      "Source": "puzzle",
+      "Target": "חידה"
+    },
+    {
+      "Source": "sentence",
+      "Target": "משפט"
+    },
+    {
+      "Source": "dance",
+      "Target": "ריקוד"
+    },
+    {
+      "Source": "ancestor, forefather",
+      "Target": "אב",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "rash, exanthem",
+      "Target": "אבבית",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "agrimony",
+      "Target": "אבגר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a loss",
+      "Target": "אבדה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "fatherhood, paternity",
+      "Target": "אבהות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "reed, flute",
+      "Target": "אבוב",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "buttocks, extremity",
+      "Target": "אבוז",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "manger, feeding trough",
+      "Target": "אבוס",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "buckle (of a belt)",
+      "Target": "אבזם",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "breaking, crumbling, corrosion",
+      "Target": "אבזקה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "item",
+      "Target": "אבזר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "thrust, brandishing of a sword: – point",
+      "Target": "אבחה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "diagnosis",
+      "Target": "אבחנה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "idleness, waste",
+      "Target": "אבטלה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "poor, needy",
+      "Target": "אביון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "caperberry, fruit of the caperbush",
+      "Target": "אביונה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "accessory, prop",
+      "Target": "אביזר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a knight",
+      "Target": "אביר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "mourning, bereavement",
+      "Target": "אבל",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "stonefish",
+      "Target": "אבנון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "scale, limescale",
+      "Target": "אבנית",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "dust",
+      "Target": "אבק",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "powder, pollen",
+      "Target": "אבקה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "limb, organ",
+      "Target": "אבר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "pinion, wing",
+      "Target": "אברה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "legend, myth,",
+      "Target": "אגדה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "ego",
+      "Target": "אגו",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "thumbsbreadth",
+      "Target": "אגודל",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "nut (hard-shelled seed)",
+      "Target": "אגוז",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "agora (ancient coin)",
+      "Target": "אגורה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": ", pool",
+      "Target": "אגם",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "basin, bowl",
+      "Target": "אגן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "Genus , the genus of such trees",
+      "Target": "אגס",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "department",
+      "Target": "אגף",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "fee, toll",
+      "Target": "אגרה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "fist",
+      "Target": "אגרוף",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": ", a kind of vessel, basin, basket",
+      "Target": "אגרטל",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a vapour, a fume",
+      "Target": "אד",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "ripple",
+      "Target": "אדווה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "red",
+      "Target": "אדום",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "lord",
+      "Target": "אדון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "indifference, apathy",
+      "Target": "אדישות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "man, human",
+      "Target": "אדם",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "reddishness",
+      "Target": "אדמדמות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "earth, soil, land",
+      "Target": "אדמה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "base, pedestal, socket; foundation",
+      "Target": "אדן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "A coat, a mantle, a robe",
+      "Target": "אדרת",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "fool, idiot, moron",
+      "Target": "אהבל",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "sympathy",
+      "Target": "אהדה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "A loved one",
+      "Target": "אהוב",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "A loved one (female)",
+      "Target": "אהובה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "aloe",
+      "Target": "אהל",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a waterskin",
+      "Target": "אוב",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "ruin, destruction",
+      "Target": "אובדן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "object (thing)",
+      "Target": "אוביקט",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "haze",
+      "Target": "אובך",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "overalls",
+      "Target": "אוברול",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "hoarder",
+      "Target": "אוגר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "red, redness",
+      "Target": "אודם",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "fool, stupid person",
+      "Target": "אוויל",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "air",
+      "Target": "אוויר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "evil, wickedness",
+      "Target": "אוון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "slight noise, murmur, hum",
+      "Target": "אוושה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "ear",
+      "Target": "אוזן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a bus",
+      "Target": "אוטובוס",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "utopia (world in perfect harmony.)",
+      "Target": "אוטופיה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a blockage",
+      "Target": "אוטם",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "enemy",
+      "Target": "אויב",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "T-pose",
+      "Target": "אוירון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "blueberry",
+      "Target": "אוכמנית",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "saddle",
+      "Target": "אוכף",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "oligarch",
+      "Target": "אוליגרך",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "A hall: a large room, an arena, a salon",
+      "Target": "אולם",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "nation, people",
+      "Target": "אומה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "artist",
+      "Target": "אומן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "craft, skill",
+      "Target": "אומנות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "courage, bravery, valor, guts",
+      "Target": "אומץ",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "utterance, word, speech",
+      "Target": "אומר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "strength, power",
+      "Target": "און",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "lobe of a lung",
+      "Target": "אונה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "fleet, shipping",
+      "Target": "אוני",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "masturbator, onanist",
+      "Target": "אונן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "onanism, masturbation",
+      "Target": "אוננות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "coercion, compulsion",
+      "Target": "אונס",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a (male)",
+      "Target": "אוסטרי",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a (female)",
+      "Target": "אוסטרית",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "Australian",
+      "Target": "אוסטרלי",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a collection",
+      "Target": "אוסף",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a baker",
+      "Target": "אופה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "character",
+      "Target": "אופי",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "opium",
+      "Target": "אופיום",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "way, manner",
+      "Target": "אופן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "fashion, style",
+      "Target": "אופנה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "recumbent bicycle",
+      "Target": "אופנוח",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "A biker",
+      "Target": "אופנוען",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": ", bike",
+      "Target": "אופניים",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "An option: a choice, an alternative",
+      "Target": "אופציה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "horizon",
+      "Target": "אופק",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "horizontality",
+      "Target": "אופקיות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "A treasure ",
+      "Target": "אוצר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "Urania",
+      "Target": "אוראניה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "orgasm",
+      "Target": "אורגזמה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "light (electromagnetic wave)",
+      "Target": "אורה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "guest, visitor",
+      "Target": "אורח",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a caravan",
+      "Target": "אורחה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "radium",
+      "Target": "אורית",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "length (in time or space)",
+      "Target": "אורך",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "oracle",
+      "Target": "אורקל",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a sign, an omen",
+      "Target": "אות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "asbestos",
+      "Target": "אזבסט",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "(Persian lilac, )",
+      "Target": "אזדרכת",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "warning",
+      "Target": "אזהרה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "hyssop",
+      "Target": "אזוב",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a girdle",
+      "Target": "אזור",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "knife, scalpel",
+      "Target": "אזמל",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "alarm",
+      "Target": "אזעקה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "(biblical) a native-born Israelite",
+      "Target": "אזרח",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "citizenship",
+      "Target": "אזרחות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "brother, fellow, peer",
+      "Target": "אח",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "sibling",
+      "Target": "אחאי",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "unity",
+      "Target": "אחדות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "reed, grass",
+      "Target": "אחו",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "A hundredth, a percent: ",
+      "Target": "אחוז",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "estate, property",
+      "Target": "אחוזה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "nurse",
+      "Target": "אחות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "Maintenance",
+      "Target": "אחזקה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "A hold, grip",
+      "Target": "אחיזה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "hind part",
+      "Target": "אחר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "One of the , modern sages of Jewish law",
+      "Target": "אחרון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "responsibility (for) ",
+      "Target": "אחריות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "end, close",
+      "Target": "אחרית",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "satrap",
+      "Target": "אחשדרפן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "clip, fastener",
+      "Target": "אטב",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "an atom",
+      "Target": "אטום",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "fine linen, thread",
+      "Target": "אטון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "etude, study",
+      "Target": "אטיוד",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "sealing, caulking, stoppage",
+      "Target": "אטימה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "butchershop",
+      "Target": "אטליז",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a seal",
+      "Target": "אטם",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "noodle (string or strip of pasta)",
+      "Target": "אטריה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "an island",
+      "Target": "אי",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "hostility, enmity, hatred",
+      "Target": "איבה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "loss",
+      "Target": "איבוד",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "an object, an element",
+      "Target": "איבר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "boxing",
+      "Target": "איגרוף",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "letter, epistle",
+      "Target": "איגרת",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "calamity, misfortune",
+      "Target": "איד",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "A (male) idiot: a (male) stupid person",
+      "Target": "אידיוט",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "idyll",
+      "Target": "אידיליה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "honey buzzard",
+      "Target": "איה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "folly",
+      "Target": "איוולת",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a threat",
+      "Target": "איום",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "Union",
+      "Target": "איחוד",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "slowness",
+      "Target": "איטיות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": ", AIDS",
+      "Target": "איידס",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "(male) deer, stag",
+      "Target": "אייל",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "quality",
+      "Target": "איכות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "farmer, husbandman",
+      "Target": "איכר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "A mute ",
+      "Target": "אילם",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "mutism",
+      "Target": "אילמות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "tree",
+      "Target": "אילן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "tree frog",
+      "Target": "אילנית",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "improvisation",
+      "Target": "אילתור",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "terror",
+      "Target": "אימה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "motherhood, maternity",
+      "Target": "אימהות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "adoption",
+      "Target": "אימוץ",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "e-mail",
+      "Target": "אימייל",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "empire",
+      "Target": "אימפריה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "nothing",
+      "Target": "אין",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "indigo",
+      "Target": "אינדיגו",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "Infinity, the infinite",
+      "Target": "אינסוף",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "gathering, collection",
+      "Target": "איסוף",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "prohibition, ban",
+      "Target": "איסור",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "Icelander",
+      "Target": "איסלנדי",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "darkness",
+      "Target": "איפול",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "makeup, cosmetics",
+      "Target": "איפור",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "signal modulation",
+      "Target": "איפנון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "letter X",
+      "Target": "איקס",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "an Iranian man",
+      "Target": "איראני",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "event",
+      "Target": "אירוע",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "count, indictment",
+      "Target": "אישום",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "A persons personality",
+      "Target": "אישיות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "Akkadian (person)",
+      "Target": "אכדי",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "cruelty",
+      "Target": "אכזריות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "eating",
+      "Target": "אכילה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "food, nourishment",
+      "Target": "אכלה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "terrace, veranda",
+      "Target": "אכסדרה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "hostel",
+      "Target": "אכסנייה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "algebra",
+      "Target": "אלגברה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "A goddess",
+      "Target": "אלה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a god",
+      "Target": "אלוה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "deity (essential nature of a god)",
+      "Target": "אלוהות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "stretcher",
+      "Target": "אלונקה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "major general",
+      "Target": "אלוף",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "alto",
+      "Target": "אלט",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "alligator",
+      "Target": "אליגטור",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "tail of a fat-tailed sheep",
+      "Target": "אליה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "violence, terror",
+      "Target": "אלימות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "championship",
+      "Target": "אליפות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "ellipse",
+      "Target": "אליפסה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "alchemist",
+      "Target": "אלכימאי",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "alchemy",
+      "Target": "אלכימיה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "diagonal",
+      "Target": "אלכסון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "sheaf",
+      "Target": "אלמה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "coral",
+      "Target": "אלמוג",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": ": widows",
+      "Target": "אלמנות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "An element",
+      "Target": "אלמנט",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "millennium",
+      "Target": "אלף",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "primary, first",
+      "Target": "אלפא",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "alphabet",
+      "Target": "אלפבית",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "thousands (of something)",
+      "Target": "אלפים",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "electorate",
+      "Target": "אלקטורט",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "allergy",
+      "Target": "אלרגיה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "salmon",
+      "Target": "אלתית",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "mother, feminine originator or codifier",
+      "Target": "אם",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "ambulance",
+      "Target": "אמבולנס",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "bathtub",
+      "Target": "אמבט",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "bathtub, bath",
+      "Target": "אמבטיה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "faith, confidence, trust",
+      "Target": "אמון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "faith",
+      "Target": "אמונה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "Ammonium: the ion NHsub4/subsup+/sup",
+      "Target": "אמוניום",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "One of the , sages of the Gemara",
+      "Target": "אמורא",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "an expression, a saying",
+      "Target": "אמירה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "convention, covenant, treaty",
+      "Target": "אמנה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "art",
+      "Target": "אמנות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "empathy",
+      "Target": "אמפתיה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "middle, center",
+      "Target": "אמצע",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "truth",
+      "Target": "אמת",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "excuse",
+      "Target": "אמתלה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "Englishman",
+      "Target": "אנגלי",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "monument, memorial",
+      "Target": "אנדרטה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "egoism, egotism, selfishness",
+      "Target": "אנוכיות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "human, man, person, mortal",
+      "Target": "אנוש",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "humanity, humanness, humankind",
+      "Target": "אנושות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "humaneness",
+      "Target": "אנושיות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "enzyme (catalytic protein)",
+      "Target": "אנזים",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "anatomy",
+      "Target": "אנטומיה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "antifa",
+      "Target": "אנטיפה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "antenna",
+      "Target": "אנטנה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "entrecôte, ribeye, forerib",
+      "Target": "אנטרקוט",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "analysis",
+      "Target": "אנליזה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "an attacker",
+      "Target": "אנס",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "unseen",
+      "Target": "אנסין",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "moan",
+      "Target": "אנקה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "energy",
+      "Target": "אנרגיה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "intifada",
+      "Target": "אנתיפדה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "raft",
+      "Target": "אסדה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "A catastrophe, a disaster",
+      "Target": "אסון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "male",
+      "Target": "אסטוני",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "female",
+      "Target": "אסטונית",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "token",
+      "Target": "אסימון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "toilet bowl, toilet",
+      "Target": "אסלה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "aspirin",
+      "Target": "אספירין",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "asphalt",
+      "Target": "אספלט",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "collector",
+      "Target": "אספן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "supply",
+      "Target": "אספקה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "aspect",
+      "Target": "אספקט",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "nose",
+      "Target": "אף",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "vest, jacket",
+      "Target": "אפוד",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "pea",
+      "Target": "אפונה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "episode",
+      "Target": "אפיזודה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "pope",
+      "Target": "אפיפיור",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "riverbed, channel, trough",
+      "Target": "אפיק",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "afikomen",
+      "Target": "אפיקומן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "discrimination",
+      "Target": "אפליה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "end, tip",
+      "Target": "אפס",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a member",
+      "Target": "אפעה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "effect",
+      "Target": "אפקט",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "ash",
+      "Target": "אפר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "earpiece",
+      "Target": "אפרכסת",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "balsam",
+      "Target": "אפרסמון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "apathy",
+      "Target": "אפתיה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "thimble",
+      "Target": "אצבעון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "seaweed",
+      "Target": "אצה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "nobility, aristocracy",
+      "Target": "אצולה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "stadium",
+      "Target": "אצטדיון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "acetylene",
+      "Target": "אצטילן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "pinecone",
+      "Target": "אצטרובל",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a noble, a member of the nobility",
+      "Target": "אציל",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a handgun, pistol, revolver",
+      "Target": "אקדח",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "academic",
+      "Target": "אקדמאי",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "academy",
+      "Target": "אקדמיה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "chance, coincidence",
+      "Target": "אקראי",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "box with golden gifts of the Philistines",
+      "Target": "ארגז",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "chimney",
+      "Target": "ארובה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "aroma",
+      "Target": "ארומה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a fiancé",
+      "Target": "ארוס",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "engagement, betrothal",
+      "Target": "ארוסין",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "cedar (chiefly )",
+      "Target": "ארז",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "an ice cream bar, a milk-based popsicle",
+      "Target": "ארטיק",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "artichoke ()",
+      "Target": "ארטישוק",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": ": lion",
+      "Target": "ארי",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "packaging, packing",
+      "Target": "אריזה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "tile",
+      "Target": "אריח",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "antlion",
+      "Target": "ארינמל",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "tenant farmer, sharecropper",
+      "Target": "אריס",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "an archive",
+      "Target": "ארכיב",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a male",
+      "Target": "ארמני",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a female",
+      "Target": "ארמנית",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "A female ; a doe",
+      "Target": "ארנבת",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "poison, venom",
+      "Target": "ארס",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "country, land",
+      "Target": "ארץ",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "expression, appearance",
+      "Target": "ארשת",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a female animal",
+      "Target": "אשה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "time, period of time",
+      "Target": "אשון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "boxwood, box tree",
+      "Target": "אשור",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "buckthorn",
+      "Target": "אשחר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "cluster",
+      "Target": "אשכול",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "gift, present",
+      "Target": "אשכר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "tamarisk (chiefly and )",
+      "Target": "אשל",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "illusion",
+      "Target": "אשליה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "Guilt",
+      "Target": "אשם",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "blame; fault",
+      "Target": "אשמה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "watch (time period)",
+      "Target": "אשמורת",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "viewport, counter, small window",
+      "Target": "אשנב",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "garbage",
+      "Target": "אשפה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "credit",
+      "Target": "אשראי",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a visa, a permit",
+      "Target": "אשרה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": ": sign",
+      "Target": "את",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "atheism",
+      "Target": "אתאיזם",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "An atheist",
+      "Target": "אתאיסט",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a challenge",
+      "Target": "אתגר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "ethos",
+      "Target": "אתוס",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "athletics",
+      "Target": "אתלטיקה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "ethnicity",
+      "Target": "אתניות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "baobab",
+      "Target": "באובב",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "bowling (the game)",
+      "Target": "באולינג",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "stench, stink, fetid smell",
+      "Target": "באוש",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "bazaar",
+      "Target": "באזאר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "bummer, disappointing experience",
+      "Target": "באסה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "well",
+      "Target": "באר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "image",
+      "Target": "בבואה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "baboon",
+      "Target": "בבון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "chamomile",
+      "Target": "בבונג",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "A night foodstuff",
+      "Target": "בג",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": ", garment",
+      "Target": "בגד",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "adult",
+      "Target": "בגיר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "adulthood, maturity",
+      "Target": "בגרות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "fabric, cloth, linen",
+      "Target": "בד",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "fiction",
+      "Target": "בדאי",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a Bedouin",
+      "Target": "בדואי",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "#",
+      "Target": "בדולח",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "joker, jokester; prankster",
+      "Target": "בדחן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "loneliness",
+      "Target": "בדידות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a fiction",
+      "Target": "בדיון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "joke",
+      "Target": "בדיחה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "hilarity",
+      "Target": "בדיחות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "An examination, check-up, test, trial",
+      "Target": "בדיקה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "stub, shred, a small piece",
+      "Target": "בדל",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "separatist",
+      "Target": "בדלן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "isolationism, separatism",
+      "Target": "בדלנות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "alabaster",
+      "Target": "בהט",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "brightness",
+      "Target": "בהירות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "fright, panic",
+      "Target": "בהלה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "behemoth",
+      "Target": "בהמות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "baharat: a Middle Eastern spice mixture",
+      "Target": "בהרט",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "A doll, puppet, plush toy etc",
+      "Target": "בובה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "traitor",
+      "Target": "בוגד",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "mature, having the quality of adulthood",
+      "Target": "בוגר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "isolated person, single person",
+      "Target": "בודד",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "booth",
+      "Target": "בודקה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "void",
+      "Target": "בוהו",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "thumb, big toe",
+      "Target": "בוהן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "contempt, scorn",
+      "Target": "בוז",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "an examiner, a tester",
+      "Target": "בוחן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "pistachio,",
+      "Target": "בוטן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "bulbul",
+      "Target": "בולבול",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "boom",
+      "Target": "בום",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a boomerang",
+      "Target": "בומרנג",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "beaver",
+      "Target": "בונה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a bonus",
+      "Target": "בונוס",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a kiss",
+      "Target": "בוסה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "unripe fruit",
+      "Target": "בוסר",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "bubble",
+      "Target": "בועה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "mud",
+      "Target": "בוץ",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "elm",
+      "Target": "בוקיצה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "hole, pit",
+      "Target": "בור",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "creator",
+      "Target": "בורא",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "A screw, a bolt: a threaded fastener",
+      "Target": "בורג",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "bourgeoisie",
+      "Target": "בורגנות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "ignorance",
+      "Target": "בורות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "soapwort, any plant of the genus",
+      "Target": "בורית",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "a stock exchange",
+      "Target": "בורסה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "shame",
+      "Target": "בושה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "perfume",
+      "Target": "בושם",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "shame, a shameful thing",
+      "Target": "בושת",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "booty, spoils",
+      "Target": "בז",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "basalt (hard rock)",
+      "Target": "בזלת",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "flash",
+      "Target": "בזק",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "guy, boy",
+      "Target": "בחור",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "An exam, an examination, a test",
+      "Target": "בחינה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "choice",
+      "Target": "בחירה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "watchtower, fortress",
+      "Target": "בחן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "adolescence",
+      "Target": "בחרות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "concrete",
+      "Target": "בטון",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "safety",
+      "Target": "בטיחות",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "idleness",
+      "Target": "בטלה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": ", belly",
+      "Target": "בטן",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "bidet",
+      "Target": "בידה",
+      "PartOfSpeech": "noun"
+    },
+    {
+      "Source": "isolation",
+      "Target": "בידוד",
+      "PartOfSpeech": "noun"
+    }
   ]
 }
