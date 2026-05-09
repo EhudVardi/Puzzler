@@ -29,8 +29,9 @@ namespace PresentationLogic
         private static readonly PuzzlerColor cLetterHint    = PuzzlerColor.FromArgb(255,  35,  60,  80);
         private static readonly PuzzlerColor cLetterFg      = PuzzlerColor.FromArgb(255, 220, 220, 240);
         private static readonly PuzzlerColor cHintFg        = PuzzlerColor.FromArgb(255, 100, 200, 160);
-        private static readonly PuzzlerColor cTrack         = PuzzlerColor.FromArgb(80,  120, 180, 255);
-        private static readonly PuzzlerColor cActiveCursor  = PuzzlerColor.FromArgb(200, 120, 180, 255);
+        private static readonly PuzzlerColor cTrack         = PuzzlerColor.FromArgb(120, 100, 160, 255);
+        private static readonly PuzzlerColor cActiveCursor  = PuzzlerColor.FromArgb(130, 255, 200,  70);
+        private static readonly PuzzlerColor cCursorBorder  = PuzzlerColor.FromArgb(255, 255, 210,  80);
         private static readonly PuzzlerColor cCheckMark     = PuzzlerColor.FromArgb(255,  80, 210, 120);
         private static readonly PuzzlerColor cHeaderBg      = PuzzlerColor.FromArgb(255,  28,  28,  42);
         private static readonly PuzzlerColor cProgressArc   = PuzzlerColor.FromArgb(255,  90, 160, 255);
@@ -54,22 +55,6 @@ namespace PresentationLogic
 
             DrawHeader(trackerBoard, solvedBoard, width);
 
-            // Highlight active group track
-            if (_activeGroup != null)
-            {
-                foreach (var cell in _activeGroup.Cells)
-                    FillRect(cTrack,
-                        cell.Column * cellW, HeaderH + cell.Row * cellH, cellW, cellH);
-
-                // cursor cell
-                if (_activeCellIndex >= 0 && _activeCellIndex < _activeGroup.Cells.Count)
-                {
-                    var cur = _activeGroup.Cells[_activeCellIndex];
-                    FillRect(cActiveCursor,
-                        cur.Column * cellW, HeaderH + cur.Row * cellH, cellW, cellH);
-                }
-            }
-
             // Draw all cells
             for (int r = 0; r < trackerBoard.Rows; r++)
             {
@@ -89,6 +74,23 @@ namespace PresentationLogic
                         DrawClueCell(holder, x, y, cellW, cellH);
                     else if (rawCell is CellValueYakugo letter)
                         DrawLetterCell(letter, trackerBoard, x, y, cellW, cellH);
+                }
+            }
+
+            // Selection overlays — drawn after cells so they composite on top
+            if (_activeGroup != null)
+            {
+                foreach (var cell in _activeGroup.Cells)
+                    FillRect(cTrack,
+                        cell.Column * cellW, HeaderH + cell.Row * cellH, cellW, cellH);
+
+                if (_activeCellIndex >= 0 && _activeCellIndex < _activeGroup.Cells.Count)
+                {
+                    var cur = _activeGroup.Cells[_activeCellIndex];
+                    float cx = cur.Column * cellW;
+                    float cy = HeaderH + cur.Row * cellH;
+                    FillRect(cActiveCursor, cx, cy, cellW, cellH);
+                    DrawRect(cCursorBorder, 2, cx + 1, cy + 1, cellW - 2, cellH - 2);
                 }
             }
 
