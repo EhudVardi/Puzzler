@@ -6,25 +6,54 @@
   "Cells": [
     {
       "Row": 0,
-      "Col": 4,
+      "Col": 0,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "sun",
-          "Target": "שמש",
+          "Source": "a (male)",
+          "Target": "אוסטרי",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 3,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "A (male) idiot: a (male) stupid person",
+          "Target": "אידיוט",
           "Dir": "Down"
         }
       ]
     },
     {
       "Row": 1,
-      "Col": 0,
+      "Col": 1,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "family",
-          "Target": "משפחה",
+          "Source": "table",
+          "Target": "שולחנ",
           "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "a bonus",
+          "Target": "בונוס",
+          "Dir": "Down"
+        },
+        {
+          "Source": "nose",
+          "Target": "אף",
+          "Dir": "Left"
         }
       ]
     },
@@ -34,83 +63,40 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "song",
-          "Target": "שיר",
-          "Dir": "Left"
-        }
-      ]
-    },
-    {
-      "Row": 2,
-      "Col": 1,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "food",
-          "Target": "אוכל",
+          "Source": "One of the , sages of the Gemara",
+          "Target": "אמורא",
           "Dir": "Down"
         }
       ]
     },
     {
       "Row": 2,
-      "Col": 3,
+      "Col": 2,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "cat",
-          "Target": "חתול",
+          "Source": "void",
+          "Target": "בוהו",
           "Dir": "Down"
         }
       ]
     },
     {
-      "Row": 3,
+      "Row": 6,
       "Col": 6,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "game",
-          "Target": "משחק",
+          "Source": "male",
+          "Target": "אסטוני",
           "Dir": "Left"
         }
       ]
     },
     {
-      "Row": 4,
-      "Col": 6,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "letter",
-          "Target": "מכתב",
-          "Dir": "Left"
-        }
-      ]
-    },
-    {
-      "Row": 5,
-      "Col": 6,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "dream",
-          "Target": "חלומ",
-          "Dir": "Left"
-        }
-      ]
-    },
-    {
-      "Row": 6,
-      "Col": 4,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "night",
-          "Target": "לילה",
-          "Dir": "Left"
-        }
-      ]
+      "Row": 1,
+      "Col": 0,
+      "Kind": "Letter"
     },
     {
       "Row": 1,
@@ -120,11 +106,6 @@
     {
       "Row": 1,
       "Col": 3,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 1,
-      "Col": 4,
       "Kind": "Letter"
     },
     {
@@ -134,7 +115,22 @@
     },
     {
       "Row": 2,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
       "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 5,
       "Kind": "Letter"
     },
     {
@@ -245,6 +241,16 @@
     {
       "Row": 6,
       "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 5,
       "Kind": "Letter"
     }
   ]

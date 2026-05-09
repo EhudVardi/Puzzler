@@ -86,6 +86,8 @@ class State:
         self.grid: Dict[Tuple[int, int], str] = {}
         # clue cell origins: (r, c) -> list of {dir, src, tgt}
         self.clue_cells: Dict[Tuple[int, int], List[Dict[str, str]]] = {}
+        # positions that must stay void — the cell immediately past each word's last letter
+        self.end_guards: set = set()
 
     @property
     def letter_cells(self) -> set:
@@ -124,8 +126,20 @@ def can_place(state: State, origin_r: int, origin_c: int,
         # Letter cell must not land on an existing clue origin
         if (r, c) in state.clue_cells:
             return False
+        # Letter cell must not land on an end-guard (void separator of a prior word)
+        if (r, c) in state.end_guards:
+            return False
         # If already occupied the character must match
         if (r, c) in state.grid and state.grid[(r, c)] != letters[i]:
+            return False
+
+    # The cell immediately past the last letter must be void — not a letter cell.
+    # Without this, two consecutive words in the same direction would fuse visually.
+    dr, dc = DIRS[direction]
+    n = len(letters)
+    end_r, end_c = origin_r + dr * (n + 1), origin_c + dc * (n + 1)
+    if 0 <= end_r < rows and 0 <= end_c < cols:
+        if (end_r, end_c) in state.grid:
             return False
 
     return True
@@ -143,8 +157,12 @@ def place(state: State, origin_r: int, origin_c: int, direction: str,
     state.clue_cells.setdefault(pos, []).append(
         {"dir": direction, "src": source, "tgt": target}
     )
-    for i, (r, c) in enumerate(letter_positions(origin_r, origin_c, direction, len(letters))):
+    dr, dc = DIRS[direction]
+    n = len(letters)
+    for i, (r, c) in enumerate(letter_positions(origin_r, origin_c, direction, n)):
         state.grid[(r, c)] = letters[i]
+    # Reserve the cell past the last letter so no future word can place a letter there
+    state.end_guards.add((origin_r + dr * (n + 1), origin_c + dc * (n + 1)))
 
 
 # ── Generator ──────────────────────────────────────────────────────────────────
@@ -394,7 +412,7 @@ def main() -> None:
 
     if args.examples:
         generated = []
-        for name, ex in EXAMPLES.items():
+        for ex in EXAMPLES.values():
             state, placed = best_of(
                 ex["words"], ex["rows"], ex["cols"], count=20, base_seed=0,
                 target_lang=ex["target_lang"],

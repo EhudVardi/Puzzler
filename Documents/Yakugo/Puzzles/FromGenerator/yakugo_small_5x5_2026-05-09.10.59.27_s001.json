@@ -6,49 +6,25 @@
   "Cells": [
     {
       "Row": 0,
-      "Col": 0,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "love",
-          "Target": "אהבה",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 0,
       "Col": 1,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "window",
-          "Target": "חלונ",
+          "Source": "adult",
+          "Target": "בגיר",
           "Dir": "Down"
         }
       ]
     },
     {
-      "Row": 0,
-      "Col": 2,
+      "Row": 1,
+      "Col": 4,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "puzzle",
-          "Target": "חידה",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 0,
-      "Col": 3,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "dream",
-          "Target": "חלומ",
-          "Dir": "Down"
+          "Source": "an object, an element",
+          "Target": "איבר",
+          "Dir": "Left"
         }
       ]
     },
@@ -58,8 +34,32 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "night",
-          "Target": "לילה",
+          "Source": "box with golden gifts of the Philistines",
+          "Target": "ארגז",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 3,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "sky",
+          "Target": "שמים",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 4,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "light (electromagnetic wave)",
+          "Target": "אורה",
           "Dir": "Left"
         }
       ]

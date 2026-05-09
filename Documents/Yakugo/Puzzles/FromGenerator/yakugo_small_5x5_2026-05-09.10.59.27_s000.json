@@ -6,36 +6,12 @@
   "Cells": [
     {
       "Row": 0,
-      "Col": 0,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "love",
-          "Target": "אהבה",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 0,
       "Col": 2,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "window",
-          "Target": "חלונ",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 0,
-      "Col": 3,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "night",
-          "Target": "לילה",
+          "Source": "enemy",
+          "Target": "אויב",
           "Dir": "Down"
         }
       ]
@@ -46,8 +22,8 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "bread",
-          "Target": "לחמ",
+          "Source": "bummer, disappointing experience",
+          "Target": "באסה",
           "Dir": "Left"
         }
       ]
@@ -58,8 +34,8 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "girl",
-          "Target": "ילדה",
+          "Source": "creator",
+          "Target": "בורא",
           "Dir": "Left"
         }
       ]
@@ -70,8 +46,20 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "chicken coop",
-          "Target": "לול",
+          "Source": "tree",
+          "Target": "אילן",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 4,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "a knight",
+          "Target": "אביר",
           "Dir": "Left"
         }
       ]
@@ -139,6 +127,11 @@
     {
       "Row": 4,
       "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 1,
       "Kind": "Letter"
     },
     {

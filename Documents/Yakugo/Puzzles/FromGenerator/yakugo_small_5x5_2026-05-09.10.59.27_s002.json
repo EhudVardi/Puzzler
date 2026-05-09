@@ -10,8 +10,32 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "morning",
-          "Target": "בוקר",
+          "Source": "fright, panic",
+          "Target": "בהלה",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 1,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "tile",
+          "Target": "אריח",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 2,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "thrust, brandishing of a sword: – point",
+          "Target": "אבחה",
           "Dir": "Down"
         }
       ]
@@ -22,21 +46,9 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "chair",
-          "Target": "כיסא",
+          "Source": "stench, stink, fetid smell",
+          "Target": "באוש",
           "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 1,
-      "Col": 4,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "star",
-          "Target": "כוכב",
-          "Dir": "Left"
         }
       ]
     },
@@ -46,32 +58,8 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "moon",
-          "Target": "ירח",
-          "Dir": "Left"
-        }
-      ]
-    },
-    {
-      "Row": 3,
-      "Col": 4,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "book",
-          "Target": "ספר",
-          "Dir": "Left"
-        }
-      ]
-    },
-    {
-      "Row": 4,
-      "Col": 4,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "man",
-          "Target": "איש",
+          "Source": "pinion, wing",
+          "Target": "אברה",
           "Dir": "Left"
         }
       ]

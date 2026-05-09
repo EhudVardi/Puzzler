@@ -10,8 +10,20 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "road",
-          "Target": "דרכ",
+          "Source": "a waterskin",
+          "Target": "אוב",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "credit",
+          "Target": "אשראי",
           "Dir": "Down"
         }
       ]
@@ -22,8 +34,8 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "dance",
-          "Target": "ריקוד",
+          "Source": "alabaster",
+          "Target": "בהט",
           "Dir": "Down"
         }
       ]
@@ -34,140 +46,92 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "food",
-          "Target": "אוכל",
+          "Source": "alchemy",
+          "Target": "אלכימיה",
           "Dir": "Down"
         }
       ]
     },
     {
       "Row": 1,
+      "Col": 3,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "blueberry",
+          "Target": "אוכמנית",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 6,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "a noble, a member of the nobility",
+          "Target": "אציל",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 7,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "bazaar",
+          "Target": "באזאר",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 3,
       "Col": 8,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "teacher",
-          "Target": "מורה",
-          "Dir": "Left"
-        }
-      ]
-    },
-    {
-      "Row": 2,
-      "Col": 0,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "year",
-          "Target": "שנה",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 2,
-      "Col": 7,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "bird",
-          "Target": "ציפור",
-          "Dir": "Left"
-        }
-      ]
-    },
-    {
-      "Row": 3,
-      "Col": 3,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "dream",
-          "Target": "חלומ",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 3,
-      "Col": 6,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "sky",
-          "Target": "שמים",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 4,
-      "Col": 7,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "table",
-          "Target": "שולחנ",
+          "Source": "pinecone",
+          "Target": "אצטרובל",
           "Dir": "Left"
         }
       ]
     },
     {
       "Row": 5,
-      "Col": 4,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "night",
-          "Target": "לילה",
-          "Dir": "Left"
-        }
-      ]
-    },
-    {
-      "Row": 5,
-      "Col": 7,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "man",
-          "Target": "איש",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 6,
       "Col": 8,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "woman",
-          "Target": "אישה",
+          "Source": "alchemist",
+          "Target": "אלכימאי",
           "Dir": "Left"
         }
       ]
     },
     {
       "Row": 7,
-      "Col": 4,
+      "Col": 7,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "number",
-          "Target": "מספר",
+          "Source": "aspirin",
+          "Target": "אספירין",
           "Dir": "Left"
         }
       ]
     },
     {
       "Row": 8,
-      "Col": 8,
+      "Col": 7,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "sun",
-          "Target": "שמש",
+          "Source": "empathy",
+          "Target": "אמפתיה",
           "Dir": "Left"
         }
       ]
@@ -188,16 +152,6 @@
       "Kind": "Letter"
     },
     {
-      "Row": 1,
-      "Col": 6,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 1,
-      "Col": 7,
-      "Kind": "Letter"
-    },
-    {
       "Row": 2,
       "Col": 1,
       "Kind": "Letter"
@@ -228,8 +182,8 @@
       "Kind": "Letter"
     },
     {
-      "Row": 3,
-      "Col": 0,
+      "Row": 2,
+      "Col": 7,
       "Kind": "Letter"
     },
     {
@@ -240,6 +194,16 @@
     {
       "Row": 3,
       "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 4,
       "Kind": "Letter"
     },
     {
@@ -248,18 +212,18 @@
       "Kind": "Letter"
     },
     {
-      "Row": 4,
-      "Col": 0,
+      "Row": 3,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 7,
       "Kind": "Letter"
     },
     {
       "Row": 4,
       "Col": 1,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 4,
-      "Col": 2,
       "Kind": "Letter"
     },
     {
@@ -274,17 +238,12 @@
     },
     {
       "Row": 4,
-      "Col": 5,
+      "Col": 6,
       "Kind": "Letter"
     },
     {
       "Row": 4,
-      "Col": 6,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 5,
-      "Col": 0,
+      "Col": 7,
       "Kind": "Letter"
     },
     {
@@ -304,32 +263,32 @@
     },
     {
       "Row": 5,
-      "Col": 5,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 5,
-      "Col": 6,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 6,
-      "Col": 3,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 6,
       "Col": 4,
       "Kind": "Letter"
     },
     {
-      "Row": 6,
+      "Row": 5,
       "Col": 5,
       "Kind": "Letter"
     },
     {
-      "Row": 6,
+      "Row": 5,
       "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 3,
       "Kind": "Letter"
     },
     {
@@ -359,12 +318,37 @@
     },
     {
       "Row": 7,
-      "Col": 6,
+      "Col": 4,
       "Kind": "Letter"
     },
     {
       "Row": 7,
-      "Col": 7,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 4,
       "Kind": "Letter"
     },
     {
@@ -375,11 +359,6 @@
     {
       "Row": 8,
       "Col": 6,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 8,
-      "Col": 7,
       "Kind": "Letter"
     }
   ]

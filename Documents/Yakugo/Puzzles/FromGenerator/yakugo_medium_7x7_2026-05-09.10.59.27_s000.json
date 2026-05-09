@@ -10,104 +10,92 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "morning",
-          "Target": "בוקר",
+          "Source": "violence, terror",
+          "Target": "אלימות",
           "Dir": "Down"
         }
       ]
     },
     {
       "Row": 0,
-      "Col": 1,
+      "Col": 3,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "dance",
-          "Target": "ריקוד",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 0,
-      "Col": 5,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "day",
-          "Target": "יומ",
+          "Source": "an Iranian man",
+          "Target": "איראני",
           "Dir": "Down"
         }
       ]
     },
     {
       "Row": 1,
-      "Col": 2,
+      "Col": 4,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "family",
-          "Target": "משפחה",
-          "Dir": "Down"
+          "Source": "primary, first",
+          "Target": "אלפא",
+          "Dir": "Left"
         }
       ]
     },
     {
-      "Row": 1,
+      "Row": 2,
       "Col": 6,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "child",
-          "Target": "ילד",
+          "Source": "antlion",
+          "Target": "ארינמל",
           "Dir": "Left"
         }
       ]
     },
     {
-      "Row": 2,
-      "Col": 3,
+      "Row": 3,
+      "Col": 5,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "chair",
-          "Target": "כיסא",
-          "Dir": "Down"
+          "Source": "a male",
+          "Target": "ארמני",
+          "Dir": "Left"
         }
       ]
     },
     {
-      "Row": 3,
+      "Row": 4,
       "Col": 6,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "king",
-          "Target": "מלכ",
+          "Source": "sibling",
+          "Target": "אחאי",
           "Dir": "Left"
         }
       ]
     },
     {
-      "Row": 4,
-      "Col": 5,
+      "Row": 5,
+      "Col": 6,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "bird",
-          "Target": "ציפור",
+          "Source": "beaver",
+          "Target": "בונה",
           "Dir": "Left"
         }
       ]
     },
     {
       "Row": 6,
-      "Col": 4,
+      "Col": 6,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "love",
-          "Target": "אהבה",
+          "Source": "indifference, apathy",
+          "Target": "אדישות",
           "Dir": "Left"
         }
       ]
@@ -124,17 +112,12 @@
     },
     {
       "Row": 1,
-      "Col": 3,
+      "Col": 2,
       "Kind": "Letter"
     },
     {
       "Row": 1,
-      "Col": 4,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 1,
-      "Col": 5,
+      "Col": 3,
       "Kind": "Letter"
     },
     {
@@ -150,6 +133,16 @@
     {
       "Row": 2,
       "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 4,
       "Kind": "Letter"
     },
     {
@@ -183,18 +176,8 @@
       "Kind": "Letter"
     },
     {
-      "Row": 3,
-      "Col": 5,
-      "Kind": "Letter"
-    },
-    {
       "Row": 4,
       "Col": 0,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 4,
-      "Col": 1,
       "Kind": "Letter"
     },
     {
@@ -213,8 +196,13 @@
       "Kind": "Letter"
     },
     {
+      "Row": 4,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
       "Row": 5,
-      "Col": 1,
+      "Col": 0,
       "Kind": "Letter"
     },
     {
@@ -225,6 +213,16 @@
     {
       "Row": 5,
       "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 5,
       "Kind": "Letter"
     },
     {
@@ -245,6 +243,16 @@
     {
       "Row": 6,
       "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 5,
       "Kind": "Letter"
     }
   ]

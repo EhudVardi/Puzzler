@@ -1,72 +1,12 @@
 {
-  "Rows": 7,
-  "Cols": 7,
+  "Rows": 9,
+  "Cols": 9,
   "SourceLanguage": "en",
   "TargetLanguage": "he",
   "Cells": [
     {
       "Row": 0,
-      "Col": 3,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "chair",
-          "Target": "כיסא",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 0,
       "Col": 4,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "bread",
-          "Target": "לחמ",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 0,
-      "Col": 5,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "water",
-          "Target": "מים",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 1,
-      "Col": 0,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "table",
-          "Target": "שולחנ",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 1,
-      "Col": 1,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "road",
-          "Target": "דרכ",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 1,
-      "Col": 2,
       "Kind": "Clue",
       "Clues": [
         {
@@ -78,56 +18,111 @@
     },
     {
       "Row": 1,
+      "Col": 2,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "humaneness",
+          "Target": "אנושיות",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 3,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "alligator",
+          "Target": "אליגטור",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "a handgun, pistol, revolver",
+          "Target": "אקדח",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 3,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "ambulance",
+          "Target": "אמבולנס",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 4,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "egoism, egotism, selfishness",
+          "Target": "אנוכיות",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 5,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "rain",
+          "Target": "גשמ",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 6,
+      "Col": 7,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "athletics",
+          "Target": "אתלטיקה",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 7,
       "Col": 6,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "king",
-          "Target": "מלכ",
+          "Source": "folly",
+          "Target": "איוולת",
           "Dir": "Left"
         }
       ]
     },
     {
-      "Row": 4,
-      "Col": 4,
+      "Row": 8,
+      "Col": 8,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "food",
-          "Target": "אוכל",
+          "Source": "watch (time period)",
+          "Target": "אשמורת",
           "Dir": "Left"
         }
       ]
-    },
-    {
-      "Row": 5,
-      "Col": 5,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "star",
-          "Target": "כוכב",
-          "Dir": "Left"
-        }
-      ]
-    },
-    {
-      "Row": 6,
-      "Col": 4,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "window",
-          "Target": "חלונ",
-          "Dir": "Left"
-        }
-      ]
-    },
-    {
-      "Row": 1,
-      "Col": 3,
-      "Kind": "Letter"
     },
     {
       "Row": 1,
@@ -140,13 +135,13 @@
       "Kind": "Letter"
     },
     {
-      "Row": 2,
-      "Col": 0,
+      "Row": 1,
+      "Col": 6,
       "Kind": "Letter"
     },
     {
-      "Row": 2,
-      "Col": 1,
+      "Row": 1,
+      "Col": 7,
       "Kind": "Letter"
     },
     {
@@ -162,16 +157,6 @@
     {
       "Row": 2,
       "Col": 4,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 2,
-      "Col": 5,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 3,
-      "Col": 0,
       "Kind": "Letter"
     },
     {
@@ -200,8 +185,13 @@
       "Kind": "Letter"
     },
     {
-      "Row": 4,
-      "Col": 0,
+      "Row": 3,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 7,
       "Kind": "Letter"
     },
     {
@@ -220,8 +210,23 @@
       "Kind": "Letter"
     },
     {
-      "Row": 5,
-      "Col": 0,
+      "Row": 4,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 7,
       "Kind": "Letter"
     },
     {
@@ -240,28 +245,98 @@
       "Kind": "Letter"
     },
     {
-      "Row": 5,
+      "Row": 6,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
       "Col": 4,
       "Kind": "Letter"
     },
     {
       "Row": 6,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
       "Col": 0,
       "Kind": "Letter"
     },
     {
-      "Row": 6,
+      "Row": 7,
       "Col": 1,
       "Kind": "Letter"
     },
     {
-      "Row": 6,
+      "Row": 7,
       "Col": 2,
       "Kind": "Letter"
     },
     {
-      "Row": 6,
+      "Row": 7,
       "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 7,
       "Kind": "Letter"
     }
   ]

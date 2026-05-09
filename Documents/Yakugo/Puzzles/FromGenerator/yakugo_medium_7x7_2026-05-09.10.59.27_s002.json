@@ -6,12 +6,36 @@
   "Cells": [
     {
       "Row": 0,
+      "Col": 0,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "apathy",
+          "Target": "אפתיה",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
       "Col": 1,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "story",
-          "Target": "סיפור",
+          "Source": "engagement, betrothal",
+          "Target": "ארוסין",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 2,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "loneliness",
+          "Target": "בדידות",
           "Dir": "Down"
         }
       ]
@@ -22,95 +46,52 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "food",
-          "Target": "אוכל",
+          "Source": "token",
+          "Target": "אסימון",
           "Dir": "Down"
         }
       ]
     },
     {
-      "Row": 1,
-      "Col": 0,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "chicken coop",
-          "Target": "לול",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 1,
-      "Col": 2,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "dance",
-          "Target": "ריקוד",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 1,
+      "Row": 0,
       "Col": 5,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "house",
-          "Target": "בית",
+          "Source": "An atheist",
+          "Target": "אתאיסט",
           "Dir": "Down"
         }
       ]
     },
     {
-      "Row": 2,
+      "Row": 1,
+      "Col": 3,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "family",
+          "Target": "משפחה",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 3,
       "Col": 6,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "morning",
-          "Target": "בוקר",
+          "Source": "A persons personality",
+          "Target": "אישיות",
           "Dir": "Left"
         }
       ]
     },
     {
-      "Row": 4,
-      "Col": 3,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "voice",
-          "Target": "קול",
-          "Dir": "Left"
-        }
-      ]
-    },
-    {
-      "Row": 5,
-      "Col": 6,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "bird",
-          "Target": "ציפור",
-          "Dir": "Left"
-        }
-      ]
-    },
-    {
-      "Row": 6,
-      "Col": 5,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "puzzle",
-          "Target": "חידה",
-          "Dir": "Left"
-        }
-      ]
+      "Row": 1,
+      "Col": 0,
+      "Kind": "Letter"
     },
     {
       "Row": 1,
@@ -119,7 +100,17 @@
     },
     {
       "Row": 1,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
       "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 5,
       "Kind": "Letter"
     },
     {
@@ -169,6 +160,11 @@
     },
     {
       "Row": 3,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
       "Col": 4,
       "Kind": "Letter"
     },
@@ -194,6 +190,11 @@
     },
     {
       "Row": 4,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
       "Col": 4,
       "Kind": "Letter"
     },
@@ -204,6 +205,11 @@
     },
     {
       "Row": 5,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
       "Col": 1,
       "Kind": "Letter"
     },
@@ -245,6 +251,11 @@
     {
       "Row": 6,
       "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 5,
       "Kind": "Letter"
     }
   ]

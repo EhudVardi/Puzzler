@@ -10,8 +10,8 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "dance",
-          "Target": "ריקוד",
+          "Source": "satrap",
+          "Target": "אחשדרפן",
           "Dir": "Down"
         }
       ]
@@ -22,157 +22,128 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "girl",
-          "Target": "ילדה",
+          "Source": "A catastrophe, a disaster",
+          "Target": "אסון",
           "Dir": "Down"
         }
       ]
     },
     {
-      "Row": 1,
+      "Row": 0,
       "Col": 5,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "bird",
-          "Target": "ציפור",
-          "Dir": "Left"
+          "Source": "noodle (string or strip of pasta)",
+          "Target": "אטריה",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 6,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "chimney",
+          "Target": "ארובה",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 7,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "image",
+          "Target": "בבואה",
+          "Dir": "Down"
         }
       ]
     },
     {
       "Row": 1,
-      "Col": 6,
+      "Col": 1,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "smile",
-          "Target": "חיוכ",
+          "Source": "stadium",
+          "Target": "אצטדיון",
           "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "nose",
+          "Target": "אף",
+          "Dir": "Left"
         }
       ]
     },
     {
       "Row": 2,
-      "Col": 7,
+      "Col": 2,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "cat",
-          "Target": "חתול",
+          "Source": "brother, fellow, peer",
+          "Target": "אח",
           "Dir": "Left"
         }
       ]
     },
     {
-      "Row": 3,
-      "Col": 1,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "door",
-          "Target": "דלת",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 3,
-      "Col": 2,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "song",
-          "Target": "שיר",
-          "Dir": "Down"
-        }
-      ]
-    },
-    {
-      "Row": 3,
+      "Row": 2,
       "Col": 4,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "chicken coop",
-          "Target": "לול",
+          "Source": "a (male)",
+          "Target": "אוסטרי",
           "Dir": "Down"
         }
       ]
     },
     {
-      "Row": 3,
+      "Row": 4,
       "Col": 8,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "man",
-          "Target": "איש",
+          "Source": "poor, needy",
+          "Target": "אביון",
           "Dir": "Left"
         }
       ]
     },
     {
-      "Row": 4,
+      "Row": 7,
+      "Col": 7,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "balsam",
+          "Target": "אפרסמון",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 8,
       "Col": 8,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "food",
-          "Target": "אוכל",
-          "Dir": "Left"
-        }
-      ]
-    },
-    {
-      "Row": 5,
-      "Col": 3,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "dog",
-          "Target": "כלב",
-          "Dir": "Down"
-        },
-        {
-          "Source": "child",
-          "Target": "ילד",
-          "Dir": "Left"
-        }
-      ]
-    },
-    {
-      "Row": 6,
-      "Col": 6,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "king",
-          "Target": "מלכ",
-          "Dir": "Left"
-        }
-      ]
-    },
-    {
-      "Row": 7,
-      "Col": 6,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "voice",
-          "Target": "קול",
-          "Dir": "Left"
-        }
-      ]
-    },
-    {
-      "Row": 8,
-      "Col": 5,
-      "Kind": "Clue",
-      "Clues": [
-        {
-          "Source": "color",
-          "Target": "צבע",
+          "Source": "aspirin",
+          "Target": "אספירין",
           "Dir": "Left"
         }
       ]
@@ -180,11 +151,6 @@
     {
       "Row": 1,
       "Col": 0,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 1,
-      "Col": 1,
       "Kind": "Letter"
     },
     {
@@ -199,7 +165,17 @@
     },
     {
       "Row": 1,
-      "Col": 4,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 7,
       "Kind": "Letter"
     },
     {
@@ -209,12 +185,12 @@
     },
     {
       "Row": 2,
-      "Col": 3,
+      "Col": 1,
       "Kind": "Letter"
     },
     {
       "Row": 2,
-      "Col": 4,
+      "Col": 3,
       "Kind": "Letter"
     },
     {
@@ -228,13 +204,28 @@
       "Kind": "Letter"
     },
     {
+      "Row": 2,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
       "Row": 3,
       "Col": 0,
       "Kind": "Letter"
     },
     {
       "Row": 3,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
       "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 4,
       "Kind": "Letter"
     },
     {
@@ -260,11 +251,6 @@
     {
       "Row": 4,
       "Col": 1,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 4,
-      "Col": 2,
       "Kind": "Letter"
     },
     {
@@ -304,17 +290,27 @@
     },
     {
       "Row": 5,
-      "Col": 2,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 5,
       "Col": 4,
       "Kind": "Letter"
     },
     {
       "Row": 5,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
       "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 0,
       "Kind": "Letter"
     },
     {
@@ -324,37 +320,47 @@
     },
     {
       "Row": 6,
-      "Col": 2,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 6,
-      "Col": 3,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 6,
       "Col": 4,
       "Kind": "Letter"
     },
     {
-      "Row": 6,
+      "Row": 7,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
       "Col": 5,
       "Kind": "Letter"
     },
     {
       "Row": 7,
-      "Col": 3,
+      "Col": 6,
       "Kind": "Letter"
     },
     {
-      "Row": 7,
-      "Col": 4,
-      "Kind": "Letter"
-    },
-    {
-      "Row": 7,
-      "Col": 5,
+      "Row": 8,
+      "Col": 1,
       "Kind": "Letter"
     },
     {
@@ -370,6 +376,21 @@
     {
       "Row": 8,
       "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 7,
       "Kind": "Letter"
     }
   ]

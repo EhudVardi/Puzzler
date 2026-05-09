@@ -6,12 +6,12 @@
   "Cells": [
     {
       "Row": 0,
-      "Col": 1,
+      "Col": 0,
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "cat",
-          "Target": "חתול",
+          "Source": "word",
+          "Target": "מילה",
           "Dir": "Down"
         }
       ]
@@ -22,8 +22,8 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "game",
-          "Target": "משחק",
+          "Source": "dream",
+          "Target": "חלומ",
           "Dir": "Left"
         }
       ]
@@ -34,8 +34,8 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "letter",
-          "Target": "מכתב",
+          "Source": "character",
+          "Target": "אופי",
           "Dir": "Left"
         }
       ]
@@ -46,8 +46,8 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "window",
-          "Target": "חלונ",
+          "Source": "knife, scalpel",
+          "Target": "אזמל",
           "Dir": "Left"
         }
       ]
@@ -58,8 +58,8 @@
       "Kind": "Clue",
       "Clues": [
         {
-          "Source": "word",
-          "Target": "מילה",
+          "Source": "lobe of a lung",
+          "Target": "אונה",
           "Dir": "Left"
         }
       ]
