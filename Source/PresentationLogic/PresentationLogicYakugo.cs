@@ -101,8 +101,7 @@ namespace PresentationLogic
                 DrawLine(cBoardBorder, 1, c * cellW, HeaderH, c * cellW, height);
         }
 
-        private const float StripW   = 10f;
-        private const float MaxTextH = 26f;
+        private const float StripW = 10f;
 
         private void DrawClueCell(CellGroupHolderYakugo holder,
                                    float x, float y, float w, float h)
@@ -130,9 +129,10 @@ namespace PresentationLogic
                 DrawDirectionStrip(g.Direction, x, sy, w, slotH);
 
                 const float padX = 4f;
-                float textH = Math.Min(slotH * 0.55f, MaxTextH);
+                const float padY = 3f;
+                float textH = slotH - padY * 2;
                 float textW = w - padX * 2;
-                float textY = sy + (slotH - textH) * 0.5f;
+                float textY = sy + padY;
 
                 string label = g.SourceText;
                 if (g.LengthPattern != null)

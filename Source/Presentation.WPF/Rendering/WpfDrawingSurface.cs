@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using PresentationLogic.Rendering;
@@ -29,18 +30,35 @@ namespace Presentation.WPF
                 FontStyles.Normal,
                 font.Bold ? FontWeights.Bold : FontWeights.Normal,
                 FontStretches.Normal);
+            var brush = ToBrush(color);
             double size = Math.Min(width, height) * 0.75;
-            size = Math.Max(size, 1);
-            var ft = new FormattedText(
-                text,
-                CultureInfo.CurrentUICulture,
-                FlowDirection.LeftToRight,
-                typeface,
-                size,
-                ToBrush(color),
-                96.0);
-            ft.TextAlignment = TextAlignment.Center;
-            _dc.DrawText(ft, new Point(x + width / 2, y + (height - ft.Height) / 2));
+            size = Math.Max(size, 4);
+
+            // Wrapped version — enables word wrapping; used for height check and final drawing
+            FormattedText MakeWrapped(double s) => new FormattedText(
+                text, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight,
+                typeface, s, brush, 96.0)
+            { TextAlignment = TextAlignment.Center, MaxTextWidth = width };
+
+            // Width check uses the longest single token — the minimum unbreakable unit.
+            // Multi-word phrases can wrap, so measuring the whole line would over-shrink them.
+            string longestToken = text.Split(' ')
+                .OrderByDescending(t => t.Length).First();
+            FormattedText MakeToken(double s) => new FormattedText(
+                longestToken, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight,
+                typeface, s, brush, 96.0)
+            { TextAlignment = TextAlignment.Center };
+
+            var ft    = MakeWrapped(size);
+            var token = MakeToken(size);
+            while ((ft.Height > height || token.Width > width) && size > 5)
+            {
+                size  = Math.Max(size * 0.85, 5);
+                ft    = MakeWrapped(size);
+                token = MakeToken(size);
+            }
+
+            _dc.DrawText(ft, new Point(x, y + (height - ft.Height) / 2));
         }
 
         public void DrawLine(PuzzlerColor color, float thickness, float x1, float y1, float x2, float y2)
