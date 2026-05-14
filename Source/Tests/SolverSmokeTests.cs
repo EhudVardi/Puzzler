@@ -100,5 +100,35 @@ namespace Tests
             Assert.True(finished, "Triddler hard solver did not complete within 60 seconds");
             Assert.True(logic.RequestSolveStatus() == true, "Triddler hard was not solved after completion");
         }
+
+        [Fact]
+        public async Task Triddler_23x23Hard_SolvesWithinTimeout()
+        {
+            var logic = new LogicLayerTriddler();
+            var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
+
+            bool loaded = logic.ReadFromFile(FixturePath("triddler_23x23_hard.json"));
+            Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
+
+            bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(10))) == tcs.Task;
+            Assert.True(finished, "Triddler 23x23 hard solver did not complete within 10 seconds");
+            Assert.True(logic.RequestSolveStatus() == true, "Triddler 23x23 hard was not solved after completion");
+        }
+
+        [Fact]
+        public async Task Triddler_KitchenKnife25x25_SolvesWithinTimeout()
+        {
+            var logic = new LogicLayerTriddler();
+            var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
+
+            bool loaded = logic.ReadFromFile(FixturePath("triddler_kitchen_knife_25x25.json"));
+            Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
+
+            bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromMinutes(3))) == tcs.Task;
+            Assert.True(finished, "Triddler Kitchen Knife solver did not complete within 3 minutes");
+            Assert.True(logic.RequestSolveStatus() == true, "Kitchen Knife was not solved after completion");
+        }
     }
 }
