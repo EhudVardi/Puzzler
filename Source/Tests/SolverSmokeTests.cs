@@ -2,6 +2,8 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Logic;
+using Logic.Kurodoko;
+using Common.Models.Kurodoko;
 using Xunit;
 
 namespace Tests
@@ -159,6 +161,27 @@ namespace Tests
             bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(60))) == tcs.Task;
             Assert.True(finished, "Kurodoko hard solver did not complete within 60 seconds");
             Assert.True(logic.RequestSolveStatus() == true, "Kurodoko hard was not solved after completion");
+        }
+
+        [Fact]
+        public void Kurodoko_Generator_ProducesSparseSolvablePuzzle()
+        {
+            var factory = new FactoryKurodoko();
+            var board   = factory.GenerateRandom(); // 19×11, TimeBoundedMin, 10s cap
+
+            // Must have at least one clue but not all whites carrying a clue
+            Assert.True(board.InitialCells.Count > 0, "Generator produced no clues");
+
+            // After solving, there must be white cells that had no clue (sparse check)
+            var solver = new SolverKurodoko { Board = board };
+            solver.SolveBoard();
+            Assert.True(solver.IsSolved(), "Generated puzzle is not solvable");
+
+            int whiteFree = 0;
+            foreach (var cell in board.ValueCells)
+                if (cell.Value == false && !cell.IsFixed)
+                    whiteFree++;
+            Assert.True(whiteFree > 0, "Every white cell has a clue — puzzle is not sparse");
         }
     }
 }

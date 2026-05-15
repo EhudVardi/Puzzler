@@ -131,30 +131,19 @@ namespace Logic
                 int min = CountMinVisible(clue);
                 if (min < n) continue;
 
-                // Already have N confirmed whites in range → everything beyond must be black
+                // min == n: confirmed whites fill the budget; first undecided in each ray must be black
                 foreach (var (dr, dc) in Directions)
-                {
-                    int whiteSeen = 1; // count clue cell itself
                     foreach (var cell in Board.RayFrom(clue, dr, dc))
                     {
-                        if (cell.Value == true) break;
-                        if (whiteSeen < n)
+                        if (cell.Value == true)  break;         // existing black → stop
+                        if (cell.Value == null)                 // first undecided → must be black
                         {
-                            if (cell.Value == false) whiteSeen++;
-                            // undecided cells don't count as confirmed whites here
-                        }
-                        else
-                        {
-                            // We've already counted N whites; this cell must be black
-                            if (cell.Value == null)
-                            {
-                                cell.Value = true;
-                                progress   = true;
-                            }
+                            cell.Value = true;
+                            progress   = true;
                             break;
                         }
+                        // confirmed white → skip, keep walking
                     }
-                }
             }
             return progress;
         }
@@ -179,6 +168,10 @@ namespace Logic
             }
             return progress;
         }
+
+        // Fast 3-rule sweep used by the generator (skips ConnectivityProtection)
+        public bool LightweightDeduce()
+            => NeighboursOfBlackAreWhite() | ClueSaturationMax() | ClueSaturationMin();
 
         // ── backtracking ──────────────────────────────────────────────────────
 
