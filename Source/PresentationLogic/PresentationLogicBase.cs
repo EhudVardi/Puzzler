@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Common;
 using PresentationLogic.Rendering;
 
@@ -24,15 +25,17 @@ namespace PresentationLogic
         protected DisplayType displayType;
         private IDrawingSurface _surface = null!;
 
+        public virtual bool IsSolving => false;
+
         public virtual void Initialize() { }
 
         public virtual Dictionary<string, List<string>>? ReadFileList() { return null; }
         public virtual string GetPuzzleSizeLabel(string filePath) => string.Empty;
-        public virtual bool ReadFromFile(string fileName) { return false; }
-        public virtual bool ReadFromWeb(string url) { return false; }
-        public virtual bool ReadFromText(string text) { return false; }
+        public virtual Task<bool> ReadFromFile(string fileName) => Task.FromResult(false);
+        public virtual Task<bool> ReadFromWeb(string url) => Task.FromResult(false);
+        public virtual Task<bool> ReadFromText(string text) => Task.FromResult(false);
 
-        public virtual bool GenerateRandom() { return false; }
+        public virtual Task<bool> GenerateRandom() => Task.FromResult(false);
 
         public virtual string? GetPuzzleTypeDocumentsPath() { return null; }
 

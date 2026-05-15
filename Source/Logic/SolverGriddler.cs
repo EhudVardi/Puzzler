@@ -39,7 +39,7 @@ namespace Logic
                 List<BitArray> variations = CalcAllValidVariationConsideringExsitingLine(group);
                 _groupsVariations.Add(group, variations);
                 ReflectIntegratedVariationToCells(group, variations);
-                ReportProgress(progress++, null);
+                ReportProgress(progress++);
             }
         }
 

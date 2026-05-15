@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using Common.Models.Yakugo;
 
 namespace Logic
@@ -61,11 +60,11 @@ namespace Logic
             return progress;
         }
 
-        public override void SolveBoard(DoWorkEventArgs e)
+        public override void SolveBoard()
         {
             SolveInitiation();
             while (!IsSolved() && DoCompleteStep())
-                ReportProgress(0, null);
+                ReportProgress(0);
         }
     }
 }

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Logic
 {
@@ -18,54 +20,57 @@ namespace Logic
         public event EventHandler? StepCompleted;
         public event EventHandler? SolveCompleted;
 
-        protected BackgroundWorker bg = null!;
+        private CancellationTokenSource? _cts;
+        private Task?                     _workTask;
+        protected CancellationToken       _ct;
+        protected IProgress<int>?         _progress;
+
+        public bool IsSolving => _workTask is { IsCompleted: false };
 
         public virtual void Solve()
         {
-            bg.RunWorkerAsync();
+            _cts      = new CancellationTokenSource();
+            _ct       = _cts.Token;
+            _progress = new Progress<int>(pct => OnStepCompleted(new ProgressChangedEventArgs(pct, null)));
+            var scheduler = SynchronizationContext.Current != null
+                ? TaskScheduler.FromCurrentSynchronizationContext()
+                : TaskScheduler.Default;
+            _workTask = Task.Run(SolveBoard, _ct)
+                            .ContinueWith(_ => OnSolveCompleted(EventArgs.Empty),
+                                          CancellationToken.None,
+                                          TaskContinuationOptions.None,
+                                          scheduler);
         }
 
-        void bg_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
+        internal async Task Initialize()
         {
-            OnSolveCompleted(EventArgs.Empty);
-        }
-        void bg_ProgressChanged(object? sender, ProgressChangedEventArgs e)
-        {
-            OnStepCompleted(e);
-        }
-        void bg_DoWork(object? sender, DoWorkEventArgs e)
-        {
-            SolveBoard(e);
-        }
-
-        protected void ReportProgress(int precentageProgress, object? state)
-        {
-            bg.ReportProgress(precentageProgress, state);
+            if (_cts != null && _workTask != null)
+            {
+                _cts.Cancel();
+                try { await Task.WhenAny(_workTask); } catch { }
+                _cts.Dispose();
+                _cts      = null;
+                _workTask = null;
+            }
         }
 
-        public virtual void SolveBoard(DoWorkEventArgs e)
+        protected void ReportProgress(int pct) => _progress?.Report(pct);
+
+        public virtual void SolveBoard()
         {
             DateTime start = DateTime.Now;
             SolveInitiation();
-            if (IsValid() == false)
-                return;
+            if (!IsValid()) return;
 
-            int precentageProgress = 0;
+            int pct = 0;
             while (!IsSolved())
             {
-                if (bg.CancellationPending)
-                    return;
-
-                if (!DoCompleteStep())
-                    break;
-
-                ReportProgress(precentageProgress, null);
-                precentageProgress++;
+                if (_ct.IsCancellationRequested) return;
+                if (!DoCompleteStep()) break;
+                ReportProgress(pct++);
             }
 
-            if (!IsSolved())
-                BacktrackSolve();
-
+            if (!IsSolved()) BacktrackSolve();
             Console.WriteLine("total time = " + (DateTime.Now - start).TotalMilliseconds + "ms");
         }
 
@@ -78,7 +83,7 @@ namespace Logic
 
             foreach (Action tryBranch in GetBranches())
             {
-                if (bg.CancellationPending) return false;
+                if (_ct.IsCancellationRequested) return false;
                 object snapshot = TakeSnapshot();
                 tryBranch();
                 if (BacktrackSolve()) return true;
@@ -112,25 +117,6 @@ namespace Logic
         {
             if (SolveCompleted != null)
                 SolveCompleted(this, e);
-        }
-
-        internal void Initialize()
-        {
-            if (bg != null)
-            {
-                if (bg.IsBusy)
-                    bg.CancelAsync();
-                while (bg.IsBusy) ;
-                bg.DoWork             -= bg_DoWork;
-                bg.ProgressChanged    -= bg_ProgressChanged;
-                bg.RunWorkerCompleted -= bg_RunWorkerCompleted;
-            }
-            bg = new BackgroundWorker();
-            bg.DoWork             += new DoWorkEventHandler(bg_DoWork);
-            bg.ProgressChanged    += new ProgressChangedEventHandler(bg_ProgressChanged);
-            bg.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bg_RunWorkerCompleted);
-            bg.WorkerReportsProgress    = true;
-            bg.WorkerSupportsCancellation = true;
         }
     }
 }

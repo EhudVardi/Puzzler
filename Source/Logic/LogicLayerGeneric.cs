@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Data;
 
 namespace Logic
@@ -45,24 +46,24 @@ namespace Logic
             return this.DataProxy.GetFileList();
         }
         public string GetPuzzleSizeLabel(string filePath) => DataProxy.GetPuzzleSizeLabel(filePath);
-        public virtual bool ReadFromFile(string fileName)
+        public virtual async Task<bool> ReadFromFile(string fileName)
         {
-            return LoadFromPuzzleObject(this.DataProxy.LoadPuzzle(fileName));
+            return await LoadFromPuzzleObject(this.DataProxy.LoadPuzzle(fileName));
         }
-        public virtual bool ReadFromWeb(string url)
+        public virtual async Task<bool> ReadFromWeb(string url)
         {
             TPuzzle? puzzleFromWeb = this.DataProxy.WebToPuzzleObject(url);
-            if (LoadFromPuzzleObject(puzzleFromWeb))
+            if (await LoadFromPuzzleObject(puzzleFromWeb))
             {
                 this.DataProxy.WritePuzzle(puzzleFromWeb!, DataProxy.Options.FromWebFolder);
                 return true;
             }
             return false;
         }
-        public virtual bool ReadFromText(string text)
+        public virtual async Task<bool> ReadFromText(string text)
         {
             TPuzzle? puzzleFromText = this.DataProxy.TextToPuzzleObject(text);
-            if (LoadFromPuzzleObject(puzzleFromText))
+            if (await LoadFromPuzzleObject(puzzleFromText))
             {
                 this.DataProxy.WritePuzzle(puzzleFromText!, DataProxy.Options.FromTextFolder);
                 return true;
@@ -70,11 +71,11 @@ namespace Logic
             return false;
         }
 
-        public virtual bool GenerateRandom()
+        public virtual async Task<bool> GenerateRandom()
         {
             TBoard? generatedBoard = this.FactoryModule.GenerateRandom();
             TPuzzle? puzzleFromGenerator = generatedBoard != null ? this.FactoryModule.BoardToPuzzle(generatedBoard) : default;
-            if (LoadFromPuzzleObject(puzzleFromGenerator))
+            if (await LoadFromPuzzleObject(puzzleFromGenerator))
             {
                 this.DataProxy.WritePuzzle(puzzleFromGenerator!, DataProxy.Options.FromGeneratorFolder);
                 return true;
@@ -82,7 +83,7 @@ namespace Logic
             return false;
         }
 
-        public virtual bool LoadFromPuzzleObject(TPuzzle? puzzle)
+        public virtual async Task<bool> LoadFromPuzzleObject(TPuzzle? puzzle)
         {
             if (puzzle == null)
                 return false;
@@ -93,7 +94,7 @@ namespace Logic
 
             this.TrackerModule = new TrackerGeneric<TBoard>(this.FactoryModule.PuzzleToBoard(puzzle)!);
 
-            this.SolverModule.Initialize();
+            await this.SolverModule.Initialize();
             this.SolverModule.Board = board!;
             this.SolverModule.Solve();
 
@@ -101,6 +102,8 @@ namespace Logic
 
             return true;
         }
+
+        public bool IsSolving => this.SolverModule.IsSolving;
 
         public string GetPuzzleTypeDocumentsPath() { return DataProxy.GetPuzzleTypeDocumentsPath(); }
         public string GetPuzzleName()               { return DataProxy.GetPuzzleName(); }

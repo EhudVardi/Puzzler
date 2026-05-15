@@ -21,7 +21,7 @@ namespace Tests
         private async Task<(bool solved, long elapsedMs, int stepCount)> RunBenchmark(
             Action<EventHandler> subscribeStep,
             Action<EventHandler> subscribeComplete,
-            Func<bool> load,
+            Func<Task<bool>> load,
             Func<bool?> isSolved)
         {
             int stepCount = 0;
@@ -32,7 +32,7 @@ namespace Tests
             subscribeComplete((_, _) => { sw.Stop(); tcs.TrySetResult(true); });
 
             sw.Start();
-            bool loaded = load();
+            bool loaded = await load();
             if (!loaded)
                 return (false, 0, 0);
 

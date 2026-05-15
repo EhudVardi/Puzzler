@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Logic;
 using PresentationLogic.Rendering;
 
@@ -21,13 +22,15 @@ namespace PresentationLogic
             this.LogicProxy.StepGenerated  += new EventHandler(LogicProxy_StepGenerated);
         }
 
+        public override bool IsSolving => LogicProxy.IsSolving;
+
         public override Dictionary<string, List<string>>? ReadFileList() { return this.LogicProxy.ReadFileList(); }
         public override string GetPuzzleSizeLabel(string filePath) => LogicProxy.GetPuzzleSizeLabel(filePath);
-        public override bool ReadFromFile(string fileName) { return this.LogicProxy.ReadFromFile(fileName); }
-        public override bool ReadFromWeb(string url)       { return this.LogicProxy.ReadFromWeb(this.URL); }
-        public override bool ReadFromText(string text)     { return LogicProxy.ReadFromText(text); }
+        public override Task<bool> ReadFromFile(string fileName) => this.LogicProxy.ReadFromFile(fileName);
+        public override Task<bool> ReadFromWeb(string url)       => this.LogicProxy.ReadFromWeb(this.URL);
+        public override Task<bool> ReadFromText(string text)     => LogicProxy.ReadFromText(text);
 
-        public override bool GenerateRandom() { return LogicProxy.GenerateRandom(); }
+        public override Task<bool> GenerateRandom() => LogicProxy.GenerateRandom();
 
         public override string? GetPuzzleTypeDocumentsPath() { return LogicProxy.GetPuzzleTypeDocumentsPath(); }
         public virtual string GetPuzzleName() { return LogicProxy.GetPuzzleName(); }

@@ -18,7 +18,7 @@ namespace Tests
             var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
 
-            bool loaded = logic.ReadFromFile(FixturePath("sudoku_9x9_easy.json"));
+            bool loaded = await logic.ReadFromFile(FixturePath("sudoku_9x9_easy.json"));
             Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
 
             bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(10))) == tcs.Task;
@@ -33,7 +33,7 @@ namespace Tests
             var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
 
-            bool loaded = logic.ReadFromFile(FixturePath("sudoku_9x9_hard_needs_backtracking.json"));
+            bool loaded = await logic.ReadFromFile(FixturePath("sudoku_9x9_hard_needs_backtracking.json"));
             Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
 
             bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(30))) == tcs.Task;
@@ -48,7 +48,7 @@ namespace Tests
             var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
 
-            bool loaded = logic.ReadFromFile(FixturePath("kakuru_hard.json"));
+            bool loaded = await logic.ReadFromFile(FixturePath("kakuru_hard.json"));
             Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
 
             bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(30))) == tcs.Task;
@@ -63,7 +63,7 @@ namespace Tests
             var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
 
-            bool loaded = logic.ReadFromFile(FixturePath("griddler_easy.json"));
+            bool loaded = await logic.ReadFromFile(FixturePath("griddler_easy.json"));
             Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
 
             bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(10))) == tcs.Task;
@@ -78,7 +78,7 @@ namespace Tests
             var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
 
-            bool loaded = logic.ReadFromFile(FixturePath("griddler_hard.json"));
+            bool loaded = await logic.ReadFromFile(FixturePath("griddler_hard.json"));
             Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
 
             bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(60))) == tcs.Task;
@@ -93,7 +93,7 @@ namespace Tests
             var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
 
-            bool loaded = logic.ReadFromFile(FixturePath("triddler_hard.json"));
+            bool loaded = await logic.ReadFromFile(FixturePath("triddler_hard.json"));
             Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
 
             bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(60))) == tcs.Task;
@@ -108,7 +108,7 @@ namespace Tests
             var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
 
-            bool loaded = logic.ReadFromFile(FixturePath("triddler_23x23_hard.json"));
+            bool loaded = await logic.ReadFromFile(FixturePath("triddler_23x23_hard.json"));
             Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
 
             bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(10))) == tcs.Task;
@@ -123,7 +123,7 @@ namespace Tests
             var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
 
-            bool loaded = logic.ReadFromFile(FixturePath("triddler_kitchen_knife_25x25.json"));
+            bool loaded = await logic.ReadFromFile(FixturePath("triddler_kitchen_knife_25x25.json"));
             Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
 
             bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromMinutes(3))) == tcs.Task;

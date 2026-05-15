@@ -33,11 +33,16 @@ namespace Presentation.WPF
             this.btnSelectYakugo.Tag = PuzzleRegistry.Find("Yakugo");
         }
 
-        void ucDataGrid_RequestLoadPuzzle(object sender, ucPuzzlerDataGrid.RequestLoadPuzzleEventArgs e)
+        async void ucDataGrid_RequestLoadPuzzle(object sender, ucPuzzlerDataGrid.RequestLoadPuzzleEventArgs e)
         {
+            if (PresentationLogicObject.IsSolving)
+            {
+                this.lblStatus.Text = "Cannot load: solve in progress.";
+                return;
+            }
             try
             {
-                PresentationLogicObject.ReadFromFile(e.Path);
+                await PresentationLogicObject.ReadFromFile(e.Path);
                 ResizeWindowForCurrentPuzzle();
             }
             catch (IOException ex)  { ShowError(ex.Message); }
@@ -174,11 +179,16 @@ namespace Presentation.WPF
             RefreshForm();
         }
 
-        private void btnLoadFromWeb_Click(object sender, RoutedEventArgs e)
+        private async void btnLoadFromWeb_Click(object sender, RoutedEventArgs e)
         {
+            if (PresentationLogicObject.IsSolving)
+            {
+                this.lblStatus.Text = "Cannot load: solve in progress.";
+                return;
+            }
             try
             {
-                PresentationLogicObject.ReadFromWeb(string.Empty);
+                await PresentationLogicObject.ReadFromWeb(string.Empty);
                 RefreshForm();
             }
             catch (WebException ex)         { ShowError(ex.Message); }
@@ -186,8 +196,13 @@ namespace Presentation.WPF
             catch (IOException ex)           { ShowError(ex.Message); }
         }
 
-        private void btnLoadFromText_Click(object sender, RoutedEventArgs e)
+        private async void btnLoadFromText_Click(object sender, RoutedEventArgs e)
         {
+            if (PresentationLogicObject.IsSolving)
+            {
+                this.lblStatus.Text = "Cannot load: solve in progress.";
+                return;
+            }
             InputWindow inputWindow = new InputWindow();
             inputWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             inputWindow.ShowDialog();
@@ -195,7 +210,7 @@ namespace Presentation.WPF
             {
                 try
                 {
-                    PresentationLogicObject.ReadFromText(inputWindow.Data);
+                    await PresentationLogicObject.ReadFromText(inputWindow.Data);
                     ResizeWindowForCurrentPuzzle();
                     RefreshForm();
                 }
@@ -205,9 +220,14 @@ namespace Presentation.WPF
             }
         }
 
-        private void btnRandom_Click(object sender, RoutedEventArgs e)
+        private async void btnRandom_Click(object sender, RoutedEventArgs e)
         {
-            PresentationLogicObject.GenerateRandom();
+            if (PresentationLogicObject.IsSolving)
+            {
+                this.lblStatus.Text = "Cannot load: solve in progress.";
+                return;
+            }
+            await PresentationLogicObject.GenerateRandom();
             RefreshForm();
         }
 

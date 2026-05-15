@@ -63,7 +63,7 @@ namespace Logic
                     ReflectIntegratedVariationToCells(gv.Group, vars);
                     _needsPropagation.Add(gv.Group);
                 }
-                ReportProgress(progress++, null);
+                ReportProgress(progress++);
             }
 
             Console.WriteLine($"[diag] SolveInitiation done in {(DateTime.Now-t0).TotalMilliseconds:F0}ms, oversized={_oversizedGroups.Count}");
