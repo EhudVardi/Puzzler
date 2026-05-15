@@ -130,5 +130,35 @@ namespace Tests
             Assert.True(finished, "Triddler Kitchen Knife solver did not complete within 3 minutes");
             Assert.True(logic.RequestSolveStatus() == true, "Kitchen Knife was not solved after completion");
         }
+
+        [Fact]
+        public async Task Kurodoko_Easy_SolvesWithinTimeout()
+        {
+            var logic = new LogicLayerKurodoko();
+            var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
+
+            bool loaded = await logic.ReadFromFile(FixturePath("kurodoko_easy.json"));
+            Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
+
+            bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(10))) == tcs.Task;
+            Assert.True(finished, "Kurodoko easy solver did not complete within 10 seconds");
+            Assert.True(logic.RequestSolveStatus() == true, "Kurodoko easy was not solved after completion");
+        }
+
+        [Fact]
+        public async Task Kurodoko_Hard_SolvesWithinTimeout()
+        {
+            var logic = new LogicLayerKurodoko();
+            var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            logic.SolveCompleted += (_, _) => tcs.TrySetResult(true);
+
+            bool loaded = await logic.ReadFromFile(FixturePath("kurodoko_hard.json"));
+            Assert.True(loaded, "ReadFromFile returned false — puzzle could not be loaded");
+
+            bool finished = await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(60))) == tcs.Task;
+            Assert.True(finished, "Kurodoko hard solver did not complete within 60 seconds");
+            Assert.True(logic.RequestSolveStatus() == true, "Kurodoko hard was not solved after completion");
+        }
     }
 }

@@ -321,7 +321,8 @@
                                 <RadioButton x:Name="btnSelectKakuru"   DockPanel.Dock="Top" Content="Kakuru"   Checked="btnSelectPuzzles_Checked"/>
                                 <RadioButton x:Name="btnSelectGriddler" DockPanel.Dock="Top" Content="Griddler" Checked="btnSelectPuzzles_Checked"/>
                                 <RadioButton x:Name="btnSelectTriddler"        DockPanel.Dock="Top" Content="Triddler"        Checked="btnSelectPuzzles_Checked"/>
-                                <RadioButton x:Name="btnSelectYakugo" DockPanel.Dock="Top" Content="Yakugo" Checked="btnSelectPuzzles_Checked"/>
+                                <RadioButton x:Name="btnSelectYakugo"   DockPanel.Dock="Top" Content="Yakugo"   Checked="btnSelectPuzzles_Checked"/>
+                                <RadioButton x:Name="btnSelectKurodoko" DockPanel.Dock="Top" Content="Kurodoko" Checked="btnSelectPuzzles_Checked"/>
                             </DockPanel>
                         </GroupBox>
                         <GroupBox Header="Display" Margin="3" VerticalAlignment="Top">

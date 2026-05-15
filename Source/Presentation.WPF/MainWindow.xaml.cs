@@ -30,7 +30,8 @@ namespace Presentation.WPF
             this.btnSelectKakuru.Tag          = PuzzleRegistry.Find("Kakuru");
             this.btnSelectGriddler.Tag        = PuzzleRegistry.Find("Griddler");
             this.btnSelectTriddler.Tag        = PuzzleRegistry.Find("Triddler");
-            this.btnSelectYakugo.Tag = PuzzleRegistry.Find("Yakugo");
+            this.btnSelectYakugo.Tag   = PuzzleRegistry.Find("Yakugo");
+            this.btnSelectKurodoko.Tag = PuzzleRegistry.Find("Kurodoko");
         }
 
         async void ucDataGrid_RequestLoadPuzzle(object sender, ucPuzzlerDataGrid.RequestLoadPuzzleEventArgs e)

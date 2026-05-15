@@ -1,0 +1,14 @@
+{
+  "Rows": 5,
+  "Columns": 5,
+  "Clues": [
+    { "Row": 0, "Column": 1, "Number": 6 },
+    { "Row": 0, "Column": 3, "Number": 6 },
+    { "Row": 1, "Column": 2, "Number": 3 },
+    { "Row": 2, "Column": 0, "Number": 2 },
+    { "Row": 2, "Column": 4, "Number": 4 },
+    { "Row": 3, "Column": 2, "Number": 4 },
+    { "Row": 4, "Column": 0, "Number": 2 },
+    { "Row": 4, "Column": 4, "Number": 4 }
+  ]
+}
