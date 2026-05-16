@@ -9,13 +9,18 @@ its target-language translation; letter cells are shared by crossing words
 exactly like a crossword, so every character must satisfy all groups that pass
 through it.
 
-The placement algorithm is greedy with random tiebreaking:
-  1. Sort words by target length (longest first).
-  2. Place the first word Down near the top-centre of the grid.
-  3. For each subsequent word try every (origin, direction) candidate that
-     produces at least one intersection with already-placed letters.  Among
-     candidates pick the one with the most intersections; break ties randomly.
-  4. Words with no valid placement are skipped.
+The placement algorithm is greedy with random tiebreaking and several
+quality improvements over a naive greedy placer:
+
+  1. First word: pick the "anchor" (longest word whose letters are most common
+     in the rest of the pool) and place it centred in the grid.
+  2. Placement score = current_intersections + λ·lookahead_score, where
+     lookahead counts how many remaining words share at least one letter with
+     each new cell.
+  3. best_of() uses a composite quality metric (crossings, density, wasted
+     cells, isolated words) rather than just word count.
+  4. Restart / backtrack: if a greedy pass stalls, undo the last K placements
+     and retry with the remaining words re-shuffled (up to 3 retries/seed).
 
 Usage
 -----
@@ -32,11 +37,13 @@ Usage
   python yakugo_generate.py --examples [--outdir path]
 """
 
+import copy
 import json
 import argparse
 import os
 import sys
 import random
+from collections import Counter
 from typing import Any, Dict, List, Optional, Tuple
 
 # Hebrew output requires UTF-8; reconfigure stdout if the terminal uses a
@@ -55,6 +62,20 @@ DIRS: Dict[str, Tuple[int, int]] = {
 }
 
 RTL_LANGUAGES = {"he", "ar", "fa", "ur"}
+
+# Lookahead weight: contribution of potential-future-word letters per new cell
+LOOKAHEAD_WEIGHT = 0.15
+
+# Quality metric weights for best_of scoring
+W_PLACED    = 1.0   # words placed
+W_CROSSINGS = 0.6   # total intersections across all placed words
+W_DENSITY   = 2.0   # letter_cells / total_cells
+W_WASTED    = 0.3   # penalty per wasted cell
+W_ISOLATED  = 0.5   # penalty per isolated word (0 crossings)
+
+# Backtrack parameters
+MAX_RETRIES     = 3
+BACKTRACK_STEPS = [3, 5, 8]   # undo this many placements per retry attempt
 
 
 def horizontal_dir(target_lang: str) -> str:
@@ -88,6 +109,8 @@ class State:
         self.clue_cells: Dict[Tuple[int, int], List[Dict[str, str]]] = {}
         # positions that must stay void — the cell immediately past each word's last letter
         self.end_guards: set = set()
+        # per-placed-word intersection count (same order as placement)
+        self.word_crossings: List[int] = []
 
     @property
     def letter_cells(self) -> set:
@@ -95,6 +118,20 @@ class State:
 
     def dirs_at(self, pos: Tuple[int, int]) -> set:
         return {e["dir"] for e in self.clue_cells.get(pos, [])}
+
+    def snapshot(self) -> "State":
+        s = State()
+        s.grid = dict(self.grid)
+        s.clue_cells = {k: list(v) for k, v in self.clue_cells.items()}
+        s.end_guards = set(self.end_guards)
+        s.word_crossings = list(self.word_crossings)
+        return s
+
+    def restore(self, snap: "State") -> None:
+        self.grid = dict(snap.grid)
+        self.clue_cells = {k: list(v) for k, v in snap.clue_cells.items()}
+        self.end_guards = set(snap.end_guards)
+        self.word_crossings = list(snap.word_crossings)
 
 
 def can_place(state: State, origin_r: int, origin_c: int,
@@ -159,25 +196,155 @@ def place(state: State, origin_r: int, origin_c: int, direction: str,
     )
     dr, dc = DIRS[direction]
     n = len(letters)
+    crossings = 0
     for i, (r, c) in enumerate(letter_positions(origin_r, origin_c, direction, n)):
+        if (r, c) in state.grid:
+            crossings += 1
         state.grid[(r, c)] = letters[i]
+    state.word_crossings.append(crossings)
     # Reserve the cell past the last letter so no future word can place a letter there
     state.end_guards.add((origin_r + dr * (n + 1), origin_c + dc * (n + 1)))
 
 
+# ── Quality metric ─────────────────────────────────────────────────────────────
+
+def compute_quality(state: State, rows: int, cols: int, placed_count: int) -> float:
+    """Composite quality score for a completed generation state."""
+    total_cells = rows * cols
+    filled = len(state.letter_cells)
+    total_crossings = sum(state.word_crossings)
+    isolated = sum(1 for c in state.word_crossings if c == 0)
+
+    # Wasted cells: in-bounds cells that are not filled, not clue, but adjacent
+    # to a filled cell AND blocked from any future use (end-guard neighbours).
+    wasted = 0
+    for r in range(rows):
+        for c in range(cols):
+            pos = (r, c)
+            if pos in state.grid or pos in state.clue_cells:
+                continue
+            has_letter_neighbour = any(
+                (r + dr, c + dc) in state.grid
+                for dr, dc in ((0, 1), (0, -1), (1, 0), (-1, 0))
+            )
+            if has_letter_neighbour and pos in state.end_guards:
+                wasted += 1
+
+    density = filled / total_cells if total_cells else 0.0
+
+    return (
+        W_PLACED    * placed_count
+        + W_CROSSINGS * total_crossings
+        + W_DENSITY   * density * total_cells   # scale to be comparable
+        - W_WASTED    * wasted
+        - W_ISOLATED  * isolated
+    )
+
+
+# ── Lookahead helper ───────────────────────────────────────────────────────────
+
+def build_letter_freq(remaining_words: List[Word]) -> Counter:
+    """Count how many remaining words contain each target letter."""
+    freq: Counter = Counter()
+    for w in remaining_words:
+        for ch in set(strip_spaces(w["Target"])):
+            freq[ch] += 1
+    return freq
+
+
+def lookahead_score(new_positions: List[Tuple[int, int]], state: State,
+                    letters: str, letter_freq: Counter) -> float:
+    """Sum of letter-frequency contributions for non-pre-occupied new positions."""
+    score = 0.0
+    for i, (r, c) in enumerate(new_positions):
+        if (r, c) not in state.grid:   # only new cells contribute
+            score += letter_freq.get(letters[i], 0)
+    return score
+
+
+# ── Anchor word selection ──────────────────────────────────────────────────────
+
+def pick_anchor(sorted_words: List[Word]) -> Word:
+    """
+    From the longest words, pick the one whose letters are most common
+    in the rest of the pool — maximising future crossing potential.
+    """
+    if not sorted_words:
+        return sorted_words[0]
+
+    max_len = len(strip_spaces(sorted_words[0]["Target"]))
+    candidates = [w for w in sorted_words if len(strip_spaces(w["Target"])) == max_len]
+
+    rest = [w for w in sorted_words if w not in candidates]
+    freq = build_letter_freq(rest) if rest else Counter()
+
+    def anchor_value(w: Word) -> float:
+        return sum(freq.get(ch, 0) for ch in set(strip_spaces(w["Target"])))
+
+    return max(candidates, key=anchor_value)
+
+
 # ── Generator ──────────────────────────────────────────────────────────────────
+
+def _greedy_pass(
+    state: State,
+    words_to_place: List[Word],
+    placed: List[Word],
+    rows: int,
+    cols: int,
+    horiz: str,
+    rng: random.Random,
+    letter_freq: Counter,
+) -> None:
+    """Single greedy sweep: try to place every word in words_to_place."""
+    for word in words_to_place:
+        letters = strip_spaces(word["Target"])
+        if len(letters) < 2:
+            continue
+
+        best_score: float = -1.0
+        best: Optional[Tuple[int, int, str]] = None
+
+        remaining = [w for w in words_to_place if w is not word]
+        live_freq = build_letter_freq(remaining)
+
+        for direction in ("Down", horiz):
+            for origin_r in range(rows):
+                for origin_c in range(cols):
+                    if not can_place(state, origin_r, origin_c,
+                                     direction, letters, rows, cols):
+                        continue
+                    cur_x = count_intersections(
+                        state, origin_r, origin_c, direction, letters)
+                    if placed and cur_x < 1:
+                        continue
+                    new_pos = letter_positions(origin_r, origin_c, direction, len(letters))
+                    la = lookahead_score(new_pos, state, letters, live_freq)
+                    score = cur_x + LOOKAHEAD_WEIGHT * la + rng.random() * 0.01
+                    if score > best_score:
+                        best_score = score
+                        best = (origin_r, origin_c, direction)
+
+        if best is None:
+            continue
+
+        origin_r, origin_c, direction = best
+        place(state, origin_r, origin_c, direction,
+              word["Source"], word["Target"], letters)
+        placed.append(word)
+
 
 def generate(words: List[Word], rows: int, cols: int,
              seed: int = 0,
              target_lang: str = "en") -> Tuple[State, List[Word]]:
     """
-    Greedy crossword placement.  Returns (state, list-of-placed-words).
+    Greedy crossword placement with lookahead, smart anchor, and backtrack.
+    Returns (state, list-of-placed-words).
     """
     rng = random.Random(seed)
     horiz = horizontal_dir(target_lang)
 
-    # Group by target length, shuffle within each group for variety, then sort
-    # longest-first so long words claim good positions before short ones.
+    # Group by target length, shuffle within each group, then sort longest-first
     by_len: Dict[int, List[Word]] = {}
     for w in words:
         n = len(strip_spaces(w["Target"]))
@@ -189,38 +356,83 @@ def generate(words: List[Word], rows: int, cols: int,
     state = State()
     placed: List[Word] = []
 
-    for word in sorted_words:
-        letters = strip_spaces(word["Target"])
-        if len(letters) < 2:
-            continue  # single-char targets can't form meaningful crossword entries
+    # ── Place anchor word first, centred ──────────────────────────────────────
+    anchor = pick_anchor(sorted_words)
+    anchor_letters = strip_spaces(anchor["Target"])
+    remaining_after_anchor = [w for w in sorted_words if w is not anchor]
 
-        best_score: float = -1.0
-        best: Optional[Tuple[int, int, str]] = None
+    # Alternate anchor direction across seeds: even seeds → Down, odd → horiz
+    anchor_dir = "Down" if seed % 2 == 0 else horiz
 
-        for direction in ("Down", horiz):
-            for origin_r in range(rows):
-                for origin_c in range(cols):
-                    if not can_place(state, origin_r, origin_c,
-                                     direction, letters, rows, cols):
-                        continue
-                    score = count_intersections(
-                        state, origin_r, origin_c, direction, letters)
-                    # After the first word every placement must intersect
-                    if placed and score < 1:
-                        continue
-                    # Small random jitter breaks ties without bias
-                    score_j = score + rng.random() * 0.01
-                    if score_j > best_score:
-                        best_score = score_j
-                        best = (origin_r, origin_c, direction)
+    dr, dc = DIRS[anchor_dir]
+    n = len(anchor_letters)
+    # Centre the clue cell so the word straddles the grid centre
+    centre_r, centre_c = rows // 2, cols // 2
+    # Offset the origin so the middle letter lands near centre
+    anchor_r = max(0, min(rows - 1, centre_r - dr * (n // 2 + 1)))
+    anchor_c = max(0, min(cols - 1, centre_c - dc * (n // 2 + 1)))
 
-        if best is None:
-            continue
+    if can_place(state, anchor_r, anchor_c, anchor_dir, anchor_letters, rows, cols):
+        place(state, anchor_r, anchor_c, anchor_dir,
+              anchor["Source"], anchor["Target"], anchor_letters)
+        placed.append(anchor)
 
-        origin_r, origin_c, direction = best
-        place(state, origin_r, origin_c, direction,
-              word["Source"], word["Target"], letters)
-        placed.append(word)
+    letter_freq = build_letter_freq(remaining_after_anchor)
+
+    # ── Main greedy pass with backtrack ───────────────────────────────────────
+    unplaced = [w for w in sorted_words if w not in placed]
+    _greedy_pass(state, unplaced, placed, rows, cols, horiz, rng, letter_freq)
+
+    # Backtrack if quality is low: undo last K placements and retry
+    best_quality = compute_quality(state, rows, cols, len(placed))
+
+    for retry in range(MAX_RETRIES):
+        if len(placed) < 2:
+            break
+
+        k = BACKTRACK_STEPS[retry]
+        if k >= len(placed):
+            k = max(1, len(placed) - 1)
+
+        # Build state from scratch without the last k placements
+        # (cheaper than trying to undo in a mutable structure)
+        keep = placed[:-k]
+        undo = placed[-k:]
+
+        state_retry = State()
+        placed_retry: List[Word] = []
+        for w in keep:
+            letters_r = strip_spaces(w["Target"])
+            # Re-place kept words greedily (they fit since we replay them)
+            for direction in ("Down", horiz):
+                for origin_r in range(rows):
+                    for origin_c in range(cols):
+                        if can_place(state_retry, origin_r, origin_c,
+                                     direction, letters_r, rows, cols):
+                            cx = count_intersections(
+                                state_retry, origin_r, origin_c, direction, letters_r)
+                            if placed_retry and cx < 1:
+                                continue
+                            place(state_retry, origin_r, origin_c, direction,
+                                  w["Source"], w["Target"], letters_r)
+                            placed_retry.append(w)
+                            break
+                    if placed_retry and placed_retry[-1] is w:
+                        break
+
+        # Re-add unplaced (undo set + words that never placed)
+        placed_set = {id(w) for w in placed_retry}
+        retry_pool = [w for w in sorted_words if id(w) not in placed_set]
+        rng.shuffle(retry_pool)
+
+        _greedy_pass(state_retry, retry_pool, placed_retry,
+                     rows, cols, horiz, rng, build_letter_freq(retry_pool))
+
+        retry_quality = compute_quality(state_retry, rows, cols, len(placed_retry))
+        if retry_quality > best_quality:
+            best_quality = retry_quality
+            state = state_retry
+            placed = placed_retry
 
     return state, placed
 
@@ -228,12 +440,17 @@ def generate(words: List[Word], rows: int, cols: int,
 def best_of(words: List[Word], rows: int, cols: int,
             count: int = 1, base_seed: int = 0,
             target_lang: str = "en") -> Tuple[State, List[Word]]:
-    """Run `count` seeds and return the result that placed the most words."""
+    """Run `count` seeds and return the result with the highest composite quality."""
     best_state, best_placed = generate(words, rows, cols, base_seed, target_lang)
+    best_quality = compute_quality(best_state, rows, cols, len(best_placed))
+
     for i in range(1, count):
         state, placed = generate(words, rows, cols, base_seed + i, target_lang)
-        if len(placed) > len(best_placed):
+        q = compute_quality(state, rows, cols, len(placed))
+        if q > best_quality:
+            best_quality = q
             best_state, best_placed = state, placed
+
     return best_state, best_placed
 
 
@@ -291,11 +508,19 @@ def preview(state: State, rows: int, cols: int, placed: List[Word]) -> None:
 def load_wordlist(path: str) -> Tuple[List[Word], str, str]:
     with open(path, encoding="utf-8") as f:
         data = json.load(f)
-    return (
-        data["Words"],
-        data.get("SourceLanguage", "en"),
-        data.get("TargetLanguage", "he"),
-    )
+    src_lang = data.get("SourceLanguage", "en")
+    tgt_lang = data.get("TargetLanguage", "he")
+
+    # New grouped schema
+    if "Categories" in data:
+        words: List[Word] = []
+        for entries in data["Categories"].values():
+            for e in entries:
+                words.append({"Source": e["Source"], "Target": e["Target"]})
+        return words, src_lang, tgt_lang
+
+    # Legacy flat schema
+    return data.get("Words", []), src_lang, tgt_lang
 
 
 def save_puzzle(puzzle: Dict[str, Any], path: str) -> None:

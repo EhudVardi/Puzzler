@@ -55,8 +55,8 @@ _FINAL_TO_REGULAR = str.maketrans("ךםןףץ", "כמנפצ")
 DEFAULT_POS    = ["noun", "verb", "adjective"]
 DEFAULT_LIMIT  = 200
 DEFAULT_MIN    = 2
-DEFAULT_MAX    = 7
-API_DELAY      = 0.5   # seconds between API calls — be a polite client
+DEFAULT_MAX    = 8
+API_DELAY      = 1.5   # seconds between API calls — Wiktionary rate-limits aggressively
 BATCH_SIZE     = 50    # max titles per revisions request
 
 
@@ -237,17 +237,60 @@ def scrape(
 # ── I/O ────────────────────────────────────────────────────────────────────────
 
 def load_wordlist(path: str) -> Tuple[List[Dict], str, str]:
+    """Return (flat_word_list, src_lang, tgt_lang).
+
+    Accepts both the legacy {"Words": [...]} schema and the new grouped
+    {"Categories": {"noun": [...], ...}} schema.  New entries added by the
+    scraper carry a "PartOfSpeech" key so save_wordlist can route them into
+    the right category bucket.
+    """
     if not os.path.exists(path):
         return [], "en", "he"
     with open(path, encoding="utf-8") as f:
         data = json.load(f)
-    return data["Words"], data.get("SourceLanguage", "en"), data.get("TargetLanguage", "he")
+    src_lang = data.get("SourceLanguage", "en")
+    tgt_lang = data.get("TargetLanguage", "he")
+
+    if "Categories" in data:
+        words: List[Dict] = []
+        for pos, entries in data["Categories"].items():
+            for e in entries:
+                words.append({"Source": e["Source"], "Target": e["Target"],
+                               "PartOfSpeech": pos})
+        return words, src_lang, tgt_lang
+
+    return data.get("Words", []), src_lang, tgt_lang
 
 
 def save_wordlist(path: str, words: List[Dict], src: str, tgt: str) -> None:
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump({"SourceLanguage": src, "TargetLanguage": tgt, "Words": words},
-                  f, indent=2, ensure_ascii=False)
+    """Write words back using the grouped Categories schema.
+
+    If the existing file already uses Categories, rebuild that structure.
+    Otherwise start fresh with Categories.
+    """
+    from collections import defaultdict
+    KNOWN_POS = {"noun", "verb", "adjective", "adverb"}
+    buckets: dict = defaultdict(list)
+    for w in words:
+        pos = w.get("PartOfSpeech", "noun").lower()
+        if pos not in KNOWN_POS:
+            pos = "noun"
+        buckets[pos].append({"Source": w["Source"], "Target": w["Target"]})
+
+    # Preserve category order: noun first, then others alphabetically
+    ordered: dict = {}
+    for key in ["noun", "verb", "adjective", "adverb"]:
+        if key in buckets:
+            ordered[key] = buckets[key]
+    for key in sorted(buckets):
+        if key not in ordered:
+            ordered[key] = buckets[key]
+
+    tmp = path + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump({"SourceLanguage": src, "TargetLanguage": tgt,
+                   "Categories": ordered}, f, indent=2, ensure_ascii=False)
+    os.replace(tmp, path)
 
 
 # ── CLI ────────────────────────────────────────────────────────────────────────
@@ -290,7 +333,7 @@ def main() -> None:
 
     print(f"\n{'[DRY RUN] ' if args.dry_run else ''}Found {len(new_words)} new word(s):")
     for w in new_words:
-        print(f"  {w['Source']:30s} → {w['Target']:10s}  ({w['PartOfSpeech']})")
+        print(f"  {w['Source']:30s} → {w['Target']:10s}  ({w.get('PartOfSpeech', '?')})")
 
     if args.dry_run or not new_words:
         if not new_words:
