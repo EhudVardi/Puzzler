@@ -1,0 +1,70 @@
+{
+  "Type": "Triddler",
+  "Source": "FromGenerator",
+  "Name": "from_image_plus_small",
+  "DateCreated": "2026-05-16T11:59:31.1361019\u002B03:00",
+  "Horizontals": [
+    [
+      2
+    ],
+    [
+      2
+    ],
+    [
+      10
+    ],
+    [
+      2
+    ],
+    [
+      2
+    ]
+  ],
+  "Verticals": [
+    [
+      2
+    ],
+    [
+      2
+    ],
+    [
+      10
+    ],
+    [
+      2
+    ],
+    [
+      2
+    ]
+  ],
+  "Diagonals": [
+    [],
+    [],
+    [
+      1,
+      1
+    ],
+    [
+      2,
+      2
+    ],
+    [
+      3
+    ],
+    [
+      3
+    ],
+    [
+      2,
+      2
+    ],
+    [
+      1,
+      1
+    ],
+    [],
+    []
+  ],
+  "BaseRowsCount": 5,
+  "BaseColumnCount": 5
+}

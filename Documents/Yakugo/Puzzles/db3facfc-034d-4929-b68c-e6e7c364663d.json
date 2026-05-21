@@ -1,0 +1,2048 @@
+{
+  "Type": "Yakugo",
+  "Source": "FromGenerator",
+  "Name": "yakugo_large_20x20",
+  "DateCreated": "2026-05-16T11:59:31.2271888\u002B03:00",
+  "Rows": 20,
+  "Cols": 20,
+  "SourceLanguage": "en",
+  "TargetLanguage": "he",
+  "Cells": [
+    {
+      "Row": 0,
+      "Col": 3,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "a blockage",
+          "Target": "\u05D0\u05D5\u05D8\u05DD",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 13,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "A treasure ",
+          "Target": "\u05D0\u05D5\u05E6\u05E8",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 16,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "shame",
+          "Target": "\u05D1\u05D5\u05E9\u05D4",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 0,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "athletics",
+          "Target": "\u05D0\u05EA\u05DC\u05D8\u05D9\u05E7\u05D4",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 1,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "empire",
+          "Target": "\u05D0\u05D9\u05DE\u05E4\u05E8\u05D9\u05D4",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 7,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "primary, first",
+          "Target": "\u05D0\u05DC\u05E4\u05D0",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "window",
+          "Target": "\u05D7\u05DC\u05D5\u05E0",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 17,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "creator",
+          "Target": "\u05D1\u05D5\u05E8\u05D0",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 18,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "man",
+          "Target": "\u05D0\u05D9\u05E9",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 2,
+      "Col": 6,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "intifada",
+          "Target": "\u05D0\u05E0\u05EA\u05D9\u05E4\u05D3\u05D4",
+          "Dir": "Down"
+        },
+        {
+          "Source": "ego",
+          "Target": "\u05D0\u05D2\u05D5",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 2,
+      "Col": 9,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "bowling (the game)",
+          "Target": "\u05D1\u05D0\u05D5\u05DC\u05D9\u05E0\u05D2",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 2,
+      "Col": 15,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "hoarder",
+          "Target": "\u05D0\u05D5\u05D2\u05E8",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 2,
+      "Col": 19,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "reed, grass",
+          "Target": "\u05D0\u05D7\u05D5",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 3,
+      "Col": 7,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "a (female)",
+          "Target": "\u05D0\u05D5\u05E1\u05D8\u05E8\u05D9\u05EA",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 3,
+      "Col": 15,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "pinecone",
+          "Target": "\u05D0\u05E6\u05D8\u05E8\u05D5\u05D1\u05DC",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 4,
+      "Col": 2,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "cruelty",
+          "Target": "\u05D0\u05DB\u05D6\u05E8\u05D9\u05D5\u05EA",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 4,
+      "Col": 10,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": ", bike",
+          "Target": "\u05D0\u05D5\u05E4\u05E0\u05D9\u05D9\u05DD",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 4,
+      "Col": 15,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "tile",
+          "Target": "\u05D0\u05E8\u05D9\u05D7",
+          "Dir": "Left"
+        },
+        {
+          "Source": "an island",
+          "Target": "\u05D0\u05D9",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 4,
+      "Col": 19,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "year",
+          "Target": "\u05E9\u05E0\u05D4",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 5,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "aspirin",
+          "Target": "\u05D0\u05E1\u05E4\u05D9\u05E8\u05D9\u05DF",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 5,
+      "Col": 5,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "book",
+          "Target": "\u05E1\u05E4\u05E8",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 5,
+      "Col": 13,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "female",
+          "Target": "\u05D0\u05E1\u05D8\u05D5\u05E0\u05D9\u05EA",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 5,
+      "Col": 16,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "artichoke ()",
+          "Target": "\u05D0\u05E8\u05D8\u05D9\u05E9\u05D5\u05E7",
+          "Dir": "Down"
+        },
+        {
+          "Source": "ancestor, forefather",
+          "Target": "\u05D0\u05D1",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 6,
+      "Col": 3,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "afikomen",
+          "Target": "\u05D0\u05E4\u05D9\u05E7\u05D5\u05DE\u05DF",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 6,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "chair",
+          "Target": "\u05DB\u05D9\u05E1\u05D0",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 6,
+      "Col": 17,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "Infinity, the infinite",
+          "Target": "\u05D0\u05D9\u05E0\u05E1\u05D5\u05E3",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 6,
+      "Col": 18,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "well",
+          "Target": "\u05D1\u05D0\u05E8",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 7,
+      "Col": 7,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "ambulance",
+          "Target": "\u05D0\u05DE\u05D1\u05D5\u05DC\u05E0\u05E1",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 7,
+      "Col": 15,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "alligator",
+          "Target": "\u05D0\u05DC\u05D9\u05D2\u05D8\u05D5\u05E8",
+          "Dir": "Down"
+        },
+        {
+          "Source": "blueberry",
+          "Target": "\u05D0\u05D5\u05DB\u05DE\u05E0\u05D9\u05EA",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 7,
+      "Col": 19,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "hole, pit",
+          "Target": "\u05D1\u05D5\u05E8",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 8,
+      "Col": 10,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "dance",
+          "Target": "\u05E8\u05D9\u05E7\u05D5\u05D3",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 8,
+      "Col": 12,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "Australian",
+          "Target": "\u05D0\u05D5\u05E1\u05D8\u05E8\u05DC\u05D9",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 8,
+      "Col": 14,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "anatomy",
+          "Target": "\u05D0\u05E0\u05D8\u05D5\u05DE\u05D9\u05D4",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 8,
+      "Col": 17,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "Icelander",
+          "Target": "\u05D0\u05D9\u05E1\u05DC\u05E0\u05D3\u05D9",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 9,
+      "Col": 5,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "chance, coincidence",
+          "Target": "\u05D0\u05E7\u05E8\u05D0\u05D9",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 9,
+      "Col": 13,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "orgasm",
+          "Target": "\u05D0\u05D5\u05E8\u05D2\u05D6\u05DE\u05D4",
+          "Dir": "Left"
+        },
+        {
+          "Source": "citizenship",
+          "Target": "\u05D0\u05D6\u05E8\u05D7\u05D5\u05EA",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 10,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "indigo",
+          "Target": "\u05D0\u05D9\u05E0\u05D3\u05D9\u05D2\u05D5",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 11,
+      "Col": 0,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "an examiner, a tester",
+          "Target": "\u05D1\u05D5\u05D7\u05DF",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 11,
+      "Col": 9,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "horizontality",
+          "Target": "\u05D0\u05D5\u05E4\u05E7\u05D9\u05D5\u05EA",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 11,
+      "Col": 18,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "alchemist",
+          "Target": "\u05D0\u05DC\u05DB\u05D9\u05DE\u05D0\u05D9",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 12,
+      "Col": 1,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "nut (hard-shelled seed)",
+          "Target": "\u05D0\u05D2\u05D5\u05D6",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 12,
+      "Col": 2,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "an atom",
+          "Target": "\u05D0\u05D8\u05D5\u05DD",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 12,
+      "Col": 11,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "enemy",
+          "Target": "\u05D0\u05D5\u05D9\u05D1",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 12,
+      "Col": 19,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "electorate",
+          "Target": "\u05D0\u05DC\u05E7\u05D8\u05D5\u05E8\u05D8",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 13,
+      "Col": 6,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "folly",
+          "Target": "\u05D0\u05D9\u05D5\u05D5\u05DC\u05EA",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 13,
+      "Col": 9,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "an Iranian man",
+          "Target": "\u05D0\u05D9\u05E8\u05D0\u05E0\u05D9",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 13,
+      "Col": 16,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "brightness",
+          "Target": "\u05D1\u05D4\u05D9\u05E8\u05D5\u05EA",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 14,
+      "Col": 3,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "fatherhood, paternity",
+          "Target": "\u05D0\u05D1\u05D4\u05D5\u05EA",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 15,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "evil, wickedness",
+          "Target": "\u05D0\u05D5\u05D5\u05DF",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 15,
+      "Col": 15,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "collector",
+          "Target": "\u05D0\u05E1\u05E4\u05DF",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 16,
+      "Col": 12,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "bourgeoisie",
+          "Target": "\u05D1\u05D5\u05E8\u05D2\u05E0\u05D5\u05EA",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 16,
+      "Col": 17,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "flower",
+          "Target": "\u05E4\u05E8\u05D7",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 17,
+      "Col": 10,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "utopia (world in perfect harmony.)",
+          "Target": "\u05D0\u05D5\u05D8\u05D5\u05E4\u05D9\u05D4",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 17,
+      "Col": 19,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "balsam",
+          "Target": "\u05D0\u05E4\u05E8\u05E1\u05DE\u05D5\u05DF",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 18,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "championship",
+          "Target": "\u05D0\u05DC\u05D9\u05E4\u05D5\u05EA",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 18,
+      "Col": 14,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "table",
+          "Target": "\u05E9\u05D5\u05DC\u05D7\u05E0",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 19,
+      "Col": 5,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "ethos",
+          "Target": "\u05D0\u05EA\u05D5\u05E1",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 19,
+      "Col": 12,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "loneliness",
+          "Target": "\u05D1\u05D3\u05D9\u05D3\u05D5\u05EA",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 17,
+      "Kind": "Letter"
+    }
+  ]
+}

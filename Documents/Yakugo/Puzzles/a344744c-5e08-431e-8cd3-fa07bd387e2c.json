@@ -1,0 +1,152 @@
+{
+  "Type": "Yakugo",
+  "Source": "FromGenerator",
+  "Name": "yakugo_small_5x5_2026-05-09.10.59.27_s002",
+  "DateCreated": "2026-05-14T17:12:06.3778432\u002B03:00",
+  "Rows": 5,
+  "Cols": 5,
+  "SourceLanguage": "en",
+  "TargetLanguage": "he",
+  "Cells": [
+    {
+      "Row": 0,
+      "Col": 0,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "fright, panic",
+          "Target": "\u05D1\u05D4\u05DC\u05D4",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 1,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "tile",
+          "Target": "\u05D0\u05E8\u05D9\u05D7",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 2,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "thrust, brandishing of a sword: \u2013 point",
+          "Target": "\u05D0\u05D1\u05D7\u05D4",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 3,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "stench, stink, fetid smell",
+          "Target": "\u05D1\u05D0\u05D5\u05E9",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 2,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "pinion, wing",
+          "Target": "\u05D0\u05D1\u05E8\u05D4",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 3,
+      "Kind": "Letter"
+    }
+  ]
+}

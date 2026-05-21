@@ -1,0 +1,60 @@
+{
+  "Type": "Kurodoko",
+  "Source": "FromGenerator",
+  "Name": "2026-05-15.04.33.49",
+  "DateCreated": "2026-05-15T16:33:49.4831433\u002B03:00",
+  "Rows": 4,
+  "Columns": 6,
+  "Clues": [
+    {
+      "Row": 2,
+      "Column": 1,
+      "Number": 7
+    },
+    {
+      "Row": 3,
+      "Column": 4,
+      "Number": 3
+    },
+    {
+      "Row": 0,
+      "Column": 5,
+      "Number": 3
+    },
+    {
+      "Row": 1,
+      "Column": 5,
+      "Number": 4
+    },
+    {
+      "Row": 2,
+      "Column": 2,
+      "Number": 9
+    },
+    {
+      "Row": 0,
+      "Column": 2,
+      "Number": 5
+    },
+    {
+      "Row": 1,
+      "Column": 0,
+      "Number": 6
+    },
+    {
+      "Row": 0,
+      "Column": 3,
+      "Number": 2
+    },
+    {
+      "Row": 2,
+      "Column": 4,
+      "Number": 8
+    },
+    {
+      "Row": 3,
+      "Column": 0,
+      "Number": 4
+    }
+  ]
+}

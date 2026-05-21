@@ -1,25 +1,21 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
-using PresentationLogic;
-using System.Drawing;
-using System.IO;
-using System.Data;
 
 namespace Presentation.WPF
 {
+    public sealed record PuzzleRow(
+        string Type,
+        string Name,
+        string Source,
+        string Size,
+        DateTime DateCreated,
+        string Path);
+
     public partial class ucPuzzlerDataGrid : UserControl
     {
         private DataTable _PuzzleDataTable = null!;
@@ -44,29 +40,32 @@ namespace Presentation.WPF
             InitializeComponent();
         }
 
-        public void SetData(List<(string path, string size)> data)
+        public void SetData(IReadOnlyList<PuzzleRow> rows)
         {
             _PuzzleDataTable = new DataTable();
-            _PuzzleDataTable.Columns.Add(new DataColumn("Name", typeof(string)));
-            _PuzzleDataTable.Columns.Add(new DataColumn("Size", typeof(string)));
-            _PuzzleDataTable.Columns.Add(new DataColumn("Path", typeof(string)));
+            _PuzzleDataTable.Columns.Add(new DataColumn("Type",        typeof(string)));
+            _PuzzleDataTable.Columns.Add(new DataColumn("Name",        typeof(string)));
+            _PuzzleDataTable.Columns.Add(new DataColumn("Source",      typeof(string)));
+            _PuzzleDataTable.Columns.Add(new DataColumn("Size",        typeof(string)));
+            _PuzzleDataTable.Columns.Add(new DataColumn("DateCreated", typeof(DateTime)));
+            _PuzzleDataTable.Columns.Add(new DataColumn("Path",        typeof(string)));
 
-            foreach (var (file, size) in data)
+            foreach (var r in rows)
             {
                 var row = _PuzzleDataTable.NewRow();
+                row["Type"]        = r.Type        ?? "";
+                row["Name"]        = r.Name        ?? "";
+                row["Source"]      = r.Source      ?? "";
+                row["Size"]        = r.Size        ?? "";
+                row["DateCreated"] = r.DateCreated;
+                row["Path"]        = System.IO.Path.GetFullPath(r.Path);
                 _PuzzleDataTable.Rows.Add(row);
-
-                row["Name"] = System.IO.Path.GetFileNameWithoutExtension(file);
-                row["Size"] = size;
-                row["Path"] = System.IO.Path.GetFullPath(file);
             }
-            
-            //ItemsSource="{Binding ElementName=This, Path=GameData}"
+
             Binding b = new Binding();
             b.ElementName = "PuzzlerDataGrid";
-            b.Path = new PropertyPath("PuzzleDataTable");
+            b.Path        = new PropertyPath("PuzzleDataTable");
             datagrid.SetBinding(DataGrid.ItemsSourceProperty, b);
-            //
         }
 
         private void datagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -85,7 +84,7 @@ namespace Presentation.WPF
                     break;
             }
         }
-        
+
         private void LoadSelectedRowPuzzle()
         {
             if (datagrid.SelectedIndex == -1)

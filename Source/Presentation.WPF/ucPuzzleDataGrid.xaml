@@ -107,9 +107,12 @@
                       CellStyle="{StaticResource DarkCellStyle}"
                       RowHeaderWidth="0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
-                    <DataGridTextColumn Binding="{Binding Size}" Header="Size"/>
-                    <DataGridTextColumn Binding="{Binding Path}" Header="Path" Visibility="Collapsed"/>
+                    <DataGridTextColumn Binding="{Binding Type}"   Header="Type"/>
+                    <DataGridTextColumn Binding="{Binding Name}"   Header="Name"/>
+                    <DataGridTextColumn Binding="{Binding Source}" Header="Source"/>
+                    <DataGridTextColumn Binding="{Binding Size}"   Header="Size"/>
+                    <DataGridTextColumn Binding="{Binding DateCreated, StringFormat=yyyy-MM-dd HH:mm}" Header="Date Created" SortMemberPath="DateCreated"/>
+                    <DataGridTextColumn Binding="{Binding Path}"   Header="Path" Visibility="Collapsed"/>
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>

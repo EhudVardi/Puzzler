@@ -1,0 +1,363 @@
+{
+  "Type": "Yakugo",
+  "Source": "FromGenerator",
+  "Name": "yakugo_large_9x9_2026-05-16.12.47.26_s001",
+  "DateCreated": "2026-05-16T12:48:03.2438315\u002B03:00",
+  "Rows": 9,
+  "Cols": 9,
+  "SourceLanguage": "en",
+  "TargetLanguage": "he",
+  "Cells": [
+    {
+      "Row": 0,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "bowling (the game)",
+          "Target": "\u05D1\u05D0\u05D5\u05DC\u05D9\u05E0\u05D2",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 7,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "ambulance",
+          "Target": "\u05D0\u05DE\u05D1\u05D5\u05DC\u05E0\u05E1",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 2,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "Urania",
+          "Target": "\u05D0\u05D5\u05E8\u05D0\u05E0\u05D9\u05D4",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 3,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "a bus",
+          "Target": "\u05D0\u05D5\u05D8\u05D5\u05D1\u05D5\u05E1",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 4,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "Icelander",
+          "Target": "\u05D0\u05D9\u05E1\u05DC\u05E0\u05D3\u05D9",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 5,
+      "Col": 7,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "episode",
+          "Target": "\u05D0\u05E4\u05D9\u05D6\u05D5\u05D3\u05D4",
+          "Dir": "Left"
+        },
+        {
+          "Source": "stone",
+          "Target": "\u05D0\u05D1\u05E0",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 6,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": ", bike",
+          "Target": "\u05D0\u05D5\u05E4\u05E0\u05D9\u05D9\u05DD",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 7,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "bourgeoisie",
+          "Target": "\u05D1\u05D5\u05E8\u05D2\u05E0\u05D5\u05EA",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 7,
+      "Kind": "Letter"
+    }
+  ]
+}

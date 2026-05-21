@@ -1,0 +1,262 @@
+{
+  "Type": "Kakuru",
+  "Source": "FromGenerator",
+  "Name": "2013-11-06.03.07.11",
+  "DateCreated": "2026-05-14T17:12:01.9191887\u002B03:00",
+  "Rows": 9,
+  "Columns": 9,
+  "NumberRange": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "SumLines": [
+    {
+      "RowI": 0,
+      "ColumnI": 1,
+      "HorizontalVertical": true,
+      "Sum": 9,
+      "Size": 2
+    },
+    {
+      "RowI": 0,
+      "ColumnI": 2,
+      "HorizontalVertical": true,
+      "Sum": 35,
+      "Size": 7
+    },
+    {
+      "RowI": 0,
+      "ColumnI": 5,
+      "HorizontalVertical": true,
+      "Sum": 9,
+      "Size": 2
+    },
+    {
+      "RowI": 0,
+      "ColumnI": 6,
+      "HorizontalVertical": true,
+      "Sum": 17,
+      "Size": 3
+    },
+    {
+      "RowI": 0,
+      "ColumnI": 7,
+      "HorizontalVertical": true,
+      "Sum": 25,
+      "Size": 4
+    },
+    {
+      "RowI": 1,
+      "ColumnI": 0,
+      "HorizontalVertical": false,
+      "Sum": 10,
+      "Size": 2
+    },
+    {
+      "RowI": 1,
+      "ColumnI": 3,
+      "HorizontalVertical": true,
+      "Sum": 19,
+      "Size": 3
+    },
+    {
+      "RowI": 1,
+      "ColumnI": 4,
+      "HorizontalVertical": true,
+      "Sum": 21,
+      "Size": 4
+    },
+    {
+      "RowI": 1,
+      "ColumnI": 4,
+      "HorizontalVertical": false,
+      "Sum": 19,
+      "Size": 3
+    },
+    {
+      "RowI": 1,
+      "ColumnI": 8,
+      "HorizontalVertical": true,
+      "Sum": 17,
+      "Size": 3
+    },
+    {
+      "RowI": 2,
+      "ColumnI": 0,
+      "HorizontalVertical": false,
+      "Sum": 36,
+      "Size": 8
+    },
+    {
+      "RowI": 3,
+      "ColumnI": 1,
+      "HorizontalVertical": false,
+      "Sum": 20,
+      "Size": 3
+    },
+    {
+      "RowI": 3,
+      "ColumnI": 5,
+      "HorizontalVertical": false,
+      "Sum": 21,
+      "Size": 3
+    },
+    {
+      "RowI": 4,
+      "ColumnI": 1,
+      "HorizontalVertical": true,
+      "Sum": 15,
+      "Size": 2
+    },
+    {
+      "RowI": 4,
+      "ColumnI": 1,
+      "HorizontalVertical": false,
+      "Sum": 14,
+      "Size": 3
+    },
+    {
+      "RowI": 4,
+      "ColumnI": 5,
+      "HorizontalVertical": true,
+      "Sum": 15,
+      "Size": 2
+    },
+    {
+      "RowI": 4,
+      "ColumnI": 6,
+      "HorizontalVertical": false,
+      "Sum": 14,
+      "Size": 2
+    },
+    {
+      "RowI": 5,
+      "ColumnI": 0,
+      "HorizontalVertical": false,
+      "Sum": 14,
+      "Size": 2
+    },
+    {
+      "RowI": 5,
+      "ColumnI": 3,
+      "HorizontalVertical": false,
+      "Sum": 13,
+      "Size": 2
+    },
+    {
+      "RowI": 5,
+      "ColumnI": 6,
+      "HorizontalVertical": true,
+      "Sum": 10,
+      "Size": 2
+    },
+    {
+      "RowI": 6,
+      "ColumnI": 0,
+      "HorizontalVertical": false,
+      "Sum": 11,
+      "Size": 2
+    },
+    {
+      "RowI": 6,
+      "ColumnI": 3,
+      "HorizontalVertical": true,
+      "Sum": 9,
+      "Size": 2
+    },
+    {
+      "RowI": 6,
+      "ColumnI": 4,
+      "HorizontalVertical": true,
+      "Sum": 10,
+      "Size": 2
+    },
+    {
+      "RowI": 6,
+      "ColumnI": 4,
+      "HorizontalVertical": false,
+      "Sum": 9,
+      "Size": 2
+    },
+    {
+      "RowI": 6,
+      "ColumnI": 7,
+      "HorizontalVertical": true,
+      "Sum": 10,
+      "Size": 2
+    },
+    {
+      "RowI": 6,
+      "ColumnI": 8,
+      "HorizontalVertical": true,
+      "Sum": 13,
+      "Size": 2
+    },
+    {
+      "RowI": 7,
+      "ColumnI": 1,
+      "HorizontalVertical": false,
+      "Sum": 13,
+      "Size": 3
+    },
+    {
+      "RowI": 7,
+      "ColumnI": 5,
+      "HorizontalVertical": false,
+      "Sum": 17,
+      "Size": 3
+    },
+    {
+      "RowI": 8,
+      "ColumnI": 2,
+      "HorizontalVertical": false,
+      "Sum": 9,
+      "Size": 2
+    },
+    {
+      "RowI": 8,
+      "ColumnI": 6,
+      "HorizontalVertical": false,
+      "Sum": 14,
+      "Size": 2
+    }
+  ],
+  "FixedCells": [
+    {
+      "Row": 3,
+      "Column": 7,
+      "Value": 8
+    },
+    {
+      "Row": 3,
+      "Column": 8,
+      "Value": 6
+    },
+    {
+      "Row": 4,
+      "Column": 3,
+      "Value": 4
+    },
+    {
+      "Row": 4,
+      "Column": 4,
+      "Value": 3
+    },
+    {
+      "Row": 8,
+      "Column": 4,
+      "Value": 8
+    },
+    {
+      "Row": 8,
+      "Column": 8,
+      "Value": 6
+    }
+  ]
+}

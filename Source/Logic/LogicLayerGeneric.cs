@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Data;
+using Data.DataModels;
 
 namespace Logic
 {
-    public class LogicLayerGeneric<TPuzzle, TBoard>
+    public class LogicLayerGeneric<TPuzzle, TBoard> where TPuzzle : PuzzleBase
     {
         public DataLayerGeneric<TPuzzle>       DataProxy     { get; set; } = null!;
         public FactoryGeneric<TPuzzle, TBoard> FactoryModule { get; set; } = null!;
@@ -41,11 +42,12 @@ namespace Logic
             if (StepGenerated != null) StepGenerated(this, e);
         }
 
-        public Dictionary<string, List<string>> ReadFileList()
+        public List<string> ReadFileList()
         {
             return this.DataProxy.GetFileList();
         }
         public string GetPuzzleSizeLabel(string filePath) => DataProxy.GetPuzzleSizeLabel(filePath);
+        public PuzzleBase GetPuzzleMetadata(string filePath) => DataProxy.ReadMetadata(filePath);
         public virtual async Task<bool> ReadFromFile(string fileName)
         {
             return await LoadFromPuzzleObject(this.DataProxy.LoadPuzzle(fileName));

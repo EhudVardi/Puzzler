@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Common;
+using Data.DataModels;
 
 namespace Data
 {
-    public class DataLayerGeneric<TPuzzle>
+    public class DataLayerGeneric<TPuzzle> where TPuzzle : PuzzleBase
     {
         protected string PuzzleName;
 
@@ -37,18 +38,32 @@ namespace Data
             new SerializeDeserializeObject().SerializePuzzleJson(fileName, puzzle!, typeof(TPuzzle));
         }
 
-        public Dictionary<string, List<string>> GetFileList()
+        public List<string> GetFileList()
         {
-            Dictionary<string, List<string>> dic = new Dictionary<string, List<string>>();
-            string[] keys = new string[] { Options.FromGeneratorFolder, Options.FromTextFolder, Options.FromWebFolder };
-            for (int i = 0; i < keys.Length; i++)
+            string folder = GetPuzzleTypeDocumentsPath() + Options.PuzzlesLibraryFolder;
+            Directory.CreateDirectory(folder);
+            return new List<string>(Directory.GetFiles(folder, "*.json"));
+        }
+
+        public virtual PuzzleBase ReadMetadata(string filePath)
+        {
+            PuzzleBase? md = null;
+            try
             {
-                string puzzleType = keys[i];
-                string folder = GetPuzzleTypeDocumentsPath() + Options.PuzzlesLibraryFolder + puzzleType;
-                Directory.CreateDirectory(folder);
-                dic.Add(puzzleType, new List<string>(Directory.GetFiles(folder, "*.json")));
+                md = (PuzzleBase?)new SerializeDeserializeObject().DeserializePuzzleJson(filePath, typeof(PuzzleBase));
             }
-            return dic;
+            catch { }
+
+            md ??= new PuzzleBase();
+
+            if (string.IsNullOrEmpty(md.Type))
+                md.Type = GetPuzzleName();
+            if (string.IsNullOrEmpty(md.Name))
+                md.Name = Path.GetFileNameWithoutExtension(filePath);
+            if (md.DateCreated == default)
+                md.DateCreated = File.GetLastWriteTime(filePath);
+
+            return md;
         }
 
         public string GetPuzzleTypeDocumentsPath()
@@ -60,11 +75,15 @@ namespace Data
 
         public virtual void WritePuzzle(TPuzzle puzzle, string sourceTypeFolder)
         {
-            string filePath = GetPuzzleTypeDocumentsPath() +
-                Options.PuzzlesLibraryFolder +
-                sourceTypeFolder +
-                DateTime.Now.ToString("yyyy-MM-dd.hh.mm.ss") +
-                ".json";
+            string id = Guid.NewGuid().ToString();
+            puzzle.Type        = GetPuzzleName();
+            puzzle.Source      = sourceTypeFolder.Trim('\\', '/');
+            puzzle.Name        = id;
+            puzzle.DateCreated = DateTime.Now;
+
+            string filePath = GetPuzzleTypeDocumentsPath()
+                            + Options.PuzzlesLibraryFolder
+                            + id + ".json";
             SavePuzzle(puzzle, filePath);
         }
 

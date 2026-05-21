@@ -1,0 +1,76 @@
+{
+  "Type": "Sudoku",
+  "Source": "FromGenerator",
+  "Name": "2013-11-03.04.20.59",
+  "DateCreated": "2026-05-14T17:12:03.5017436\u002B03:00",
+  "Size": 0,
+  "N": 2,
+  "M": 3,
+  "FixedNumbers": [
+    {
+      "Row": 1,
+      "Column": 0,
+      "Number": 3
+    },
+    {
+      "Row": 1,
+      "Column": 3,
+      "Number": 0
+    },
+    {
+      "Row": 1,
+      "Column": 4,
+      "Number": 4
+    },
+    {
+      "Row": 1,
+      "Column": 5,
+      "Number": 2
+    },
+    {
+      "Row": 2,
+      "Column": 0,
+      "Number": 4
+    },
+    {
+      "Row": 2,
+      "Column": 3,
+      "Number": 3
+    },
+    {
+      "Row": 2,
+      "Column": 5,
+      "Number": 0
+    },
+    {
+      "Row": 3,
+      "Column": 2,
+      "Number": 0
+    },
+    {
+      "Row": 3,
+      "Column": 3,
+      "Number": 4
+    },
+    {
+      "Row": 3,
+      "Column": 4,
+      "Number": 2
+    },
+    {
+      "Row": 3,
+      "Column": 5,
+      "Number": 1
+    },
+    {
+      "Row": 4,
+      "Column": 4,
+      "Number": 1
+    },
+    {
+      "Row": 5,
+      "Column": 2,
+      "Number": 4
+    }
+  ]
+}

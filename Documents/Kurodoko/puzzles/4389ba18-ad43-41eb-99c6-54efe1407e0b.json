@@ -1,0 +1,235 @@
+{
+  "Type": "Kurodoko",
+  "Source": "FromGenerator",
+  "Name": "2026-05-15.05.02.21",
+  "DateCreated": "2026-05-15T17:02:21.9780673\u002B03:00",
+  "Rows": 19,
+  "Columns": 11,
+  "Clues": [
+    {
+      "Row": 2,
+      "Column": 0,
+      "Number": 7
+    },
+    {
+      "Row": 4,
+      "Column": 2,
+      "Number": 14
+    },
+    {
+      "Row": 3,
+      "Column": 3,
+      "Number": 9
+    },
+    {
+      "Row": 15,
+      "Column": 8,
+      "Number": 6
+    },
+    {
+      "Row": 10,
+      "Column": 1,
+      "Number": 9
+    },
+    {
+      "Row": 16,
+      "Column": 0,
+      "Number": 6
+    },
+    {
+      "Row": 0,
+      "Column": 9,
+      "Number": 12
+    },
+    {
+      "Row": 12,
+      "Column": 2,
+      "Number": 7
+    },
+    {
+      "Row": 14,
+      "Column": 10,
+      "Number": 11
+    },
+    {
+      "Row": 13,
+      "Column": 1,
+      "Number": 3
+    },
+    {
+      "Row": 11,
+      "Column": 9,
+      "Number": 6
+    },
+    {
+      "Row": 16,
+      "Column": 7,
+      "Number": 3
+    },
+    {
+      "Row": 12,
+      "Column": 1,
+      "Number": 5
+    },
+    {
+      "Row": 13,
+      "Column": 5,
+      "Number": 4
+    },
+    {
+      "Row": 10,
+      "Column": 0,
+      "Number": 7
+    },
+    {
+      "Row": 6,
+      "Column": 2,
+      "Number": 8
+    },
+    {
+      "Row": 5,
+      "Column": 10,
+      "Number": 9
+    },
+    {
+      "Row": 4,
+      "Column": 9,
+      "Number": 14
+    },
+    {
+      "Row": 5,
+      "Column": 7,
+      "Number": 7
+    },
+    {
+      "Row": 13,
+      "Column": 8,
+      "Number": 5
+    },
+    {
+      "Row": 12,
+      "Column": 6,
+      "Number": 9
+    },
+    {
+      "Row": 18,
+      "Column": 3,
+      "Number": 7
+    },
+    {
+      "Row": 17,
+      "Column": 4,
+      "Number": 7
+    },
+    {
+      "Row": 9,
+      "Column": 9,
+      "Number": 2
+    },
+    {
+      "Row": 10,
+      "Column": 6,
+      "Number": 5
+    },
+    {
+      "Row": 14,
+      "Column": 1,
+      "Number": 7
+    },
+    {
+      "Row": 3,
+      "Column": 2,
+      "Number": 5
+    },
+    {
+      "Row": 10,
+      "Column": 5,
+      "Number": 6
+    },
+    {
+      "Row": 9,
+      "Column": 0,
+      "Number": 8
+    },
+    {
+      "Row": 4,
+      "Column": 8,
+      "Number": 16
+    },
+    {
+      "Row": 6,
+      "Column": 9,
+      "Number": 6
+    },
+    {
+      "Row": 4,
+      "Column": 7,
+      "Number": 12
+    },
+    {
+      "Row": 18,
+      "Column": 4,
+      "Number": 4
+    },
+    {
+      "Row": 1,
+      "Column": 1,
+      "Number": 5
+    },
+    {
+      "Row": 16,
+      "Column": 4,
+      "Number": 4
+    },
+    {
+      "Row": 6,
+      "Column": 4,
+      "Number": 5
+    },
+    {
+      "Row": 2,
+      "Column": 6,
+      "Number": 8
+    },
+    {
+      "Row": 8,
+      "Column": 8,
+      "Number": 14
+    },
+    {
+      "Row": 4,
+      "Column": 4,
+      "Number": 11
+    },
+    {
+      "Row": 11,
+      "Column": 8,
+      "Number": 8
+    },
+    {
+      "Row": 17,
+      "Column": 8,
+      "Number": 6
+    },
+    {
+      "Row": 7,
+      "Column": 9,
+      "Number": 8
+    },
+    {
+      "Row": 13,
+      "Column": 7,
+      "Number": 5
+    },
+    {
+      "Row": 4,
+      "Column": 5,
+      "Number": 13
+    },
+    {
+      "Row": 5,
+      "Column": 2,
+      "Number": 7
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "Type": "Yakugo",
+  "Source": "FromGenerator",
+  "Name": "yakugo_small_5x5_2026-05-16.12.47.26_s002",
+  "DateCreated": "2026-05-16T12:47:38.5738530\u002B03:00",
+  "Rows": 5,
+  "Cols": 5,
+  "SourceLanguage": "en",
+  "TargetLanguage": "he",
+  "Cells": [
+    {
+      "Row": 0,
+      "Col": 0,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "A doll, puppet, plush toy etc",
+          "Target": "\u05D1\u05D5\u05D1\u05D4",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 1,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "human, man, person, mortal",
+          "Target": "\u05D0\u05E0\u05D5\u05E9",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 3,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "reed, flute",
+          "Target": "\u05D0\u05D1\u05D5\u05D1",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 2,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "ego",
+          "Target": "\u05D0\u05D2\u05D5",
+          "Dir": "Down"
+        },
+        {
+          "Source": "ancestor, forefather",
+          "Target": "\u05D0\u05D1",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 4,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "shame",
+          "Target": "\u05D1\u05D5\u05E9\u05D4",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 3,
+      "Kind": "Letter"
+    }
+  ]
+}

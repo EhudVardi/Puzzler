@@ -306,8 +306,8 @@
             <Grid Grid.Row="1" Grid.Column="1" Margin="2" Style="{StaticResource ResourceKey=BorderPanelsStyleMainGrid}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    <ColumnDefinition Width="200"></ColumnDefinition>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*" MinWidth="500"/>
+                    <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" Margin="5" Background="{StaticResource SurfaceBrush}"
                         CornerRadius="8" BorderBrush="{StaticResource PanelBorderBrush}" BorderThickness="1" Padding="4">
@@ -340,26 +340,14 @@
                         <DropShadowEffect Color="#000000" Opacity="0.35" BlurRadius="10" ShadowDepth="2" Direction="315"/>
                     </Border.Effect>
                     <GroupBox Header="Library" VerticalAlignment="Stretch">
-                        <TabControl VerticalAlignment="Stretch" Background="{StaticResource SurfaceBrush}">
-                            <TabItem Header="Generator">
-                                <DockPanel>
-                                    <Button x:Name="btnRandom" Margin="10,5" DockPanel.Dock="Top" Content="Generate New Puzzle" Click="btnRandom_Click"/>
-                                    <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridGenerator"/>
-                                </DockPanel>
-                            </TabItem>
-                            <TabItem Header="Text">
-                                <DockPanel>
-                                    <Button x:Name="btnLoadFromText" Margin="10,5" DockPanel.Dock="Top" Content="Read New From Text" Click="btnLoadFromText_Click"/>
-                                    <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridText"/>
-                                </DockPanel>
-                            </TabItem>
-                            <TabItem Header="Web">
-                                <DockPanel>
-                                    <Button x:Name="btnLoadFromWeb" Margin="10,5" DockPanel.Dock="Top" Content="Read New From Web" Click="btnLoadFromWeb_Click"/>
-                                    <UserControls:ucPuzzlerDataGrid x:Name="ucDataGridWeb"/>
-                                </DockPanel>
-                            </TabItem>
-                        </TabControl>
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="6,4">
+                                <Button x:Name="btnRandom"       Margin="4" Padding="10,3" Content="Generate"       Click="btnRandom_Click"/>
+                                <Button x:Name="btnLoadFromWeb"  Margin="4" Padding="10,3" Content="Fetch From Web" Click="btnLoadFromWeb_Click"/>
+                                <Button x:Name="btnLoadFromText" Margin="4" Padding="10,3" Content="Read From Text" Click="btnLoadFromText_Click"/>
+                            </StackPanel>
+                            <UserControls:ucPuzzlerDataGrid x:Name="ucDataGrid"/>
+                        </DockPanel>
                     </GroupBox>
                 </Border>
                 <Border Grid.Column="2" Margin="5" Background="{StaticResource SurfaceBrush}"

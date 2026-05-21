@@ -3,6 +3,7 @@ using PresentationLogic.Rendering;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Windows;
@@ -22,14 +23,12 @@ namespace Presentation.WPF
         public MainWindow()
         {
             InitializeComponent();
-            this.ucDataGridGenerator.RequestLoadPuzzle += ucDataGrid_RequestLoadPuzzle;
-            this.ucDataGridText.RequestLoadPuzzle      += ucDataGrid_RequestLoadPuzzle;
-            this.ucDataGridWeb.RequestLoadPuzzle       += ucDataGrid_RequestLoadPuzzle;
+            this.ucDataGrid.RequestLoadPuzzle += ucDataGrid_RequestLoadPuzzle;
 
-            this.btnSelectSudoku.Tag          = PuzzleRegistry.Find("Sudoku");
-            this.btnSelectKakuru.Tag          = PuzzleRegistry.Find("Kakuru");
-            this.btnSelectGriddler.Tag        = PuzzleRegistry.Find("Griddler");
-            this.btnSelectTriddler.Tag        = PuzzleRegistry.Find("Triddler");
+            this.btnSelectSudoku.Tag   = PuzzleRegistry.Find("Sudoku");
+            this.btnSelectKakuru.Tag   = PuzzleRegistry.Find("Kakuru");
+            this.btnSelectGriddler.Tag = PuzzleRegistry.Find("Griddler");
+            this.btnSelectTriddler.Tag = PuzzleRegistry.Find("Triddler");
             this.btnSelectYakugo.Tag   = PuzzleRegistry.Find("Yakugo");
             this.btnSelectKurodoko.Tag = PuzzleRegistry.Find("Kurodoko");
         }
@@ -60,10 +59,7 @@ namespace Presentation.WPF
                 PresentationLogicObject = descriptor.Create();
                 PresentationLogicObject.Options = _options;
 
-                Dictionary<string, List<string>>? puzzlesDic = PresentationLogicObject.ReadFileList();
-                this.ucDataGridGenerator.SetData(ToPathSizeList(puzzlesDic?[_options.FromGeneratorFolder]));
-                this.ucDataGridText.SetData(ToPathSizeList(puzzlesDic?[_options.FromTextFolder]));
-                this.ucDataGridWeb.SetData(ToPathSizeList(puzzlesDic?[_options.FromWebFolder]));
+                ReloadGrid();
 
                 PresentationLogicObject.Initialize();
                 PresentationLogicObject.Refresh += PresentationLogicObject_Refresh;
@@ -74,10 +70,21 @@ namespace Presentation.WPF
             catch (XmlException ex) { ShowError(ex.Message); }
         }
 
-        private List<(string path, string size)> ToPathSizeList(List<string>? paths)
+        private void ReloadGrid()
         {
-            if (paths == null) return new();
-            return paths.ConvertAll(p => (p, PresentationLogicObject.GetPuzzleSizeLabel(p)));
+            var files = PresentationLogicObject.ReadFileList() ?? new List<string>();
+            var rows  = files.Select(p =>
+            {
+                var md = PresentationLogicObject.GetPuzzleMetadata(p);
+                return new PuzzleRow(
+                    Type:        md.Type,
+                    Name:        md.Name,
+                    Source:      md.Source,
+                    Size:        PresentationLogicObject.GetPuzzleSizeLabel(p),
+                    DateCreated: md.DateCreated,
+                    Path:        System.IO.Path.GetFullPath(p));
+            }).ToList();
+            this.ucDataGrid.SetData(rows);
         }
 
         void PresentationLogicObject_Refresh(object? sender, EventArgs e)
@@ -190,6 +197,7 @@ namespace Presentation.WPF
             try
             {
                 await PresentationLogicObject.ReadFromWeb(string.Empty);
+                ReloadGrid();
                 RefreshForm();
             }
             catch (WebException ex)         { ShowError(ex.Message); }
@@ -212,6 +220,7 @@ namespace Presentation.WPF
                 try
                 {
                     await PresentationLogicObject.ReadFromText(inputWindow.Data);
+                    ReloadGrid();
                     ResizeWindowForCurrentPuzzle();
                     RefreshForm();
                 }
@@ -229,6 +238,7 @@ namespace Presentation.WPF
                 return;
             }
             await PresentationLogicObject.GenerateRandom();
+            ReloadGrid();
             RefreshForm();
         }
 

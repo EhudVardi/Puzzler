@@ -1,0 +1,126 @@
+{
+  "Type": "Sudoku",
+  "Source": "FromWeb",
+  "Name": "2015-01-01.09.38.07",
+  "DateCreated": "2026-05-14T17:12:05.2129296\u002B03:00",
+  "Size": 0,
+  "N": 3,
+  "M": 3,
+  "FixedNumbers": [
+    {
+      "Row": 0,
+      "Column": 0,
+      "Number": 7
+    },
+    {
+      "Row": 0,
+      "Column": 2,
+      "Number": 5
+    },
+    {
+      "Row": 0,
+      "Column": 3,
+      "Number": 6
+    },
+    {
+      "Row": 0,
+      "Column": 5,
+      "Number": 2
+    },
+    {
+      "Row": 1,
+      "Column": 4,
+      "Number": 7
+    },
+    {
+      "Row": 1,
+      "Column": 5,
+      "Number": 5
+    },
+    {
+      "Row": 1,
+      "Column": 7,
+      "Number": 4
+    },
+    {
+      "Row": 2,
+      "Column": 5,
+      "Number": 3
+    },
+    {
+      "Row": 2,
+      "Column": 6,
+      "Number": 2
+    },
+    {
+      "Row": 3,
+      "Column": 0,
+      "Number": 8
+    },
+    {
+      "Row": 3,
+      "Column": 1,
+      "Number": 0
+    },
+    {
+      "Row": 3,
+      "Column": 3,
+      "Number": 2
+    },
+    {
+      "Row": 4,
+      "Column": 2,
+      "Number": 7
+    },
+    {
+      "Row": 4,
+      "Column": 4,
+      "Number": 6
+    },
+    {
+      "Row": 4,
+      "Column": 8,
+      "Number": 5
+    },
+    {
+      "Row": 5,
+      "Column": 0,
+      "Number": 4
+    },
+    {
+      "Row": 5,
+      "Column": 8,
+      "Number": 8
+    },
+    {
+      "Row": 6,
+      "Column": 6,
+      "Number": 1
+    },
+    {
+      "Row": 7,
+      "Column": 1,
+      "Number": 4
+    },
+    {
+      "Row": 7,
+      "Column": 3,
+      "Number": 0
+    },
+    {
+      "Row": 7,
+      "Column": 4,
+      "Number": 8
+    },
+    {
+      "Row": 7,
+      "Column": 6,
+      "Number": 3
+    },
+    {
+      "Row": 8,
+      "Column": 5,
+      "Number": 6
+    }
+  ]
+}

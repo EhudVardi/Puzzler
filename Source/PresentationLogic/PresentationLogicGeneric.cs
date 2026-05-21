@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Data.DataModels;
 using Logic;
 using PresentationLogic.Rendering;
 
 namespace PresentationLogic
 {
-    public class PresentationLogicGeneric<TPuzzle, TBoard> : PresentationLogicBase
+    public class PresentationLogicGeneric<TPuzzle, TBoard> : PresentationLogicBase where TPuzzle : PuzzleBase
     {
         public LogicLayerGeneric<TPuzzle, TBoard> LogicProxy { get; set; } = null!;
         public string URL { get; set; } = null!;
@@ -24,8 +25,9 @@ namespace PresentationLogic
 
         public override bool IsSolving => LogicProxy.IsSolving;
 
-        public override Dictionary<string, List<string>>? ReadFileList() { return this.LogicProxy.ReadFileList(); }
+        public override List<string> ReadFileList() { return this.LogicProxy.ReadFileList(); }
         public override string GetPuzzleSizeLabel(string filePath) => LogicProxy.GetPuzzleSizeLabel(filePath);
+        public override PuzzleBase GetPuzzleMetadata(string filePath) => LogicProxy.GetPuzzleMetadata(filePath);
         public override Task<bool> ReadFromFile(string fileName) => this.LogicProxy.ReadFromFile(fileName);
         public override Task<bool> ReadFromWeb(string url)       => this.LogicProxy.ReadFromWeb(this.URL);
         public override Task<bool> ReadFromText(string text)     => LogicProxy.ReadFromText(text);

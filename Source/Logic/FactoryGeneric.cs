@@ -1,8 +1,9 @@
 using System;
+using Data.DataModels;
 
 namespace Logic
 {
-    public class FactoryGeneric<TPuzzle, TBoard>
+    public class FactoryGeneric<TPuzzle, TBoard> where TPuzzle : PuzzleBase
     {
         public virtual TPuzzle? BoardToPuzzle(TBoard board) { return CreatePuzzleObjectFromBoard(board); }
 

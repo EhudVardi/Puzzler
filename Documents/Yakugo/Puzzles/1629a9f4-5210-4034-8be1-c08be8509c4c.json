@@ -1,0 +1,2050 @@
+{
+  "Type": "Yakugo",
+  "Source": "FromGenerator",
+  "Name": "yakugo_20x20",
+  "DateCreated": "2026-05-16T15:35:28.7560657\u002B03:00",
+  "Rows": 20,
+  "Cols": 20,
+  "SourceLanguage": "en",
+  "TargetLanguage": "he",
+  "Cells": [
+    {
+      "Row": 0,
+      "Col": 1,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "twilight",
+          "Target": "\u05D3\u05D9\u05DE\u05D3\u05D5\u05DE\u05D9\u05DD",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 2,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "pinkish",
+          "Target": "\u05D5\u05E8\u05D3\u05E8\u05D3",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 3,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "wet",
+          "Target": "\u05E8\u05D8\u05D5\u05D1",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 6,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "Levite",
+          "Target": "\u05DC\u05D5\u05D9",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 10,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "religion",
+          "Target": "\u05D3\u05EA",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 11,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "summer",
+          "Target": "\u05E7\u05D9\u05E6",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 12,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "Excitement; agitation",
+          "Target": "\u05D4\u05EA\u05E8\u05D2\u05E9\u05D5\u05EA",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 13,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "worn out, torn, old",
+          "Target": "\u05D1\u05DC\u05D5\u05D9",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "A strategy",
+          "Target": "\u05D0\u05E1\u05D8\u05E8\u05D8\u05D2\u05D9\u05D4",
+          "Dir": "Down"
+        },
+        {
+          "Source": "electrode",
+          "Target": "\u05D0\u05DC\u05E7\u05D8\u05E8\u05D5\u05D3\u05D4",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 14,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "population",
+          "Target": "\u05D0\u05D5\u05DB\u05DC\u05D5\u05E1\u05D9\u05DF",
+          "Dir": "Down"
+        },
+        {
+          "Source": "soon, early",
+          "Target": "\u05D1\u05D4\u05E7\u05D3\u05DD",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 2,
+      "Col": 0,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "to dissolve",
+          "Target": "\u05D4\u05DE\u05E1",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 2,
+      "Col": 9,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "egocentric (egotistical)",
+          "Target": "\u05D0\u05D2\u05D5\u05E6\u05E0\u05D8\u05E8\u05D9",
+          "Dir": "Left"
+        },
+        {
+          "Source": "veto",
+          "Target": "\u05D5\u05D8\u05D5",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 2,
+      "Col": 15,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "salmon",
+          "Target": "\u05D0\u05DC\u05EA\u05D9\u05EA",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 2,
+      "Col": 16,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "buzzword",
+          "Target": "\u05D6\u05DE\u05D6\u05D5\u05DE\u05D9\u05DC\u05D4",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 2,
+      "Col": 17,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "apartheid",
+          "Target": "\u05D0\u05E4\u05E8\u05D8\u05D4\u05D9\u05D9\u05D3",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 3,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "seclusion",
+          "Target": "\u05D4\u05EA\u05D1\u05D5\u05D3\u05D3\u05D5\u05EA",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 3,
+      "Col": 5,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "critical",
+          "Target": "\u05D1\u05D9\u05E7\u05D5\u05E8\u05EA\u05D9",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 3,
+      "Col": 7,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "insulin",
+          "Target": "\u05D0\u05D9\u05E0\u05E1\u05D5\u05DC\u05D9\u05DF",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 3,
+      "Col": 10,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "rarely",
+          "Target": "\u05DC\u05E2\u05D9\u05EA\u05D9\u05DE \u05E8\u05D7\u05D5\u05E7\u05D5\u05EA",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 3,
+      "Col": 15,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "A mirror",
+          "Target": "\u05D0\u05E1\u05E4\u05E7\u05DC\u05E8\u05D9\u05D4",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 3,
+      "Col": 18,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "So, therefore, then, thus",
+          "Target": "\u05D0\u05D6",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 4,
+      "Col": 6,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "creationism",
+          "Target": "\u05D1\u05E8\u05D9\u05D0\u05EA\u05E0\u05D5\u05EA",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 5,
+      "Col": 3,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "A religious, orthodox Jew",
+          "Target": "\u05D3\u05D5\u05E1",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 5,
+      "Col": 13,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "homework",
+          "Target": "\u05E9\u05D9\u05E2\u05D5\u05E8\u05D9 \u05D1\u05D9\u05EA",
+          "Dir": "Left"
+        },
+        {
+          "Source": "\u0022big fish\u0022 (senior gangster)",
+          "Target": "\u05DC\u05D5\u05D5\u05D9\u05D9\u05EA\u05DF",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 6,
+      "Col": 0,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "positive, optimistic",
+          "Target": "\u05E4\u05D5\u05D6\u05D9\u05D8\u05D9\u05D1\u05D9",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 6,
+      "Col": 2,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "Electronic",
+          "Target": "\u05D0\u05DC\u05E7\u05D8\u05E8\u05D5\u05E0\u05D9",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 6,
+      "Col": 18,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "topological",
+          "Target": "\u05D8\u05D5\u05E4\u05D5\u05DC\u05D5\u05D2\u05D9",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 7,
+      "Col": 3,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "usually",
+          "Target": "\u05D1\u05D3\u05E8\u05DB \u05DB\u05DC\u05DC",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 7,
+      "Col": 11,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "Cholesterol",
+          "Target": "\u05DB\u05D5\u05DC\u05E1\u05D8\u05E8\u05D5\u05DC",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 8,
+      "Col": 12,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "attractive, appealing",
+          "Target": "\u05D0\u05D8\u05E8\u05E7\u05D8\u05D9\u05D1\u05D9",
+          "Dir": "Down"
+        },
+        {
+          "Source": "so, thus",
+          "Target": "\u05DB\u05D9",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 9,
+      "Col": 1,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "confusion",
+          "Target": "\u05D1\u05DC\u05D1\u05D5\u05DC",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 9,
+      "Col": 9,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "organism",
+          "Target": "\u05D0\u05D5\u05E8\u05D2\u05E0\u05D9\u05D6\u05DD",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 10,
+      "Col": 14,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "spout",
+          "Target": "\u05D6\u05E8\u05D1\u05D5\u05D1\u05D9\u05EA",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 11,
+      "Col": 5,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "eukaryotic",
+          "Target": "\u05D0\u05D9\u05E7\u05E8\u05D9\u05D5\u05D8\u05D9",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 11,
+      "Col": 16,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "yearning, longing",
+          "Target": "\u05DB\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 11,
+      "Col": 18,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "remark",
+          "Target": "\u05D4\u05EA\u05D1\u05D8\u05D0\u05D5\u05EA",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 12,
+      "Col": 15,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "magnetism",
+          "Target": "\u05DE\u05D2\u05E0\u05D8\u05D9\u05D5\u05EA",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 12,
+      "Col": 17,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "supremacy, superiority",
+          "Target": "\u05E2\u05DC\u05D9\u05D5\u05E0\u05D5\u05EA",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 14,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "ukulele",
+          "Target": "\u05D9\u05D5\u05E7\u05D5\u05DC\u05D9\u05DC\u05D9",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 15,
+      "Col": 13,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "impossible",
+          "Target": "\u05D1\u05DC\u05EA\u05D9 \u05D0\u05E4\u05E9\u05E8\u05D9",
+          "Dir": "Left"
+        },
+        {
+          "Source": "ready",
+          "Target": "\u05DE\u05D5\u05DB\u05E0",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 16,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "heretic",
+          "Target": "\u05D0\u05E4\u05D9\u05E7\u05D5\u05E8\u05D5\u05E1",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 16,
+      "Col": 10,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "rainbow",
+          "Target": "\u05E7\u05E9\u05EA",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 16,
+      "Col": 19,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "Optimistic, hopeful",
+          "Target": "\u05D0\u05D5\u05E4\u05D8\u05D9\u05DE\u05D9",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 17,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "demography",
+          "Target": "\u05D3\u05DE\u05D5\u05D2\u05E8\u05E4\u05D9\u05D4",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 17,
+      "Col": 11,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "hook",
+          "Target": "\u05D5\u05D5",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 18,
+      "Col": 9,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "Intersex, intersexed",
+          "Target": "\u05D0\u05D9\u05E0\u05D8\u05E8\u05E1\u05E7\u05E1",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 18,
+      "Col": 14,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "conquered, occupied",
+          "Target": "\u05DB\u05D1\u05D5\u05E9",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 19,
+      "Col": 9,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "excellence",
+          "Target": "\u05DE\u05E6\u05D5\u05D9\u05D9\u05E0\u05D5\u05EA",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 19,
+      "Col": 16,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "plan",
+          "Target": "\u05EA\u05DB\u05E0\u05D9\u05D5\u05EA",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 9,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 10,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 11,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 12,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 13,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 14,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 15,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 16,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 9,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 17,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 16,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 17,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 18,
+      "Col": 18,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 8,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 10,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 11,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 12,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 13,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 14,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 15,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 19,
+      "Col": 17,
+      "Kind": "Letter"
+    }
+  ]
+}

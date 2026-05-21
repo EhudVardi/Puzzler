@@ -1,0 +1,147 @@
+{
+  "Type": "Kakuru",
+  "Source": "FromGenerator",
+  "Name": "25e1c0b2-9fae-4e44-b512-989daa78a81b",
+  "DateCreated": "2026-05-14T17:12:02.0284165\u002B03:00",
+  "Rows": 7,
+  "Columns": 7,
+  "NumberRange": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "SumLines": [
+    {
+      "RowI": 0,
+      "ColumnI": 2,
+      "HorizontalVertical": true,
+      "Sum": 20,
+      "Size": 5
+    },
+    {
+      "RowI": 0,
+      "ColumnI": 3,
+      "HorizontalVertical": true,
+      "Sum": 4,
+      "Size": 2
+    },
+    {
+      "RowI": 0,
+      "ColumnI": 4,
+      "HorizontalVertical": true,
+      "Sum": 4,
+      "Size": 2
+    },
+    {
+      "RowI": 1,
+      "ColumnI": 1,
+      "HorizontalVertical": false,
+      "Sum": 10,
+      "Size": 3
+    },
+    {
+      "RowI": 1,
+      "ColumnI": 5,
+      "HorizontalVertical": true,
+      "Sum": 16,
+      "Size": 5
+    },
+    {
+      "RowI": 2,
+      "ColumnI": 1,
+      "HorizontalVertical": true,
+      "Sum": 3,
+      "Size": 2
+    },
+    {
+      "RowI": 2,
+      "ColumnI": 1,
+      "HorizontalVertical": false,
+      "Sum": 12,
+      "Size": 4
+    },
+    {
+      "RowI": 2,
+      "ColumnI": 6,
+      "HorizontalVertical": true,
+      "Sum": 11,
+      "Size": 2
+    },
+    {
+      "RowI": 3,
+      "ColumnI": 0,
+      "HorizontalVertical": false,
+      "Sum": 5,
+      "Size": 2
+    },
+    {
+      "RowI": 3,
+      "ColumnI": 4,
+      "HorizontalVertical": false,
+      "Sum": 8,
+      "Size": 2
+    },
+    {
+      "RowI": 4,
+      "ColumnI": 0,
+      "HorizontalVertical": false,
+      "Sum": 5,
+      "Size": 2
+    },
+    {
+      "RowI": 4,
+      "ColumnI": 3,
+      "HorizontalVertical": true,
+      "Sum": 8,
+      "Size": 2
+    },
+    {
+      "RowI": 4,
+      "ColumnI": 4,
+      "HorizontalVertical": true,
+      "Sum": 6,
+      "Size": 2
+    },
+    {
+      "RowI": 4,
+      "ColumnI": 4,
+      "HorizontalVertical": false,
+      "Sum": 6,
+      "Size": 2
+    },
+    {
+      "RowI": 5,
+      "ColumnI": 1,
+      "HorizontalVertical": false,
+      "Sum": 14,
+      "Size": 4
+    },
+    {
+      "RowI": 6,
+      "ColumnI": 2,
+      "HorizontalVertical": false,
+      "Sum": 12,
+      "Size": 3
+    }
+  ],
+  "FixedCells": [
+    {
+      "Row": 2,
+      "Column": 4,
+      "Value": 1
+    },
+    {
+      "Row": 4,
+      "Column": 2,
+      "Value": 4
+    },
+    {
+      "Row": 6,
+      "Column": 5,
+      "Value": 3
+    }
+  ]
+}

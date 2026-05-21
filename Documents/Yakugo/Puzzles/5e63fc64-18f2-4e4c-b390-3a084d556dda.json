@@ -1,0 +1,347 @@
+{
+  "Type": "Yakugo",
+  "Source": "FromGenerator",
+  "Name": "yakugo_large_9x9_2026-05-09.10.59.27_s000",
+  "DateCreated": "2026-05-14T17:12:06.3224713\u002B03:00",
+  "Rows": 9,
+  "Cols": 9,
+  "SourceLanguage": "en",
+  "TargetLanguage": "he",
+  "Cells": [
+    {
+      "Row": 0,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "smile",
+          "Target": "\u05D7\u05D9\u05D5\u05DB",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 2,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "humaneness",
+          "Target": "\u05D0\u05E0\u05D5\u05E9\u05D9\u05D5\u05EA",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 3,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "alligator",
+          "Target": "\u05D0\u05DC\u05D9\u05D2\u05D8\u05D5\u05E8",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "a handgun, pistol, revolver",
+          "Target": "\u05D0\u05E7\u05D3\u05D7",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 3,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "ambulance",
+          "Target": "\u05D0\u05DE\u05D1\u05D5\u05DC\u05E0\u05E1",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 4,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "egoism, egotism, selfishness",
+          "Target": "\u05D0\u05E0\u05D5\u05DB\u05D9\u05D5\u05EA",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 5,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "rain",
+          "Target": "\u05D2\u05E9\u05DE",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 6,
+      "Col": 7,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "athletics",
+          "Target": "\u05D0\u05EA\u05DC\u05D8\u05D9\u05E7\u05D4",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 7,
+      "Col": 6,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "folly",
+          "Target": "\u05D0\u05D9\u05D5\u05D5\u05DC\u05EA",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 8,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "watch (time period)",
+          "Target": "\u05D0\u05E9\u05DE\u05D5\u05E8\u05EA",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 7,
+      "Kind": "Letter"
+    }
+  ]
+}

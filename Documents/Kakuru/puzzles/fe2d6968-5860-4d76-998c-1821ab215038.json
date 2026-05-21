@@ -1,0 +1,188 @@
+{
+  "Type": "Kakuru",
+  "Source": "FromGenerator",
+  "Name": "58f0a3af-87c0-4df6-8bda-600c64c93e53",
+  "DateCreated": "2026-05-14T17:12:02.1328003\u002B03:00",
+  "Rows": 8,
+  "Columns": 8,
+  "NumberRange": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "SumLines": [
+    {
+      "RowI": 0,
+      "ColumnI": 1,
+      "HorizontalVertical": true,
+      "Sum": 4,
+      "Size": 2
+    },
+    {
+      "RowI": 0,
+      "ColumnI": 2,
+      "HorizontalVertical": true,
+      "Sum": 27,
+      "Size": 6
+    },
+    {
+      "RowI": 0,
+      "ColumnI": 4,
+      "HorizontalVertical": true,
+      "Sum": 12,
+      "Size": 3
+    },
+    {
+      "RowI": 0,
+      "ColumnI": 5,
+      "HorizontalVertical": true,
+      "Sum": 11,
+      "Size": 2
+    },
+    {
+      "RowI": 1,
+      "ColumnI": 0,
+      "HorizontalVertical": false,
+      "Sum": 10,
+      "Size": 2
+    },
+    {
+      "RowI": 1,
+      "ColumnI": 3,
+      "HorizontalVertical": true,
+      "Sum": 3,
+      "Size": 2
+    },
+    {
+      "RowI": 1,
+      "ColumnI": 3,
+      "HorizontalVertical": false,
+      "Sum": 8,
+      "Size": 2
+    },
+    {
+      "RowI": 1,
+      "ColumnI": 6,
+      "HorizontalVertical": true,
+      "Sum": 27,
+      "Size": 6
+    },
+    {
+      "RowI": 2,
+      "ColumnI": 0,
+      "HorizontalVertical": false,
+      "Sum": 23,
+      "Size": 6
+    },
+    {
+      "RowI": 2,
+      "ColumnI": 7,
+      "HorizontalVertical": true,
+      "Sum": 10,
+      "Size": 2
+    },
+    {
+      "RowI": 3,
+      "ColumnI": 1,
+      "HorizontalVertical": true,
+      "Sum": 11,
+      "Size": 2
+    },
+    {
+      "RowI": 3,
+      "ColumnI": 1,
+      "HorizontalVertical": false,
+      "Sum": 9,
+      "Size": 3
+    },
+    {
+      "RowI": 3,
+      "ColumnI": 5,
+      "HorizontalVertical": false,
+      "Sum": 6,
+      "Size": 2
+    },
+    {
+      "RowI": 4,
+      "ColumnI": 0,
+      "HorizontalVertical": false,
+      "Sum": 10,
+      "Size": 2
+    },
+    {
+      "RowI": 4,
+      "ColumnI": 4,
+      "HorizontalVertical": true,
+      "Sum": 6,
+      "Size": 3
+    },
+    {
+      "RowI": 4,
+      "ColumnI": 5,
+      "HorizontalVertical": true,
+      "Sum": 8,
+      "Size": 2
+    },
+    {
+      "RowI": 4,
+      "ColumnI": 5,
+      "HorizontalVertical": false,
+      "Sum": 13,
+      "Size": 2
+    },
+    {
+      "RowI": 5,
+      "ColumnI": 0,
+      "HorizontalVertical": false,
+      "Sum": 7,
+      "Size": 2
+    },
+    {
+      "RowI": 5,
+      "ColumnI": 3,
+      "HorizontalVertical": true,
+      "Sum": 5,
+      "Size": 2
+    },
+    {
+      "RowI": 5,
+      "ColumnI": 3,
+      "HorizontalVertical": false,
+      "Sum": 13,
+      "Size": 3
+    },
+    {
+      "RowI": 5,
+      "ColumnI": 7,
+      "HorizontalVertical": true,
+      "Sum": 11,
+      "Size": 2
+    },
+    {
+      "RowI": 6,
+      "ColumnI": 1,
+      "HorizontalVertical": false,
+      "Sum": 26,
+      "Size": 6
+    },
+    {
+      "RowI": 7,
+      "ColumnI": 2,
+      "HorizontalVertical": false,
+      "Sum": 3,
+      "Size": 2
+    },
+    {
+      "RowI": 7,
+      "ColumnI": 5,
+      "HorizontalVertical": false,
+      "Sum": 7,
+      "Size": 2
+    }
+  ],
+  "FixedCells": []
+}

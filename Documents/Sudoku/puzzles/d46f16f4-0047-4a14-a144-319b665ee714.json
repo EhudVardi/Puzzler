@@ -1,0 +1,21 @@
+{
+  "Type": "Sudoku",
+  "Source": "FromGenerator",
+  "Name": "2015-05-22.01.11.13",
+  "DateCreated": "2026-05-14T17:12:04.0897244\u002B03:00",
+  "Size": 0,
+  "N": 4,
+  "M": 4,
+  "FixedNumbers": [
+    {
+      "Row": 2,
+      "Column": 11,
+      "Number": 5
+    },
+    {
+      "Row": 12,
+      "Column": 10,
+      "Number": 2
+    }
+  ]
+}

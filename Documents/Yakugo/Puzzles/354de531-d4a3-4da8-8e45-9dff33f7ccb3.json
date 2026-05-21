@@ -1,0 +1,152 @@
+{
+  "Type": "Yakugo",
+  "Source": "FromGenerator",
+  "Name": "yakugo_small_5x5_2026-05-09.10.59.27_s000",
+  "DateCreated": "2026-05-14T17:12:06.3693388\u002B03:00",
+  "Rows": 5,
+  "Cols": 5,
+  "SourceLanguage": "en",
+  "TargetLanguage": "he",
+  "Cells": [
+    {
+      "Row": 0,
+      "Col": 2,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "enemy",
+          "Target": "\u05D0\u05D5\u05D9\u05D1",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "bummer, disappointing experience",
+          "Target": "\u05D1\u05D0\u05E1\u05D4",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 2,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "creator",
+          "Target": "\u05D1\u05D5\u05E8\u05D0",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 3,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "tree",
+          "Target": "\u05D0\u05D9\u05DC\u05DF",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 4,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "a knight",
+          "Target": "\u05D0\u05D1\u05D9\u05E8",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 3,
+      "Kind": "Letter"
+    }
+  ]
+}

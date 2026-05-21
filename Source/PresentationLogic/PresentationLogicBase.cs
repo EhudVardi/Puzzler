@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common;
+using Data.DataModels;
 using PresentationLogic.Rendering;
 
 namespace PresentationLogic
@@ -29,8 +30,9 @@ namespace PresentationLogic
 
         public virtual void Initialize() { }
 
-        public virtual Dictionary<string, List<string>>? ReadFileList() { return null; }
+        public virtual List<string> ReadFileList() { return new List<string>(); }
         public virtual string GetPuzzleSizeLabel(string filePath) => string.Empty;
+        public virtual PuzzleBase GetPuzzleMetadata(string filePath) => new PuzzleBase();
         public virtual Task<bool> ReadFromFile(string fileName) => Task.FromResult(false);
         public virtual Task<bool> ReadFromWeb(string url) => Task.FromResult(false);
         public virtual Task<bool> ReadFromText(string text) => Task.FromResult(false);

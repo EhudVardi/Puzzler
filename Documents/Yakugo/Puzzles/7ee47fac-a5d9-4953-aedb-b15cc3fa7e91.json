@@ -1,0 +1,401 @@
+{
+  "Type": "Yakugo",
+  "Source": "FromGenerator",
+  "Name": "yakugo_large_9x9_2026-05-09.10.59.27_s004",
+  "DateCreated": "2026-05-14T17:12:06.3428182\u002B03:00",
+  "Rows": 9,
+  "Cols": 9,
+  "SourceLanguage": "en",
+  "TargetLanguage": "he",
+  "Cells": [
+    {
+      "Row": 0,
+      "Col": 0,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "satrap",
+          "Target": "\u05D0\u05D7\u05E9\u05D3\u05E8\u05E4\u05DF",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 3,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "A catastrophe, a disaster",
+          "Target": "\u05D0\u05E1\u05D5\u05DF",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 5,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "noodle (string or strip of pasta)",
+          "Target": "\u05D0\u05D8\u05E8\u05D9\u05D4",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 6,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "chimney",
+          "Target": "\u05D0\u05E8\u05D5\u05D1\u05D4",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 0,
+      "Col": 7,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "image",
+          "Target": "\u05D1\u05D1\u05D5\u05D0\u05D4",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 1,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "stadium",
+          "Target": "\u05D0\u05E6\u05D8\u05D3\u05D9\u05D5\u05DF",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "nose",
+          "Target": "\u05D0\u05E3",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 2,
+      "Col": 2,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "brother, fellow, peer",
+          "Target": "\u05D0\u05D7",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 2,
+      "Col": 4,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "a (male)",
+          "Target": "\u05D0\u05D5\u05E1\u05D8\u05E8\u05D9",
+          "Dir": "Down"
+        }
+      ]
+    },
+    {
+      "Row": 4,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "poor, needy",
+          "Target": "\u05D0\u05D1\u05D9\u05D5\u05DF",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 7,
+      "Col": 7,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "balsam",
+          "Target": "\u05D0\u05E4\u05E8\u05E1\u05DE\u05D5\u05DF",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 8,
+      "Col": 8,
+      "Kind": "Clue",
+      "Clues": [
+        {
+          "Source": "aspirin",
+          "Target": "\u05D0\u05E1\u05E4\u05D9\u05E8\u05D9\u05DF",
+          "Dir": "Left"
+        }
+      ]
+    },
+    {
+      "Row": 1,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 1,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 2,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 3,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 4,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 5,
+      "Col": 7,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 6,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 0,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 7,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 1,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 2,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 3,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 4,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 5,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 6,
+      "Kind": "Letter"
+    },
+    {
+      "Row": 8,
+      "Col": 7,
+      "Kind": "Letter"
+    }
+  ]
+}

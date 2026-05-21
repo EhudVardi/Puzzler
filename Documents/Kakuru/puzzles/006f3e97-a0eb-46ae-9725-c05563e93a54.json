@@ -1,0 +1,125 @@
+{
+  "Type": "Kakuru",
+  "Source": "FromGenerator",
+  "Name": "2015-01-01.10.29.47",
+  "DateCreated": "2026-05-14T17:12:01.9527077\u002B03:00",
+  "Rows": 6,
+  "Columns": 6,
+  "NumberRange": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "SumLines": [
+    {
+      "RowI": 0,
+      "ColumnI": 3,
+      "HorizontalVertical": true,
+      "Sum": 12,
+      "Size": 3
+    },
+    {
+      "RowI": 0,
+      "ColumnI": 4,
+      "HorizontalVertical": true,
+      "Sum": 15,
+      "Size": 5
+    },
+    {
+      "RowI": 0,
+      "ColumnI": 5,
+      "HorizontalVertical": true,
+      "Sum": 7,
+      "Size": 2
+    },
+    {
+      "RowI": 1,
+      "ColumnI": 2,
+      "HorizontalVertical": false,
+      "Sum": 12,
+      "Size": 3
+    },
+    {
+      "RowI": 2,
+      "ColumnI": 2,
+      "HorizontalVertical": true,
+      "Sum": 10,
+      "Size": 3
+    },
+    {
+      "RowI": 2,
+      "ColumnI": 2,
+      "HorizontalVertical": false,
+      "Sum": 12,
+      "Size": 3
+    },
+    {
+      "RowI": 3,
+      "ColumnI": 1,
+      "HorizontalVertical": true,
+      "Sum": 9,
+      "Size": 2
+    },
+    {
+      "RowI": 3,
+      "ColumnI": 1,
+      "HorizontalVertical": false,
+      "Sum": 10,
+      "Size": 3
+    },
+    {
+      "RowI": 3,
+      "ColumnI": 5,
+      "HorizontalVertical": true,
+      "Sum": 3,
+      "Size": 2
+    },
+    {
+      "RowI": 4,
+      "ColumnI": 0,
+      "HorizontalVertical": false,
+      "Sum": 7,
+      "Size": 2
+    },
+    {
+      "RowI": 4,
+      "ColumnI": 3,
+      "HorizontalVertical": false,
+      "Sum": 5,
+      "Size": 2
+    },
+    {
+      "RowI": 5,
+      "ColumnI": 0,
+      "HorizontalVertical": false,
+      "Sum": 7,
+      "Size": 2
+    },
+    {
+      "RowI": 5,
+      "ColumnI": 3,
+      "HorizontalVertical": false,
+      "Sum": 3,
+      "Size": 2
+    }
+  ],
+  "FixedCells": [
+    {
+      "Row": 2,
+      "Column": 5,
+      "Value": 3
+    },
+    {
+      "Row": 5,
+      "Column": 2,
+      "Value": 3
+    },
+    {
+      "Row": 5,
+      "Column": 5,
+      "Value": 1
+    }
+  ]
+}
