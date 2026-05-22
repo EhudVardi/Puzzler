@@ -57,7 +57,7 @@ namespace Logic
             TPuzzle? puzzleFromWeb = this.DataProxy.WebToPuzzleObject(url);
             if (await LoadFromPuzzleObject(puzzleFromWeb))
             {
-                this.DataProxy.WritePuzzle(puzzleFromWeb!, DataProxy.Options.FromWebFolder);
+                this.DataProxy.WritePuzzle(puzzleFromWeb!, DataProxy.Options.ScrapedSource);
                 return true;
             }
             return false;
@@ -67,7 +67,7 @@ namespace Logic
             TPuzzle? puzzleFromText = this.DataProxy.TextToPuzzleObject(text);
             if (await LoadFromPuzzleObject(puzzleFromText))
             {
-                this.DataProxy.WritePuzzle(puzzleFromText!, DataProxy.Options.FromTextFolder);
+                this.DataProxy.WritePuzzle(puzzleFromText!, DataProxy.Options.TypedSource);
                 return true;
             }
             return false;
@@ -79,7 +79,7 @@ namespace Logic
             TPuzzle? puzzleFromGenerator = generatedBoard != null ? this.FactoryModule.BoardToPuzzle(generatedBoard) : default;
             if (await LoadFromPuzzleObject(puzzleFromGenerator))
             {
-                this.DataProxy.WritePuzzle(puzzleFromGenerator!, DataProxy.Options.FromGeneratorFolder);
+                this.DataProxy.WritePuzzle(puzzleFromGenerator!, DataProxy.Options.GeneratedSource);
                 return true;
             }
             return false;

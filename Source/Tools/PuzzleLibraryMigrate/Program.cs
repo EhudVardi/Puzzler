@@ -18,9 +18,17 @@ namespace Tools.PuzzleLibraryMigrate
             WriteIndented = true,
         };
 
+        private static readonly Dictionary<string, string> SourceRenames = new()
+        {
+            { "FromGenerator", "Generated" },
+            { "FromText",      "Typed"     },
+            { "FromWeb",       "Scraped"   },
+        };
+
         private static int Main(string[] args)
         {
-            bool dryRun = Array.Exists(args, a => a == "--dry-run");
+            bool dryRun        = Array.Exists(args, a => a == "--dry-run");
+            bool renameSources = Array.Exists(args, a => a == "--rename-sources");
 
             string? docsRoot = ResolveDocumentsRoot(args);
             if (docsRoot == null || !Directory.Exists(docsRoot))
@@ -33,6 +41,9 @@ namespace Tools.PuzzleLibraryMigrate
             Console.WriteLine($"Documents root: {docsRoot}");
             Console.WriteLine(dryRun ? "Mode: DRY RUN (no changes will be written)" : "Mode: LIVE");
             Console.WriteLine();
+
+            if (renameSources)
+                return RenameSources(docsRoot, dryRun);
 
             int totalMoved = 0, totalSkipped = 0, totalErrors = 0;
 
@@ -157,6 +168,60 @@ namespace Tools.PuzzleLibraryMigrate
             }
 
             return "moved";
+        }
+
+        private static int RenameSources(string docsRoot, bool dryRun)
+        {
+            int total = 0, changed = 0, untouched = 0, errors = 0;
+
+            foreach (string type in PuzzleTypes)
+            {
+                string typeRoot = Path.Combine(docsRoot, type, "puzzles");
+                if (!Directory.Exists(typeRoot))
+                    continue;
+
+                string[] files = Directory.GetFiles(typeRoot, "*.json");
+                Console.WriteLine($"[{type}] {files.Length} file(s)");
+
+                foreach (string file in files)
+                {
+                    total++;
+                    try
+                    {
+                        string raw = File.ReadAllText(file);
+                        JsonNode? root = JsonNode.Parse(raw);
+                        if (root is not JsonObject obj || obj["Source"] is not JsonValue srcVal)
+                        {
+                            untouched++;
+                            continue;
+                        }
+
+                        string? oldSrc = srcVal.GetValue<string>();
+                        if (oldSrc == null || !SourceRenames.TryGetValue(oldSrc, out string? newSrc))
+                        {
+                            untouched++;
+                            continue;
+                        }
+
+                        obj["Source"] = newSrc;
+                        Console.WriteLine($"  {Path.GetFileName(file)}: {oldSrc} -> {newSrc}");
+
+                        if (!dryRun)
+                            File.WriteAllText(file, obj.ToJsonString(WriteOptions));
+
+                        changed++;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.Error.WriteLine($"  ERROR {Path.GetFileName(file)}: {ex.Message}");
+                        errors++;
+                    }
+                }
+            }
+
+            Console.WriteLine();
+            Console.WriteLine($"DONE  total={total} changed={changed} untouched={untouched} errors={errors}");
+            return errors == 0 ? 0 : 2;
         }
 
         private static string? ResolveDocumentsRoot(string[] args)

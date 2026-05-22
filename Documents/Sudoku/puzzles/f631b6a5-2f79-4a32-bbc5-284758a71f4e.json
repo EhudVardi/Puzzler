@@ -1,6 +1,6 @@
 {
   "Type": "Sudoku",
-  "Source": "FromText",
+  "Source": "Typed",
   "Name": "puzzle9",
   "DateCreated": "2026-05-14T17:12:04.4282693\u002B03:00",
   "Size": 25,

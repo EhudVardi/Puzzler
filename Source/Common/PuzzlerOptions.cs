@@ -7,9 +7,9 @@ namespace Common
     {
         public string DocumentsRelativePath { get; set; } = @"..\..\..\..\..\Documents\";
         public string PuzzlesLibraryFolder  { get; set; } = @"Puzzles\";
-        public string FromWebFolder         { get; set; } = @"FromWeb\";
-        public string FromTextFolder        { get; set; } = @"FromText\";
-        public string FromGeneratorFolder   { get; set; } = @"FromGenerator\";
+        public string ScrapedSource         { get; set; } = "Scraped";
+        public string TypedSource           { get; set; } = "Typed";
+        public string GeneratedSource       { get; set; } = "Generated";
 
         public string GetDocumentPath()
         {
